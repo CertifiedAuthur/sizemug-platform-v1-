@@ -1,0 +1,226 @@
+.creator_settings_container header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 20px;
+  font-size: var(--text-size-lg);
+  font-weight: 600;
+}
+
+.settings_categories {
+  font-size: var(--text-size-md);
+  width: fit-content;
+}
+
+.creator_settings_stream_inner {
+  background: var(--modal-bg-color);
+  padding: 10px;
+  border-radius: var(--radius-md);
+}
+
+.creator_settings_stream,
+.creator_settings_room {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/*--------------------------------- SG Video Quality Dropdown ---------------------------------*/
+.sg-video-quality-dropdown {
+  z-index: 99999;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sg-video-quality-dropdown-container {
+  width: 100%;
+  min-width: 100%;
+
+  position: absolute;
+  z-index: 99999999999;
+  top: 100%;
+  left: 0;
+
+  background: var(--live-container-bg);
+  border-radius: var(--text-size-sm);
+  box-shadow: var(--global-box-shadow);
+  overflow: hidden;
+}
+
+.sg-video-quality-dropdown-container li {
+  padding: 10px 15px;
+}
+
+.sg-video-quality-dropdown-container ul {
+  padding-bottom: 10px;
+}
+
+.sg-video-quality-dropdown-container li {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sg-video-quality-dropdown-container li:hover {
+  background: var(--text-color-60);
+}
+
+/*--------------------------------- SG Audio Quality Dropdown ---------------------------------*/
+.sg-audio-quality-dropdown {
+  z-index: 99999;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sg-audio-quality-dropdown-container {
+  width: 100%;
+  min-width: 100%;
+
+  position: absolute;
+  z-index: 99999999999;
+  top: 100%;
+  left: 0;
+
+  background: var(--live-container-bg);
+  border-radius: var(--text-size-sm);
+  box-shadow: var(--global-box-shadow);
+  overflow: hidden;
+}
+
+.sg-audio-quality-dropdown-container li {
+  padding: 10px 15px;
+}
+
+.sg-audio-quality-dropdown-container ul {
+  padding-bottom: 10px;
+}
+
+.sg-audio-quality-dropdown-container li {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sg-audio-quality-dropdown-container li:hover {
+  background: var(--text-color-60);
+}
+
+/*--------------------------------- SG Video Latency Dropdown ---------------------------------*/
+.sg-video-latency-dropdown {
+  z-index: 99999;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sg-video-latency-dropdown-container {
+  width: 100%;
+  min-width: 100%;
+
+  position: absolute;
+  z-index: 99999999999;
+  top: 100%;
+  left: 0;
+
+  background: var(--live-container-bg);
+  border-radius: var(--text-size-sm);
+  box-shadow: var(--global-box-shadow);
+  overflow: hidden;
+}
+
+.sg-video-latency-dropdown-container li {
+  padding: 10px 15px;
+}
+
+.sg-video-latency-dropdown-container ul {
+  /* padding-bottom: 10px; */
+}
+
+.sg-video-latency-dropdown-container li {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sg-video-latency-dropdown-container li:hover {
+  background: var(--text-color-60);
+}
+
+/*--------------------------------- SG Video Profanity Dropdown ---------------------------------*/
+.sg-video-profanity-dropdown {
+  z-index: 99999;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sg-video-profanity-dropdown-container {
+  width: 100%;
+  min-width: 100%;
+
+  position: absolute;
+  z-index: 99999999999;
+  top: 100%;
+  left: 0;
+
+  background: var(--live-container-bg);
+  border-radius: var(--text-size-sm);
+  box-shadow: var(--global-box-shadow);
+  overflow: hidden;
+}
+
+.sg-video-profanity-dropdown-container li {
+  padding: 10px 15px;
+}
+
+.sg-video-profanity-dropdown-container ul {
+  padding-bottom: 10px;
+}
+
+.sg-video-profanity-dropdown-container li {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sg-video-profanity-dropdown-container li:hover {
+  background: var(--text-color-60);
+}
+
+/*--------------------------------- SG Video Visibility Dropdown ---------------------------------*/
+.sg-video-visibility-dropdown {
+  z-index: 99999;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.sg-video-visibility-dropdown-container {
+  width: 100%;
+  min-width: 100%;
+
+  position: absolute;
+  z-index: 99999999999;
+  top: 100%;
+  left: 0;
+
+  background: var(--live-container-bg);
+  border-radius: var(--text-size-sm);
+  box-shadow: var(--global-box-shadow);
+  overflow: hidden;
+}
+
+.sg-video-visibility-dropdown-container li {
+  padding: 10px 15px;
+}
+
+.sg-video-visibility-dropdown-container ul {
+  padding-bottom: 10px;
+}
+
+.sg-video-visibility-dropdown-container li {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.sg-video-visibility-dropdown-container li:hover {
+  background: var(--text-color-60);
+}

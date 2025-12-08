@@ -1,0 +1,26 @@
+.goals-container-form-wrapper {
+  padding: 1.5rem;
+  padding-top: 0;
+}
+
+.goals-container-form-wrapper * {
+  color: #344054;
+}
+
+.goals-container-form-wrapper h2 {
+  font-weight: 500;
+  font-size: 1rem;
+  padding-bottom: 10px;
+}
+
+.goals-container-form-wrapper p {
+  color: #667085;
+  font-size: 0.9rem;
+  padding-bottom: 1rem;
+}
+
+.goals-container-form-wrapper .goal_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

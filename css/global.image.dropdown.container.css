@@ -1,0 +1,46 @@
+.sizemug_image_drop_container {
+  width: 100%;
+  background: white;
+  border-radius: 0.4rem;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  transition: background-color 0.4s ease;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  text-align: center;
+  color: #667085;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+
+.sizemug_image_drop_container.active {
+  background: #f3f3f355;
+}
+
+.sizemug_image_drop_container .cloud--icon {
+  border: 8px solid #f9fafb;
+  background: #f2f4f7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+}
+
+.sizemug_image_drop_container span:first-child {
+  color: #8837e9;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sizemug_image_drop_container div:has(span) {
+  width: 70%;
+  padding-top: 10px;
+  font-weight: 300;
+}

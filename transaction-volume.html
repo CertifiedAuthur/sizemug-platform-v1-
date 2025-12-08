@@ -1,0 +1,3286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" type="image/icon" href="./icons/favicon-sizemug.svg" />
+    <meta name="theme-color" content="#8837e9" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/@material-tailwind/html@latest/styles/material-tailwind.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- date picker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sizemug</title>
+    <script type="module" crossorigin src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"></script>
+    <script type="module" crossorigin src="/scripts/crypto-dashboard/main-DFQn_PZp.js"></script>
+    <script type="module" crossorigin src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"></script>
+    <link rel="stylesheet" crossorigin href="/css/crypto-dashboard/main-dBD89tXU.css" />
+  </head>
+  <body class="">
+    <div class="grid grid-cols-6">
+      <aside class="pb-6 px-2 max-h-screen overflow-scroll col-span-1 hidden lg:block">
+        <a href="/" class="logo py-4 flex relative mx-4 mb-6 left-0">
+          <img src="/images/crypto-dashboard-icons-images/sizemug.svg" class="h-9 w-fit" alt="sizemug logo" />
+        </a>
+        <nav class="flex flex-col gap-6">
+          <menu class="flex flex-col">
+            <li>
+              <a href="/crypto-dashboard.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-[.95rem]"> other_houses </span>
+                <span> Overview</span>
+              </a>
+            </li>
+            <span class="px-2 text-sm py-4 ps-4 font-semibold"> COINS </span>
+            <li>
+              <button class="buyCoinsMultipleOptionsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> currency_exchange </span>
+                <span> Buy coins </span>
+              </button>
+            </li>
+            <li>
+              <button class="sendCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> north_east </span>
+                <span> Send coins </span>
+              </button>
+            </li>
+            <li>
+              <button class="sendCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> south_west </span>
+                <span> Receive coins </span>
+              </button>
+            </li>
+            <li>
+              <button class="withdrawCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-[.95rem]"> upgrade </span>
+                <span> Withdraw coins </span>
+              </button>
+            </li>
+          </menu>
+
+          <menu class="flex flex-col">
+            <span class="px-2 text-sm py-4 ps-4 font-semibold"> MONEY </span>
+            <li>
+              <button class="sendMoneyButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> north_east </span>
+                <span> Send money </span>
+              </button>
+            </li>
+            <li>
+              <button class="depositeMoneyButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> vertical_align_bottom </span>
+                <span> Deposit money </span>
+              </button>
+            </li>
+            <li>
+              <button class="withdrawMoneyButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-[.95rem]"> upgrade </span>
+                <span> withdraw money </span>
+              </button>
+            </li>
+          </menu>
+
+          <menu class="flex flex-col">
+            <span class="px-2 text-sm py-4 ps-4 font-semibold"> ANALYTICS </span>
+            <li>
+              <a href="/transaction-volume.html" class="text-sm ps-4 bg-violet-500 bg-opacity-15 text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> sync_alt </span>
+                <span> Transaction Volume </span>
+              </a>
+            </li>
+            <li>
+              <a href="/revenue-analysis.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> database </span>
+                <span> Revenue Analysis </span>
+              </a>
+            </li>
+            <li>
+              <a href="/channel-effectiveness.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> list_alt_check </span>
+                <span> Channel Effectiveness </span>
+              </a>
+            </li>
+            <li>
+              <a href="/visitor-flow.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> conversion_path </span>
+                <span> Visitor Flow & Behaviour </span>
+              </a>
+            </li>
+          </menu>
+
+          <menu class="flex flex-col">
+            <span class="px-2 text-sm py-4 ps-4 font-semibold"> Manage </span>
+            <li>
+              <a href="/cards.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> credit_card </span>
+                <span> Cards </span>
+              </a>
+            </li>
+            <li>
+              <a href="/manage-accounts.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                <span class="material-symbols-outlined text-sm"> account_balance </span>
+                <span> Bank Accounts </span>
+              </a>
+            </li>
+          </menu>
+
+          <div class="flex flex-col">
+            <span class="px-2 text-sm py-4 ps-4 font-semibold"> Support </span>
+            <menu class="px-4 flex flex-wrap gap-2">
+              <li>
+                <a href="#" class="text-sm">Contact</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm">About</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm">Help</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm">Security</a>
+              </li>
+              <li>
+                <a href="#" class="text-sm">Community</a>
+              </li>
+            </menu>
+            <span class="px-4 text-sm py-2"> © 2024 Sizemug </span>
+          </div>
+        </nav>
+
+        <!-- MODAL FOR NOTIFICATIONS -->
+        <template id="notificationModal">
+          <div class="w-screen max-w-[650px] absolute h-full max-h-screen md:h-auto md:max-h-[calc(100vh-3rem)] flex flex-col bg-white top-0 md:top-6 right-0 md:right-6 p-6 rounded-xl z-[11]">
+            <div class="flex flex-row-reverse justify-end gap-4 md:flex-row py-3 items-center md:justify-between md:border-b border-gray-300">
+              <p class="font-semibold">Notifications</p>
+              <span class="w-8 h-8 closeModalButton cursor-pointer">
+                <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+              </span>
+            </div>
+
+            <div class="overflow-y-scroll">
+              <div>
+                <div class="pt-6">
+                  <span class="text-gray-400 font-semibold"> New </span>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/success.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="success icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Deposite Successful </span>
+                        <span class="text-gray-400 text-sm"> 🎉 Deposit Successful! $50.00 has been added to your Money Wallet </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 bg-violet-600 rounded-full flex-none ms-2"> </span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/error.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="error icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Withdrawal Error </span>
+                        <span class="text-gray-400 text-sm"> ❌ Withdrawal Failed. Please check your bank details or try again. </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 bg-violet-600 rounded-full flex-none ms-2"> </span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/success.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="success icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Deposite Successful </span>
+                        <span class="text-gray-400 text-sm"> 🎉 Deposit Successful! $50.00 has been added to your Money Wallet </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 bg-violet-600 rounded-full flex-none ms-2"> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="pt-6">
+                  <span class="text-gray-400 font-semibold"> Last 7 Days </span>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/success.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="success icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Deposite Successful </span>
+                        <span class="text-gray-400 text-sm"> 🎉 Deposit Successful! $50.00 has been added to your Money Wallet </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 rounded-full justify-self-end"> </span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/success.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="success icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Deposite Successful </span>
+                        <span class="text-gray-400 text-sm"> 🎉 Deposit Successful! $50.00 has been added to your Money Wallet </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 rounded-full justify-self-end"> </span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/error.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="error icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Withdrawal Error </span>
+                        <span class="text-gray-400 text-sm"> ❌ Withdrawal Failed. Please check your bank details or try again. </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 rounded-full justify-self-end"> </span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-5 py-4 items-center justify-start">
+                    <img src="/images/crypto-dashboard-icons-images/success.svg" class="w-7 h-7 md:w-11 md:h-11 self-start" alt="success icon" />
+
+                    <div class="flex justify-between items-center w-full">
+                      <div class="flex flex-col gap-1">
+                        <span class="font-bold text-sm"> Deposite Successful </span>
+                        <span class="text-gray-400 text-sm"> 🎉 Deposit Successful! $50.00 has been added to your Money Wallet </span>
+                        <span class="text-xs py-1 text-gray-400"> 13 mins ago </span>
+                      </div>
+
+                      <span class="w-3 h-3 rounded-full justify-self-end"> </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-4 py-2 mt-4">
+              <span class="p-2 text-white bg-gray-200 rounded-2xl w-full text-sm text-center cursor-pointer cancelModalButton"> Close </span>
+              <div class="p-2 flex justify-center gap-3 items-center bg-white border-2 border-violet-600 text-violet-600 rounded-2xl w-full text-sm text-center cursor-pointer">
+                <span> Mark all as read </span>
+                <img src="/images/crypto-dashboard-icons-images/mark.svg" class="w-5 h-5" alt="mark icon" />
+              </div>
+            </div>
+          </div>
+        </template>
+        <!-- END OF MODAL FOR NOTIFICATIONS -->
+      </aside>
+      <main class="col-span-6 lg:col-span-5 h-screen overflow-y-scroll">
+        <div class="border-[1px] border-gray-300 md:m-2 md:rounded-3xl min-h-[calc(100%-1rem)]">
+          <header class="flex justify-between border md:rounded-none rounded-2xl md:border-0 m-4 md:m-0 md:border-b-[1px] border-gay-300 p-2 md:p-4">
+            <div class="flex gap-4 items-center">
+              <span class="lg:hidden w-5 h-5 sidebarButton">
+                <img src="/images/crypto-dashboard-icons-images/navbars.svg" alt="nav bars icon" class="w-full h-full" />
+              </span>
+              <h1 class="text-base md:text-lg font-bold overview">Transaction Volume</h1>
+            </div>
+            <nav>
+              <menu class="flex gap-3">
+                <li class="w-10 h-10 p-3 md:bg-gray-200 rounded-full flex justify-center items-center notificationButton">
+                  <img src="/images/crypto-dashboard-icons-images/bell.svg" alt="bell" class="w-full h-full" />
+                </li>
+                <li class="w-10 h-10 rounded-full bg-violet-200 text-violet-600 flex justify-center items-center text-center">
+                  <span> EO </span>
+                </li>
+              </menu>
+            </nav>
+          </header>
+
+          <!-- SIDEBAR MOBILE-->
+
+          <template id="sidebar">
+            <div class="absolute overflow-y-scroll lg:hidden top-0 left-0 w-5/6 max-w-[400px] h-full bg-gradient-to-tr from-[#DA4DAA] to-[#4D4BFE]">
+              <aside class="pb-6 px-2 max-h-screen col-span-1 text-white relative">
+                <span class="closeModalButton material-symbols-outlined text-3xl relative block p-2 mx-2 mt-2"> close </span>
+
+                <a href="/" class="logo py-4 flex relative mx-4 mb-6 left-0">
+                  <img src="/images/crypto-dashboard-icons-images/logowhite.svg" class="h-12 w-fit" alt="sizemug logo" />
+                </a>
+                <nav class="flex flex-col gap-6">
+                  <menu class="flex flex-col">
+                    <li>
+                      <a href="/crypto-dashboard.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-[.95rem]"> other_houses </span>
+                        <span> Overview</span>
+                      </a>
+                    </li>
+                    <span class="px-2 text-sm py-4 ps-4 font-semibold"> COINS </span>
+                    <li>
+                      <button class="buyCoinsMultipleOptionsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> currency_exchange </span>
+                        <span> Buy coins </span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="sendCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> north_east </span>
+                        <span> Send coins </span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="sendCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> south_west </span>
+                        <span> Receive coins </span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="withdrawCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-[.95rem]"> upgrade </span>
+                        <span> Withdraw coins </span>
+                      </button>
+                    </li>
+                  </menu>
+
+                  <menu class="flex flex-col">
+                    <span class="px-2 text-sm py-4 ps-4 font-semibold"> MONEY </span>
+                    <li>
+                      <button class="sendMoneyButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> north_east </span>
+                        <span> Send money </span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="depositeMoneyButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> vertical_align_bottom </span>
+                        <span> Deposit money </span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="withdrawCoinsButton w-full text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-[.95rem]"> upgrade </span>
+                        <span> withdraw money </span>
+                      </button>
+                    </li>
+                  </menu>
+
+                  <menu class="flex flex-col">
+                    <span class="px-2 text-sm py-4 ps-4 font-semibold"> ANALYTICS </span>
+                    <li>
+                      <a href="/transaction-volume.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> sync_alt </span>
+                        <span> Transaction Volume </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/revenue-analysis.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> database </span>
+                        <span> Revenue Analysis </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/channel-effectiveness.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> list_alt_check </span>
+                        <span> Channel Effectiveness </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/visitor-flow.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> conversion_path </span>
+                        <span> Visitor Flow & Behaviour </span>
+                      </a>
+                    </li>
+                  </menu>
+
+                  <menu class="flex flex-col">
+                    <span class="px-2 text-sm py-4 ps-4 font-semibold"> Manage </span>
+                    <li>
+                      <a href="/cards.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> credit_card </span>
+                        <span> Cards </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/manage-accounts.html" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                        <span class="material-symbols-outlined text-sm"> account_balance </span>
+                        <span> Bank Accounts </span>
+                      </a>
+                    </li>
+                  </menu>
+
+                  <div class="flex flex-col">
+                    <span class="px-2 text-sm py-4 ps-4 font-semibold"> Support </span>
+                    <menu class="px-4 flex flex-wrap gap-2">
+                      <li>
+                        <a href="#" class="text-sm">Contact</a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-sm">About</a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-sm">Privacy Policy</a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-sm">Help</a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-sm">Security</a>
+                      </li>
+                      <li>
+                        <a href="#" class="text-sm">Community</a>
+                      </li>
+                    </menu>
+                    <span class="px-4 text-sm py-2"> © 2024 Sizemug </span>
+                  </div>
+                </nav>
+              </aside>
+            </div>
+          </template>
+
+          <!-- END OF SIDEBAR -->
+
+          <div class="p-4 pt-0 md:pt-4">
+            <div class="flex flex-col gap-6 lg:flex-row">
+              <div class="flex border relative border-gray-300 gap-4 md:gap-6 overflow-hidden rounded-2xl p-4 md:p-6 items-center justify-start w-full">
+                <div class="h-[150%] bg-gradient-to-tr from-transparent via-[#ffffff49] to-primary aspect-[5/4] absolute top-0 -right-[20%]"></div>
+                <span class="w-10 h-10 bg-gray-100 bg-opacity-50 rounded-full flex justify-center items-center">
+                  <img src="/images/crypto-dashboard-icons-images/totalTransactions.svg" alt="" />
+                </span>
+                <div class="flex flex-col gap-5">
+                  <span>Total Transactions</span>
+                  <span class="text-xl font-semibold"> 3,450 </span>
+                </div>
+              </div>
+
+              <div class="flex border relative border-gray-300 gap-4 md:gap-6 overflow-hidden rounded-2xl p-4 md:p-6 items-center justify-start w-full">
+                <div class="h-[150%] bg-gradient-to-tr from-transparent via-[#ffffff49] to-orange-400 aspect-[5/4] absolute top-0 -right-[20%]"></div>
+                <span class="w-10 h-10 bg-gray-100 bg-opacity-50 rounded-full flex justify-center items-center">
+                  <img src="/images/crypto-dashboard-icons-images/highestTransactionsDay.svg" alt="" />
+                </span>
+                <div class="flex flex-col gap-5">
+                  <span>Highest Transactions day</span>
+                  <span class="text-xl font-semibold"> 47 on 8 May,2024 </span>
+                </div>
+              </div>
+
+              <div class="flex border relative border-gray-300 gap-4 md:gap-6 overflow-hidden rounded-2xl p-4 md:p-6 items-center justify-start w-full">
+                <div class="h-[150%] bg-gradient-to-tr from-transparent via-[#ffffff49] to-[#4e4bfe] aspect-[5/4] absolute top-0 -right-[20%]"></div>
+                <span class="w-10 h-10 bg-gray-100 bg-opacity-50 rounded-full flex justify-center items-center">
+                  <img src="/images/crypto-dashboard-icons-images/lowestTransactionsDay.svg" alt="" />
+                </span>
+                <div class="flex flex-col gap-5">
+                  <span>Lowest Transactions day</span>
+                  <span class="text-xl font-semibold"> 3 on 8 May,2024 </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-2 md:p-4 border m-4 border-gray-300 rounded-2xl" data-controller="tabs" data-tabs-index-value="0">
+            <div class="flex items-start justify-between md:items-center px-2 md:px-0">
+              <span class="text-xs md:text-base"> Transaction trends </span>
+
+              <div>
+                <!-- Tabs -->
+                <div class="md:mx-6 md:mt-2 mx-2 mt-1 text-[.5rem] md:text-base">
+                  <ul class="flex gap-2 bg-gray-100 p-1 md:p-2 rounded-xl">
+                    <li class="rounded-xl bg-white" data-action="click->tabs#change" data-tabs-target="tab">
+                      <a href="#" class="inline-block text-gray-700 rounded-xl py-2 px-5 font-medium text-center">Coins</a>
+                    </li>
+                    <li class="rounded-xl inactive" data-action="click->tabs#change" data-tabs-target="tab">
+                      <a href="#" class="inline-block text-gray-700 rounded-xl py-2 px-5 font-medium text-center">Money</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="flex w-14 overflow-visible md:w-fit flex-col md:flex-row gap-2 md:gap-6 items-end md:items-center">
+                <div class="flex p-1 md:p-2 md:py-2 text-xs rounded-lg border-2 cursor-pointer border-gray-200 items-center gap-2">
+                  <span class="material-symbols-outlined text-xl"> cycle </span>
+                  <span class="hidden md:block"> Refresh table </span>
+                </div>
+
+                <div x-data="select" class="md:relative min-w-fit text-[.7rem] md:text-base" @click.outside="open = false">
+                  <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full items-center justify-between rounded bg-white p-2 ring-1 ring-gray-300">
+                    <span x-text="(ChartType == '') ? 'Monthly' : ChartType"></span>
+                    <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </button>
+
+                  <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:left-auto absolute mt-1 w-full md:rounded bg-white ring-1 ring-gray-300" x-show="open">
+                    <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Hourly')">Hourly</li>
+                    <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Daily')">Daily</li>
+                    <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Weekly')">Weekly</li>
+                    <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Monthly')">Monthly</li>
+                    <hr class="bg-gray-200 my-2" />
+                    <div class="cursor-pointer relative m-2 rounded-lg select-none p-2 hover:bg-gray-200">
+                      <input type="text" class="absolute h-full cursor-pointer top-0 left-0 opacity-0 w-full" id="dateRangePicker" @change="(e)=>setChartType(e.target.value)" />
+                      Custom
+                    </div>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="min-h-[250px] md:min-h-[400px] relative w-full">
+              <div class="mt-3mx-2 md:mx-0">
+                <div class="hidden px-1 py-2" data-tabs-target="panel">
+                  <div class="text-sm" data-controller="tabs" data-tabs-index-value="0">
+                    <div x-data="select" class="relative w-fit text-[.7rem] md:text-base" @click.outside="open = false">
+                      <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full gap-2 items-center justify-between rounded bg-white p-2 ring-1 ring-gray-300">
+                        <img src="/images/crypto-dashboard-icons-images/chartType.svg" alt="chart Type" class="w-5 h-5" />
+                        <span x-text="(ChartType == '') ? 'ChartType' : ChartType"></span>
+                        <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                      </button>
+
+                      <ul class="z-20 absolute mt-1 w-full rounded bg-white ring-1 ring-gray-300" x-show="open">
+                        <li data-action="click->tabs#change" data-tabs-target="tab" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Area chart')">Area Chart</li>
+                        <li data-action="click->tabs#change" data-tabs-target="tab" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Bar Chart')">Bar Chart</li>
+                      </ul>
+                    </div>
+
+                    <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                      <div id="areaChartCoins"></div>
+                    </div>
+                    <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                      <div id="barChartCoins"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="hidden px-1 py-2" data-tabs-target="panel">
+                  <div class="text-sm" data-controller="tabs" data-tabs-index-value="0">
+                    <div x-data="select" class="relative w-[10rem]" @click.outside="open = false">
+                      <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full items-center justify-between rounded bg-white p-2 ring-1 ring-gray-300">
+                        <img src="/images/crypto-dashboard-icons-images/chartType.svg" alt="chart Type" class="w-5 h-5" />
+                        <span x-text="(ChartType == '') ? 'ChartType' : ChartType"></span>
+                        <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                      </button>
+
+                      <ul class="z-20 absolute mt-1 w-full rounded bg-white ring-1 ring-gray-300" x-show="open">
+                        <li data-action="click->tabs#change" data-tabs-target="tab" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Area chart')">Area Chart</li>
+                        <li data-action="click->tabs#change" data-tabs-target="tab" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click="setChartType('Bar Chart')">Bar Chart</li>
+                      </ul>
+                    </div>
+
+                    <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                      <div id="areaChartMoney"></div>
+                    </div>
+                    <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                      <div id="barChartMoney"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col lg:flex-row gap-6 m-4">
+            <div class="border border-gray-300 rounded-xl w-full overflow-scroll max-h-[500px] p-2 md:p-6">
+              <table class="min-w-full border-collapserounded-lg">
+                <h3 class="text-xl font-semibold p-6 pb-8 block">Coin Transactions</h3>
+                <tbody class="border-0 border-gray-200 recenttransactiontable">
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=5" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Michael Brown</span>
+                          <span class="text-gray-400 text-xs">20, Apr 2024 | 08:20 am</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-200 coins</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=6" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Sophia White</span>
+                          <span class="text-gray-400 text-xs">25, May 2024 | 06:50 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-green-500">
+                        <span class="material-symbols-outlined text-lg"> currency_exchange </span>
+                        <span> Buy coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">+200 coins</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=7" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">William Green</span>
+                          <span class="text-gray-400 text-xs">02, Jun 2024 | 10:10 am</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> upgrade </span>
+                        <span> withdraw coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-200 coins</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=1" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">John Smith</span>
+                          <span class="text-gray-400 text-xs">10, Jan 2024 | 09:30 am</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-200 coins</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-primary flex-none text-center pt-2">FM</span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Faith Mollins</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-200 coins</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-primary flex-none text-center pt-2">FM</span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Faith Mollins</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-green-500">
+                        <span class="material-symbols-outlined text-lg"> currency_exchange </span>
+                        <span> Buy coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">+200 coins</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=3" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Collns Gray</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-green-500">
+                        <span class="material-symbols-outlined text-lg"> currency_exchange </span>
+                        <span> Buy coins </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">+200 coins</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="border border-gray-300 rounded-xl w-full overflow-scroll max-h-[500px] p-2 md:p-6">
+              <table class="min-w-full border-collapserounded-lg">
+                <h3 class="text-xl font-semibold p-6 pb-8 block">Money Transactions</h3>
+                <tbody class="border-0 border-gray-200 recenttransactiontable">
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-primary flex-none text-center pt-2">SM</span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Samuel Michaels</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-$75.00</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=2" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Alice Johnson</span>
+                          <span class="text-gray-400 text-xs">15, Feb 2024 | 12:45 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-green-500">
+                        <span class="material-symbols-outlined text-base"> vertical_align_bottom </span>
+                        <span> Deposit Money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">+$75.00</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=3" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Dan Mills</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-$90.00</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=4" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Emily Davis</span>
+                          <span class="text-gray-400 text-xs">05, Mar 2024 | 03:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-green-500">
+                        <span class="material-symbols-outlined text-base"> vertical_align_bottom </span>
+                        <span> Deposit Money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">+$75.00</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=4" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Faith Mollins</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> upgrade </span>
+                        <span> Withdraw money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-$35.00</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-primary flex-none text-center pt-2">FM</span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Faith Mollins</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-$42.00</td>
+                  </tr>
+                  <tr class="border-b">
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-primary flex-none text-center pt-2">FM</span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Faith Mollins</span>
+                          <span class="text-gray-400 text-xs"> 03, Dec 2023 | 01:15 pm</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">
+                      <div class="flex items-center justify-center font-bold gap-3 text-red-500">
+                        <span class="material-symbols-outlined text-base"> north_east </span>
+                        <span> Send money </span>
+                      </div>
+                    </td>
+                    <td class="p-3 py-5 text-center text-[.65rem] md:text-sm font-bold">-$120.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="flex flex-col lg:flex-row gap-6 m-4">
+            <div class="border border-gray-300 rounded-xl w-full">
+              <div class="p-4 md:p-6">
+                <div class="flex justify-between gap-6 items-center">
+                  <span class="font-semibold text-base md:text-lg py-2"> Coins Transactions By Type </span>
+
+                  <div x-data="select" class="md:relative w-fit min-w-[110px] text-[.7rem] md:text-base" @click.outside="open = false">
+                    <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full items-center justify-between rounded bg-white p-2 ring-1 ring-gray-300">
+                      <span x-text="(ChartType == '') ? 'Monthly' : ChartType"></span>
+                      <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      </svg>
+                    </button>
+
+                    <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:left-auto absolute mt-1 w-full md:rounded bg-white ring-1 ring-gray-300" x-show="open">
+                      <div class="flex justify-between items-center md:hidden gap-6">
+                        <button class="material-symbols-outlined close me-6 p-2" @click="toggle">close</button>
+
+                        <span class="text-sm font-semibold opacity-0"> Monthly </span>
+
+                        <span class="w-8 h-8 mx-2"> </span>
+                      </div>
+
+                      <div x-data="{ open: false, selectedMonth: '' }" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click.outside="open = false">
+                        <button @click="open = !open" :class="{ 'ring-blue-600': open }" class="flex w-full items-center justify-between rounded py-2 md:py-0">
+                          <span>Monthly</span>
+                          <svg class="fill-current h-4 w-8 -rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                          </svg>
+                        </button>
+
+                        <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:right-full md:left-auto absolute mt-1 w-screen md:w-fit md:rounded bg-white ring-1 ring-gray-300" x-show="open" @click.outside="open = false">
+                          <div class="flex justify-between items-center md:hidden gap-6">
+                            <button class="material-symbols-outlined close me-6 p-2" @click="toggle">close</button>
+
+                            <span class="text-sm font-semibold"> Monthly </span>
+
+                            <span class="w-8 h-8 mx-2"> </span>
+                          </div>
+
+                          <template x-for="month in ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']">
+                            <li class="cursor-pointer m-2 rounded-lg select-none p-2 py-3 hover:bg-gray-200" @click="setChartType(month); toggle" x-text="month"></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <div x-data="{ open: false, selectedYear: '' }" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click.outside="open = false">
+                        <button @click="open = !open" :class="{ 'ring-blue-600': open }" class="flex w-full items-center justify-between rounded py-2 md:py-0">
+                          <span>Yearly</span>
+                          <svg class="fill-current h-4 w-8 -rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                          </svg>
+                        </button>
+
+                        <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:right-full md:left-auto absolute mt-1 w-screen md:w-fit md:rounded bg-white ring-1 ring-gray-300" x-show="open" @click.outside="open = false">
+                          <div class="flex justify-between items-center md:hidden gap-6">
+                            <button class="material-symbols-outlined close me-6 p-2" @click="toggle">close</button>
+
+                            <span class="text-sm font-semibold"> Yearly </span>
+
+                            <span class="w-8 h-8 mx-2"> </span>
+                          </div>
+
+                          <template
+                            x-for="year in [
+                        '2013', '2014', '2015', '2016', '2017', 
+                        '2018', '2019', '2020', '2021', '2022', 
+                        '2023', '2024'
+                      ]"
+                          >
+                            <li class="cursor-pointer m-2 rounded-lg select-none p-2 py-3 hover:bg-gray-200" @click="setChartType(year); toggle" x-text="year"></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <hr class="bg-gray-200 my-2 w-[calc(100%-2rem)] relative left-1/2 -translate-x-1/2" />
+                      <div class="cursor-pointer relative m-2 rounded-lg select-none p-2 hover:bg-gray-200">
+                        <input type="text" class="absolute h-full cursor-pointer top-0 left-0 opacity-0 w-full" id="dateRangePicker" @change="(e)=>setChartType(e.target.value)" />
+                        Custom
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+                <div class="p-2 md:p-6 flex justify-center items-center">
+                  <div class="w-full max-w-[300px] aspect-square">
+                    <canvas id="pieChart1"></canvas>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="font-semibold pb-2 block"> Transaction types </span>
+                  <div class="flex justify-between gap-6 text-xs md:text-sm">
+                    <div class="flex flex-col gap-2">
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-primary"></span>
+                        <span> Coins sent </span>
+                      </span>
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-blue-600"></span>
+                        <span> Coins received </span>
+                      </span>
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-red-400"></span>
+                        <span> Coins withdrawn </span>
+                      </span>
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-orange-400"></span>
+                        <span> Coins bought </span>
+                      </span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <span class="font-semibold">
+                        <span> 300 transactions </span>
+                      </span>
+                      <span class="font-semibold">
+                        <span> 400 transactions </span>
+                      </span>
+                      <span class="font-semibold">
+                        <span> 140 transactions </span>
+                      </span>
+                      <span class="font-semibold">
+                        <span> 380 transactions </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="border border-gray-300 rounded-xl w-full">
+              <div class="p-4 md:p-6">
+                <div class="flex justify-between gap-6 text-xs md:text-sm items-center">
+                  <span class="font-semibold text-lg py-2"> Money Transactions By Type </span>
+                  <div x-data="select" class="md:relative w-fit min-w-[110px] text-[.7rem] md:text-base" @click.outside="open = false">
+                    <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full items-center justify-between rounded bg-white p-2 ring-1 ring-gray-300">
+                      <span x-text="(ChartType == '') ? 'Monthly' : ChartType"></span>
+                      <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                      </svg>
+                    </button>
+
+                    <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:left-auto absolute mt-1 w-full md:rounded bg-white ring-1 ring-gray-300" x-show="open">
+                      <div class="flex justify-between items-center md:hidden gap-6">
+                        <button class="material-symbols-outlined close me-6 p-2" @click="toggle">close</button>
+
+                        <span class="text-sm font-semibold opacity-0"> Monthly </span>
+
+                        <span class="w-8 h-8 mx-2"> </span>
+                      </div>
+
+                      <div x-data="{ open: false, selectedMonth: '' }" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click.outside="open = false">
+                        <button @click="open = !open" :class="{ 'ring-blue-600': open }" class="flex w-full items-center justify-between rounded py-2 md:py-0">
+                          <span>Monthly</span>
+                          <svg class="fill-current h-4 w-8 -rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                          </svg>
+                        </button>
+
+                        <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:right-full md:left-auto absolute mt-1 w-screen md:w-fit md:rounded bg-white ring-1 ring-gray-300" x-show="open" @click.outside="open = false">
+                          <div class="flex justify-between items-center md:hidden gap-6">
+                            <button class="material-symbols-outlined close me-6 p-2" @click="toggle">close</button>
+
+                            <span class="text-sm font-semibold"> Monthly </span>
+
+                            <span class="w-8 h-8 mx-2"> </span>
+                          </div>
+
+                          <template x-for="month in ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']">
+                            <li class="cursor-pointer m-2 rounded-lg select-none p-2 py-3 hover:bg-gray-200" @click="setChartType(month); toggle" x-text="month"></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <div x-data="{ open: false, selectedYear: '' }" class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200" @click.outside="open = false">
+                        <button @click="open = !open" :class="{ 'ring-blue-600': open }" class="flex w-full items-center justify-between rounded py-2 md:py-0">
+                          <span>Yearly</span>
+                          <svg class="fill-current h-4 w-8 -rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                          </svg>
+                        </button>
+
+                        <ul class="z-20 py-4 md:py-0 rounded-tl-2xl rounded-tr-2xl bottom-0 left-0 md:bottom-auto md:right-full md:left-auto absolute mt-1 w-screen md:w-fit md:rounded bg-white ring-1 ring-gray-300" x-show="open" @click.outside="open = false">
+                          <div class="flex justify-between items-center md:hidden gap-6">
+                            <button class="material-symbols-outlined close me-6 p-2" @click="toggle">close</button>
+
+                            <span class="text-sm font-semibold"> Yearly </span>
+
+                            <span class="w-8 h-8 mx-2"> </span>
+                          </div>
+
+                          <template
+                            x-for="year in [
+                          '2013', '2014', '2015', '2016', '2017', 
+                          '2018', '2019', '2020', '2021', '2022', 
+                          '2023', '2024'
+                        ]"
+                          >
+                            <li class="cursor-pointer m-2 rounded-lg select-none p-2 py-3 hover:bg-gray-200" @click="setChartType(year); toggle" x-text="year"></li>
+                          </template>
+                        </ul>
+                      </div>
+
+                      <hr class="bg-gray-200 my-2 w-[calc(100%-2rem)] relative left-1/2 -translate-x-1/2" />
+                      <div class="cursor-pointer relative m-2 rounded-lg select-none p-2 hover:bg-gray-200">
+                        <input type="text" class="absolute h-full cursor-pointer top-0 left-0 opacity-0 w-full" id="dateRangePicker" @change="(e)=>setChartType(e.target.value)" />
+                        Custom
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+                <div class="p-2 md:p-6 flex justify-center items-center">
+                  <div class="w-full max-w-[300px] aspect-square">
+                    <canvas id="pieChart2"></canvas>
+                  </div>
+                </div>
+
+                <div>
+                  <span class="font-semibold pb-2 block"> Transaction types </span>
+                  <div class="flex justify-between gap-6 text-xs md:text-sm">
+                    <div class="flex flex-col gap-2">
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-primary"></span>
+                        <span> Money sent </span>
+                      </span>
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-blue-600"></span>
+                        <span> Money received </span>
+                      </span>
+                      <span class="flex gap-6 items-center">
+                        <span class="size-4 inline-block rounded-full bg-orange-400"></span>
+                        <span> Money withdrawn </span>
+                      </span>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                      <span class="font-semibold">
+                        <span> 300 transactions </span>
+                      </span>
+                      <span class="font-semibold">
+                        <span> 300 transactions </span>
+                      </span>
+                      <span class="font-semibold">
+                        <span> 300 transactions </span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BACKDROP AND MODAL -->
+        <div class="fixed z-10 w-screen h-screen top-0 left-0 bottom-0 right-0 justify-center overflow-y-scroll items-end md:items-center hidden" id="modal">
+          <div id="backdrop" class="bg-black w-full h-full absolute bg-opacity-5 backdrop-blur-sm"></div>
+
+          <!-- MODAL CONTENT IS DISPLAYED HERE -->
+          <div class="bg-white rounded-lg z-[11]" id="modalContent"></div>
+        </div>
+        <!-- END OF BACKDROP AND MODAL -->
+
+        <div class="transactionModals">
+          <div class="coinModals">
+            <div class="buyCoinsModals">
+              <!-- TEMPLATE FOR BUY COIN CUSTOM INPUT MODAL ### -->
+              <template id="buyCoinsCustomInput">
+                <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-[90vh] sm:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden block"></span>
+                    <p class="font-semibold">Buy Coins</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="overflow-x-scroll">
+                    <div class="flex gap-2">
+                      <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="50">
+                        <div class="flex gap-2">
+                          <div class="flex justify-start gap-2 items-center">
+                            <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                              <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                            </span>
+                            <span class="italic text-md font-semibold text-primary"> 50 coins </span>
+                          </div>
+                        </div>
+
+                        <span class="font-semibold text-sm"> $5 </span>
+                      </div>
+
+                      <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="100">
+                        <div class="flex gap-2">
+                          <div class="flex justify-start gap-2 items-center">
+                            <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                              <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                            </span>
+                            <span class="italic text-md font-semibold text-primary"> 100 coins </span>
+                          </div>
+                        </div>
+
+                        <span class="font-semibold text-sm"> $10 </span>
+                      </div>
+
+                      <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="500">
+                        <div class="flex gap-2">
+                          <div class="flex justify-start gap-2 items-center">
+                            <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                              <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                            </span>
+                            <span class="italic text-md font-semibold text-primary"> 500 coins </span>
+                          </div>
+                        </div>
+
+                        <span class="font-semibold text-sm"> $45 </span>
+                      </div>
+
+                      <div class="flex gap-2 border-[1px] justify-center items-center border-gray-300 hover:border-primary hover:text-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none addCoinsCustomButton">
+                        <img src="/images/crypto-dashboard-icons-images/customAdd.svg" class="w-5 h-5" alt="add icon" />
+                        <span class="text-sm">Custom</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex gap-6 py-4 pt-6 outline-none">
+                    <input type="number" class="w-full border border-gray-300 rounded-lg outline-none px-4" value="5" id="moneyAmount" />
+                    <span class="w-14 h-14">
+                      <img src="/images/crypto-dashboard-icons-images/conversion.svg" class="w-full h-full" alt="conversion icon" />
+                    </span>
+                    <input type="number" class="w-full border border-gray-300 rounded-lg outline-none px-4" id="coinAmount" value="50" readonly />
+                  </div>
+
+                  <p class="text-md my-4 mb-6">Total : <span>$</span> <span class="moneyAmount">5</span></p>
+
+                  <div data-controller="tabs" data-tabs-index-value="0">
+                    <p class="my-2 font-semibold">Choose A Payment Method</p>
+                    <div class="flex gap-4 py-2">
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Money Wallet </span>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                      <div class="overflow-x-scroll w-full px-2">
+                        <div class="flex gap-4 credit_cards">
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="text-blue-500 text-sm my-2 addCardButton">+ Add another card</button>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <div class="py-4">
+                        <h5 class="font-semibold">Saved Accounts</h5>
+                        <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                        <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                          <span> ******222997 </span>
+                        </div>
+
+                        <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                      </div>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <!-- Pay from Money Account -->
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToPayment">Continue</button>
+                  </div>
+                </div>
+              </template>
+              <!-- TEMPLATE FOR BUY COIN CUSTOM INPUT MODAL  -->
+
+              <!-- TEMPLATE FOR ADD COIN MODAL ###-->
+              <template id="addCoinsModal">
+                <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-[90vh] sm:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden block"></span>
+                    <p class="font-semibold">Buy Coins</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="flex flex-col gap-4 border-[1px] bg-primary bg-opacity-10 border-primary rounded-md p-2 my-2 max-w-[170px]">
+                    <div class="flex justify-start gap-2 items-center">
+                      <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                        <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                      </span>
+                      <span class="italic text-md font-semibold text-primary">
+                        <span class="coinAmountField">50</span>
+                        coins
+                      </span>
+                    </div>
+                    <span class="font-semibold text-sm"> $ <span class="moneyAmountField"> 5 </span> </span>
+                  </div>
+
+                  <p class="text-md my-4 mb-6">Total : <span>$</span><span class="moneyAmountField"> 5 </span>.00</p>
+
+                  <div data-controller="tabs" data-tabs-index-value="0">
+                    <p class="my-2 font-semibold">Choose A Payment Method</p>
+                    <div class="flex gap-4 py-2">
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Money Wallet </span>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                      <div class="overflow-x-scroll w-full px-2">
+                        <div class="flex gap-4 credit_cards">
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="text-blue-500 text-sm my-2 addCardButton">+ Add another card</button>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <div class="py-4">
+                        <h5 class="font-semibold">Saved Accounts</h5>
+                        <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                        <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                          <span> ******222997 </span>
+                        </div>
+
+                        <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                      </div>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <!-- Pay from Money Account -->
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToPayment">Continue</button>
+                  </div>
+                </div>
+              </template>
+              <!-- END OF TEMPLATE FOR ADD COIN MODAL -->
+
+              <!-- TEMPLATE FOR CHOOSE PAYEMENT METHOD ### -->
+              <template id="choosePaymentMethod">
+                <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-[90vh] sm:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden block"></span>
+                    <p class="font-semibold">Buy Coins</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="flex flex-col gap-4 border-[1px] bg-primary bg-opacity-10 border-primary rounded-md p-2 my-2 max-w-[170px]">
+                    <div class="flex justify-start gap-2 items-center">
+                      <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                        <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                      </span>
+                      <span class="italic text-md font-semibold text-primary"> 50 coins </span>
+                    </div>
+                    <span class="font-semibold text-sm"> $5 </span>
+                  </div>
+
+                  <p class="text-md my-4 mb-6">Total : <span>$5.00</span></p>
+
+                  <div data-controller="tabs" data-tabs-index-value="0">
+                    <p class="my-2 font-semibold">Choose A Payment Method</p>
+                    <div class="flex gap-4 py-2">
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Money Wallet </span>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                      <div class="overflow-x-scroll w-full px-2">
+                        <div class="flex gap-4 credit_cards">
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="text-blue-500 text-sm my-2 addCardButton">+ Add another card</button>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <div class="py-4">
+                        <h5 class="font-semibold">Saved Accounts</h5>
+                        <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                        <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                          <span> ******222997 </span>
+                        </div>
+
+                        <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                      </div>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <!-- Pay from Money Account -->
+                    </div>
+                  </div>
+
+                  <div>
+                    <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                    <div class="rounded-lg bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 p-4 max-w-[250px]">
+                      <div class="flex gap-3 items-center justify-between">
+                        <span class="w-5 h-5">
+                          <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                        </span>
+                        <span class="w-10 h-5">
+                          <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                        </span>
+                      </div>
+                      <div class="pb-3 pt-7">
+                        <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                      </div>
+                      <div class="flex justify-between gap-3">
+                        <div class="flex flex-col">
+                          <span class="text-[.5rem] text-white">11/26</span>
+                          <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+                    <span class="p-2 text-white bg-primary rounded-2xl w-full text-sm text-center continueToPayment"> Continue </span>
+                  </div>
+                </div>
+              </template>
+              <!-- END OF TEMPLATE FOR CHOOSE PAYEMENT METHOD -->
+            </div>
+
+            <div class="sendCoinsModals">
+              <template id="sendCoinsSelectUserModal">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold">Send Coins</p>
+
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="p-4 bg-gray-100 rounded-lg my-6 border border-gray-300">
+                    <span class="text-gray-400 text-sm">Your balance(available)</span>
+                    <div class="py-2">
+                      <span class="text-xl font-bold"> 10,000 </span>
+                      <span class="text-xs uppercase font-bold"> coins </span>
+                    </div>
+                    <span class="text-blue-600 italic font-semibold">1 coin = $0.10 USD</span>
+                  </div>
+
+                  <div class="overflow-x-scroll py-3">
+                    <div class="flex gap-4 p-2 recenttransaction">
+                      <div class="flex flex-col gap-1 items-center">
+                        <button class="w-12 h-12 rounded-full bg-gray-200 text-4xl text-center selectBeneficiaryButton">+</button>
+                        <span class="text-xs">Add</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="/images/crypto-dashboard-icons-images/person.svg" class="w-full h-full" alt="coin svg" />
+                        </span>
+                        <span class="text-xs">Faith</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=1" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">John</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=2" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Jane</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=3" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Mike</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=4" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Sophia</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=5" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Liam</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=6" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Emma</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=7" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Oliver</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=8" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Ava</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=9" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Noah</span>
+                      </div>
+
+                      <div class="flex flex-col gap-1 items-center">
+                        <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=10" class="w-full h-full" alt="person image" />
+                        </span>
+                        <span class="text-xs">Isabella</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="py-2">
+                    <div class="pb-4">
+                      <span class="font-bold block py-1">Amount</span>
+                      <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+                    </div>
+
+                    <div class="pb-4">
+                      <div class="py-2"><span class="font-bold py-2">Message</span><span class="text-gray-400 px-2">(optional)</span></div>
+                      <textarea type="text" class="p-3 outline-none focus:border-primary h-24 resize-none block w-full border border-gray-300 rounded-md" placeholder="Tyepe here..."> </textarea>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer sendCoinsContinueToReviewTransaction">Continue</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="sendCoinsReviewTransaction">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <p class="font-semibold py-3">Send Coins To</p>
+
+                  <div class="flex justify-between py-2">
+                    <div class="flex gap-2">
+                      <span class="w-10 h-10 rounded-full bg-gray-200">
+                        <img src="/images/crypto-dashboard-icons-images/person.svg" class="w-full h-full" alt="coin svg" />
+                      </span>
+                      <div class="flex flex-col">
+                        <span>Faith Mollins</span>
+                        <span class="text-gray-400 text-sm">@faith</span>
+                      </div>
+                    </div>
+                    <div class="text-xs p-2 rounded-2xl text-white flex-none h-fit px-6 bg-blue-600">Change</div>
+                  </div>
+
+                  <p class="text-sm font-semibold py-2">Amount</p>
+
+                  <div class="relative">
+                    <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="400 coins" />
+                    <img src="/images/crypto-dashboard-icons-images/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner">Continue</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="transactionDetailsModal">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold showTransactionErrorButton">Transaction details</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="py-6">
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">Transaction ID</span>
+                      <span> TR1122233098 </span>
+                    </div>
+
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">date</span>
+                      <span> 03, Dec 2023 | 01:15 pm </span>
+                    </div>
+
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">Transaction type</span>
+                      <span class="text-red-600 font-semibold"> Send coins </span>
+                    </div>
+
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">To</span>
+                      <span> @Mickey </span>
+                    </div>
+
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">Amount</span>
+                      <span> -400 coins </span>
+                    </div>
+
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">Message</span>
+                      <span> Just a little something to say thank you! 🙌 </span>
+                    </div>
+
+                    <div class="flex justify-between gap-6 py-3">
+                      <span class="text-gray-400">Status</span>
+                      <div class="flex justify-center">
+                        <div class="rounded-2xl flex gap-2 font-semibold py-[0.4rem] w-fit items-center bg-green-100 text-green-500 p-[.4rem] px-5">
+                          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                          <span class="text-sm">Completed</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+                    <span class="text-white bg-primary rounded-2xl w-full text-sm text-center p-4 md:p-2 cancelModalButton cursor-pointer"> Download Receipt </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+
+            <div class="withdrawCoinsModals">
+              <template id="withdrawCoinsEnterAmount">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold">Withdraw Coins</p>
+
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="p-4 bg-gray-100 rounded-lg my-6 border border-gray-300">
+                    <span class="text-gray-400 text-sm">Your balance(available)</span>
+                    <div class="py-2">
+                      <span class="text-xl font-bold"> 10,000 </span>
+                      <span class="text-xs uppercase font-bold"> coins </span>
+                    </div>
+                    <span class="text-blue-600 italic font-semibold">1 coin = $0.10 USD</span>
+                  </div>
+
+                  <div class="py-2">
+                    <div class="pb-4">
+                      <span class="font-bold block py-1">Amount</span>
+                      <div class="relative">
+                        <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+                        <span class="text-xs p-2 px-3 bg-gray-300 absolute right-2 top-2 rounded-md"> Max </span>
+                      </div>
+                    </div>
+
+                    <div class="pb-4">
+                      <div class="py-2"><span class="font-bold py-2">Coin Conversion</span><span class="text-gray-400 px-2">(USD)</span></div>
+                      <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="$0.00" />
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer withdrawCoinsContinueToReviewTransaction">Continue</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="withdrawCoinsReviewTransaction">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <p class="font-semibold py-3">Withdraw Coins To</p>
+                  <span class="text-sm text-gray-400"> Money wallet </span>
+
+                  <p class="text-sm font-semibold py-2">Amount</p>
+
+                  <div class="relative">
+                    <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="400 coins" />
+                    <img src="/images/crypto-dashboard-icons-images/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner">Continue</button>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <div class="moneyModals">
+            <div class="withdrawMoneyModals">
+              <template id="withdrawMoneyEnteramount">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold">Withdraw Money</p>
+
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="p-4 bg-gray-100 rounded-lg my-6 border border-gray-300">
+                    <span class="text-gray-400 text-sm">Your balance(available)</span>
+                    <div class="py-2">
+                      <span class="text-xl font-bold"> 25,000 </span>
+                      <span class="text-xs uppercase font-bold"> USD </span>
+                    </div>
+                  </div>
+
+                  <div class="py-2">
+                    <div class="pb-4">
+                      <span class="font-bold block py-1">Amount</span>
+                      <div class="relative">
+                        <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div data-controller="tabs" data-tabs-index-value="0">
+                    <p class="my-2 font-semibold">Choose A Payment Method</p>
+                    <div class="flex gap-4 py-2">
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Mobile Money </span>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                      <div class="overflow-x-scroll w-full px-2">
+                        <div class="flex gap-4 credit_cards">
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="text-blue-500 text-sm my-4 addCardButton">+ Add another Card</button>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <div class="py-4">
+                        <h5 class="font-semibold">Saved Accounts</h5>
+                        <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                        <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                          <span> ******222997 </span>
+                        </div>
+
+                        <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                      </div>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <!-- Pay from Money Account -->
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer withdrawMoneyContinueToReviewTransaction">Continue</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="withdrawMoneyReviewTransaction">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="pb-4">
+                    <p class="font-semibold py-3">Withdraw money to</p>
+
+                    <div class="flex justify-between">
+                      <div class="flex flex-col gap-1 text-xs text-gray-500">
+                        <span>Faith Muema</span>
+                        <span>2290011882773</span>
+                      </div>
+
+                      <div class="text-xs p-2 rounded-2xl text-white flex-none h-fit px-6 bg-blue-600">Change</div>
+                    </div>
+                  </div>
+
+                  <p class="text-sm font-semibold py-2">Amount</p>
+
+                  <div class="relative">
+                    <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="" placeholder="USD" readonly />
+                    <img src="/images/crypto-dashboard-icons-images/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+                    <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner"> Withdraw money </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+
+            <div class="sendMoneymodals">
+              <template id="sendMoneySelectUserModal">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold">Send Money</p>
+
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="p-4 bg-gray-100 rounded-lg my-6 border border-gray-300">
+                    <span class="text-gray-400 text-sm">Your balance(available)</span>
+                    <div class="py-2">
+                      <span class="text-xl font-bold"> 10,000 </span>
+                      <span class="text-xs uppercase font-bold"> coins </span>
+                    </div>
+                  </div>
+
+                  <div class="py-3">
+                    <span class="font-bold py-2"> Send to </span>
+
+                    <div class="overflow-x-scroll">
+                      <div class="flex gap-4 p-2 recenttransaction">
+                        <div class="flex flex-col gap-1 items-center">
+                          <button class="w-12 h-12 rounded-full bg-gray-200 text-4xl text-center selectBeneficiaryButton">+</button>
+                          <span class="text-xs">Add</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="/images/crypto-dashboard-icons-images/person.svg" class="w-full h-full" alt="coin svg" />
+                          </span>
+                          <span class="text-xs">Faith</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=1" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">John</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=2" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Jane</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=3" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Mike</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=4" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Sophia</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=5" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Liam</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=6" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Emma</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=7" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Oliver</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=8" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Ava</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=9" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Noah</span>
+                        </div>
+
+                        <div class="flex flex-col gap-1 items-center">
+                          <span class="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=10" class="w-full h-full" alt="person image" />
+                          </span>
+                          <span class="text-xs">Isabella</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="py-2">
+                    <div class="pb-4">
+                      <span class="font-bold block py-1">Amount</span>
+                      <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+                    </div>
+
+                    <div class="pb-4">
+                      <div class="py-2"><span class="font-bold py-2">Message</span><span class="text-gray-400 px-2">(optional)</span></div>
+                      <textarea type="text" class="p-3 outline-none focus:border-primary h-24 resize-none block w-full border border-gray-300 rounded-md" placeholder="Tyepe here..."> </textarea>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer sendMoneyContinueToReviewTransaction">Continue</button>
+                  </div>
+                </div>
+              </template>
+              <template id="sendMoneyReviewTransaction">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div>
+                    <p class="font-semibold py-3">Send money to</p>
+
+                    <div class="flex justify-between mb-4">
+                      <div class="flex gap-3 items-center">
+                        <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-gray-200 flex-none text-center overflow-hidden">
+                          <img src="https://picsum.photos/200/200?random=5" alt="random image" />
+                        </span>
+                        <div class="flex flex-col text-start">
+                          <span class="text-nowrap">Michael Brown</span>
+                          <span class="text-gray-400 text-xs">@Mike</span>
+                        </div>
+                      </div>
+
+                      <div class="text-xs p-2 rounded-2xl text-white flex-none h-fit px-6 bg-blue-600">Change</div>
+                    </div>
+                  </div>
+
+                  <p class="text-sm font-semibold py-2">Amount</p>
+
+                  <div class="relative">
+                    <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="" placeholder="USD" readonly />
+                    <img src="/images/crypto-dashboard-icons-images/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+                    <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner"> Send money </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+
+            <div class="depositeMoneyModals">
+              <template id="depositeMoneyEnterAmount">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold">Deposit Money</p>
+
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="py-2">
+                    <div class="pb-4">
+                      <span class="font-bold block py-1">Amount</span>
+                      <div class="relative">
+                        <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+                        <span class="text-xs p-2 px-3 bg-gray-300 absolute right-2 top-2 rounded-md"> Max </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div data-controller="tabs" data-tabs-index-value="0">
+                    <p class="my-2 font-semibold">Choose A Payment Method</p>
+                    <div class="flex gap-4 py-2">
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                      <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Mobile Money </span>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                      <div class="overflow-x-scroll w-full px-2">
+                        <div class="flex gap-4 credit_cards">
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="credit_card_container">
+                            <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                              <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                              <div class="flex gap-3 items-center justify-between">
+                                <span class="w-5 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                                </span>
+                                <span class="w-10 h-5">
+                                  <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                                </span>
+                              </div>
+                              <div class="pb-3 pt-7">
+                                <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                              </div>
+                              <div class="flex justify-between gap-3">
+                                <div class="flex flex-col">
+                                  <span class="text-[.5rem] text-white">11/26</span>
+                                  <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="text-blue-500 text-sm my-2 addCardButton">+ Add another card</button>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <div class="py-4">
+                        <h5 class="font-semibold">Saved Accounts</h5>
+                        <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                        <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                          <span> ******222997 </span>
+                        </div>
+
+                        <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                      </div>
+                    </div>
+
+                    <div data-tabs-target="panel">
+                      <!-- Pay from Money Account -->
+                    </div>
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                    <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer depositeMoneyContinueToReviewTransaction">Continue</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="depositeMoneyReviewTransaction">
+                <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                  <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                    <span class="md:hidden w-20"></span>
+
+                    <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                  </div>
+
+                  <div class="pb-4">
+                    <p class="font-semibold py-3">Add money from</p>
+
+                    <div class="flex justify-between">
+                      <div class="flex flex-col gap-1 text-xs text-gray-500">
+                        <span>Faith Muema</span>
+                        <span>2290011882773</span>
+                      </div>
+
+                      <div class="text-xs p-2 rounded-2xl text-white flex-none h-fit px-6 bg-blue-600">Change</div>
+                    </div>
+                  </div>
+
+                  <p class="text-sm font-semibold py-2">Amount</p>
+
+                  <div class="relative">
+                    <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="" placeholder="USD" readonly />
+                    <img src="/images/crypto-dashboard-icons-images/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+                  </div>
+
+                  <div class="flex gap-4 py-2 mt-10">
+                    <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+                    <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner"> Deposit money </span>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+
+          <div class="otherModals">
+            <!-- TEMPLATE FOR REVIEW TANSACTION MODAL -->
+            <template id="reviewTransaction">
+              <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-[90vh] sm:h-auto">
+                <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                  <span class="md:hidden block"></span>
+                  <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+                  <span class="w-8 h-8 closeModalButton cursor-pointer">
+                    <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                  </span>
+                </div>
+
+                <div>
+                  <p class="text-sm font-semibold py-3">Buy Coins From</p>
+
+                  <div class="flex justify-between">
+                    <div class="flex flex-col gap-1 text-xs text-gray-500">
+                      <span>Faith Muema</span>
+                      <span>2290011882773</span>
+                    </div>
+
+                    <div class="text-xs p-2 rounded-2xl text-white flex-none h-fit px-6 bg-blue-600">Change</div>
+                  </div>
+                </div>
+
+                <p class="text-sm font-semibold py-3">Amount</p>
+
+                <div class="relative">
+                  <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl moneyAmountInputField" value="$5" readonly />
+                  <img src="/images/crypto-dashboard-icons-images/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+                </div>
+
+                <div class="flex gap-4 py-2 mt-10">
+                  <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                  <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner">Continue</button>
+                </div>
+              </div>
+            </template>
+            <!-- END OF TEMPLATE FOR REVIEW TANSACTION MODAL -->
+
+            <!-- TEMPLATE FOR SPINNER MODAL -->
+
+            <template id="spinnerModal">
+              <div class="w-full min-w-[200px] p-10 flex left-0 md:left-auto absolute md:relative justify-center items-center bottom-20 md:bottom-0 showTransactionSuccessButton">
+                <span class="loader"></span>
+              </div>
+            </template>
+            <!-- END OF TEMPLATE FOR SPINNER MODAL -->
+
+            <!-- TEMPLATE FOR SHOW TRANSACTION SUCCESS MODAL -->
+
+            <template id="showTransactionSuccessModal">
+              <div class="flex flex-col items-center justify-center gap-3 w-screen max-w-full md:max-w-[550px] text-center p-4">
+                <img src="/images/crypto-dashboard-icons-images/success.svg" class="w-10 h-10" alt="success icon" />
+                <p class="text-md font-[500] pb-20 md:pb-0" id="successMessage">🎉 Coins Sent! You’ve successfully sent 400 Coins to @Mikey</p>
+
+                <div class="flex p-2 justify-center gap-6">
+                  <button class="text-gray-600 underline cursor-pointer hidden md:inline-block cancelModalButton">Continue</button>
+                  <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-0 text-white bg-primary md:bg-transparent rounded-2xl text-center md:text-primary md:underline no-underline cursor-pointer sendCoinsShowTransactionDetailsButton">View Transaction</button>
+                </div>
+              </div>
+            </template>
+
+            <!-- TEMPLATE FOR SHOW TRANSACTION SUCCESS MODAL -->
+
+            <!-- TEMPLATE FOR BUY COIN ERROR MODAL -->
+
+            <template id="showTransactionErrorModal">
+              <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-auto">
+                <img src="/images/crypto-dashboard-icons-images/error.svg" class="w-10 h-10" alt="error icon" />
+                <p class="text-md font-[500]">❌ Transaction Failed. Please check your details or try again.</p>
+
+                <div class="flex p-2 justify-center gap-6">
+                  <button class="text-gray-600 underline cursor-pointer">Continue</button>
+                  <button class="text-primary underline cursor-pointer">Try Again</button>
+                </div>
+              </div>
+            </template>
+
+            <!-- END OF TEMPLATE FOR BUY COIN ERROR MODAL -->
+
+            <!-- TEMPLATE FOR BUY COIN ERROR MODAL WITH MULTIPLE COIN OPTIONS -->
+
+            <template id="buyCoinsMultipleOptionsModal">
+              <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-[90vh] sm:h-auto">
+                <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                  <span class="md:hidden block"></span>
+                  <p class="font-semibold">Buy Coins</p>
+                  <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                    <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                  </span>
+                </div>
+
+                <div class="overflow-x-scroll">
+                  <div class="flex gap-2">
+                    <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="50">
+                      <div class="flex gap-2">
+                        <div class="flex justify-start gap-2 items-center">
+                          <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                            <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                          </span>
+                          <span class="italic text-md font-semibold text-primary"> 50 coins </span>
+                        </div>
+                      </div>
+
+                      <span class="font-semibold text-sm"> $5 </span>
+                    </div>
+
+                    <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="100">
+                      <div class="flex gap-2">
+                        <div class="flex justify-start gap-2 items-center">
+                          <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                            <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                          </span>
+                          <span class="italic text-md font-semibold text-primary"> 100 coins </span>
+                        </div>
+                      </div>
+
+                      <span class="font-semibold text-sm"> $10 </span>
+                    </div>
+
+                    <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="500">
+                      <div class="flex gap-2">
+                        <div class="flex justify-start gap-2 items-center">
+                          <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                            <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                          </span>
+                          <span class="italic text-md font-semibold text-primary"> 500 coins </span>
+                        </div>
+                      </div>
+
+                      <span class="font-semibold text-sm"> $45 </span>
+                    </div>
+
+                    <div class="flex gap-2 border-[1px] justify-center items-center border-gray-300 hover:border-primary hover:text-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none addCoinsCustomButton">
+                      <img src="/images/crypto-dashboard-icons-images/customAdd.svg" class="w-5 h-5" alt="add icon" />
+                      <span class="text-sm">Custom</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="text-md my-4 mb-6">Total : <span>$5.00</span></p>
+
+                <div data-controller="tabs" data-tabs-index-value="0">
+                  <p class="my-2 font-semibold">Choose A Payment Method</p>
+                  <div class="flex gap-4 py-2">
+                    <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                    <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                    <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Money Wallet </span>
+                  </div>
+
+                  <div data-tabs-target="panel">
+                    <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                    <div class="overflow-x-scroll w-full px-2">
+                      <div class="flex gap-4 credit_cards">
+                        <div class="credit_card_container">
+                          <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                            <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                            <div class="flex gap-3 items-center justify-between">
+                              <span class="w-5 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                              </span>
+                              <span class="w-10 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                              </span>
+                            </div>
+                            <div class="pb-3 pt-7">
+                              <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                            </div>
+                            <div class="flex justify-between gap-3">
+                              <div class="flex flex-col">
+                                <span class="text-[.5rem] text-white">11/26</span>
+                                <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="credit_card_container">
+                          <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                            <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                            <div class="flex gap-3 items-center justify-between">
+                              <span class="w-5 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                              </span>
+                              <span class="w-10 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                              </span>
+                            </div>
+                            <div class="pb-3 pt-7">
+                              <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                            </div>
+                            <div class="flex justify-between gap-3">
+                              <div class="flex flex-col">
+                                <span class="text-[.5rem] text-white">11/26</span>
+                                <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="text-blue-500 text-sm my-2 addCardButton">+ Add another card</button>
+                  </div>
+
+                  <div data-tabs-target="panel">
+                    <div class="py-4">
+                      <h5 class="font-semibold">Saved Accounts</h5>
+                      <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                      <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                        <span> ******222997 </span>
+                      </div>
+
+                      <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                    </div>
+                  </div>
+
+                  <div data-tabs-target="panel">
+                    <!-- Pay from Money Account -->
+                  </div>
+                </div>
+
+                <div class="flex gap-4 py-2 mt-10">
+                  <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                  <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToPayment">Continue</button>
+                </div>
+              </div>
+            </template>
+
+            <!-- END OF TEMPLATE FOR BUY COIN ERROR MODAL WITH MULTIPLE COIN OPTIONS -->
+
+            <!-- TEMPLATE FOR BUY COIN (SELECT PAYMENT CARD) WITH MULTIPLE COIN OPTIONS -->
+
+            <template id="payWithCardMultipleCoinOptionsModal">
+              <div class="w-screen max-w-full sm:max-w-[550px] p-6 h-[90vh] sm:h-auto">
+                <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                  <span class="md:hidden block"></span>
+                  <p class="font-semibold">Buy Coins</p>
+                  <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                    <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                  </span>
+                </div>
+
+                <div class="overflow-x-scroll">
+                  <div class="flex gap-2">
+                    <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="50">
+                      <div class="flex gap-2">
+                        <div class="flex justify-start gap-2 items-center">
+                          <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                            <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                          </span>
+                          <span class="italic text-md font-semibold text-primary"> 50 coins </span>
+                        </div>
+                      </div>
+
+                      <span class="font-semibold text-sm"> $5 </span>
+                    </div>
+
+                    <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="100">
+                      <div class="flex gap-2">
+                        <div class="flex justify-start gap-2 items-center">
+                          <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                            <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                          </span>
+                          <span class="italic text-md font-semibold text-primary"> 100 coins </span>
+                        </div>
+                      </div>
+
+                      <span class="font-semibold text-sm"> $10 </span>
+                    </div>
+
+                    <div class="flex flex-col gap-4 border-[1px] border-gray-200 hover:bg-primary hover:bg-opacity-10 hover:border-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none coinAmount addCoinsButton" data-amount="500">
+                      <div class="flex gap-2">
+                        <div class="flex justify-start gap-2 items-center">
+                          <span class="w-8 h-8 rounded-full flex justify-center items-center">
+                            <img src="/images/crypto-dashboard-icons-images/coin.svg" alt="coin svg" />
+                          </span>
+                          <span class="italic text-md font-semibold text-primary"> 500 coins </span>
+                        </div>
+                      </div>
+
+                      <span class="font-semibold text-sm"> $45 </span>
+                    </div>
+
+                    <div class="flex gap-2 border-[1px] justify-center items-center border-gray-300 hover:border-primary hover:text-primary rounded-md p-2 my-2 max-w-[150px] w-full flex-none addCoinsCustomButton">
+                      <img src="/images/crypto-dashboard-icons-images/customAdd.svg" class="w-5 h-5" alt="add icon" />
+                      <span class="text-sm">Custom</span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="text-md my-4 mb-6">Total : <span>$5.00</span></p>
+
+                <div data-controller="tabs" data-tabs-index-value="0">
+                  <p class="my-2 font-semibold">Choose A Payment Method</p>
+                  <div class="flex gap-4 py-2">
+                    <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Card </span>
+                    <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Paypal </span>
+                    <span data-action="click->tabs#change" data-tabs-target="tab" class="p-1 border text-gray-300 w-full hover:bg-blue-600 cursor-pointer text-sm text-center rounded-md"> Money Wallet </span>
+                  </div>
+
+                  <div data-tabs-target="panel">
+                    <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                    <div class="overflow-x-scroll w-full px-2">
+                      <div class="flex gap-4 credit_cards">
+                        <div class="credit_card_container">
+                          <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                            <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                            <div class="flex gap-3 items-center justify-between">
+                              <span class="w-5 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                              </span>
+                              <span class="w-10 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                              </span>
+                            </div>
+                            <div class="pb-3 pt-7">
+                              <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                            </div>
+                            <div class="flex justify-between gap-3">
+                              <div class="flex flex-col">
+                                <span class="text-[.5rem] text-white">11/26</span>
+                                <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="credit_card_container">
+                          <div class="rounded-lg relative bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 credit_card cursor-pointer p-4 min-w-[250px] w-[300px]">
+                            <span class="material-symbols-outlined absolute w-4 h-4 bg-coin -top-1 hidden -left-1 pt-1 rounded-full text-[.7rem] text-white text-center"> check </span>
+                            <div class="flex gap-3 items-center justify-between">
+                              <span class="w-5 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                              </span>
+                              <span class="w-10 h-5">
+                                <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                              </span>
+                            </div>
+                            <div class="pb-3 pt-7">
+                              <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                            </div>
+                            <div class="flex justify-between gap-3">
+                              <div class="flex flex-col">
+                                <span class="text-[.5rem] text-white">11/26</span>
+                                <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="text-blue-500 text-sm my-2 addCardButton">+ Add another card</button>
+                  </div>
+
+                  <div data-tabs-target="panel">
+                    <div class="py-4">
+                      <h5 class="font-semibold">Saved Accounts</h5>
+                      <p class="pb-2 text-sm text-gray-400">Choose account from saved accounts or add an account</p>
+
+                      <div class="border border-gray-400 bg-gray-100 rounded-md p-2 flex justify-between my-2">
+                        <span> ******222997 </span>
+                      </div>
+
+                      <button class="text-blue-500 text-sm my-2">+ Add a new account</button>
+                    </div>
+                  </div>
+
+                  <div data-tabs-target="panel">
+                    <!-- Pay from Money Account -->
+                  </div>
+                </div>
+
+                <p class="py-3 text-sm font-semibold">Select Card</p>
+
+                <div class="rounded-lg bg-gradient-to-bl from-blue-500 via-purple-500 to-pink-500 p-4 max-w-[250px]">
+                  <div class="flex gap-3 items-center justify-between">
+                    <span class="w-5 h-5">
+                      <img src="/images/crypto-dashboard-icons-images/signal.svg" alt="" />
+                    </span>
+                    <span class="w-10 h-5">
+                      <img src="/images/crypto-dashboard-icons-images/overlappingcircles.svg" alt="" />
+                    </span>
+                  </div>
+                  <div class="pb-3 pt-7">
+                    <span class="text-md font-bold text-white"> 8765 7654 6543 5432 </span>
+                  </div>
+                  <div class="flex justify-between gap-3">
+                    <div class="flex flex-col">
+                      <span class="text-[.5rem] text-white">11/26</span>
+                      <span class="text-[.5rem] text-white font-semibold">Faith Muoma</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 py-2 mt-10">
+                  <button class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer">Cancel</button>
+                  <button class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToPayment">Continue</button>
+                </div>
+              </div>
+            </template>
+
+            <!-- END OF TEMPLATE FOR BUY COIN WITH MULTIPLE COIN OPTIONS -->
+          </div>
+
+          <!-- Card And Accounts Modals -->
+
+          <div class="cardsAndAccountsModals">
+            <template id="addCardModal">
+              <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                  <span class="md:hidden w-20"></span>
+
+                  <p class="font-semibold">Add Card</p>
+
+                  <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+                    <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                  </span>
+                </div>
+
+                <div class="py-2">
+                  <div class="pb-4">
+                    <span class="font-bold block py-1 text-sm text-indigo-900">Card holders name</span>
+                    <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="eg.Faith Moumo" />
+                  </div>
+
+                  <div class="pb-4">
+                    <span class="font-bold block py-1 text-sm text-indigo-900">Card number</span>
+                    <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="eg. 2299875019" />
+                  </div>
+
+                  <div class="flex gap-4 py-3">
+                    <div class="pb-4">
+                      <span class="font-bold block py-1 text-sm text-indigo-900">Expiration date</span>
+                      <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="eg 23/03/2025" />
+                    </div>
+
+                    <div class="pb-4">
+                      <span class="font-bold block py-1 text-sm text-indigo-900">Cvv</span>
+                      <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="eg 1542" />
+                    </div>
+                  </div>
+                  <div class="flex gap-2 items-center">
+                    <input class="accent-coin scale-125" type="checkbox" name="saveCard" id="saveCard" />
+                    <label for="saveCard" class="text-sm"> Save card for future use </label>
+                  </div>
+                </div>
+
+                <div class="flex gap-4 py-2 mt-10">
+                  <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+                  <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer sendCoinsContinueToReviewTransaction"> Save Card </span>
+                </div>
+              </div>
+            </template>
+
+            <template id="selectBeneficiaryModal">
+              <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+                <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b-0 md:border-b mb-4 border-gray-300">
+                  <span class="md:hidden w-20"></span>
+
+                  <div class="flex gap-6 items-center">
+                    <button class="material-symbols-outlined backButton hidden md:block">arrow_back</button>
+                    <p class="font-semibold">Select Beneficiary</p>
+                  </div>
+
+                  <div>
+                    <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full justify-center items-center hidden md:flex">
+                      <img src="/images/crypto-dashboard-icons-images/closeButton.svg" alt="close button" />
+                    </span>
+                    <button class="material-symbols-outlined backButton md:hidden">arrow_back</button>
+                  </div>
+                </div>
+
+                <div class="py-2">
+                  <div class="pb-4 relative">
+                    <span class="absolute material-symbols-outlined top-3 left-3 text-gray-600"> search </span>
+                    <input type="text" class="p-3 ps-10 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Search name" />
+                  </div>
+
+                  <div>
+                    <div class="md:max-h-[400px] flex flex-col h-full relative overflow-y-scroll">
+                      <div>
+                        <span class="text-xs font-semibold pb-3 block"> Recents </span>
+
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-8 h-8 md:w-10 md:h-10 text-white rounded-full bg-primary text-center pt-2"> FM </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Faith Mollins</span>
+                            <span class="text-gray-400 text-sm font-normal">@faith</span>
+                          </div>
+                        </div>
+
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=1" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Faith Mollins</span>
+                            <span class="text-gray-400 text-sm font-normal">@faith</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <span class="text-xs pb-3 font-semibold block"> A </span>
+
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=4" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Faith Mollins</span>
+                            <span class="text-gray-400 text-sm font-normal">@faith</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 1 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=1" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">John Doe</span>
+                            <span class="text-gray-400 text-sm font-normal">@john_doe</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 2 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=2" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Jane Smith</span>
+                            <span class="text-gray-400 text-sm font-normal">@jane_smith</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 3 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=3" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Mike Johnson</span>
+                            <span class="text-gray-400 text-sm font-normal">@mike_johnson</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 4 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=4" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Sophia Williams</span>
+                            <span class="text-gray-400 text-sm font-normal">@sophia_w</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 5 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=5" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Emma Brown</span>
+                            <span class="text-gray-400 text-sm font-normal">@emma_b</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 6 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=6" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Liam Jones</span>
+                            <span class="text-gray-400 text-sm font-normal">@liam_j</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 7 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=7" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Oliver Miller</span>
+                            <span class="text-gray-400 text-sm font-normal">@oliver_m</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 8 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=8" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Ava Davis</span>
+                            <span class="text-gray-400 text-sm font-normal">@ava_d</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 9 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=9" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Noah Garcia</span>
+                            <span class="text-gray-400 text-sm font-normal">@noah_g</span>
+                          </div>
+                        </div>
+
+                        <!-- Set 10 -->
+                        <div class="flex gap-3 items-center pb-4">
+                          <span class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img src="https://picsum.photos/200/200?random=10" class="w-full h-full" alt="person image" />
+                          </span>
+                          <div class="flex flex-col">
+                            <span class="text-nowrap">Isabella Hall</span>
+                            <span class="text-gray-400 text-sm font-normal">@isabella_h</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+
+          <!-- End Of Card And Accounts Modals -->
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="./node_modules/preline/dist/preline.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js"></script>
+
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("select", () => ({
+          open: false,
+          ChartType: "",
+
+          toggle() {
+            this.open = !this.open;
+          },
+
+          setChartType(val) {
+            this.ChartType = val;
+            this.open = false;
+          },
+        }));
+      });
+
+      // const ctx = document.getElementById("myChart");
+      const pieChart1 = document.getElementById("pieChart1");
+      const pieChart2 = document.getElementById("pieChart2");
+      Chart.register(ChartDataLabels);
+
+      // data for pie charts
+      const pieChartData1 = {
+        labels: ["Red", "Blue", "Yellow"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [300, 50, 100],
+            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"],
+            hoverOffset: 4,
+          },
+        ],
+      };
+
+      new Chart(pieChart1, {
+        type: "doughnut",
+        data: pieChartData1,
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+            datalabels: {
+              formatter: (value, context) => {
+                const dataset = context.chart.data.datasets[0];
+                const total = dataset.data.reduce((sum, val) => sum + val, 0);
+                const percentage = ((value / total) * 100).toFixed(2) + "%";
+                return percentage;
+              },
+              color: "#fff",
+              font: {
+                size: 14,
+              },
+            },
+          },
+        },
+      });
+
+      const pieChartData2 = {
+        labels: ["Red", "Blue", "Yellow"],
+        datasets: [
+          {
+            label: "My First Dataset",
+            data: [300, 50, 100],
+            backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)", "rgb(255, 205, 86)"],
+            hoverOffset: 4,
+          },
+        ],
+      };
+      new Chart(pieChart2, {
+        type: "doughnut",
+        data: pieChartData1,
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+            datalabels: {
+              formatter: (value, context) => {
+                const dataset = context.chart.data.datasets[0];
+                const total = dataset.data.reduce((sum, val) => sum + val, 0);
+                const percentage = ((value / total) * 100).toFixed(2) + "%";
+                return percentage;
+              },
+              color: "#fff",
+              font: {
+                size: 14,
+              },
+            },
+          },
+        },
+      });
+
+      var areaChartCoinsOptions = {
+        chart: {
+          height: 350,
+          type: "area",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        series: [
+          {
+            name: "Coins",
+            data: [45, 52, 38, 45, 19, 23, 2, 45, 23],
+          },
+          // {
+          //   name: "Series 2",
+          //   data: [25, 5, 38, 35, 26, 10, 49],
+          // },
+        ],
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 90, 100],
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " Transactions";
+            },
+          },
+        },
+
+        xaxis: {
+          categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+        },
+        //Chanege colours here.
+        colors: ["#FFC454"],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#areaChartCoins"), areaChartCoinsOptions);
+
+      chart.render();
+    </script>
+
+    <script>
+      var barChartCoinsOptions = {
+        series: [
+          {
+            name: "Coins",
+            data: [45, 52, 38, 45, 19, 23, 2, 45, 23],
+          },
+        ],
+        chart: {
+          type: "bar",
+          height: 350,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "55%",
+            borderRadius: 5,
+            borderRadiusApplication: "end",
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        xaxis: {
+          categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+        },
+        yaxis: {
+          title: {
+            text: "$ (thousands)",
+          },
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " Transactions";
+            },
+          },
+        }, //Change colours here.
+        colors: ["#FFC454"],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#barChartCoins"), barChartCoinsOptions);
+      chart.render();
+    </script>
+
+    <!-- Charts For money -->
+    <script>
+      var areaChartMoneyOptions = {
+        chart: {
+          height: 350,
+          type: "area",
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        series: [
+          {
+            name: "Money",
+            data: [45, 52, 38, 45, 19, 23, 2, 45, 23],
+          },
+          // {
+          //   name: "Series 2",
+          //   data: [25, 5, 38, 35, 26, 10, 49],
+          // },
+        ],
+        fill: {
+          type: "gradient",
+          gradient: {
+            shadeIntensity: 1,
+            opacityFrom: 0.7,
+            opacityTo: 0.9,
+            stops: [0, 90, 100],
+          },
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " Transactions";
+            },
+          },
+        },
+        xaxis: {
+          categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+        },
+        //Chanege colours here.
+        colors: ["#AF79F0"],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#areaChartMoney"), areaChartMoneyOptions);
+
+      chart.render();
+    </script>
+
+    <script>
+      var barChartMoneyOptions = {
+        series: [
+          {
+            name: "Money",
+            data: [45, 52, 38, 45, 19, 23, 2, 45, 23],
+          },
+        ],
+        chart: {
+          type: "bar",
+          height: 350,
+        },
+        plotOptions: {
+          bar: {
+            horizontal: false,
+            columnWidth: "55%",
+            borderRadius: 5,
+            borderRadiusApplication: "end",
+          },
+        },
+        dataLabels: {
+          enabled: false,
+        },
+        stroke: {
+          show: true,
+          width: 2,
+          colors: ["transparent"],
+        },
+        xaxis: {
+          categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"],
+        },
+        fill: {
+          opacity: 1,
+        },
+        tooltip: {
+          y: {
+            formatter: function (val) {
+              return val + " Transactions";
+            },
+          },
+        }, //Change colours here.
+        colors: ["#AF79F0"],
+      };
+
+      var chart = new ApexCharts(document.querySelector("#barChartMoney"), barChartMoneyOptions);
+      chart.render();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+      flatpickr("#dateRangePicker", {
+        mode: "range",
+        dateFormat: "Y-m-d",
+        // disable: [new Date()],
+      });
+    </script>
+  </body>
+</html>

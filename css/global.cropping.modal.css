@@ -1,0 +1,163 @@
+.cropping_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: none;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cropping_modal_wrapper {
+  box-shadow: var(--global-box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 0.6rem;
+  background: white;
+
+  width: 30rem;
+  height: 40rem;
+  padding: 0 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cropping_modal_wrapper header,
+.cropping_modal_wrapper footer {
+  padding: 1rem 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cropping_modal_wrapper header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cropping_modal_wrapper footer button {
+  width: 100%;
+  padding: 10px;
+
+  border-radius: 0.6rem;
+  color: black;
+  font-weight: 500;
+}
+
+.cropping_modal_wrapper footer button:first-child {
+  border: 1px solid var(--border-color);
+  background: #f4f4f4;
+}
+
+.cropping_modal_wrapper footer button:last-child {
+  border: 1px solid var(--link-color);
+  background: var(--link-color);
+  color: white;
+}
+
+.cropping_modal_wrapper footer button[disabled]:last-child {
+  border: 1px solid var(--link-color-fade);
+  background: var(--link-color-fade);
+  color: white;
+}
+
+.cropping_zoom_controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cropping_progress_bar {
+  position: relative;
+  flex: 1;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cropping_progress_fill {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 5px;
+  width: 0%;
+}
+
+.cropping_progress_thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  background: #3b82f6;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  left: 0%;
+  cursor: grab;
+}
+
+/*------------------------------ Main Container --------------------------------- */
+.cropping_main_container {
+  flex-grow: 1;
+  background: #f4f4f4;
+  border: 1px solid #dbdde1;
+
+  border-radius: 0.6rem;
+  padding: 0 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cropping_preview_container {
+  border: 2px dashed #b42318;
+  height: 100%;
+
+  width: 100%;
+  height: 22rem; /* Adjust this value based on your needs */
+  overflow: hidden;
+  position: relative;
+  background: #f0f0f0;
+}
+
+.cropping_preview_container .cropping_preview_container_image {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+/* Override Cropper.js container to fit parent */
+.cropper-point,
+.cropper-line {
+  background: var(--primary-color);
+}
+
+.cropper-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.cropper-wrap-box {
+  background-color: transparent;
+}
+
+@media screen and (max-width: 667px) {
+  .cropping_modal_wrapper {
+    border: none;
+    border-radius: 0;
+
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+}

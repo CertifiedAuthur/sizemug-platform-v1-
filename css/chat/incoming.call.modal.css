@@ -1,0 +1,92 @@
+.incoming_call_modal {
+  position: absolute;
+  bottom: 4rem;
+  right: 5px;
+  background: #0000008d;
+  border-radius: 0.8rem;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+
+  width: 23rem;
+  min-width: 23rem;
+
+  z-index: 99999;
+  backdrop-filter: blur(4px);
+}
+
+.incoming_call_modal > * {
+  display: flex;
+  align-items: center;
+}
+
+.incoming_call_modal header {
+  justify-content: space-between;
+  color: white;
+
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.incoming_call_modal header button {
+  background: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.incoming_call_modal footer {
+  gap: 10px;
+}
+
+.incoming_call_modal footer button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 40px;
+  color: #ffffff;
+  font-weight: 400;
+
+  padding: 15px;
+  font-size: 20px;
+}
+
+.incoming_call_modal footer button.reject {
+  background: var(--global-red-color);
+}
+
+.incoming_call_modal footer button.accept {
+  background: var(--online-color);
+}
+
+.incoming_call_modal .main {
+  padding: 0 15px;
+  gap: 10px;
+}
+
+.incoming_call_modal .main img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+}
+
+.incoming_call_modal .main h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: white;
+}
+
+.incoming_call_modal .main p {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--time-display-color);
+}

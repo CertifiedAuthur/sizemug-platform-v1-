@@ -1,0 +1,178 @@
+.template_preview_modal--wrapper {
+  animation: preview 0.6s ease;
+}
+
+.template_preview_modal--wrapper * {
+  margin: 0;
+}
+
+@keyframes preview {
+  from {
+    transform: translateY(6rem);
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+.template_preview--modal {
+  height: 95vh;
+  width: 100%;
+  align-self: flex-end;
+  background: #ffff !important;
+  border-radius: 20px 20px 0 0;
+  padding: 15px;
+  padding-top: 20px;
+}
+
+.template_preview--modal .owner_cancel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.template_preview--modal .owner_cancel .owner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.template_preview--modal .owner_cancel img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.template_preview--modal h1 {
+  font-size: 32px !important;
+  font-weight: 700 !important;
+  padding: 7px 0 !important;
+}
+
+.template_preview--modal .share_price,
+.template_preview--modal .share_price > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.template_preview--modal .share_price button {
+  padding: 8px 0;
+  width: 160px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-rule: #ffff;
+  gap: 6px;
+}
+
+.template_preview--modal .add_to_projects {
+  background: #8837e9;
+  color: #fff;
+}
+
+.template_preview--modal .share_price .share {
+  font-size: 14px;
+  border: 1px solid #eaecf0;
+}
+
+.template_preview--modal .share_price .buy {
+  background: #8837e9;
+  color: #ffff;
+}
+
+.template_preview--modal .share_price h2 {
+  font-size: 27px;
+  font-weight: 500;
+  color: #8837e9;
+  margin-left: 10px;
+}
+
+.template_preview--modal .share_price .icon {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #fb9b21, #f99335, #f08906);
+  border-radius: 100%;
+  font-size: 10px;
+
+  margin-right: 10px;
+}
+
+.template_preview--modal .share_price .ratings {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.template_preview--modal .share_price .ratings > div {
+  font-size: 14px;
+}
+
+.template_preview--modal .share_price .ratings > div span:first-child {
+  font-weight: 600;
+}
+
+.template_preview--modal .share_price .ratings > div span:last-child {
+  color: #5b5a5a;
+}
+
+.template_preview--modal .sample {
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 10px;
+  height: calc(65% - 20px);
+  background: orange;
+}
+
+.template_preview--modal .sample img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.template_preview--modal .free {
+  font-size: 25px;
+  font-weight: 700;
+  background: linear-gradient(to right, #4d4bfe, #992df2);
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
+.template_preview--modal .desc {
+  padding-bottom: 0.7rem;
+}
+
+.template_preview--modal .desc h5 {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.template_preview--modal .desc p {
+  color: #676980;
+  font-size: 0.9rem;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.template_preview--modal .desc p.expanded {
+  -webkit-line-clamp: inherit;
+}
+
+.template_preview--modal .desc button {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8837e9;
+}

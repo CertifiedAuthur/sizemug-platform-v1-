@@ -1,0 +1,79 @@
+.aside_request_join_container {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.aside_join_requests_container {
+  height: 100%;
+  padding: 10px;
+  overflow-y: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.aside_join_requests_container form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: var(--live-container-bg);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.aside_join_requests_container form input {
+  width: 100%;
+}
+
+.request_join_items {
+  height: 100%;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.request_join_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.request_join_item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.request_join_item .request_action_btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-left: auto;
+}
+
+.request_join_item .request_action_btns button {
+  padding: 4px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--live-container-bg);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.request_join_item .request_action_btns button.cancel:hover {
+  background: var(--primary-danger);
+}
+
+.request_join_item .request_action_btns button.accept:hover {
+  background: var(--primary-green);
+}

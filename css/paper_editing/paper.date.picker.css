@@ -1,0 +1,14 @@
+#sizemug_add_date--btn {
+  position: relative;
+}
+
+duet-date-picker {
+  position: absolute;
+}
+
+.duet-date__day[aria-pressed="true"],
+.duet-date__day:focus,
+.duet-date__day:hover {
+  background: #8837e9 !important;
+  color: #fff !important;
+}

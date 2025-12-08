@@ -1,0 +1,157 @@
+/* ===== DESCRIPTION: This stylesheet defines the styles for the profile interests  section. It includes styles for the list container and individual  list items, with specific background colors for the first six items. ====*/
+
+/* The .profile-interests > ul selector styles the unordered list within the  profile-interests class. It uses flexbox to align items centrally and allows wrapping with a gap between items. */
+
+/* The .profile-interests > ul > li selector styles each list item within the  unordered list. It includes padding, border-radius, text color, font size, and text overflow handling to ensure long text is truncated. */
+
+/* The .profile-interests > ul > li:first-child selector applies a specific background color to the first list item. */
+
+/* The .profile-interests > ul > li:nth-child(2) selector applies a specific background color to the second list item. */
+
+/* The .profile-interests > ul > li:nth-child(3) selector applies a specific background color to the third list item. */
+
+/* The .profile-interests > ul > li:nth-child(4) selector applies a specific background color to the fourth list item. */
+
+/* The .profile-interests > ul > li:nth-child(5) selector applies a specific background color to the fifth list item. */
+
+/* The .profile-interests > ul > li:nth-child(6) selector applies a specific background color to the sixth list item and changes the cursor to a pointer to indicate interactivity. */
+
+.profile-interests > ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-interests > ul > li {
+  padding: 3px 12px;
+  border-radius: 15px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.profile-interests > ul > li:first-child {
+  background: #0089ff;
+}
+
+.profile-interests > ul > li:nth-child(2) {
+  background: #ff3d00;
+}
+
+.profile-interests > ul > li:nth-child(3) {
+  background: #02d63e;
+}
+
+.profile-interests > ul > li:nth-child(4) {
+  background: #ffa800;
+}
+
+.profile-interests > ul > li:nth-child(5) {
+  background: #7f00ff;
+}
+
+.profile-interests > ul > li:nth-child(6) {
+  background: #848484;
+  cursor: pointer;
+}
+
+/*------------------------------- Tippy.js CSS ---------------------*/
+.tippy-box[data-theme~="light"] {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 6px #0000001a;
+  font-size: 12px;
+}
+
+.interest-more-container {
+  border-radius: 8px;
+  border: 1px solid #f1f1f1;
+  padding: 10px;
+  max-width: 15rem;
+  box-shadow: var(--global-box-shadow); /* Standard box shadow */
+  background: #ffffff;
+}
+
+.interest-filter-container {
+  position: relative;
+  background: #f4f4f5;
+  border-radius: 5px;
+
+  padding: 4px 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.interest-filter-container input {
+  background: #f4f4f5;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 0.8rem;
+  color: #a1a1aa;
+}
+
+.interest-filter-container input::placeholder {
+  color: #a1a1aa;
+}
+
+.interest-more-container ul {
+  margin-top: 5px;
+  max-height: 10rem;
+  overflow-y: auto;
+}
+
+.interest-more-container ul li {
+  padding: 7px 0;
+  color: #363853;
+  font-size: 0.8em;
+
+  text-transform: capitalize;
+}
+
+.thin-scroll-bar {
+  scrollbar-gutter: stable;
+  display: none;
+  flex-shrink: 0;
+  overflow-y: auto;
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@media (min-width: 1024px) {
+  .thin-scroll-bar {
+    display: block;
+  }
+}
+
+.thin-scroll-bar::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.thin-scroll-bar::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+
+/* Remove border and background for the Tippy.js tooltip */
+.tippy-box {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #333 !important;
+  padding: 0 !important;
+}
+
+.tippy-content {
+  padding: 0 !important;
+}
+
+.tippy-arrow {
+  color: #f1f1f1 !important;
+}

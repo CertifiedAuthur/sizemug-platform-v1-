@@ -1,0 +1,125 @@
+.mutual_friends_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(2px);
+  background: #00000053;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: calc(var(--overlay-z-index) - 10);
+}
+
+.mutual_friends_container {
+  width: 40rem;
+  height: 90vh;
+
+  background: white;
+  border-radius: 0.8rem;
+
+  padding: 1rem;
+}
+
+#mutualFriendMobileBack {
+  display: none;
+}
+
+@media screen and (max-width: 667px) {
+  #mutualFriendMobileBack {
+    display: block;
+  }
+}
+
+.mutual_friends_container header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0d021b;
+
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mutual_friends_main {
+  padding-top: 0.5rem;
+  padding-bottom: 0.8rem;
+
+  height: 95%;
+  /* background: green; */
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mutual_friends_main form {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f4f4f4;
+
+  padding: 0.3rem 0.7rem;
+
+  border-radius: 1.5rem;
+}
+
+.mutual_friends_main form:focus-within {
+  outline: 1px solid var(--primary-color);
+}
+
+.mutual_friends_main form input {
+  background: none;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+#mutualFriendsList {
+  height: 100%;
+  overflow-y: auto;
+}
+
+@media screen and (max-width: 667px) {
+  .mutual_friends_container header {
+    padding: 0 0.5rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .mutual_friends_container {
+    padding: 0.8rem 0;
+    align-self: flex-end;
+    border-radius: 0.8rem 0.8rem 0 0;
+    height: calc(100dvh - var(--header-nav-height));
+  }
+
+  .mutual_friends_main {
+    padding: 0.6rem;
+  }
+
+  #mutualFriendsList {
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+  }
+
+  #mutualFriendsList > div:last-child {
+    padding-bottom: 1rem;
+  }
+
+  #closeMutualFriendModal {
+    display: none;
+  }
+
+  .mutual_friends_overlay {
+    backdrop-filter: blur(0);
+    background: none;
+  }
+}

@@ -1,0 +1,128 @@
+.show_collaborators {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+.show_collaborators img {
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.show_collaborators img:not(:first-child),
+.show_collaborators .more {
+  margin-left: -10px;
+}
+
+.show_collaborators .more {
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  border-radius: 100%;
+
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f3f3f3;
+  color: black;
+}
+
+.sticky_collaborators {
+  position: absolute;
+  top: 3.8rem;
+  border: 1px solid #bec1c7;
+  border-radius: 8px;
+
+  width: 22rem;
+  height: 25rem;
+  background: #ffff;
+  right: -1.6rem;
+  animation: Modal 0.1s ease;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky_collaborators header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.8rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #bec1c7;
+}
+
+.sticky_collaborators header h2 {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.sticky_collaborators button:hover {
+  background: none !important;
+}
+
+.sticky_collaborators ul {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sticky_collaborators ul li:not(:first-child) {
+  margin-top: 10px;
+}
+
+.sticky_collaborators ul li > div,
+.sticky_collaborators ul li > a,
+.sticky_collaborators ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.sticky_collaborators ul li img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.sticky_collaborators ul li button {
+  color: #ffffff;
+  font-weight: 400;
+  background: var(--link-color);
+  padding: 1px 10px;
+  border-radius: 10px;
+}
+
+.sticky_collaborators ul li button:hover {
+  background: var(--link-color) !important;
+}
+
+.sticky_collaborators ul li button {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  background: var(--link-color);
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+@media screen and (max-width: 667px) {
+  .sticky_collaborators {
+    top: 3.55rem;
+    right: 2px;
+  }
+}

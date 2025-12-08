@@ -1,0 +1,39 @@
+.preview-overlay {
+  width: 40rem;
+  background: #f4f4f4fe;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
+}
+
+.preview-overlay button {
+  position: absolute;
+  top: -15px;
+  right: -20px;
+}
+
+.preview-overlay .paper_lists {
+  overflow-y: auto;
+  height: 90vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.preview-overlay .paper_lists .paper_item {
+  height: 842px;
+  background: white;
+  border: 1px solid var(--border-color);
+  margin-bottom: 1rem;
+
+  cursor: pointer;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.preview-overlay .paper_lists .paper_item:first-child {
+  margin-top: 1rem;
+}

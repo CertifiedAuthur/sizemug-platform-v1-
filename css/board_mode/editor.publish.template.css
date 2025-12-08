@@ -1,0 +1,483 @@
+.publish-as-template-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #2624293d;
+  z-index: var(--overlay-z-index);
+  backdrop-filter: blur(4px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.publish-as-template-modal-overlay {
+  width: 60rem;
+  height: 38rem;
+  border: 1px solid var(--border-stroke);
+  background: var(--dropdown-bg);
+
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.publish-as-template-modal-overlay header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-stroke);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.publish-as-template-modal-overlay header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.publish-as-template-modal-overlay header button {
+  background: none;
+  border: none;
+}
+
+.publish-as-template-modal-overlay main {
+  display: flex;
+  height: 100%;
+}
+
+.publish-as-template-modal-overlay main > * {
+  padding: 1rem 1.5rem;
+}
+
+.publish-as-template-modal-upload-image,
+.publish-as-template-options {
+  width: 50%;
+}
+
+.publish-as-template-modal-upload-image h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
+.publish-as-template-modal-upload-image p {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--color-white-60);
+  padding-top: 10px;
+  padding-bottom: 2rem;
+}
+
+.publish-as-template-modal-upload-image-before {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  border: 2px dashed var(--border-color);
+  width: 100%;
+  border-radius: 10px;
+  padding: 1.9rem 1.5rem;
+}
+
+.new_video_project_preview {
+  width: 5rem;
+  height: 5rem;
+  background: var(--color-white-60);
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.new_video_project_spacer > div:not(:first-child) {
+  padding-top: 2.5rem;
+  width: 100%;
+}
+
+.publish-as-template-modal-upload-image-before button {
+  background: var(--primary-color);
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.6rem 1.4rem;
+
+  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
+}
+
+.publish-as-template-modal-upload-image-before button.video_upload_button {
+  max-width: 15rem;
+  margin: auto;
+}
+
+.publish-as-template-modal-upload-image-before p {
+  font-weight: 300;
+  color: var(--color-white-60);
+  text-align: center;
+  user-select: none;
+}
+
+.publish-as-template-modal-upload-image-after {
+  width: 100%;
+
+  position: relative;
+}
+
+.publish-as-template-modal-upload-image-after img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  border-radius: 10px;
+}
+
+.publish-as-template-modal-upload-image-after button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+
+  background: var(--color-white);
+  border-radius: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  padding: 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: var(--global-box-shadow);
+}
+
+.publish-as-template-options {
+  border-left: 1px solid var(--border-stroke);
+}
+
+.publish-as-template-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.publish-as-template-options h3 {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-white);
+}
+
+.publish-as-template-modal-keywords {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.publish-as-template-modal-keywords-header {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.publish-as-template-modal-keywords-header span {
+  color: var(--color-white-60);
+  font-size: 14px;
+}
+
+.publish-as-template-modal-keywords-body h5 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-white-60);
+}
+
+.publish-as-template-modal-keywords-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  padding-top: 15px;
+}
+
+.publish-as-template-modal-keywords-container button {
+  background: none;
+  border-radius: 15px;
+  padding: 0.5rem 1rem;
+
+  border: 1px solid var(--border-stroke);
+
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--color-white-60);
+}
+
+.publish-as-template-modal-keywords-container button[aria-selected="true"] {
+  background: #1c64f2;
+  color: #ffffff;
+}
+
+.publish-as-template-modal-keywords-container button[aria-selected="true"] svg.add,
+.publish-as-template-modal-keywords-container button svg.check {
+  display: none;
+}
+
+.publish-as-template-modal-keywords-container button[aria-selected="true"] svg.check,
+.publish-as-template-modal-keywords-container button svg.add {
+  display: block;
+}
+
+.publish-as-template-options footer {
+  margin-top: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  scrollbar-width: none;
+}
+
+.publish-as-template-options footer button {
+  background: var(--primary-color);
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 0.9rem;
+  padding: 0.8rem 1rem;
+  width: 100%;
+}
+
+.publish-as-template-options footer button:first-child {
+  background: var(--primary-bg-color);
+  border: 1px solid var(--border-stroke);
+  color: black;
+}
+
+.publish-as-template-options-category {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.publish_as_template_category_dropdown {
+  max-height: 20rem;
+  height: 20rem;
+
+  padding: 5px 0;
+
+  display: none;
+  flex-direction: column;
+  gap: 15px;
+  border: 1px solid var(--border-stroke) !important;
+  border-radius: 10px;
+}
+
+.publish_as_template_category_dropdown_button[aria-expanded="true"] ~ .publish_as_template_category_dropdown {
+  display: flex;
+}
+
+.publish_as_template_category_dropdown > div {
+  padding: 0 10px;
+}
+
+.publish_as_template_category_dropdown .close_dropdown_btn {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+}
+
+.publish_as_template_category_dropdown form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid var(--border-stroke);
+  border-radius: 10px;
+  padding: 5px 8px;
+  margin-top: 5px;
+}
+
+.publish_as_template_category_dropdown form input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+.publish_as_template_category_dropdown form input:focus {
+  border: none;
+}
+
+.publish_as_template_category_dropdown ul {
+  height: 100%;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.publish_as_template_category_dropdown ul li {
+  padding: 10px 15px;
+  transition: background 0.3s ease-in-out;
+  color: var(--color-white);
+}
+
+.publish_as_template_category_dropdown ul li:hover {
+  background: #18171a40;
+}
+
+.publish_as_template_category_dropdown ul li.active {
+  background: #18171a40;
+}
+
+/********************************************** Adding Keywords **********************************************/
+
+.keywords-input-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  background: var(--primary-bg-color);
+  border: none;
+  padding: 5px 7px;
+  border-radius: 10px;
+}
+
+.keywords-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.keyword {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-white-30);
+  color: var(--color-white);
+  border-radius: 15px;
+  padding: 3px 8px;
+  font-size: 14px;
+
+  animation: scale-in 0.1s ease-in-out;
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.keyword .remove-keyword {
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.keyword-input,
+.keyword-input::placeholder {
+  border: none;
+  flex: 1;
+  min-width: 100px;
+  font-size: 14px;
+  padding: 5px 2px;
+  outline: none;
+
+  color: var(--color-white-60);
+}
+
+@media screen and (max-width: 1024px) {
+  .publish-as-template-modal-overlay {
+    align-self: flex-end;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+
+    height: 90dvh;
+  }
+
+  .publish-as-template-modal-overlay main {
+    flex-direction: column;
+    /* max-height: 80dvh; */
+    overflow-y: auto;
+  }
+
+  .publish-as-template-modal-upload-image,
+  .publish-as-template-options {
+    width: 100%;
+  }
+}
+/* Toolbar style  */
+.text-input-container {
+  border: 2px solid #8b5cf6;
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.text-input-field {
+  border: none !important;
+  outline: none !important;
+  background: transparent !important;
+  resize: none;
+}
+
+.publish-as-template-item {
+  width: 100%;
+}
+
+.publish-as-template-item h3 {
+  margin-bottom: 4px;
+}
+
+.publish-as-template-item input,
+.publish-as-template-item textarea {
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+
+  background: #f5f5f7;
+
+  font-size: 15px;
+  resize: none;
+}
+
+.publish-as-template-item textarea {
+  height: 10rem;
+}
+
+.publish-as-template-modal-footer {
+  padding: 0 !important;
+  margin-top: initial !important;
+}
+
+#publishCategoryDropdown.sg-custom-dropdown {
+  max-width: none !important;
+}

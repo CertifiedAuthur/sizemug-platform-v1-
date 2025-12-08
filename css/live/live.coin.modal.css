@@ -1,0 +1,68 @@
+.live_coin_modal_overlay {
+  z-index: 99;
+}
+
+/* Modal container */
+.live_coin_modal {
+  width: 450px;
+  background: var(--modal-bg-color);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--live-container-bg);
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Header with title and primary action */
+.live_coin_modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.live_coin_title {
+  font-size: var(--text-size-md);
+  font-weight: 700;
+  color: var(--text-primary-color);
+}
+
+.user_coin_analysis {
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  font-size: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.balance-in-sg-coin {
+  font-weight: 600;
+  background: linear-gradient(90deg, #ffa800 0%, #ffc838 94%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.balance-in-dollars {
+  font-weight: 300;
+  color: var(--text-color-60);
+}
+
+.user_add_more_coins {
+  background: #f99335;
+  border-radius: var(--radius-md);
+  padding: 10px;
+  color: var(--text-primary-color);
+  /* font-size: var(--text-size-md); */
+  font-weight: 600;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

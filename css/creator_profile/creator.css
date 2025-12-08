@@ -1,0 +1,245 @@
+#load-content {
+  height: 100vh;
+}
+
+@media not all and (min-width: 1024px) {
+  #load-content {
+    width: 100dvw;
+  }
+}
+
+@media not all and (min-width: 1024px) {
+  #load-content {
+    width: 100dvw;
+  }
+}
+
+#load-content {
+  height: calc(100dvh - var(--header-nav-height) - var(--navbar-height));
+  scrollbar-gutter: stable;
+  width: 100%;
+  overflow-y: auto;
+  padding: 0.75rem;
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@media not all and (min-width: 1024px) {
+  #load-content {
+    width: 100dvw;
+  }
+}
+
+#load-content::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+#load-content::-webkit-scrollbar-track {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+#load-content::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+}
+
+@media (min-width: 1024px) {
+  #load-content {
+    height: calc(100dvh - var(--header-nav-height));
+  }
+}
+
+@media (max-width: 640px) {
+  #load-content {
+    height: calc(100dvh - var(--header-nav-height) - var(--header-nav-height));
+  }
+}
+
+.note_card_menu_option_container {
+  position: relative;
+}
+
+.note_card_menu_option_container > button {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 24px;
+  opacity: 1;
+  transition: opacity 0.2sease, visibility 0.5sease;
+  width: 40px;
+  height: 40px;
+  background: #ffffff !important;
+  border: 1px solid #eaecf0;
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+}
+
+.note_card_menu_option_container .drop-down-menu {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  background: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 52;
+
+  width: 11rem;
+}
+
+.menu-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+  width: 100%;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 4px;
+  gap: 24px;
+  width: 100%;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.menu-nav-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 100%;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.menu-nav-items:hover,
+.menu-nav-items:hover .items-item span {
+  color: #ffffff;
+}
+
+.menu-nav-items.block-note-option:hover svg path {
+  fill: #ffffff;
+}
+
+.menu-nav-items:hover {
+  background-color: #000000;
+}
+
+.menu-nav-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  width: 100%;
+  height: 40px;
+  padding: 0 4px;
+  border-radius: 8px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+
+  transition: background-color 0.1s ease-in-out;
+}
+
+.items-icon {
+  max-width: 24px;
+  height: 24px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.items-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px 0px;
+
+  height: 40px;
+
+  border-radius: 6px;
+
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
+.items-item span {
+  height: 24px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  color: #363853;
+
+  flex: none;
+  flex-grow: 0;
+}
+
+.menu-nav-list .send_note_option:hover svg g,
+.menu-nav-list .block-note-option:hover svg g {
+  stroke: #ffffff;
+}
+
+.note_card_menu_option_container .drop-down-menu {
+  display: none;
+}
+
+.note_card_menu_option_container[aria-expanded="true"] .drop-down-menu {
+  display: block;
+}
+
+.note_card_menu_option_container[aria-expanded="true"] .ellipsis,
+.note_card_menu_option_container .times {
+  display: none;
+}
+
+.note_card_menu_option_container .ellipsis,
+.note_card_menu_option_container[aria-expanded="true"] .times {
+  display: block;
+}
+
+#creatorFollowers img,
+#creatorProfileItems img {
+  border-radius: 100%;
+}
+
+.creator-hidden {
+  display: none !important;
+}

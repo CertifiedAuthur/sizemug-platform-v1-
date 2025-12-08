@@ -1,0 +1,25 @@
+.content_area {
+  display: grid;
+  flex: 1 1 0%;
+  grid-template-columns: auto 1fr;
+  height: calc(100dvh - var(--header-nav-height));
+}
+
+.content_area main {
+  overflow: hidden;
+  height: calc(100dvh - var(--header-nav-height));
+}
+
+.main_content_area_overflow {
+  overflow-y: auto !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .content_area {
+    grid-template-columns: 1fr;
+  }
+
+  .main_content_area_overflow {
+    padding-bottom: 7rem !important;
+  }
+}

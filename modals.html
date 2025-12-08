@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Modals -->
+    <script type="module" crossorigin src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"></script>
+    <script type="module" crossorigin src="/assets/main-DFQn_PZp.js"></script>
+    <script type="module" crossorigin src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/main-dBD89tXU.css" />
+  </head>
+  <body class="flex flex-col justify-center items-center min-h-screen">
+    <div class="flex gap-3">
+      <button class="button p-4 bg-violet-600 text-white rounded-md sendCoinsButton">Send coins</button>
+      <button class="button p-4 bg-violet-600 text-white rounded-md withdrawCoinsButton">Withdraw coins</button>
+      <button class="button p-4 bg-violet-600 text-white rounded-md sidebarButton">Toggle sidebar</button>
+    </div>
+
+    <br />
+    <div class="flex gap-3">
+      <!-- <button
+        class="button p-4 bg-violet-600 text-white rounded-md sendCoinsButton"
+      >
+        Send coins
+      </button> -->
+      <button class="button p-4 bg-violet-600 text-white rounded-md withdrawMoneyButton">Withdraw money</button>
+      <button class="button p-4 bg-violet-600 text-white rounded-md sendMoneyButton">Send money</button>
+      <button class="button p-4 bg-violet-600 text-white rounded-md depositeMoneyButton">Deposite money</button>
+      <button class="button p-4 bg-violet-600 text-white rounded-md addBankAccontButton">Add Bank Account</button>
+    </div>
+    <div class="fixed z-10 w-screen h-screen top-0 left-0 justify-center overflow-y-scroll items-end md:items-center flex" id="modal">
+      <div id="backdrop" class="bg-black w-full h-full absolute bg-opacity-5 backdrop-blur-sm"></div>
+      <div class="bg-white rounded-lg z-[11]" id="modalContent">
+        <!-- WORKING AREA -->
+        modal
+
+        <!-- END OF WORKING AREA -->
+      </div>
+    </div>
+
+    <template id="sidebar">
+      <div class="absolute overflow-y-scroll md:hidden top-0 left-0 w-3/4 h-full bg-gradient-to-tr from-[#DA4DAA] to-[#4D4BFE]">
+        <aside class="pb-6 px-2 max-h-screen col-span-1 text-white relative">
+          <span class="closeModalButton relative block p-2 mx-2 mt-2">
+            <img src="/closeButton.svg" class="w-7 h-7" alt="close button" />
+          </span>
+
+          <a href="/" class="logo py-4 flex relative mx-4 mb-6 left-0">
+            <img src="/logowhite.svg" class="h-12 w-fit" alt="sizemug logo" />
+          </a>
+          <nav class="flex flex-col gap-6">
+            <menu class="flex flex-col">
+              <span class="px-2 text-sm py-4 ps-4 font-semibold"> COINS </span>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Buy coins </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Send coins </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Receieve coins </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Withdraw coins </span>
+                </a>
+              </li>
+            </menu>
+
+            <menu class="flex flex-col">
+              <span class="px-2 text-sm py-4 ps-4 font-semibold"> MONEY </span>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Send money </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Deposit money </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> withdraw money </span>
+                </a>
+              </li>
+            </menu>
+
+            <menu class="flex flex-col">
+              <span class="px-2 text-sm py-4 ps-4 font-semibold"> ANALYTICS </span>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Transaction Volume </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Revenue Analysis </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Channel Effectiveness </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Visitor Flow & Behaviour </span>
+                </a>
+              </li>
+            </menu>
+
+            <menu class="flex flex-col">
+              <span class="px-2 text-sm py-4 ps-4 font-semibold"> Manage </span>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Cards </span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="text-sm ps-4 hover:bg-violet-500 hover:bg-opacity-15 hover:text-violet-500 flex items-center gap-2 rounded-lg p-2 my-1">
+                  <img src="/buy.svg" class="w-4 h-4 text-white filt" alt="buy icon" />
+                  <span> Bank Accounts </span>
+                </a>
+              </li>
+            </menu>
+          </nav>
+        </aside>
+      </div>
+    </template>
+
+    <div class="bankAccountModals">
+      <template id="addBankAccount">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b md:border-[2px] border-none border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold">Add Bank Account</p>
+
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <div class="flex flex-col gap-3 mb-4">
+            <span> Select Country </span>
+            <div class="text-sm">
+              <div x-data="select" class="relative w-full" @click.outside="open = false">
+                <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full items-center justify-between rounded bg-white p-3 ring-1 ring-gray-300">
+                  <span x-text="(Country == '') ? 'Country' : Country"></span>
+                  <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </button>
+
+                <ul class="z-20 absolute mt-1 w-full rounded bg-white ring-1 ring-gray-300" x-show="open">
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('Afhganistan')">
+                    <span> Afhganistan </span>
+                    <span class="w-6 h-6 material-symbols-outlined rounded-full border border-gray-300 text-white text-center pb-2 bg-gray-200" :class="(Country == 'Afhganistan') && 'bg-violet-600'" x-text="(Country == 'Afhganistan') ? '&#x2713;' : ''"> </span>
+                  </li>
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('Alan Island')">
+                    <span> Alan Island </span>
+                    <span class="w-6 h-6 material-symbols-outlined rounded-full border border-gray-300 text-white text-center pb-2 bg-gray-200" :class="(Country == 'Alan Island') && 'bg-violet-600'" x-text="(Country == 'Alan Island') ? '&#x2713;' : ''"> </span>
+                  </li>
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('Albania')">
+                    <span> Albania </span>
+                    <span class="w-6 h-6 material-symbols-outlined rounded-full border border-gray-300 text-white text-center pb-2 bg-gray-200" :class="(Country == 'Albania') && 'bg-violet-600'" x-text="(Country == 'Albania') ? '&#x2713;' : ''"> </span>
+                  </li>
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('Algeria')">
+                    <span> Algeria </span>
+                    <span class="w-6 h-6 material-symbols-outlined rounded-full border border-gray-300 text-white text-center pb-2 bg-gray-200" :class="(Country == 'Algeria') && 'bg-violet-600'" x-text="(Country == 'Algeria') ? '&#x2713;' : ''"> </span>
+                  </li>
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('American Samoa')">
+                    <span> American Samoa </span>
+                    <span class="w-6 h-6 material-symbols-outlined rounded-full border border-gray-300 text-white text-center pb-2 bg-gray-200" :class="(Country == 'American Samoa') && 'bg-violet-600'" x-text="(Country == 'American Samoa') ? '&#x2713;' : ''"> </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                <div id="areaChartCoins"></div>
+              </div>
+              <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                <div id="barChartCoins"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-3 mb-4">
+            <span> Select Bank </span>
+            <div class="text-sm">
+              <div x-data="select" class="relative w-full" @click.outside="open = false">
+                <button @click="toggle" :class="(open) && 'ring-blue-600'" class="flex w-full items-center justify-between rounded bg-white p-3 ring-1 ring-gray-300">
+                  <span x-text="(Country == '') ? 'Country' : Country"></span>
+                  <svg class="fill-current h-4 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                  </svg>
+                </button>
+
+                <ul class="z-20 absolute mt-1 w-full rounded bg-white ring-1 ring-gray-300" x-show="open">
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('Area chart')">
+                    <span> Area Chart </span>
+                    <span class="w-4 h-4 rounded-full border border-gray-300 bg-gray-200"> </span>
+                  </li>
+                  <li class="cursor-pointer m-2 rounded-lg select-none p-2 hover:bg-gray-200 flex justify-between gap-6" @click="setCountry('Bar Chart')">
+                    <span> Bar Chart </span>
+                    <span class="w-4 h-4 rounded-full border border-gray-300 bg-gray-200"> </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                <div id="areaChartCoins"></div>
+              </div>
+              <div data-tabs-target="panel" class="hidden !w-full !h-full">
+                <div id="barChartCoins"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-gray-200 rounded-2xl md:w-full text-sm text-center cursor-pointer continueToEnterBankDetails"> Continue </span>
+          </div>
+        </div>
+      </template>
+
+      <template id="enterBankDetails">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between mb-3 md:border-b-2 border-0 border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold">Enter Your Bank Details</p>
+
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <div class="flex flex-col gap-3 mb-4">
+            <span> Full name of bank holder </span>
+            <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Full name" />
+          </div>
+
+          <div class="flex flex-col gap-3 mb-4">
+            <span> Account Number </span>
+            <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="eg. 288378101" />
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-gray-200 rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner"> Continue </span>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <div class="withdrawCoinsModals">
+      <template id="withdrawCoinsEnterAmount">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b md:border-[2px] border-none border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold">Withdraw Coins</p>
+
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <div class="p-4 bg-gray-100 rounded-lg my-6 border border-gray-300">
+            <span class="text-gray-400 text-sm">Your balance(available)</span>
+            <div class="py-2">
+              <span class="text-xl font-bold"> 10,000 </span>
+              <span class="text-xs uppercase font-bold"> coins </span>
+            </div>
+            <span class="text-blue-600 italic font-semibold">1 coin = $0.10 USD</span>
+          </div>
+
+          <div class="py-2">
+            <div class="pb-4">
+              <span class="font-bold block py-1">Amount</span>
+              <div class="relative">
+                <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+                <span class="text-xs p-2 px-3 bg-gray-300 absolute right-2 top-2 rounded-md"> Max </span>
+              </div>
+            </div>
+
+            <div class="pb-4">
+              <div class="py-2"><span class="font-bold py-2">Coin Conversion</span><span class="text-gray-400 px-2">(USD)</span></div>
+              <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="$0.00" />
+            </div>
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-gray-200 rounded-2xl md:w-full text-sm text-center cursor-pointer withdrawCoinsContinueToReviewTransaction"> Continue </span>
+          </div>
+        </div>
+      </template>
+
+      <template id="withdrawCoinsReviewTransaction">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b md:border-[2px] border-none border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <p class="font-semibold py-3">Withdraw Coins To</p>
+          <span class="text-sm text-gray-400"> Money wallet </span>
+
+          <p class="text-sm font-semibold py-2">Amount</p>
+
+          <div class="relative">
+            <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="400 coins" />
+            <img src="/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner"> Continue </span>
+          </div>
+        </div>
+      </template>
+    </div>
+
+    <div class="sendCoinsModals">
+      <template id="sendCoinsSelectUserModal">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b md:border-[2px] border-none border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold">Send Coins</p>
+
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <div class="p-4 bg-gray-100 rounded-lg my-6 border border-gray-300">
+            <span class="text-gray-400 text-sm">Your balance(available)</span>
+            <div class="py-2">
+              <span class="text-xl font-bold"> 10,000 </span>
+              <span class="text-xs uppercase font-bold"> coins </span>
+            </div>
+            <span class="text-blue-600 italic font-semibold">1 coin = $0.10 USD</span>
+          </div>
+
+          <div class="py-3">
+            <span class="font-bold py-2"> Send to </span>
+
+            <div class="overflow-x-scroll">
+              <div class="flex gap-4 p-2 recenttransaction">
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200 text-4xl text-center"> + </span>
+                  <span class="text-xs">Add</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+
+                <div class="flex flex-col gap-1 items-center">
+                  <span class="w-12 h-12 rounded-full bg-gray-200">
+                    <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+                  </span>
+                  <span class="text-xs">Faith</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="py-2">
+            <div class="pb-4">
+              <span class="font-bold block py-1">Amount</span>
+              <input type="text" class="p-3 outline-none focus:border-primary block w-full border border-gray-300 rounded-md" placeholder="Coins" />
+            </div>
+
+            <div class="pb-4">
+              <div class="py-2"><span class="font-bold py-2">Message</span><span class="text-gray-400 px-2">(optional)</span></div>
+              <textarea type="text" class="p-3 outline-none focus:border-primary h-24 resize-none block w-full border border-gray-300 rounded-md" placeholder="Tyepe here..."> </textarea>
+            </div>
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-gray-200 rounded-2xl md:w-full text-sm text-center cursor-pointer sendCoinsContinueToReviewTransaction"> Continue </span>
+          </div>
+        </div>
+      </template>
+
+      <template id="sendCoinsReviewTransaction">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6 h-[90vh] md:h-auto">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b md:border-[2px] border-none border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold showTransactionErrorButton">Review Transactions</p>
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <p class="font-semibold py-3">Send Coins To</p>
+
+          <div class="flex justify-between py-2">
+            <div class="flex gap-2">
+              <span class="w-10 h-10 rounded-full bg-gray-200">
+                <img src="/person.svg" class="w-full h-full" alt="coin svg" />
+              </span>
+              <div class="flex flex-col">
+                <span>Faith Mollins</span>
+                <span class="text-gray-400 text-sm">@faith</span>
+              </div>
+            </div>
+            <div class="text-xs p-2 rounded-2xl text-white flex-none h-fit px-6 bg-blue-600">Change</div>
+          </div>
+
+          <p class="text-sm font-semibold py-2">Amount</p>
+
+          <div class="relative">
+            <input type="text" class="p-2 w-full outline-none bg-gray-100 py-2 mb-4 rounded-xl" value="400 coins" />
+            <img src="/pencil.svg" alt="pencil" class="absolute top-[13px] right-3 w-3 h-3" />
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary rounded-2xl md:w-full text-sm text-center cursor-pointer continueToSpinner"> Continue </span>
+          </div>
+        </div>
+      </template>
+
+      <template id="spinnerModal">
+        <div class="w-full min-w-[200px] p-10 flex relative justify-center items-center showTransactionSuccessButton">
+          <span class="loader"></span>
+        </div>
+      </template>
+
+      <template id="showTransactionSuccessModal">
+        <div class="flex flex-col items-center justify-center gap-3 w-full max-w-[500px] min-w-[200px] text-center p-4">
+          <img src="/success.svg" class="w-10 h-10" alt="success icon" />
+          <p class="text-md font-[500] pb-20 md:pb-0">🎉 Coins Sent! You’ve successfully sent 400 Coins to @Mikey</p>
+
+          <div class="flex p-2 justify-center gap-6">
+            <span class="text-gray-600 underline cursor-pointer hidden md:inline-block cancelModalButton">Continue</span>
+            <span class="absolute w-[calc(100%-3rem)] md:bottom-0 bottom-6 md:relative p-4 md:p-2 text-white bg-primary md:bg-transparent rounded-2xl md:w-full text-sm text-center md:text-primary md:underline no-underline cursor-pointer sendCoinsShowTransactionDetailsButton">View Transaction</span>
+          </div>
+        </div>
+      </template>
+
+      <template id="transactionDetailsModal">
+        <div class="w-screen max-w-full md:max-w-[550px] p-6">
+          <div class="flex flex-row-reverse md:flex-row py-3 items-center justify-between border-b md:border-[2px] border-none border-gray-300">
+            <span class="md:hidden w-20"></span>
+
+            <p class="font-semibold showTransactionErrorButton">Transaction details</p>
+            <span class="w-8 h-8 closeModalButton md:border-[3px] md:border-gray-600 md:rounded-full flex justify-center items-center">
+              <img src="/closeButton.svg" alt="close button" />
+            </span>
+          </div>
+
+          <div class="py-6">
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">Transaction ID</span>
+              <span> TR1122233098 </span>
+            </div>
+
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">date</span>
+              <span> 03, Dec 2023 | 01:15 pm </span>
+            </div>
+
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">Transaction type</span>
+              <span class="text-red-600 font-semibold"> Send coins </span>
+            </div>
+
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">To</span>
+              <span> @Mickey </span>
+            </div>
+
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">Amount</span>
+              <span> -400 coins </span>
+            </div>
+
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">Message</span>
+              <span> Just a little something to say thank you! 🙌 </span>
+            </div>
+
+            <div class="flex justify-between gap-6 py-3">
+              <span class="text-gray-400">Status</span>
+              <div class="flex justify-center">
+                <div class="rounded-2xl flex gap-2 font-semibold py-[0.4rem] w-fit items-center bg-green-100 text-green-500 p-[.4rem] px-5">
+                  <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                  <span class="text-sm">Completed</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-4 py-2 mt-10">
+            <span class="p-2 hidden md:block text-white bg-gray-200 rounded-2xl w-full text-sm text-center cancelModalButton cursor-pointer"> Cancel </span>
+            <span class="text-white bg-primary rounded-2xl w-full text-sm text-center p-4 md:p-2 cancelModalButton cursor-pointer"> Download Receipt </span>
+          </div>
+        </div>
+      </template>
+    </div>
+  </body>
+
+  <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js"></script>
+  <script>
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("select", () => ({
+        open: false,
+        Country: "",
+
+        toggle() {
+          this.open = !this.open;
+        },
+
+        setCountry(val) {
+          this.Country = val;
+          this.open = false;
+        },
+      }));
+    });
+  </script>
+</html>

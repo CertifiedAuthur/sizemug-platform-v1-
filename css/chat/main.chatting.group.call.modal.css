@@ -1,0 +1,120 @@
+.group_call_modal_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.group_call_main {
+  height: 100%;
+  padding: 0 12px;
+  gap: 10px;
+}
+
+.call_modal_container .group_call_footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+}
+
+/* Functionality for both group video & group voice call */
+.group_call_user_item {
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+
+  height: 100%;
+  background: #1c1b1b;
+}
+
+.group_call_user_item_wave_container,
+.group_call_user_item--info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.group_call_user_item--info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.group_call_user_item--info .calling_info {
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.group_call_user_item--info .calling_info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calling_info_img_wrapper {
+  box-shadow: 0 0 50px 30px #8737e93e;
+  margin: 0 auto;
+  border-radius: 100%;
+}
+
+.group_call_user_item--info .calling_info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.group_call_user_item--info > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.group_call_item_options {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  z-index: 50;
+}
+
+.group_call_item_options .group_call_item_options_action {
+  height: 30px;
+  width: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Group 1 (Participant > 1) */
+.group_item--1 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.group_item--2 > div {
+  flex: 1;
+}
+
+/* Group 2 (Participant > 2) */
+.group_item--2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Group 3 (Participant > 4) */
+.group_item--3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.group_item--3 .calling_info_img_wrapper img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}

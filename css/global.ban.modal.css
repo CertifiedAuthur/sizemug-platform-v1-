@@ -1,0 +1,67 @@
+.ban_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #34405480;
+}
+
+.ban_modal_container {
+  width: 480px;
+  /* height: 240px; */
+  padding: 1.2rem 1.5rem;
+
+  border-radius: var(--radius-md);
+  background: var(--live-darken-wrapper);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ban_modal_container footer {
+  margin-top: 1rem;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.ban_modal_container footer button {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: var(--radius-md);
+  background: var(--modal-bg-color);
+}
+
+.ban_modal_container footer button:first-child {
+  background: var(--primary-danger);
+}
+
+.ban_modal_container footer button.stay_live_modal--btn {
+  background: linear-gradient(to right, #8837e9, #373fd7);
+}
+
+.ban_modal_container > * {
+  text-align: center;
+}
+
+.ban_modal_container > span {
+  margin-top: 1rem;
+}
+
+.ban_modal_container > h2 {
+  font-weight: 600;
+}
+
+.ban_modal_container > p {
+  font-weight: 200;
+}

@@ -1,0 +1,21 @@
+.chart_form {
+  padding: 0.8rem 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chart_form label {
+  padding-bottom: 7px;
+  display: block;
+  color: #344054;
+  font-size: 0.8rem;
+}
+
+.chart_form input {
+  border: 1px solid var(--border-color);
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+}

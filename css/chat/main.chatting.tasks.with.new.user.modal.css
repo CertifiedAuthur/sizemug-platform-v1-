@@ -1,0 +1,16 @@
+.new_task_with_chatting_user {
+  position: absolute !important;
+  background: #34405439;
+}
+
+.chat_modal_create_task {
+  max-height: 80vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.create-task-fields-wrapper {
+  height: 100%;
+  overflow-y: auto;
+}

@@ -1,0 +1,110 @@
+/* Component-specific styles using CSS modules approach */
+
+/* Toolbar Component */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: var(--dropdown-bg);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.toolbarButton {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolbarButton:hover {
+  background: var(--primary-color-fade);
+  border-color: var(--primary-color);
+}
+
+.toolbarButton.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* Canvas Component */
+.canvas {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px);
+  background: white;
+  cursor: crosshair;
+}
+
+.canvas.drawing {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="2" fill="black"/></svg>') 10 10, crosshair;
+}
+
+/* Context Menu */
+.contextMenu {
+  position: absolute;
+  background: var(--dropdown-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--global-box-shadow);
+  padding: 8px 0;
+  z-index: 1001;
+  min-width: 150px;
+}
+
+.contextMenuItem {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.contextMenuItem:hover {
+  background: var(--primary-color-fade);
+}
+
+/* Selection Gizmos */
+.selectionBox {
+  position: absolute;
+  border: 2px solid var(--primary-color);
+  background: var(--primary-color-fade);
+  /* pointer-events: none; */
+}
+
+.resizeHandle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color);
+  border: 1px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.resizeHandle.nw {
+  top: -4px;
+  left: -4px;
+  cursor: nw-resize;
+}
+.resizeHandle.ne {
+  top: -4px;
+  right: -4px;
+  cursor: ne-resize;
+}
+.resizeHandle.sw {
+  bottom: -4px;
+  left: -4px;
+  cursor: sw-resize;
+}
+.resizeHandle.se {
+  bottom: -4px;
+  right: -4px;
+  cursor: se-resize;
+}

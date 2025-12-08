@@ -1,0 +1,123 @@
+.creator_audience {
+  height: 30rem;
+  padding: 1rem 0;
+}
+
+#allSvg {
+  width: 100%;
+  height: 100%;
+}
+
+#mapTooltip {
+  position: absolute;
+  background-color: #ffffff;
+  opacity: 0;
+  border-radius: 0.5rem;
+  padding: 0.8rem;
+  font-size: 1.5rem;
+  box-shadow: var(--global-box-shadow);
+  min-width: 20rem;
+}
+
+#mapTooltip #mapTooltipCountry {
+  color: #344054;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding-bottom: 0.5rem;
+}
+
+#mapTooltip ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: #667085;
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+#timeCont {
+  background-color: white;
+  width: fit-content;
+  font-size: 1.5rem;
+  padding: 5px 5px;
+  border-radius: 5px;
+  border: 3px solid var(--primary-color);
+}
+
+.creator_audience svg path {
+  cursor: pointer;
+  stroke: var(--primary-color);
+}
+
+/* Modern World Map Styles */
+.modern-world-map {
+  width: 100%;
+  height: 450px;
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+.modern-world-map svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.country-name-large {
+  font-weight: 600;
+  font-size: 18px;
+  color: #1e293b;
+}
+
+.tooltip-total {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tooltip-total svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.tooltip-total svg path {
+  fill: #64748b !important;
+}
+
+.stat-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-label-large {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.stat-value-large {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1;
+}
+
+/* Fix for male and female icons */
+.male-icon svg path {
+  fill: #2563eb !important;
+}
+
+.female-icon svg path {
+  fill: #db2777 !important;
+}
+
+.stat-icon svg {
+  width: 20px;
+  height: 20px;
+}

@@ -1,0 +1,38 @@
+.special_characters_modal_wrapper,
+.equation_modal_wrapper {
+  padding: 10px;
+  max-height: 16rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.special_characters_modal,
+.equation_modal {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 1rem;
+}
+
+.special_characters_modal span,
+.equation_modal span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #f3f3f344;
+  border-radius: 8px;
+  height: 3rem;
+  font-size: 1.6rem;
+  transition: all 0.3s ease;
+}
+
+.special_characters_modal span:hover,
+.equation_modal span:hover {
+  background: #f3f3f3;
+}
+
+.special_characters_modal span.selected,
+.equation_modal span.selected {
+  background: #f3f3f3;
+}

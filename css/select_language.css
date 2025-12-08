@@ -1,0 +1,134 @@
+.select-language {
+  position: relative;
+  border-top: 1px solid #7b889d60;
+}
+
+.select-language .selected {
+  border-radius: 0 0 1rem 1rem !important;
+}
+
+.select-language .selected,
+.select-language li {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  border-top: 1px solid #3440546f;
+  gap: 8px;
+  border: none;
+  color: #344054 !important;
+}
+
+.select-language .selected {
+  color: blue !important;
+}
+
+.select-language li {
+  padding: 10px 6px !important;
+  transition: all 0.4s ease;
+}
+
+.select-language li:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.select-language li:hover {
+  background: #f9fafb;
+}
+
+.select-language .selected svg {
+  margin-left: auto;
+}
+
+.select-language li svg {
+  display: none;
+}
+
+.select-language li.active svg {
+  display: block;
+  margin-left: auto;
+}
+
+.select-language li.active {
+  background: #f9fafb;
+}
+
+@keyframes Dropdown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.select-language .selected .expanded_icon {
+  transition: transform 0.3s ease;
+}
+
+.select-language .selected .expanded_icon.active {
+  transform: rotate(180deg);
+}
+
+.select-language .selected .expanded_icon:not(.active) {
+  transform: rotate(0);
+}
+
+.select-language .select_language_dropdown {
+  position: absolute;
+  bottom: 3rem;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0px 32px 64px -12px #00000066;
+  right: 0;
+  left: -1rem;
+  animation: Dropdown 0.3s ease;
+}
+
+.select-language .select_language_dropdown ol {
+  overflow-y: auto;
+  max-height: 15rem;
+  margin: 0 !important;
+  padding: 0 !important;
+
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbcbcbc0 #e0e0e0c6;
+}
+
+.select_language_dropdown .wrapper,
+.select_language_dropdown li {
+  padding: 6px;
+}
+
+.select_language_dropdown form {
+  background: #f4f4f5;
+  border-radius: 4px;
+  padding: 5px 7px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.select_language_dropdown form input {
+  width: 100%;
+  font-size: 0.8rem;
+  background: none;
+  padding: 0 !important;
+}
+
+.select_language_dropdown form input,
+.select_language_dropdown form input:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+@media screen and (max-width: 667px) {
+  #header_start,
+  #header_start_modal {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}

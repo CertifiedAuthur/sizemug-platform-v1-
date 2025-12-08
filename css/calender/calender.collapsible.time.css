@@ -1,0 +1,73 @@
+#timeGroup {
+  width: 5rem;
+  max-width: 5rem;
+  min-width: 5rem;
+}
+
+/* Each hour block */
+.time-group {
+  border-bottom: 1px solid #eee;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.time-group:last-child {
+  border-bottom: none;
+}
+
+/* Header bar for the hour */
+.time-group-header {
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  text-align: center;
+}
+
+.time-group-header .label {
+  width: 100%;
+  text-align: center;
+  color: #000000;
+}
+
+/* Pseudo‐element arrow */
+.time-group-header .toggle {
+  display: inline;
+  transition: transform 0.2s ease;
+  margin-left: 4px;
+  background: #a39f9f;
+  width: 16px;
+  height: 16px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.time-group-header .toggle svg {
+  transition: transform 0.2s ease-in-out;
+}
+
+/* When collapsed, hide the slots & rotate arrow */
+.time-group.collapsed .time-slots {
+  display: none;
+}
+
+.time-group.collapsed .time-group-header .toggle svg {
+  transform: rotate(180deg);
+}
+
+.time-slot {
+  color: #71717a;
+  border-top: 1px solid #f0f0f0;
+  height: 2rem;
+  line-height: 24px;
+  position: relative;
+  text-align: center;
+  font-weight: 500;
+}

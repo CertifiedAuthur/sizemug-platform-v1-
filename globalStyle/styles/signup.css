@@ -1,0 +1,885 @@
+
+@media (min-width: 768px) and (max-width: 1125px) {
+    .frame43 {
+        grid-template-columns: repeat(3, 1fr); /* Four equal columns */
+    }
+
+    /* CSS styles for mobile view */
+    .section-right {
+        width: 100% !important; /* Four equal columns */
+    }
+    .section-left {
+        width: 0% !important; /* Four equal columns */
+    }
+    .sign-container {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 834px){
+
+    /* CSS styles for mobile view */
+    .section-right {
+        width: 80% !important; /* Four equal columns */
+    }
+    .section-left {
+        display: none; /* Four equal columns */
+    }
+    .sign-container {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 644px){
+    
+    /* CSS styles for mobile view */
+    .sign-container {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .section-right {
+        width: 100% !important; /* Four equal columns */
+    }
+    .sign-container {
+        width: 100% !important; /* Four equal columns */
+        padding: 0 !important;
+    }
+    .sign-modal {
+        padding: 12px;
+    }
+}
+@media (max-width: 495px){
+
+    /* CSS styles for mobile view */
+    .sign-container {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+}
+@media (max-width: 385px){
+
+    /* CSS styles for mobile view */
+    
+}
+
+.frame-70 {
+    /* Frame 70 */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+
+    height: fit-content;
+
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #EAECF0;
+    box-shadow: 0px 32px 64px -12px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(100px);
+    /* Note: backdrop-filter has minimal browser support */
+    border-radius: 16px;
+    margin: auto;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+.desktop {
+    /* Desktop */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+
+    width: 100%;
+    height: fit-content;
+
+    /* White */
+    background: #FFFFFF;
+    border-radius: 16px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.sign {
+
+    /* Sign up */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    
+    width: 100%;
+    height: fit-content;
+    border-radius: 16px;
+    
+    /* White */
+    background: #FFFFFF;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.section-left {
+    /* Section */
+    
+    width: 50%;
+    border-radius: 16px;
+    
+    /* Gray/50 */
+    background: #F9FAFB;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+
+}
+
+.section-right {
+    /* Section */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    
+    width: 50%;
+    height: fit-content;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+
+}
+.section-header {
+    /* Header navigation */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 16px 32px;
+    
+    width: inherit;
+    height: 66px;
+    z-index: 4;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.frame-28 {
+    /* Frame 28 */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 32px;
+    
+    width: 126px;
+    height: 34px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.frame-14 {
+    /* Frame 14 */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    
+    width: 126px;
+    height: 34px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.logo {
+
+    /* Sizemug-logo 1 */
+    
+    width: 23px;
+    height: 34px;
+    
+    background: url(Sizemug-logo.jpg);
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.logo-text {
+    /* Sizemug */
+    
+    width: 95px;
+    height: 34px;
+    
+    /* Heading/H4 - Mobile */
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 140%;
+    /* identical to box height, or 34px */
+    
+    /* Black */
+    color: #000000;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.sign-container {
+    /* Container */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px;
+    
+    gap: 24px;
+    width: 80%;
+    margin: 0 auto;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0 auto;
+}
+
+.desktop-content {
+    /* Content */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 32px;
+    
+    height: inherit;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.content-header {
+    
+    /* Text and supporting text */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 12px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.content-header-top {
+    /* Text */
+    
+    
+    /* Display sm/Semibold */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 1em;
+    /* identical to box height, or 127% */
+    text-align: center;
+    
+    /* Gray/900 */
+    color: #101828;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.content-header-content {
+    /* Supporting text */
+    
+    /* Text md/Regular */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* or 150% */
+    text-align: center;
+    
+    /* Gray/500 */
+    color: #667085;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.form-section {
+    /* Content */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+    
+    
+    border-radius: 12px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.form-section form {
+    /* Form */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 20px;
+    
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.form-groups {
+    /* Input field */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    
+    height: fit-content;
+
+    gap: 30px;    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.inputs-group {
+    /* _Input field base */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 6px;
+       
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.label-input-group {
+    /* Input with label */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 6px;
+    
+    height: 70px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+
+.input-label {
+    /* Label */
+    
+    height: 20px;
+    
+    /* Text sm/Medium */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    
+    /* Gray/700 */
+    color: #344054;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.input-group {
+    /* Input */
+    
+    box-sizing: border-box;
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 8px;
+    cursor: text;
+    height: 44px;
+    
+    /* White */
+    background: #FFFFFF;
+    /* Gray/300 */
+    border: 1px solid #D0D5DD;
+    /* Shadow/xs */
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 8px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+
+}
+
+.input-group .content {
+    /* Content */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    
+    height: 24px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 1;
+}
+
+.input-group .content .input-icon-left {
+    /* mail */
+    
+    max-width: 20px;
+    max-height: 20px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+}
+
+.input-control:hover ~ .input-group {
+    border-color: blueviolet !important
+}
+.input-control {
+    /* Text */
+    
+    height: 24px;
+    
+    /* Text md/Regular */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    
+    /* Gray/500 */
+    color: #667085;
+    border: none;
+    outline: none;    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 1;
+
+}
+
+.input-help-icon {
+    /* Help icon */
+    
+    max-width: 16px;
+    max-height: 16px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.hint-text {
+    /* Hint text */
+
+    
+    /* Text sm/Regular */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    
+    /* Gray/500 */
+    color: #667085;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.group-buttons {
+    /* Actions */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 16px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.group-buttons .sign-btn {
+    /* Button */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 20px;
+    gap: 8px;
+    
+    height: 40px;
+    
+    /* Black */
+    background: #000000;
+    /* Black */
+    border: 1px solid #000000;
+    border-radius: 12px;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+button.sign-btn {
+    /* Button */
+    
+    height: 24px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    /* identical to box height, or 24px */
+    
+    /* White */
+    color: #FFFFFF;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+.btn-s {
+    /* Social button */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 12px;
+
+    min-height: 44px;
+
+    /* White */
+    background: #FFFFFF;
+    /* Gray/300 */
+    border: 1px solid #D0D5DD;
+    /* Shadow/xs */
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    border-radius: 8px;
+
+    /* Inside auto layout */
+    flex: none;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.btn-s .icon {
+    /* Social icon */
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: 1px solid blue;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+    overflow: hidden;
+}
+
+.btn-def {
+
+    /* Text */
+    
+    /* Text md/Semibold */
+    font-family: 'Inter';
+    font-style: normal; 
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.2em;
+    /* identical to box height, or 150% */
+    
+    /* Gray/700 */
+    color: #344054;
+    
+    /* Inside auto layout */
+    flex: none;
+    flex-grow: 0;
+}
+
+.path4 {
+    /* path4 */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0%;
+    bottom: 8.33%;
+    object-fit: cover;
+    /* Black */
+    background: #000000;
+}
+
+.row {
+    /* Row */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+    
+    height: 20px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 0;
+}
+
+.text-def {
+    /* Text */
+    
+    height: 20px;
+    
+    /* Text sm/Regular */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    
+    /* Gray/500 */
+    color: #667085;
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.login {
+
+    /* Button */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    
+    width: 41px;
+    height: 20px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    
+    
+    /* _Button base */
+    
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 8px;
+    
+    width: 41px;
+    height: 20px;
+    
+    
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    
+    
+    /* Text */
+    
+    width: 41px;
+    height: 20px;
+    
+    /* Text sm/Semibold */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    
+    /* Base color */
+    color: #8837E9;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.hide {
+    display: none;
+}

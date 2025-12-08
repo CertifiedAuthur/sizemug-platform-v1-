@@ -1,0 +1,78 @@
+/* Container for user little info section */
+.user-little-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.user-little-info.little_creator_page {
+  width: 17vw;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.user-little-info.little_creator_page > div {
+  white-space: nowrap;
+}
+
+.user-little-info > div {
+  display: flex;
+  align-items: center;
+
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 400;
+  color: #667085;
+}
+
+.user-little-info .stick {
+  color: var(--border-color);
+}
+
+/* Add gap between list items except the first one */
+.user-little-info > div:not(:first-child) {
+  gap: 5px; /* Space between items */
+}
+
+/* Hide specific elements by default */
+.user-little-info #work-type,
+.user-little-info #location-type,
+.user-little-info #username-type,
+.user-little-info .stick.work,
+.user-little-info .stick.username,
+.user-little-info .stick.education,
+.user-little-info #education-status,
+.user-little-info #education-status,
+.user-little-info[data-education="true"][data-work="true"] .show-profile-completion-modal {
+  display: none; /* Hide elements */
+}
+
+/* Show specific elements based on data attributes */
+.user-little-info[data-work="true"] #work-type,
+.user-little-info[data-location="true"] #location-type,
+.user-little-info[data-username="true"] #username-type,
+.user-little-info[data-work="true"] .stick.work,
+.user-little-info[data-username="true"] .stick.username,
+.user-little-info[data-education="true"] .stick.education,
+.user-little-info[data-education="true"] #education-status,
+.user-little-info .show-profile-completion-modal {
+  display: flex; /* Show elements as flexbox */
+}
+
+@media screen and (max-width: 667px) {
+  .user-little-info {
+    width: 95vw;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+  }
+
+  .user-little-info > div {
+    white-space: nowrap;
+  }
+}

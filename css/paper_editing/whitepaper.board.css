@@ -1,0 +1,37 @@
+#main_white_paper_board {
+  background: #eaecf0;
+  height: calc(100dvh - 15.7rem);
+  border: 1px solid #bec1c7;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#main_white_paper_board.sheet-active {
+  border: 0;
+  height: calc(100dvh - 13rem);
+}
+
+#main_white_paper_board .sheet_container {
+  display: none;
+}
+
+#main_white_paper_board.sheet-active .sheet_container {
+  display: block;
+}
+
+#main_white_paper_board.sheet-active ~ #paperFooter,
+#main_white_paper_board.sheet-active #voice_caption--container,
+#main_white_paper_board.sheet-active #matching_slider,
+#main_white_paper_board.sheet-active #editor-container {
+  display: none !important;
+}
+
+@media screen and (max-width: 667px) {
+  #main_white_paper_board {
+    height: calc(100dvh - 7vh);
+    border: 0;
+  }
+}

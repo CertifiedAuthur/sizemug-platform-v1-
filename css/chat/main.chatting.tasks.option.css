@@ -1,0 +1,432 @@
+.chat_select_tasks_wrapper,
+.chat_tasks_lists {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chatTasksListsContainer {
+  height: 72vh;
+}
+
+.additional_chat_modal.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999999;
+  background: #34405480;
+}
+
+.additional_chat_modal .chat_tasks_container {
+  padding: 10px;
+  box-shadow: var(--sizemug-shadow-2xl);
+  border: 2px solid var(--border-color);
+}
+
+.chat_tasks_container {
+  width: 25rem;
+  height: 30rem;
+
+  border-radius: 20px;
+  background: #f2f4f7;
+
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease-in-out;
+  box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
+
+  text-align: left;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.chat_tasks_container h3,
+.chat_tasks_container header button {
+  font-size: 13px;
+  font-weight: 500;
+  color: #00000058;
+
+  padding-bottom: 7px;
+}
+
+.add_new_chat_tasks > div {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+}
+
+.add_new_chat_tasks button,
+.add_your_location_button {
+  white-space: nowrap;
+  background: white;
+  padding: 4px 7px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.add_new_chat_tasks button span:first-child {
+  width: 20px;
+}
+
+.add_your_location_button {
+  white-space: wrap;
+  width: 100%;
+
+  justify-content: space-between;
+}
+
+.add_your_location_button h4 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222222;
+}
+
+.add_your_location_button p {
+  font-size: 12px;
+  font-weight: 300;
+  color: #2222226d;
+}
+
+.chat_tasks_container header button.see_all,
+.chat_additional_option_container header button.see_all {
+  display: flex;
+  align-items: center;
+}
+
+.show_recent_tasks_with_user header {
+  padding: 0;
+  background: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.show_recent_tasks_with_user ul {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.show_recent_tasks_with_user ul li {
+  min-width: 15rem;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.show_recent_tasks_with_user ul li > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.recent_task_item .title h4 {
+  color: #222222;
+  font-size: 14px;
+  font-weight: 500;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.recent_task_item .status {
+  padding: 5px 0;
+}
+
+.recent_task_item .status .status_text {
+  color: #222222;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.recent_task_item .status .status_box {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+
+  background: var(--online-color);
+}
+
+.recent_task_item .progress .progress_cent {
+  font-size: 12px;
+  color: #344054;
+  font-weight: 500;
+}
+
+.recent_task_item .progress .progress_track {
+  width: 100%;
+  height: 7px;
+  background: #f2f4f7;
+  border-radius: 20px;
+
+  overflow: hidden;
+}
+
+.recent_task_item .progress .progress_line {
+  background: black;
+  border-radius: 20px;
+  height: 100%;
+  width: 30%;
+}
+
+.recent_media {
+  height: 6rem;
+}
+
+.recent_media li {
+  min-width: 5rem !important;
+  max-width: 5rem !important;
+  height: 100%;
+  padding: 0 !important;
+
+  border-radius: 10px;
+  overflow: hidden;
+  border: none !important;
+}
+
+.recent_task_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recent_task_item {
+  position: relative;
+}
+
+.recent_task_item button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #00000038;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+/*--------------------------------- Tasks with ... ---------------------------------*/
+.task_with_user_header {
+  padding: 10px !important;
+  background: white;
+}
+
+.task_with_user_initial {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.task_with_user_initial h3 {
+  padding-bottom: 5px;
+  color: #00000064;
+  font-size: 13px;
+}
+
+.task_with_user {
+  padding: 0 !important;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.task_with_user .tasks_list_priority--wrapper {
+  height: 100% !important;
+}
+
+.task_with_name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+}
+
+.task_with_user_header div {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+
+  width: 100%;
+}
+
+.task_with_user_header_wrapper {
+  flex-direction: column;
+  align-items: flex-start !important;
+  padding-bottom: 10px;
+}
+
+.task_width_user_status_category {
+  gap: 10px !important;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  width: 100%;
+}
+
+.task_width_user_status_category button {
+  padding: 3px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-size: 14px;
+}
+
+.task_width_user_status_category button.active {
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  background: #8737e916;
+}
+
+.task_width_user_status_category button span:last-child {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  color: white;
+}
+
+.task_width_user_status_category button[data-status-type="all"] span:last-child {
+  background: var(--primary-color);
+}
+
+.task_width_user_status_category button[data-status-type="ongoing"] span:last-child {
+  background: #ff6363;
+}
+
+.task_width_user_status_category button[data-status-type="pending"] span:last-child {
+  background: #fda629;
+}
+
+.task_width_user_status_category button[data-status-type="completed"] span:last-child {
+  background: #12b76a;
+}
+
+.task_width_user_status_category button.active span:last-child {
+  background: none;
+  color: var(--primary-color);
+}
+
+.task_with_user_lists {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+
+  align-items: center;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+  gap: 3rem;
+}
+.task_with_user_lists .no_tasks_found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 100%;
+}
+
+.task_with_user_lists .no_tasks_found p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222222;
+}
+
+.task_with_user_lists .no_tasks_found button {
+  background: var(--primary-color);
+  color: white;
+  padding: 6px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 300;
+}
+
+/************************              *********************/
+.task_with_user_modal {
+  position: absolute;
+  overflow: hidden;
+  box-shadow: var(--sizemug-shadow-2xl);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+}
+
+.task_with_user_modal.modal {
+  border: none;
+}
+
+.task_with_user_modal.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999999;
+  background: #34405480;
+  border-radius: 0;
+}
+
+.chat_additional_option_container {
+  position: absolute;
+  right: 0;
+  bottom: 40px;
+  padding: 10px;
+
+  width: 25rem;
+  border-radius: 20px;
+  background: #f2f4f7;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.4s ease-in-out;
+  box-shadow: 0 4px 6px -1px #0000001a, 0 2px 4px -2px #0000001a;
+  text-align: left;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 10;
+}

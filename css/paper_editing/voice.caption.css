@@ -1,0 +1,75 @@
+.voice_caption--container {
+  position: absolute;
+  bottom: 10px;
+  min-width: 50%;
+  max-width: 65%;
+  max-height: 8rem;
+  align-self: center;
+  background: #101828;
+  border-radius: 20px;
+  padding: 0.7rem;
+
+  animation: Dropdown 0.6s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+@keyframes Dropdown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0.9;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.voice_caption--container * {
+  color: white;
+}
+
+/* animate__animated animate__slideInDown */
+#auto_write_caption {
+  width: 100%;
+  max-width: 100%;
+  max-height: 4rem;
+  overflow-y: auto;
+  font-size: 0.8rem;
+}
+
+.voice_record_action--btns {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voice_record_action--btns button {
+  background: #232f46;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  width: fit-content;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.voice_record_action--btns button#start_voice_capturing {
+  background: #1c64f2;
+}
+
+.voice_record_action--btns button#close_voice_capturing:hover {
+  background: #c81e1e;
+}
+
+.voice_record_action--btns button#stop_voice_capturing {
+  background: #c81e1e;
+}

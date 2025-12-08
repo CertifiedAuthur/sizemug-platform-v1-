@@ -1,0 +1,23 @@
+.interests-flex-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.interests-flex-items [role="button"] {
+  padding: 5px 10px;
+  border-radius: 20px;
+
+  display: flex;
+  gap: 4px;
+
+  border: 1px solid var(--border-color);
+}
+
+.interests-flex-items > div span:last-child {
+  display: none;
+}
+
+.interests-flex-items div[data-active="true"] span:last-child {
+  display: inline;
+}

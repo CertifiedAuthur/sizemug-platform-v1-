@@ -1,0 +1,23 @@
+.view-note-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: 1005;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: Modal 0.2s ease;
+}
+
+#viewAllNotesModal {
+  z-index: 1002;
+}
+
+.view-note-action button#viewNoteModalTrash:hover svg path {
+  fill: white;
+}

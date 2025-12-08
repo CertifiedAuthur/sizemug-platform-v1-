@@ -1,0 +1,106 @@
+.call_category h2 {
+  font-weight: 500;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.call_category ul {
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.call_category hr {
+  border-color: #f8f8f8;
+  margin: 0 !important;
+
+  width: 85%;
+  align-self: flex-end;
+}
+
+.call_category ul li {
+  padding: 7px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.caller_call_type {
+  display: flex;
+  align-items: center;
+}
+
+.caller_call_type > div {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caller_call_type > div:last-child {
+  margin-left: -20px;
+  background: white;
+  border: 1px solid var(--border-color);
+}
+
+.call_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.call_info > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.call_info .name {
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
+}
+
+.call_info .status {
+  color: black;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.call_info .called_time {
+  color: #959595;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.call_item_call_to_action {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  margin-left: auto;
+}
+
+.call_item_call_to_action button.start_voice_call {
+  padding: 8px;
+}
+
+.call_item_call_to_action button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #8737e91e;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

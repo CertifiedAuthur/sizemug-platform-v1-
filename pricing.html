@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#8837e9" />
+
+    <title>Sizemug || Pricing</title>
+    <link rel="shortcut icon" type="image/icon" href="./icons/favicon-sizemug.svg" />
+
+    <!-- inter google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- external scripts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+    <!-------------------------- Root File --------------------->
+    <link rel="stylesheet" href="./css/converted.css" />
+    <link rel="stylesheet" href="./css/sizemug.general.nav.css" />
+
+    <!-- Needed for payment modals -->
+    <link rel="stylesheet" href="/css/marketing/index.css" />
+
+    <link rel="stylesheet" href="/css/pricing/index.css" />
+  </head>
+
+  <body>
+    <!-- header starts -->
+    <nav class="header">
+      <!-- app-logo -->
+      <a href="/dashboard.html" class="header_logo">
+        <img loading="lazy" src="./icons/logo.svg" height="64" width="110" />
+      </a>
+    </nav>
+
+    <!-- Heading -->
+    <div class="heading">
+      <h4>Pricing</h4>
+      <h1>Sizemug Pro Account</h1>
+      <p>Unlock the full potential of Sizemug with our Pro account, offering a suite of advanced features designed to enhance your productivity and collaboration. Choose the package that best suits your needs</p>
+    </div>
+
+    <div class="pricing-table">
+      <div class="details">
+        <label class="switch">
+          <div class="switch-container">
+            <label class="switch">
+              <input type="checkbox" checked id="annual_price_checked" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </label>
+        <h5 class="text1" id="annuallyContent">Annual Pricing <span> (save 20%) </span></h5>
+        <h5 class="text2 pricing-hidden" id="monthlyContent">Monthly Pricing <span> (save 20%) </span></h5>
+      </div>
+
+      <div class="grid" id="plansContainerList">
+        <!-- Render Plans -->
+      </div>
+    </div>
+
+    <!-- Policy -->
+    <div class="policy">
+      <h4>Trial and Cancellation Policy</h4>
+      <h5>7 Days Free Trial</h5>
+      <p>Experience all Pro features for 7 days at no cost.</p>
+      <h5 class="cancel">Cancel Anytime</h5>
+      <p>Cancel your subscription any time during the free trial or after a month without any penalties.</p>
+    </div>
+
+    <div class="flex-container">
+      <div class="faq1">
+        <h5 class="questions">What happens if I cancel during the free trial?</h5>
+        <p class="answers">If you cancel during the 7-day free trial, you won't be charged. your account will revert to the free verison at the end of the trial period.</p>
+      </div>
+
+      <div class="faq2">
+        <h5 class="questions">Can I change my package plan after subscribing?</h5>
+        <p class="answers">Yes, you can upgrade or downgrade your package plan at any time through your account settings.</p>
+      </div>
+
+      <div class="faq3">
+        <h5 class="questions">How does the billing cycle work?</h5>
+        <p class="answers">You can choose between monthly or annual billing. Monthly billing charges you every month, while annual billing charges you once a year with a discount.</p>
+      </div>
+
+      <div class="faq4">
+        <h5 class="questions">Will I lose my data if I cancel my subscription</h5>
+        <p class="answers">No, your data will be saved. However, you will lose access to Pro features and your account will be limited to free features.</p>
+      </div>
+
+      <div class="faq5">
+        <h5 class="questions">How do I contact customer support?</h5>
+        <p class="answers">You can reach out to our customer support team via the "Contact Us" section on our website for any assistance.</p>
+      </div>
+
+      <div class="faq6">
+        <h5 class="questions">Are there any discounts for annual billing?</h5>
+        <p class="answers">Yes, choosing the annual billing option offers a discounted rate compared to the monthly billing cycle.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <h3>Still have questions?</h3>
+      <p>Can't find the answer you were looking for? Please chat to our friendly team.</p>
+      <div><button class="footer-button">Contact Us</button></div>
+    </div>
+
+    <!--------------------------- Modals ------------------------>
+    <!--------------------------- Modals ------------------------>
+    <!--------------------------- Modals ------------------------>
+
+    <!--  Payment Select Option -->
+    <div id="choosePaymentOption" class="overlay choose_payment--option pricing-hidden">
+      <div class="wallet_container payment_process_overlay">
+        <!-- Mobile Cancel Button -->
+        <button class="modal_mobile_cancel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-width="2" d="M20 20L4 4m16 0L4 20" />
+          </svg>
+        </button>
+
+        <div class="balance">
+          <h1>Wallet</h1>
+          <p>Your balance: <span>$10,000</span></p>
+        </div>
+
+        <ul>
+          <p>Select payment option</p>
+
+          <!-- Coin Payment -->
+          <li role="button" data-type="coin" class="payment_option">
+            <div class="OPSXVT">
+              <img src="/images/sizemug_coin.png" alt="Sizemug Coin" />
+
+              <div>
+                <h3>Coin</h3>
+
+                <span>500</span>
+              </div>
+            </div>
+
+            <button class="">
+              <!-- prettier-ignore -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="pricing-hidden" width="1em" height="1em" viewBox="0 0 2048 2048"><path fill="black" d="M1837 557L768 1627l-557-558l90-90l467 466l979-978z"/></svg>
+            </button>
+          </li>
+
+          <!-- Wallet Payment -->
+          <li role="button" data-type="wallet" class="payment_option">
+            <div class="OPSXVT">
+              <h3>Wallet</h3>
+
+              <span>$10,000.00</span>
+            </div>
+
+            <button class="">
+              <!-- prettier-ignore -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="pricing-hidden" width="1em" height="1em" viewBox="0 0 2048 2048"><path fill="black" d="M1837 557L768 1627l-557-558l90-90l467 466l979-978z"/></svg>
+            </button>
+          </li>
+        </ul>
+
+        <div class="action_btns">
+          <button class="back">Back</button>
+          <button class="next">Next</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wallet Select Payment -->
+    <div class="payment_with_wallet overlay pricing-hidden">
+      <div class="wallet_container payment_process_overlay">
+        <!-- Mobile Cancel Button -->
+        <button class="modal_mobile_cancel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-width="2" d="M20 20L4 4m16 0L4 20" />
+          </svg>
+        </button>
+
+        <div class="balance">
+          <h1>Wallet</h1>
+          <p>
+            Your balance:
+            <span class="total_balance--wallet">
+              <span class="amount">$10000</span>
+              <span class="asterics pricing-hidden">****</span>
+            </span>
+          </p>
+        </div>
+
+        <div class="payment_details">
+          <div class="current_balance">
+            <p>Payment details</p>
+
+            <div class="current_balance--container balance_container--wallet">
+              <p>
+                Current Balance
+                <button aria-hidden="false" class="toggle_balance_state" data-type="wallet">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="show" width="1.6em" height="1.6em" viewBox="0 0 24 24">
+                    <path fill="white" fill-rule="evenodd" d="M20.77 12c0-.359-.194-.594-.582-1.066C18.768 9.21 15.636 6 12 6c-3.636 0-6.768 3.21-8.188 4.934c-.388.472-.582.707-.582 1.066c0 .359.194.594.582 1.066C5.232 14.79 8.364 18 12 18c3.636 0 6.768-3.21 8.188-4.934c.388-.472.582-.707.582-1.066M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6" clip-rule="evenodd" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="hid" class="pricing-hidden" width="1.4em" height="1.4em" viewBox="0 0 24 24">
+                    <path fill="white" fill-rule="evenodd" d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z" />
+                  </svg>
+                </button>
+              </p>
+
+              <div class="total_balance total_balance--wallet">
+                <span class="amount">$10,000.00</span>
+                <span class="asterics pricing-hidden">****</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="calculation_shipping">
+            <div>
+              <div class="shipping_items">
+                <!-- Shipping Item -->
+              </div>
+            </div>
+
+            <div class="sum_up">
+              <p>
+                <span>Tax</span>
+                <span>$1.99</span>
+              </p>
+
+              <p>
+                <span>Total</span>
+                <span>$105.99</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="action_btns">
+          <button class="back">Back</button>
+          <button class="pay">Pay</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Coin Select Payment -->
+    <div class="payment_with_coin overlay pricing-hidden">
+      <div class="wallet_container payment_process_overlay">
+        <!-- Mobile Cancel Button -->
+        <button class="modal_mobile_cancel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-width="2" d="M20 20L4 4m16 0L4 20" />
+          </svg>
+        </button>
+
+        <div class="balance">
+          <h1>Wallet</h1>
+          <p>
+            Your balance:
+            <span class="total_balance--coin">
+              <span class="amount">200</span>
+              <span class="asterics pricing-hidden">****</span>
+            </span>
+          </p>
+        </div>
+
+        <div class="payment_details">
+          <div class="current_balance">
+            <p>Payment details</p>
+
+            <div class="current_balance--container balance_container--coin">
+              <p>
+                Current Balance
+                <button aria-hidden="false" class="toggle_balance_state" data-type="coin">
+                  <svg xmlns="http://www.w3.org/2000/svg" id="show" width="1.6em" height="1.6em" viewBox="0 0 24 24">
+                    <path fill="white" fill-rule="evenodd" d="M20.77 12c0-.359-.194-.594-.582-1.066C18.768 9.21 15.636 6 12 6c-3.636 0-6.768 3.21-8.188 4.934c-.388.472-.582.707-.582 1.066c0 .359.194.594.582 1.066C5.232 14.79 8.364 18 12 18c3.636 0 6.768-3.21 8.188-4.934c.388-.472.582-.707.582-1.066M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6" clip-rule="evenodd" />
+                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" id="hid" class="pricing-hidden" width="1.4em" height="1.4em" viewBox="0 0 24 24">
+                    <path fill="white" fill-rule="evenodd" d="m18.922 16.8l3.17 3.17l-1.06 1.061L4.06 4.061L5.12 3l2.74 2.738A11.9 11.9 0 0 1 12 5c4.808 0 8.972 2.848 11 7a12.66 12.66 0 0 1-4.078 4.8m-8.098-8.097l4.473 4.473a3.5 3.5 0 0 0-4.474-4.474zm5.317 9.56A11.9 11.9 0 0 1 12 19c-4.808 0-8.972-2.848-11-7a12.66 12.66 0 0 1 4.078-4.8l3.625 3.624a3.5 3.5 0 0 0 4.474 4.474l2.964 2.964z" />
+                  </svg>
+                </button>
+              </p>
+
+              <div class="total_balance total_balance--coin">
+                <span class="amount">200</span>
+                <span class="asterics pricing-hidden">****</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="calculation_shipping">
+            <div>
+              <div class="shipping_items">
+                <!-- Shipping Item -->
+              </div>
+            </div>
+
+            <div class="sum_up">
+              <p>
+                <span>Tax</span>
+                <span>1</span>
+              </p>
+
+              <p>
+                <span>Total</span>
+                <span>105</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="action_btns">
+          <button class="back">Back</button>
+          <button class="pay">Pay</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Successful Payment -->
+    <div class="payment_successful overlay pricing-hidden">
+      <div class="wallet_container payment_process_overlay">
+        <!-- Mobile Cancel Button -->
+        <button class="modal_mobile_cancel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-width="2" d="M20 20L4 4m16 0L4 20" />
+          </svg>
+        </button>
+
+        <div class="balance">
+          <h1>Wallet</h1>
+          <p>Your balance: <span>$10,000</span></p>
+        </div>
+
+        <div class="response success">
+          <!-- prettier-ignore -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="6em" height="6em" viewBox="0 0 24 24"><path fill="#027A48" fill-rule="evenodd" d="M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18m4.768-11.36a1 1 0 1 0-1.536-1.28l-3.598 4.317c-.347.416-.542.647-.697.788l-.006.006l-.007-.005c-.168-.127-.383-.339-.765-.722l-1.452-1.451a1 1 0 0 0-1.414 1.414l1.451 1.451l.041.041c.327.327.64.641.933.862c.327.248.756.48 1.305.456c.55-.025.956-.296 1.26-.572c.27-.247.555-.588.85-.943l.037-.044z" clip-rule="evenodd"/></svg>
+          <h3>Payment successful</h3>
+          <p>Your purchase was made successfully</p>
+        </div>
+
+        <div class="action_btns">
+          <button class="continue">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Failed Payment -->
+    <div class="payment_failed overlay pricing-hidden">
+      <div class="wallet_container payment_process_overlay">
+        <!-- Mobile Cancel Button -->
+        <button class="modal_mobile_cancel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+            <path fill="none" stroke="#000000" stroke-linecap="round" stroke-width="2" d="M20 20L4 4m16 0L4 20" />
+          </svg>
+        </button>
+
+        <div class="balance">
+          <h1>Wallet</h1>
+          <p>Your balance: <span>$10,000</span></p>
+        </div>
+
+        <div class="response success">
+          <!-- prettier-ignore -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="6em" height="6em" viewBox="0 0 24 24"><path fill="#B42318" fill-rule="evenodd" d="M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0M7.293 16.707a1 1 0 0 1 0-1.414L10.586 12L7.293 8.707a1 1 0 0 1 1.414-1.414L12 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414L13.414 12l3.293 3.293a1 1 0 0 1-1.414 1.414L12 13.414l-3.293 3.293a1 1 0 0 1-1.414 0" clip-rule="evenodd"/></svg>
+          <h3>Payment failed</h3>
+          <p>Your purchase has failed due to a certain reason</p>
+        </div>
+
+        <div class="action_btns">
+          <button class="continue">Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- scripts -->
+    <script src="/scripts/get.hidden.classnames.js"></script>
+    <script src="/scripts/pricing/toggle.js"></script>
+    <script src="/scripts/pricing/highlight.js"></script>
+    <script src="/scripts/pricing/unopened.js"></script>
+    <script src="/scripts/pricing/checkout.js"></script>
+  </body>
+</html>

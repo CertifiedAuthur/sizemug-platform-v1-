@@ -1,0 +1,135 @@
+.location_container_wrapper {
+  height: 30rem;
+  width: 100%;
+  position: relative;
+}
+
+.location_container_wrapper .frame_wrapper {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.location_container_wrapper iframe {
+  width: 100%;
+}
+
+.location_modal_info_wrapper {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 25rem;
+  height: 15rem;
+}
+
+.location_modal_info_wrapper > div {
+  width: 100%;
+  height: 100%;
+}
+
+.location_modal_info {
+  position: relative;
+}
+
+.location_modal_info .location-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.location-preview-details {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  padding: 6px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.location-action {
+  color: #000000;
+  text-shadow: 0px 7px 10px #00000025;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+
+  font-size: 12px;
+}
+
+.rated_location {
+  position: relative;
+}
+
+.rate_location_stars_wrapper {
+  position: absolute;
+  right: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.rate_location_stars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: #00000025;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* default star color */
+#rateLocationStars li svg path {
+  transition: fill 180ms ease;
+  fill: #344054;
+}
+
+/* highlighted (hover) or selected */
+#rateLocationStars li.filled svg path,
+#rateLocationStars li.selected svg path {
+  fill: #f59e0b;
+}
+
+/* small hover scale for polish */
+#rateLocationStars li:hover svg {
+  transform: scale(1.06);
+  transition: transform 120ms ease;
+}
+
+.location-all-time-ratings {
+  background: white;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.all-time-ratings-each {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.all-time-ratings-each img {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.all-time-ratings-each ul {
+  margin-left: auto;
+}
+
+.location-hidden {
+  display: none !important;
+}

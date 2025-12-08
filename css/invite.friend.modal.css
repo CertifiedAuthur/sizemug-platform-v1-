@@ -1,0 +1,453 @@
+.invite_friend_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: var(--live-bg-color);
+}
+
+#inviteModalConfettiCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.invite_friend {
+  background: white;
+  width: 50rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.invite_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invite_friend h2 {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.invite_header button {
+  background: #7e869e72;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mainInviteFriend {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+#mainInviteFriend > div {
+  width: 50%;
+}
+
+#mainInviteFriend .left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#mainInviteFriend h2 {
+  font-size: 1.4rem;
+}
+
+#mainInviteFriend p {
+  color: #667085;
+}
+
+#mainInviteFriend p a {
+  color: #4d4bfe;
+}
+
+#mainInviteFriend .left .rectangle {
+  border-radius: 20px;
+  background: #f3f3f5;
+
+  width: 6rem;
+  height: 6rem;
+}
+
+#mainInviteFriend button {
+  width: 100%;
+  display: block;
+  margin-top: 0.3rem;
+  border-radius: 25px;
+  background: #8837e9;
+  color: white;
+  padding: 0.7rem;
+  font-weight: 600;
+}
+
+#mainInviteFriend button#sizemugPro {
+  background: #f4f4f4;
+  color: #181c22;
+  margin-top: 0.8rem;
+}
+
+#mainInviteFriend .right {
+  background: #fafafc;
+  border: 1px solid #eaecf0;
+  border-radius: 10px;
+  padding: 1rem 0.5rem;
+
+  height: 70vh;
+  position: relative;
+}
+
+#mainInviteFriend .heading_invite_list h3 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+#invitedUsersList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 10px;
+  padding-top: 1rem;
+  height: calc(100% - 3vh);
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  grid-auto-rows: min-content;
+}
+
+#invitedUsersList .user_item,
+#invitedUsersList .static_placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
+  justify-self: flex-start;
+}
+
+#invitedUsersList .user_item img {
+  max-width: 70px;
+  min-width: 70px;
+  min-height: 70px;
+  max-height: 70px;
+  border-radius: 100%;
+}
+
+.AYUDNMXS {
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  border: 1px dashed #8837e9;
+  background: #8737e94b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#invitedUsersList .user_item span,
+#invitedUsersList .static_placeholder span {
+  font-size: 0.8rem;
+  color: #667085b0;
+  text-align: center;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+/*-- INVITE CODE MODAL ---*/
+.invite_code_modal {
+  background: white;
+  position: relative;
+  border-radius: 10px;
+  padding: 1rem;
+
+  width: 25rem;
+}
+
+.inviteCodeMobileCancel {
+  position: absolute;
+  top: -3rem;
+  right: 10px;
+  background: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.invite_code_modal header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.invite_code_modal header h3 {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+.HIIUGSJ {
+  background: #f4f4f4;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.invite_code main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
+  padding-top: 1rem;
+}
+
+.invite_code main p {
+  color: #667085;
+  font-size: 0.8rem;
+}
+
+.invite_code main code {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #181c22;
+}
+
+.invite_code main button {
+  background: #8837e9;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 30px;
+  color: white;
+}
+
+.invite_code main button:disabled {
+  cursor: not-allowed;
+}
+
+.invite_code main button:last-child {
+  display: none;
+}
+
+#actionInviteCode {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.positioned_container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.positioned_container #tooltipMessage {
+  background: #181c22;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  display: flex;
+}
+
+.positioned_container #tooltipMessage p {
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.positioned_container #toolMessageBtn {
+  width: initial;
+  margin-top: 0;
+  padding: 0;
+  align-self: flex-start;
+  background: none;
+}
+
+.positioned_container #getSizemugPro {
+  background: linear-gradient(100deg, #4d4bfe, #992df2);
+}
+
+@media screen and (max-width: 890px) {
+  .invite_friend {
+    width: 95%;
+  }
+
+  #mainInviteFriend > div:first-child {
+    width: 40%;
+  }
+
+  #mainInviteFriend > div:last-child {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .invite_friend {
+    width: 100%;
+    align-self: flex-end;
+    border-radius: 10px 10px 0 0;
+    height: 75vh;
+    overflow-y: auto;
+    padding: 0;
+  }
+
+  .invite_friend > * {
+    padding: 1rem;
+  }
+
+  #mainInviteFriend {
+    flex-direction: column;
+    border-top: 1px solid #f3f3f3;
+  }
+
+  #mainInviteFriend > div:first-child {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  #mainInviteFriend > div:last-child {
+    width: 100%;
+    height: initial;
+    margin-bottom: 4rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .invite_header button {
+    display: none;
+  }
+
+  .invite_header {
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+
+  #mainInviteFriend .actions {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-top: 1px solid #f3f3f3;
+    background: white;
+    padding: 15px;
+    z-index: 99999;
+  }
+
+  #mainInviteFriend button {
+    border-radius: 6px;
+  }
+
+  #mainInviteFriend .left .rectangle {
+    width: 10rem;
+    height: 9rem;
+  }
+
+  #mainInviteFriend h2 {
+    font-size: 1.4rem;
+    padding-bottom: 7px;
+  }
+
+  #mainInviteFriend p {
+    font-size: 1rem;
+    padding-bottom: 10px;
+  }
+
+  #invitedUsersList {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    padding-top: 1rem;
+  }
+
+  #invitedUsersList .user_item,
+  #invitedUsersList .static_placeholder {
+    align-self: center;
+    width: 100%;
+  }
+
+  .invite_code_modal {
+    align-self: flex-end;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .HIIUGSJ {
+    display: none;
+  }
+
+  .invite_code_modal header {
+    justify-content: center;
+    border-bottom: 1px solid #f3f3f3;
+  }
+
+  .invite_code {
+    padding: 0;
+  }
+
+  .invite_code > * {
+    padding: 10px;
+  }
+
+  .invite_code_modal {
+    padding: 0;
+  }
+
+  .invite_code_modal header h3 {
+    font-weight: 600;
+  }
+
+  .invite_code main p {
+    font-size: 1rem;
+  }
+
+  .invite_code main button {
+    border-radius: 6px;
+  }
+
+  .invite_code main button:last-child {
+    display: block;
+    background: #f4f4f4;
+    color: black;
+  }
+
+  .inviteCodeMobileCancel {
+    display: flex;
+  }
+}

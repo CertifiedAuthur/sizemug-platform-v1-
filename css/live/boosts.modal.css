@@ -1,0 +1,95 @@
+.boosts_modal {
+  z-index: 9999;
+}
+
+.streamer-sleek-modal {
+  border: 1px solid var(--live-container-bg) !important;
+  background: var(--modal-bg-color-80) !important;
+  backdrop-filter: blur(4px);
+}
+
+.boosts_modal_container {
+  width: 400px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+}
+
+/* Animation classes - same as bag modal */
+.boost_modal_item {
+  background: var(--live-darken-wrapper);
+  border-radius: var(--radius-md);
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.boost_modal_item:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.boost_modal_item button {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: var(--live-container-bg);
+  border-radius: var(--radius-sm);
+  padding: 3px 10px;
+  font-weight: 600;
+}
+
+.boost_modal_item .boost_type h4 {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.boost_modal_item .boost_type p {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.boost_modal_item .boost_type p span {
+  color: var(--sg-fire);
+  font-weight: 700;
+}
+
+.boost_modal_item button img {
+  width: 12px;
+}
+
+.boost_modal_item button span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: 10px;
+  background: var(--modal-bg-color-60);
+
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.boosts_modal_container .clip_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.boosts_modal_container .clip_header h2 {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.boosts_modal_container .clip_header button {
+  color: var(--primary-color);
+}
+
+#clipMediaModal .boost_modal_item p {
+  font-size: 12px;
+  color: var(--text-color-60);
+}

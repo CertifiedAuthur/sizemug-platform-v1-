@@ -1,0 +1,56 @@
+/********************************************** Adding Keywords **********************************************/
+.sg-tag-manager {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+
+  border: none;
+}
+
+.sg-tag-manager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.sg-tag {
+  display: inline-flex;
+  align-items: center;
+  /* background: var(--color-white-30);
+  color: var(--color-white); */
+  border-radius: 15px;
+  padding: 3px 8px;
+  font-size: 14px;
+
+  animation: scale-in 0.1s ease-in-out;
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.sg-tag .remove-sg-tag {
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.sg-tag-input,
+.sg-tag-input::placeholder {
+  border: none;
+  flex: 1;
+  min-width: 100px;
+  font-size: 14px;
+  padding: 5px 2px;
+  outline: none;
+
+  color: var(--color-white-60);
+}

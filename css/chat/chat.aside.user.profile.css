@@ -1,0 +1,263 @@
+.user_profile_container {
+  gap: 0;
+  position: relative;
+}
+
+.user_profile_container_scroll {
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  padding-top: 17px;
+
+  height: 100%;
+  padding-bottom: 6px !important;
+}
+
+.user_profile_container .user_profile_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 8px 10px;
+  position: sticky;
+  height: initial;
+}
+
+.user_head_info {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.user_head_info img {
+  width: 110px;
+  height: 110px;
+
+  border-radius: 100%;
+}
+
+#userInfoPopup .user_head_info img {
+  width: 90px;
+  height: 90px;
+}
+
+.user_head_info > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user_head_info h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: black;
+}
+
+#userInfoPopup .user_head_info h2 {
+  font-size: 1.2rem;
+  line-height: 19px;
+}
+
+.user_head_info p {
+  color: rgba(0, 0, 0, 0.389);
+}
+
+#userInfoPopup .user_head_info p {
+  line-height: 15px;
+}
+
+header .user_profile_qrcode {
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 4px;
+}
+
+/*-------------------------- Quick Profile Actions --------------------------*/
+.profile_quick_action {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile_quick_action > * {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 10px;
+  background: #f8f8f8;
+  border-radius: 0.5rem;
+
+  font-size: 0.7rem;
+  color: var(--primary-color);
+}
+
+.profile_quick_action > *:focus-visible {
+  outline: 1px solid var(--primary-color);
+}
+
+.user_scheduled_tasks,
+.user_shared_media {
+  background: #f8f8f8;
+  border-radius: 0.4rem;
+  padding: 0.6rem;
+}
+
+.user_scheduled_tasks:not(:has(h6)) {
+  padding: 0 0.6rem;
+}
+
+.user_scheduled_tasks p,
+.user_shared_media p {
+  font-size: 13px;
+  color: #9c9898b7;
+
+  padding-top: 4px;
+  font-weight: 200;
+}
+
+.user_scheduled_tasks:not(:has(h6)) li:last-child {
+  padding-bottom: 10px !important;
+}
+
+.user_scheduled_tasks--header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user_scheduled_tasks--header > * {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.user_scheduled_tasks--header > *:has(h6) {
+  gap: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.user_scheduled_tasks--body li {
+  padding: 10px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user_scheduled_tasks--body li:last-child {
+  padding-bottom: 0;
+}
+
+.user_scheduled_tasks--body li {
+  border-bottom: 1px solid #dfdddd;
+}
+
+.user_scheduled_tasks--body li:last-child {
+  border-bottom: none !important;
+  border-top: none !important;
+}
+
+.user_scheduled_tasks--body li > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user_scheduled_tasks--body .task_title {
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.user_scheduled_tasks--body .task_category {
+  padding: 3px 10px;
+  border-radius: 2rem;
+  font-size: 0.7rem;
+  text-transform: capitalize;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.user_scheduled_tasks--body .task_category.pending {
+  background: #fffaeb;
+  color: #b54708;
+}
+
+.user_scheduled_tasks--body .task_category.ongoing {
+  background: #ffecec;
+  color: #ff6363;
+}
+
+.user_scheduled_tasks--body .task_category.completed {
+  color: #027a48;
+  background: #027a4811;
+}
+
+.user_scheduled_tasks--body .task_category > span:first-child {
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+}
+
+.user_scheduled_tasks--body .task_category.pending > span:first-child {
+  background: #f79009;
+}
+
+.user_scheduled_tasks--body .task_category.ongoing > span:first-child {
+  background: #ff6363;
+}
+
+.user_scheduled_tasks--body .task_category.completed > span:first-child {
+  background: #027a48;
+}
+
+.user_scheduled_tasks .clear,
+.user_scheduled_tasks .block,
+.user_scheduled_tasks .report {
+  color: var(--global-red-color);
+}
+
+/*-------------------------- Share Media --------------------------*/
+.user_shared_lists {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  margin-top: 10px;
+}
+
+.user_shared_lists img {
+  min-width: 8rem;
+  height: 6rem;
+  border-radius: 0.3rem;
+}
+
+.no_common_group .heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

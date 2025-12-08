@@ -1,0 +1,334 @@
+/* Mind map toolbar positioning */
+#whiteboardMindMapEditorContainer {
+  background: rgba(16, 24, 40, 0.95) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transform: translateX(-50%) !important;
+}
+
+/* Ensure mind map nodes can receive pointer events */
+.mindmap-node,
+.mindmap-plus-button {
+  pointer-events: auto;
+}
+
+/* Mind map text editor styles */
+.mindmap-text-editor {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  cursor: text;
+}
+
+.mindmap-text-editor:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px #8a5cf61f;
+}
+
+.mindmap-text-editor div {
+  outline: none;
+}
+
+/* Rich text formatting support */
+.mindmap-text-editor b,
+.mindmap-text-editor strong {
+  font-weight: bold;
+}
+
+.mindmap-text-editor i,
+.mindmap-text-editor em {
+  font-style: italic;
+}
+
+.mindmap-text-editor u {
+  text-decoration: underline;
+}
+
+.mindmap-text-editor s,
+.mindmap-text-editor strike {
+  text-decoration: line-through;
+}
+
+/* Prevent text selection outside editor when editing */
+body.mindmap-editing {
+  user-select: none;
+}
+
+body.mindmap-editing .mindmap-text-editor {
+  user-select: text;
+}
+
+/* Mind map text editor overlay styles */
+.mindmap-text-editor-overlay {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  cursor: text;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.mindmap-text-editor-overlay:focus {
+  outline: none;
+}
+
+/* Edit indicator styles */
+.mindmap-edit-indicator {
+  animation: mindmap-edit-pulse 2s ease-in-out infinite;
+}
+
+@keyframes mindmap-edit-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* Rich text formatting support for overlay */
+.mindmap-text-editor-overlay b,
+.mindmap-text-editor-overlay strong {
+  font-weight: bold;
+}
+
+.mindmap-text-editor-overlay i,
+.mindmap-text-editor-overlay em {
+  font-style: italic;
+}
+
+.mindmap-text-editor-overlay u {
+  text-decoration: underline;
+}
+
+.mindmap-text-editor-overlay s,
+.mindmap-text-editor-overlay strike {
+  text-decoration: line-through;
+}
+
+.mind-map-dropdown {
+  position: absolute;
+  bottom: 130%;
+
+  background: #101828;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px !important;
+  padding: 5px 6px;
+}
+
+/* connector-line-thickness */
+.connector-lines-thickness {
+  height: 45px !important;
+}
+
+.mind-map-dropdown-item {
+  width: 45px;
+  height: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 7px;
+
+  transition: background 0.2s ease-in-out;
+  background: transparent;
+}
+
+.mind-map-dropdown-item:hover {
+  background: #ffffff10;
+}
+
+.mind-map-dropdown-item.active {
+  background: var(--primary-color);
+}
+
+.mind-map-dropdown-item span {
+  width: 100%;
+  background: #ffffff;
+}
+
+.connector-lines-thickness .mind-map-dropdown-item:first-child span {
+  height: 2px;
+}
+
+.connector-lines-thickness .mind-map-dropdown-item:nth-child(2) span {
+  height: 4px;
+}
+
+.connector-lines-thickness .mind-map-dropdown-item:nth-child(3) span {
+  height: 6px;
+}
+
+.connector-lines-thickness .mind-map-dropdown-item:last-child span {
+  height: 8px;
+}
+
+/* mind-map-node-shape-type */
+.mind-map-node-shape-type {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  height: 80px !important;
+  width: 80px !important;
+  gap: 2px;
+}
+
+.current_picker_color_border {
+  width: 20px !important;
+  height: 20px !important;
+  display: flex;
+  flex-direction: row;
+  border-radius: 100%;
+  border: 1px solid red;
+  margin-right: 3px;
+}
+
+.node_type_lists {
+  display: flex !important;
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.node_type_lists {
+  width: 80px !important;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.type_label {
+  color: #ffffff60;
+  font-size: 10px;
+  font-weight: 300;
+}
+
+/* Dash border toggle button styles */
+#nodeDashBorderToggle {
+  transition: all 0.2s ease-in-out;
+  border-radius: 8px;
+}
+
+#nodeDashBorderToggle.active {
+  background: var(--primary-color) !important;
+}
+
+#nodeDashBorderToggle.active:hover {
+  background: var(--primary-color-dark, --primary-color) !important;
+}
+
+#connectorLineTypeDropdown {
+  width: 80px !important;
+}
+
+#connectorLineThicknessDropdown {
+  width: 230px !important;
+}
+/* Connector source button styles */
+#mindMapConnectorSource {
+  transition: all 0.2s ease-in-out;
+}
+
+#mindMapConnectorSource:hover {
+  background: rgba(139, 92, 246, 0.2) !important;
+}
+
+#mindMapConnectorSource.source-center {
+  background: transparent !important;
+}
+
+#mindMapConnectorSource.source-edge {
+  background: rgba(139, 92, 246, 0.3) !important;
+}
+
+#mindMapConnectorSource.source-smart {
+  background: var(--primary-color, #8b5cf6) !important;
+}
+
+#mindMapConnectorSource.source-smart:hover {
+  background: var(--primary-color-dark, #7c3aed) !important;
+}
+/* Shape toolkit item styles */
+.shape-item {
+  transition: all 0.2s ease;
+}
+
+.shape-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.shape-item.show-handles {
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+  border-color: #8b5cf6 !important;
+}
+
+.shape-item.locked {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.shape-item .resize-handle {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.shape-item.show-handles .resize-handle {
+  opacity: 1;
+}
+
+.shape-item-container {
+  transition: padding 0.2s ease;
+}
+
+.shape-content {
+  transition: all 0.2s ease;
+}
+/* Confetti and emoji effects */
+@keyframes confetti-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-2px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+/* Emoji popper item hover effects */
+.send_emoji_container li {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.send_emoji_container li:hover {
+  background: rgba(139, 92, 246, 0.1);
+  transform: scale(1.05);
+}
+
+.send_emoji_container li:active {
+  transform: scale(0.95);
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+  pointer-events: none !important;
+  z-index: 10000 !important;
+}

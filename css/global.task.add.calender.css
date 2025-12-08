@@ -1,0 +1,124 @@
+.task_modal_add_calender {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: 99999999999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: Modal 0.2s ease;
+}
+
+.task_add_calender_modal {
+  background: #ffff;
+  border-radius: 16px;
+  width: 560px;
+}
+
+.task_add_calender_modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d7d7d7b7;
+}
+
+.task_add_calender_modal_header h1 {
+  width: 100%;
+  text-align: center !important;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+.task_modal_add_calender .schedule_date {
+  padding: 20px;
+}
+
+.task_modal_add_calender .schedule_date h3 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #344054;
+  font-weight: 500;
+}
+
+.task_modal_add_calender_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.modal_footer,
+.task_add_calender_footer {
+  width: 100%;
+  padding: 15px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #d7d7d7b7;
+}
+
+.task_add_calender_footer {
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task_add_calender_footer > button {
+  width: 100%;
+  background: #8837e9;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 10px;
+  color: #ffff;
+}
+
+.task_add_calender_footer .inline_btn {
+  display: flex;
+  gap: 10px;
+}
+
+.task_add_calender_footer .inline_btn button {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.task_add_calender_footer .inline_btn button:first-child {
+  color: #000000;
+  background: #f4f4f4;
+}
+
+.task_add_calender_footer .inline_btn button:last-child {
+  color: #ffff;
+  background: #000000;
+}
+
+#add_to_calender {
+  border: 1px solid #f3f3f3;
+  padding: 10px;
+  border-radius: 10px;
+
+  position: relative;
+}
+
+#add_to_calender > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+}
+
+.add_to_calender {
+  position: absolute;
+}
+
+.task_modal_add_calender_mobile_cancel {
+  display: none;
+}

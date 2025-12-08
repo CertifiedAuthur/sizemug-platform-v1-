@@ -1,0 +1,31 @@
+.privacy-container {
+  padding: 10px 15px;
+  background: #fafafa;
+
+  position: relative;
+  z-index: 2;
+}
+
+.privacy-container-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.privacy-container-header h2 {
+  color: #8837e9;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.privacy-container-content {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 25px;
+  color: #808081;
+}
+
+.privacy-container-content a {
+  color: #1c64f2;
+}

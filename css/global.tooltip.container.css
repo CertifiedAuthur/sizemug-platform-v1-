@@ -1,0 +1,19 @@
+#global-tooltip {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  white-space: nowrap;
+  padding: 6px 10px;
+  font-size: 12px;
+  background: #000000;
+  color: #fff;
+  border-radius: 4px;
+  z-index: 9999;
+  transform: translate(-50%, -8px);
+}
+
+#global-tooltip[data-show="true"] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}

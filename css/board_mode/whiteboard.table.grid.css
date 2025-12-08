@@ -1,0 +1,62 @@
+/* Grid Table Styles */
+.grid-table-item {
+  position: absolute;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.grid-table-item.show-handles {
+  z-index: 100;
+}
+
+.grid-table-item.locked {
+  cursor: default !important;
+}
+
+.grid-cell {
+  transition: outline 0.2s;
+}
+
+.grid-cell:hover {
+  background-color: #6366f10d;
+}
+
+.grid-selector-popup {
+  transition: opacity 0.2s;
+}
+
+.grid-selector-popup.hidden {
+  display: none;
+  opacity: 0;
+}
+
+/* Resize handles */
+.show-handles .resize-handle {
+  opacity: 1;
+}
+
+/* Grid Editor Toolbar */
+#whiteboardEditorWrapperGrid button {
+  padding: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+/***** -----------------------  ---------------------- *****/
+button.add-handler {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+
+  background: var(--primary-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+
+  position: absolute;
+}

@@ -1,0 +1,187 @@
+.whiteboard_editor_flip_card {
+  height: 2rem;
+}
+
+:root {
+  --flip-width: 280px;
+  --flip-height: 160px;
+  --flip-bg: #ffffff;
+  --flip-back-bg: #f8f9fa;
+  --flip-border: #e1e5e9;
+  --flip-border-width: 1px;
+  --flip-border-radius: 8px;
+  --flip-padding: 16px;
+  --flip-font-size: 14px;
+}
+
+/* container for each card (position/transform still set by JS) */
+.flip-card-item {
+  position: absolute; /* left/top come from JS */
+  box-sizing: border-box;
+  user-select: none;
+  touch-action: none;
+  pointer-events: auto;
+  perspective: 1000px;
+  transform-origin: 0 0;
+  width: var(--flip-width); /* default visual width */
+  height: var(--flip-height); /* default visual height */
+  padding: 4px;
+  border-radius: 10px;
+  padding-left: 15px;
+  background: red;
+}
+
+/* inner 3D container */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+/* front and back sides */
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: var(--flip-border-width) solid var(--flip-border);
+  border-radius: var(--flip-border-radius);
+  background-color: var(--flip-bg);
+  display: flex;
+  flex-direction: column;
+  padding: var(--flip-padding);
+  box-sizing: border-box;
+  color: #333;
+  font-size: var(--flip-font-size);
+  line-height: 1.4;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* back side rotated by default */
+.flip-card-back {
+  transform: rotateY(180deg);
+  background-color: var(--flip-back-bg);
+}
+
+/* when dataset.flipped="true" on wrap, rotate inner */
+.flip-card-item[data-flipped="true"] .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* content block */
+.flip-card-content {
+  outline: none;
+  flex: 1;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* click-to-flip button */
+.flip-button {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: #ffffffe6;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #666;
+  transition: background-color 0.15s ease;
+  user-select: none;
+}
+
+/* hover handled via css */
+.flip-button:hover {
+  background-color: #f0f0f0f2;
+}
+
+/* resize handles container - hidden by default */
+.handles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: none;
+}
+
+/* show handles when selected */
+.flip-card-item.show-handles .handles {
+  display: block;
+  pointer-events: none; /* container itself non-interactive; children override */
+}
+
+/* visible when card shows handles */
+.flip-card-item.show-handles .resize-handle {
+  opacity: 1;
+}
+
+/* named handle positions */
+.resize-nw {
+  left: -4px;
+  top: -4px;
+  cursor: nw-resize;
+}
+.resize-ne {
+  right: -4px;
+  top: -4px;
+  cursor: ne-resize;
+}
+.resize-sw {
+  left: -4px;
+  bottom: -4px;
+  cursor: sw-resize;
+}
+.resize-se {
+  right: -4px;
+  bottom: -4px;
+  cursor: se-resize;
+}
+
+/* editing state */
+.flip-card-item.editing {
+  box-shadow: 0 0 0 3px #007bff12;
+}
+
+/* locked state */
+.flip-card-item.locked {
+  cursor: default !important;
+  opacity: 0.95;
+  pointer-events: auto;
+}
+
+/* small utilities */
+.flip-card-item .flip-button svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+#dropDownMenuForFlipCard ~ .editor_dropdown_menu {
+  display: none;
+}
+
+#dropDownMenuForFlipCard[aria-expanded="true"] ~ .editor_dropdown_menu {
+  display: block !important;
+}

@@ -1,0 +1,330 @@
+:root {
+  --follow-container-width: 38rem;
+}
+
+.follow-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#followOverlayWrapper {
+  position: relative;
+  background: white;
+  border-radius: 14px;
+  width: var(--follow-container-width);
+}
+
+#followOverlayWrapper > #followModalMobileClose {
+  position: absolute;
+  top: -4rem;
+  right: 1rem;
+  z-index: var(--overlay-z-index);
+
+  background: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+main.follow_container {
+  background: #ffff;
+  border-radius: 16px;
+}
+
+main.follow_container .follow_modal_footer {
+  width: 100%;
+  padding: 15px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #d7d7d7b7;
+}
+
+main.follow_container .follow_modal_footer button {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+main.follow_container .follow_modal_footer button:first-child {
+  color: #000000;
+  background: #f4f4f4;
+}
+
+main.follow_container .follow_modal_footer button:last-child {
+  color: #ffff;
+  background: #000000;
+}
+
+main.follow_container .follow_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d7d7d7b7;
+  padding: 15px 10px 0px 10px;
+}
+
+main.follow_container .modal_header button {
+  padding: 10px;
+  text-transform: capitalize;
+  color: #0000006a;
+}
+
+main.follow_container .modal_header:has(input) {
+  padding: 20px 10px 0px 10px;
+}
+
+main.follow_container .modal_header button {
+  padding: 10px;
+  text-transform: capitalize;
+  color: #0000006a;
+}
+
+main.follow_container .modal_header form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+main.follow_container .modal_header input {
+  width: 130px;
+  color: #373738e8;
+}
+
+main.follow_container .follow_modal_lists {
+  height: 350px;
+  overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 20px;
+}
+
+main.follow_container .follow_modal_lists {
+  color: black;
+}
+
+main.follow_container .follow_list_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0px;
+  cursor: pointer;
+}
+
+main.follow_container .follow_users {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+main.follow_container .follow_list_row > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+main.follow_container .follow_list_row h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #373738f0;
+}
+
+main.follow_container .follow_list_row .select--all {
+  font-weight: 400;
+  color: #373738ad;
+}
+
+main.follow_container .follow_list_row .checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+main.follow_container .follow_list_row .checkbox img {
+  width: 100%;
+  height: 100%;
+}
+
+main.follow_container .follow_list_row img {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.follow_modal_lists .follow_modal_footer {
+  border-top: 1px solid #f3f3f3;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.follow_modal_lists .follow_modal_footer button {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.follow_modal_lists .follow_modal_footer button:first-child {
+  background: #f4f4f4;
+}
+
+.follow_modal_lists .follow_modal_footer button:last-child {
+  background-color: #000000;
+  color: #ffff;
+}
+
+.follow_modal_lists .modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px 0px 10px;
+
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.follow_modal_lists .modal_header button {
+  padding: 0.7rem 1rem;
+  font-size: 15px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: #00000085;
+  transition: none;
+}
+
+.follow_modal_lists .modal_header button.active {
+  color: #000000;
+  border-bottom: 2.2px solid #000000;
+}
+
+.follow_modal_lists .modal_header form {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.follow_modal_lists .follow_modal_lists {
+  padding: 1rem;
+  height: 300px;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.follow_modal_lists .follow_modal_lists button {
+  max-width: 20px;
+  max-height: 20px;
+  border: 1px solid #f3f3f3;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.follow_modal_lists button.active {
+  background: #8837e9;
+  border: none;
+}
+
+.follow_users {
+  margin-top: 10px;
+}
+
+.follow_users > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.follow_modal_lists .follow_modal_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.follow_modal_row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0px;
+  cursor: pointer;
+}
+
+.follow_modal_lists .follow_modal_row div {
+  display: flex;
+  align-items: center;
+  column-gap: 15px;
+}
+
+.follow_modal_lists .follow_modal_row img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
+.follow_container .follow_header input {
+  width: 130px;
+  color: #373738e8;
+}
+
+.follow_container .follow_header button {
+  padding: 10px;
+  text-transform: capitalize;
+  color: #0000006a;
+  transition: color 0.4s ease;
+}
+
+.follow_container .follow_header form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.follow_modal_header_switch_button button.active,
+.follow_active--btn {
+  border-bottom: 2px solid #000000;
+  color: #000000 !important;
+}
+
+.follow_modal_header_switch_button button:hover {
+  color: #000000 !important;
+}
+
+.follow_modal_row .checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+@media screen and (max-width: 667px) {
+  .follow_modal_lists {
+    width: 100%;
+    align-self: flex-end;
+    border-radius: 10px 10px 0 0;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .follow_modal_lists {
+    height: auto;
+  }
+}

@@ -1,0 +1,9 @@
+.content_area main {
+  padding: 1rem !important;
+  height: calc(100dvh - var(--header-nav-height));
+  overflow-y: auto;
+}
+
+.dropped-hidden {
+  display: none !important;
+}

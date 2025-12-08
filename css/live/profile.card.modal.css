@@ -1,0 +1,134 @@
+/* profile-overlay.css */
+:root {
+  --bg-card: #1f2937;
+  --bg-btn-hover: #374151;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --badge-ring: #fbbf24;
+}
+
+.profile_card_modal {
+  position: absolute;
+  z-index: -1;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.profile_card_modal.show {
+  z-index: 999;
+  opacity: 1;
+  visibility: visible;
+}
+
+.profile-card {
+  position: relative;
+  width: 320px;
+  background: var(--modal-bg-color-80);
+  border-radius: 20px;
+  overflow: hidden;
+  color: var(--text-primary);
+  border: 1px solid var(--live-container-bg);
+  backdrop-filter: blur(4px);
+  padding: 10px;
+}
+
+.profile-card .action-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-card .card-content {
+  margin-top: -10px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-card .big_buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.profile-card .big_buttons button {
+  flex: 1;
+  padding: 6px 0;
+  font-size: 0.875rem;
+  font-weight: 400;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.big_buttons button.msg-btn {
+  background: var(--live-container-bg);
+}
+
+.big_buttons button.follow-btn {
+  background: linear-gradient(to right, #8837e9, #373fd7);
+  color: white;
+}
+
+.profile_stats {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.profile_stats .stat {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.profile_stats .stat span:first-child {
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+.profile_stats .stat span:last-child {
+  color: var(--text-gray-70);
+  font-weight: 300;
+}
+
+.profile-card .description {
+  color: var(--text-color-60);
+}
+
+.profile-card .name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.profile-card .name-row .name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.profile-card .name-row .growth {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--live-darken-wrapper);
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.growth-number {
+  font-size: 0.7rem;
+}

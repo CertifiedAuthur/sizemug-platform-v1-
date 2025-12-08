@@ -1,0 +1,51 @@
+.selection_count_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  font-size: 16px;
+}
+
+.selection_count_container .selected_count {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  color: var(--primary-color);
+}
+
+.selection_count_container.selectionForwardCountContainer .selected_count {
+  justify-content: flex-start;
+}
+
+#cancelForwardMessages {
+  padding: 2px 15px;
+  background: #d9d9d98a;
+  border-radius: 15px;
+}
+
+.delete_selection {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.delete_selection span {
+  color: black;
+  padding-right: 2rem;
+
+  font-size: inherit;
+}
+
+.delete_selection button {
+  font-size: inherit;
+  padding: 3px 15px;
+  background: #f4f4f4;
+  border-radius: 20px;
+
+  color: var(--global-red-color);
+  white-space: nowrap;
+  font-size: 13px;
+}

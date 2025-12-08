@@ -1,0 +1,61 @@
+/* Empty Task List */
+.main_tasks_list_empty {
+  width: 100%;
+  height: 70%;
+  padding: 1rem;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 1.6rem;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.main_tasks_list_empty h2 {
+  font-size: 1rem;
+  color: #000000;
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.main_tasks_list_empty p {
+  color: #8f9099d5;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.main_tasks_list_empty button {
+  width: 80%;
+  background: #8837e9;
+  color: #ffff;
+  padding: 10px 17px;
+  border-radius: 10px;
+  font-size: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media screen and (max-width: 1024px) {
+  .main_tasks_list_empty {
+    width: 40%;
+    margin: auto;
+    padding: 4rem 0;
+  }
+
+  .main_tasks_list_empty.chatPage {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .main_tasks_list_empty {
+    width: 60%;
+    padding: 4rem 0;
+    padding-bottom: 10rem;
+  }
+}

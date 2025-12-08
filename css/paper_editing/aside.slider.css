@@ -1,0 +1,148 @@
+.aside_container {
+  width: 15rem;
+  height: 100%;
+  padding: 15px 10px;
+
+  border-left: 1px solid #d1d5db;
+
+  color: #33363f;
+  overflow-y: auto;
+  padding-bottom: 5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+
+  transition: transform 0.3s ease;
+}
+
+.aside_container.collapsed {
+  transform: translateX(100%);
+}
+
+.aside_container #search {
+  background: #f8fafc;
+  border: 1px solid var(--border-color);
+  color: #3440546a;
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.1rem;
+}
+
+.aside_lists .aside_list:not(:last-child),
+.aside_container #search {
+  margin-bottom: 15px;
+}
+
+.aside_list .top_part {
+  height: 10rem;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.aside_list .top_part img,
+.aside_list .top_part video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.aside_item_video[data-mode="idle"] svg.play_icon,
+.aside_item_video[data-mode="play"] svg.pause_icon,
+.aside_item_video[data-mode="pause"] svg.play_icon {
+  display: block;
+}
+
+.aside_item_video[data-mode="play"] svg.play_icon,
+.aside_item_video[data-mode="idle"] svg.pause_icon,
+.aside_item_video[data-mode="pause"] svg.pause_icon {
+  display: none;
+}
+
+.aside_list .top_part .position_item {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: white;
+  font-size: 0.9rem;
+}
+
+.aside_list .top_part .aside_item_video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 4px;
+  background: #000000ff;
+  border-radius: 100%;
+}
+
+.top_part .position_item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.aside_list .bottom_part {
+  padding-top: 7px;
+}
+
+.aside_list .bottom_part h3 {
+  font-size: 1rem;
+  font-weight: 500;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.bottom_part .reaction_container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 6px;
+  font-size: 0.9rem;
+}
+
+.reaction_container .reaction {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.reaction_container .reaction button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+#heart_reaction svg.active {
+  fill: #c81e1e;
+}
+
+#heart_reaction svg.active path {
+  stroke: none;
+}
+
+@media screen and (max-width: 667px) {
+  .aside_container {
+    display: none;
+  }
+}

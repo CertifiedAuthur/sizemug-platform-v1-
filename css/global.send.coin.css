@@ -1,0 +1,154 @@
+.global_send_coin_modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: 2000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.global_send_coin_modal.dark {
+  position: fixed;
+}
+
+.send_coin_container {
+  width: 25rem;
+
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.global_send_coin_modal.dark .send_coin_container {
+  background: #191b23;
+}
+
+.send_coin_container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.send_coin_container header * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.send_coin_container header div.balance span:last-child {
+  font-weight: 600;
+}
+
+.send_coin_container header div.title span:last-child {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.send_coin_container header div.title img {
+  width: 20px;
+  height: 20px;
+}
+
+.send_coin_container footer {
+  display: flex;
+  gap: 10px;
+
+  padding: 0;
+}
+
+.send_coin_container footer button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.send_coin_container footer button:first-child {
+  border: 1px solid #444954;
+  color: #000000;
+  background: transparent;
+}
+
+.global_send_coin_modal.dark .send_coin_container footer button:first-child {
+  color: #ffffff;
+}
+
+.send_coin_container footer button:last-child {
+  border: 1px solid #f99335;
+  color: #ffffff;
+  background: #f99335;
+}
+
+.send_coin_container .select_amount p {
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.send_coin_container .select_amount .amounts {
+  padding-top: 10px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.send_coin_container .select_amount .amounts > div {
+  height: 4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 1.6rem;
+  font-weight: 700;
+
+  border-width: 2px;
+  border-style: solid;
+
+  border-color: #bdbdbd;
+
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.send_coin_container .select_amount .amounts > div:hover,
+.send_coin_container .select_amount .amounts > div.active {
+  border-color: #f99335;
+  color: #f99335;
+}
+
+.send_coin_container .select_amount .amounts > div span:last-child {
+  font-weight: 300;
+  font-size: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(10px);
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+}
+
+.send_coin_container .select_amount .amounts > div:hover span:last-child,
+.send_coin_container .select_amount .amounts > div.active span:last-child {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  color: #000000;
+}
+
+.global_send_coin_modal.dark .send_coin_container .select_amount .amounts > div:hover span:last-child,
+.global_send_coin_modal.dark .send_coin_container .select_amount .amounts > div.active span:last-child {
+  color: #ffffff;
+}

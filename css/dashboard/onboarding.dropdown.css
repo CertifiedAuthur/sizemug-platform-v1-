@@ -1,0 +1,149 @@
+.form_item_outline.active {
+  border: 3px solid #b280ef92;
+}
+
+.form_item_select_option {
+  position: absolute;
+  border: 1px solid #f2f4f7;
+  border-radius: 15px;
+  background: white;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  max-height: 200px;
+  box-shadow: 0 10px 10px #00000012;
+  overflow-y: auto;
+  display: none;
+
+  animation: SelectOption 0.3s ease-in-out;
+  scrollbar-width: thin;
+  scrollbar-color: #cbcbcb #e0e0e0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation-fill-mode: forwards;
+  transform: translate(0) !important;
+  top: 4rem;
+}
+
+.form_item_select_option.active,
+.dropdown_with_search.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes SelectOption {
+  from {
+    transform: translateY(-10px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.form_item_select_option .option {
+  padding: 10px 15px;
+  font-weight: 500;
+  font-size: 0.8rem;
+  transition: all 0.4s ease;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.form_item_select_option .option:first-child {
+  border-radius: 15px 15px 0 0;
+}
+
+.form_item_select_option .option:last-child {
+  border-radius: 0 0 15px 15px;
+}
+
+.form_item_select_option .option.active {
+  background: #f9fafb;
+}
+
+.form_item_select_option .option:hover {
+  background: #f9fafb;
+}
+
+.form_item_select_option .option span:last-child {
+  display: none;
+}
+
+.form_item_select_option .option.active span:last-child {
+  display: inline;
+}
+
+#pickerYourBirthday--wrapper {
+  position: relative;
+}
+
+#pickerYourBirthday {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pickerYourBirthday {
+  position: absolute;
+}
+
+.dropdown_with_search {
+  position: absolute;
+  top: 3rem !important;
+  left: 0;
+
+  border: 1px solid #f2f4f7;
+  border-radius: 15px;
+  background: white;
+  z-index: 99;
+  width: 100%;
+  max-height: 250px;
+  box-shadow: 0 10px 10px #00000012;
+  overflow-y: auto;
+  display: noen;
+
+  animation: SelectOption 0.3s ease-in-out;
+  scrollbar-width: thin;
+  scrollbar-color: #cbcbcb #e0e0e0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation-fill-mode: forwards;
+}
+
+.dropdown_form {
+  padding: 0.7rem;
+}
+
+.dropdown_form form {
+  padding: 5px;
+  background: #f4f4f5;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown_items {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown_items > div {
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  padding: 0.7rem 0.8rem;
+}
+
+.dropdown_items > div:hover {
+  background: #f9fafb;
+}
+
+@media screen and (max-width: 667px) {
+  .dropdown_with_search {
+    max-height: 300px;
+  }
+}

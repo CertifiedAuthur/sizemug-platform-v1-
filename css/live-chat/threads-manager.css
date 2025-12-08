@@ -1,0 +1,181 @@
+/* ============================================
+   Threads Manager Styles
+   ============================================ */
+
+.threads-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.thread-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 0px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.thread-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.thread-hash {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7d8faa;
+  flex-shrink: 0;
+}
+
+.thread-details {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.thread-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thread-space {
+  font-size: 12px;
+  color: #7d8faa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thread-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.thread-views {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+
+  font-weight: 600;
+  background: linear-gradient(to top right, #ff0000, #ffae00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.live-chat-sidebar[aria-expanded="true"] .thread-views {
+  display: none;
+}
+
+.thread-views-count {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f04438;
+}
+
+.thread-unread-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 18px;
+  padding: 0 8px;
+  background: #f04438;
+  color: #ffffff !important;
+  font-size: 10px;
+  font-weight: 400;
+  border-radius: 16px;
+}
+
+/* Empty state */
+.threads-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.threads-empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin: 0 0 8px 0;
+}
+
+.threads-empty-desc {
+  font-size: 14px;
+  color: #7d8faa;
+  margin: 0 0 16px 0;
+}
+
+/* Animation for new threads */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.thread-item {
+  animation: slideInLeft 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .thread-name {
+    font-size: 13px;
+  }
+
+  .thread-space {
+    font-size: 11px;
+  }
+
+  .thread-views-count {
+    font-size: 12px;
+  }
+
+  .thread-unread-badge {
+    min-width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+}
+
+/* Active/selected state */
+.thread-item.active {
+  background: #20243a;
+  border-color: #01c74a;
+}
+
+/* Read state (no unread badge) */
+.thread-item:not(:has(.thread-unread-badge)) {
+  opacity: 0.7;
+}
+
+.thread-item:not(:has(.thread-unread-badge)):hover {
+  opacity: 1;
+}

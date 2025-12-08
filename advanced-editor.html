@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Sizemug</title>
+    <link rel="shortcut icon" type="image/icon" href="./icons/favicon-sizemug.svg" />
+
+    <script>
+      const HIDDEN = "editor-hidden";
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./advancedEditorAssests/js/script.js"></script>
+    <script defer src="/scripts/select_language.js"></script>
+    <script defer src="./scripts/logout.js"></script>
+    <script defer src="/scripts/inviteUserCode.js"></script>
+    <script defer src="/scripts/flashMessage.js"></script>
+    <script defer src="/scripts/flashMessage.js"></script>
+
+    <!-- General Overlay handler -->
+    <script defer src="./scripts/general.overlay.handler.js"></script>
+
+    <style type="text/css">
+      [ng-cloak]#splash {
+        display: block !important;
+      }
+      [ng-cloak] {
+        display: none;
+      }
+      #splash {
+        display: none;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        width: 6em;
+        height: 6em;
+        overflow: hidden;
+        border-radius: 100%;
+        z-index: 0;
+      }
+      @-webkit-keyframes fade {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0.2;
+        }
+      }
+      @keyframes fade {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0.2;
+        }
+      }
+      @-webkit-keyframes rotate {
+        from {
+          -webkit-transform: rotate(0deg);
+        }
+        to {
+          -webkit-transform: rotate(360deg);
+        }
+      }
+      @keyframes rotate {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      #splash::after,
+      #splash::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      #splash::before {
+        background: linear-gradient(to right, green, #ff0);
+        -webkit-animation: rotate 2.5s linear infinite;
+        animation: rotate 2.5s linear infinite;
+      }
+      #splash::after {
+        background: linear-gradient(to bottom, red, #00f);
+        -webkit-animation: fade 2s infinite alternate, rotate 2.5s linear reverse infinite;
+        animation: fade 2s infinite alternate, rotate 2.5s linear reverse infinite;
+      }
+      #splash-spinner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        border-radius: 100%;
+        box-sizing: border-box;
+        border-left: 0.5em solid transparent;
+        border-right: 0.5em solid transparent;
+        border-bottom: 0.5em solid rgba(255, 255, 255, 0.3);
+        border-top: 0.5em solid rgba(255, 255, 255, 0.3);
+        -webkit-animation: rotate 0.8s linear infinite;
+        animation: rotate 0.8s linear infinite;
+      }
+    </style>
+
+    <link rel="stylesheet" href="advancedEditorAssests/css/main.css?v23" />
+    <link rel="stylesheet" href="advancedEditorAssests/css/additionalCss.css" />
+    <link rel="stylesheet" href="./css/select_language.css" />
+    <link rel="stylesheet" href="./css/invite.friend.modal.css" />
+    <link rel="stylesheet" href="./css/global.discard.modal.css" />
+    <link rel="stylesheet" href="./css/flashMessage.css" />
+    <!-- Global logout CSS -->
+    <link rel="stylesheet" href="./css/global.logout.modal.css" />
+
+    <link rel="stylesheet" href="advancedEditorAssests/css/newEditor.css" />
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body id="editor" ng-app="ImageEditor" ng-strict-di>
+    <div class="header">
+      <div class="logo">
+        <img class="user-avatar" src="./icons/favicon-sizemug.svg" />
+        <span>Sizemug</span>
+      </div>
+
+      <div class="header-right">
+        <!-- <img src="./advancedImagesAndIcons/rotate-left.svg" />
+        <img src="./advancedImagesAndIcons/rotate-right.svg" />
+        <img src="./advancedImagesAndIcons/360-degree.svg" />
+
+        <div class="rotate-icons">
+          <i class="mdi mdi-rotate-left" ng-click="rotateProper(-90)"></i>
+          <i class="mdi mdi-rotate-right" ng-click="rotateProper(90)"></i>
+        </div> -->
+
+        <div>
+          <section id="top-panel" class="md-whiteframe-z1" ng-controller="TopPanelController">
+            <md-button ng-click="openUploadDialog($event)" ng-if="!getParam('hideOpenButton')" class="head-button"><img src="./advancedImagesAndIcons/new.svg" /><span>NEW</span></md-button>
+            <!-- <md-button
+              ng-class="{ inactive: !historyPanelOpen }"
+              ng-click="toggleRightPanel('history', $event)"
+              >History</md-button
+            > -->
+            <!-- <md-button
+              ng-class="{ inactive: !objectsPanelOpen }"
+              ng-click="toggleRightPanel('objects', $event)"
+              >Layers</md-button
+            > -->
+            <md-button ng-click="openSaveDialog($event)" class="md-primary md-raised head-button"><img src="./advancedImagesAndIcons/Save.svg" /><span>Save OR DOWNLOAD</span></md-button>
+          </section>
+        </div>
+        <div class="account" id="show_header_modal">
+          <img src="./icons/Avatar.svg" />
+          <img src="./advancedImagesAndIcons/Down-arrow.svg" />
+        </div>
+      </div>
+    </div>
+
+    <!-- header modal -->
+    <div id="header_modal_list" class="header_modal">
+      <div class="header_modal_content">
+        <div class="head">
+          <div class="holder_name">
+            <span>Olivia Ryne</span>
+            <img class="user-avatar" src="./icons/Avatar.svg" />
+          </div>
+          <a href="/crypto-dashboard.html" class="holder_assest">
+            <img src="./advancedImagesAndIcons/dollar.svg" />
+            <p>Coins: <span>3,400</span></p>
+          </a>
+        </div>
+        <div class="header_list">
+          <a href="/pricing.html">
+            <img src="./advancedImagesAndIcons/Award.svg" />
+            <h3>Upgrade to Pro</h3>
+          </a>
+        </div>
+        <hr />
+        <div class="header_list">
+          <a href="/campaign.html">
+            <img src="./advancedImagesAndIcons/Status.svg" />
+            <h3>Campaign</h3>
+          </a>
+        </div>
+        <hr />
+        <div class="header_list">
+          <a href="/account-profile.html">
+            <img src="./advancedImagesAndIcons/User.svg" />
+            <h3>View Profile</h3>
+          </a>
+        </div>
+        <div class="header_list">
+          <a href="/account-settings.html">
+            <img src="./advancedImagesAndIcons/Setting.svg" />
+            <h3>Profile Settings</h3>
+          </a>
+        </div>
+        <div class="header_list get-verified">
+          <a href="/get-verified.html">
+            <img src="./advancedImagesAndIcons/get-verified.svg" />
+            <h3>Get Verified</h3>
+          </a>
+        </div>
+        <hr />
+        <div class="header_list">
+          <a href="https://sizemug-community.vercel.app/">
+            <img src="./advancedImagesAndIcons/Two-user.svg" />
+            <h3>Community</h3>
+          </a>
+        </div>
+        <div class="header_list" id="invite_User_With_Code">
+          <a href="#">
+            <img src="./advancedImagesAndIcons/Invite Icon.svg" />
+            <h3>Invite Friends</h3>
+          </a>
+        </div>
+        <hr />
+        <div class="header_list" id="logout--btn">
+          <a href="#">
+            <img src="./advancedImagesAndIcons/Arrow - Left.svg" />
+            <h3>Log Out</h3>
+          </a>
+        </div>
+        <div class="header_list switch-account">
+          <a href="#">
+            <img src="./advancedImagesAndIcons/Arrow - Swap.svg" />
+            <h3>Switch Account</h3>
+          </a>
+        </div>
+        <hr />
+
+        <div class="select-language" id="select-language">
+          <a href="#" class="selected">
+            <img src="/icons/flags/us.svg" alt="" />
+            <span>English (US)</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="expanded_icon" width="1.8em" height="1.8em" viewBox="0 0 24 24">
+              <path fill="none" stroke="#CCCCCC" stroke-width="2" d="m18 9l-6 6l-6-6" />
+            </svg>
+          </a>
+
+          <div id="select_language_dropdown" class="select_language_dropdown editor-hidden" aria-expanded="false">
+            <div class="wrapper">
+              <form>
+                <!-- prettier-ignore -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="#CCCCCC" d="M10.5 2a8.5 8.5 0 1 0 5.262 15.176l3.652 3.652a1 1 0 0 0 1.414-1.414l-3.652-3.652A8.5 8.5 0 0 0 10.5 2M4 10.5a6.5 6.5 0 1 1 13 0a6.5 6.5 0 0 1-13 0"/></g></svg>
+                <input type="text" placeholder="Search" />
+              </form>
+            </div>
+
+            <ol>
+              <!-- COUNTRY ITEM -->
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Language Modal -->
+
+    <div id="language-modal" class="header_modal language-modal">
+      <div class="language-option">
+        <div class="search">
+          <img loading="lazy" src="./advancedImagesAndIcons/Search.svg" class="size-6" />
+          <input type="text" id="search" placeholder="Search..." />
+        </div>
+        <ul>
+          <li>
+            <img src="./advancedImagesAndIcons/US_flag.svg" />
+            <span>English(US)</span>
+          </li>
+          <li class="selected">
+            <div class="selected-element">
+              <img src="./advancedImagesAndIcons/english (uk).svg" />
+              <span>English(UK)</span>
+            </div>
+            <img src="./advancedImagesAndIcons/selected.svg" />
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/ES_flag.svg" />
+            <span>Spanish(ES)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/PT_flag.svg" />
+            <span>Portuguese(PT)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/IN_flag.svg" />
+            <span>Hindi(HI)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/BD_flag.svg" />
+            <span>Bengali(BN)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/FR_flag.svg" />
+            <span>French(FR)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/CN_flag.svg" />
+            <span>Chinese(ZH)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/RU_flag.svg" />
+            <span>Russian(RU)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/DE_flag.svg" />
+            <span>German(DE)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/PK_flag.svg" />
+            <span>Urdu(UR)</span>
+          </li>
+          <li>
+            <img src="./advancedImagesAndIcons/IN_flag.svg" />
+            <span>Italian(IT)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Switch account modal -->
+    <div id="Switch-modal" class="header_modal">
+      <div class="switch-content">
+        <div class="switch_header">
+          <div class="switch-left">
+            <img src="./advancedImagesAndIcons/Arrow - Swap.svg" />
+            <span>Switch Account</span>
+          </div>
+          <div id="close" class="close-switch">
+            <img src="./advancedImagesAndIcons/cancel.svg" />
+          </div>
+        </div>
+        <hr />
+        <div class="switch-footer add-account">
+          <button>
+            <img src="./advancedImagesAndIcons/Add_round copy.svg" />
+            <span>Add Account</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Accounts -->
+    <div id="Add-account-modal" class="header_modal">
+      <div class="switch-content account-modal">
+        <div class="switch_header">
+          <div class="switch-left">
+            <img src="./advancedImagesAndIcons/Arrow - Swap.svg" />
+            <span>Switch Account</span>
+          </div>
+          <div class="close-switch">
+            <img src="./advancedImagesAndIcons/cancel.svg" />
+          </div>
+        </div>
+        <hr />
+        <div class="switch-body">
+          <div class="switch-left">
+            <img src="./icons/Avatar.svg" />
+            <div class="avater-desc">
+              <h3>Esther Howward</h3>
+              <span>Logged in 20 mins ago</span>
+            </div>
+          </div>
+          <div class="switch-counter">
+            <span>10</span>
+          </div>
+        </div>
+        <div class="switch-body">
+          <div class="switch-left">
+            <img src="./icons/Avatar.svg" />
+            <div class="avater-desc">
+              <h3>Esther Howward</h3>
+              <span>Logged in 20 mins ago</span>
+            </div>
+          </div>
+          <div class="switch-counter switch-counter-wide">
+            <span>99+</span>
+          </div>
+        </div>
+        <div class="switch-body">
+          <div class="switch-left">
+            <img src="./icons/Avatar.svg" />
+            <div class="avater-desc">
+              <h3>Esther Howward</h3>
+              <span>Logged in 20 mins ago</span>
+            </div>
+          </div>
+        </div>
+        <div class="switch-footer">
+          <button>
+            <img src="./advancedImagesAndIcons/Add_round.svg" />
+            <span>Add Account</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="splash" ng-cloak>
+      <div id="splash-spinner"></div>
+    </div>
+
+    <!-- Discard Modal -->
+    <div class="overlay discard_modal_wrapper editor-hidden" id="discard_modal">
+      <div class="mobile_cancel_holder">
+        <button class="mobile_cancel--btn">
+          <img src="icons/cancel.svg" alt="" />
+        </button>
+        <div class="modal discard_modal">
+          <div class="discard_modal_icon_layers">
+            <div>
+              <img src="icons/alarm-icon.svg" alt="" />
+            </div>
+          </div>
+
+          <h2>Discard Task</h2>
+
+          <p>Are you sure you want to discard your task? This action cannot be undone.</p>
+
+          <div class="btns">
+            <button class="cancel_discard">Cancel</button>
+            <button id="discard_task--btn">Discard</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logout Modal -->
+    <div class="logoutOverlay animation-modal editor-hidden" id="logoutModal">
+      <div class="logoutOverlayWrapper">
+        <button id="logoutModalMobileClose">
+          <!-- prettier-ignore -->
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18" stroke="#33363F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6L18 18" stroke="#33363F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="logout_container">
+          <div id="userLogoutProfile">
+            <img src="https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMGltYWdlfGVufDB8fDB8fHww" alt="" />
+
+            <span>
+              <!-- prettier-ignore -->
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 10L2 8L4 6" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.66667 4H6.66667C6.48986 4 6.32029 4.07024 6.19526 4.19526C6.07024 4.32029 6 4.48986 6 4.66667V5.33333" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.6665V11.3332C6 11.51 6.07024 11.6796 6.19526 11.8046C6.32029 11.9296 6.48986 11.9998 6.66667 11.9998H8.66667" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 7.99988H6M14 12.1465V3.85321C14.0044 3.70092 13.9566 3.55171 13.8644 3.43041C13.7722 3.30911 13.6413 3.22305 13.4933 3.18655L9.49333 2.18655C9.39351 2.16182 9.28932 2.16053 9.18891 2.18276C9.0885 2.205 8.9946 2.25016 8.91455 2.31472C8.83449 2.37928 8.77046 2.46148 8.72746 2.5549C8.68446 2.64832 8.66365 2.75042 8.66667 2.85321V13.1465C8.66365 13.2493 8.68446 13.3514 8.72746 13.4449C8.77046 13.5383 8.83449 13.6205 8.91455 13.685C8.9946 13.7496 9.0885 13.7948 9.18891 13.817C9.28932 13.8392 9.39351 13.8379 9.49333 13.8132L13.4933 12.8132C13.6413 12.7767 13.7722 12.6907 13.8644 12.5694C13.9566 12.4481 14.0044 12.2988 14 12.1465Z" stroke="white" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+
+          <h2>Log Out of Your Account</h2>
+
+          <p>Are you sure you want to sign out? You’ll need to log in again to access your tasks, posts, and updates. Stay connected or continue to log out now.</p>
+
+          <footer class="">
+            <button id="cancelLogoutModal">Cancel</button>
+            <button id="logoutAction">Log Out</button>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- Invite Friend -->
+    <div class="invite_friend_modal animation-modal editor-hidden" id="inviteFriend">
+      <div style="position: relative">
+        <button class="mobile_cancel--btn inviteCodeMobileCancel">
+          <img src="icons/cancel.svg" alt="" />
+        </button>
+
+        <div class="invite_friend">
+          <nav id="inviteHeader" class="invite_header">
+            <h2>Invite Friends</h2>
+
+            <button id="closeInviteModal">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 24 24">
+                <path fill="none" stroke="#222222" stroke-linecap="round" stroke-linejoin="round" d="M17 7L7 17M7 7l10 10" />
+              </svg>
+            </button>
+          </nav>
+
+          <main id="mainInviteFriend">
+            <div class="left">
+              <div class="rectangle"></div>
+
+              <div>
+                <h2>Share the Love with Sizemug!</h2>
+                <p>Invite Four friends to join Sizemug, and you’ll unlock a free month of <a href="#">Sizemug Pro</a>!</p>
+              </div>
+
+              <div class="actions">
+                <button id="showInviteCopyBtn">Invite Friends</button>
+                <button id="sizemugPro">Sizemug Pro</button>
+              </div>
+            </div>
+
+            <div class="right">
+              <div class="heading_invite_list">
+                <h3>Friends You’ve Invited So Far</h3>
+              </div>
+
+              <div id="invitedUsersList">
+                <!-- lists -->
+              </div>
+
+              <!-- Position container -->
+              <div class="positioned_container" id="InvitePositionedContainer">
+                <div id="tooltipMessage" class="editor-hidden">
+                  <p>Congratulations 🎉! You have unlocked Sizemug Pro for inviting Four friends.</p>
+                  <button id="toolMessageBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                      <path fill="none" stroke="#626872" stroke-linecap="round" stroke-linejoin="round" d="M17 7L7 17M7 7l10 10" />
+                    </svg>
+                  </button>
+                </div>
+
+                <button id="getSizemugPro">Get Sizemug Pro</button>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- Confetti Canvas -->
+        <canvas id="inviteModalConfettiCanvas" style="display: none"></canvas>
+      </div>
+    </div>
+
+    <!-- Invite Code Modal  -->
+    <div class="invite_friend_modal animation-modal editor-hidden" id="inviteCodeModal">
+      <div class="invite_code_modal">
+        <button class="mobile_cancel--btn inviteCodeMobileCancel">
+          <img src="icons/cancel.svg" alt="" />
+        </button>
+
+        <div class="invite_code">
+          <header>
+            <h3>Share</h3>
+
+            <button class="HIIUGSJ" id="HIIUGSJ">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                <path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" d="M17 7L7 17M7 7l10 10" />
+              </svg>
+            </button>
+          </header>
+
+          <main>
+            <p>Your Invite Code</p>
+            <code id="inviteCode">DK987I24</code>
+            <div id="actionInviteCode">
+              <button id="copyInviteCode">Copy Code</button>
+              <button id="copyInviteCodeBack">Back</button>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- Flash Message Container -->
+    <div class="flash-container" id="flashContainer"></div>
+
+    <div ng-controller="MainController" ng-cloak style="height: 100%">
+      <section id="right-panels">
+        <section id="objects" class="md-whiteframe-z1" ng-controller="ObjectsPanelController">
+          <h3 ed-toggle-panel-visibility="objects"><span>Layers</span><i class="mdi mdi-expand-less"></i></h3>
+          <div class="scrollbar-wrapper" ed-pretty-scrollbar ed-scroll-axis="y">
+            <ul class="objects-panel list-unstyled" ui-sortable="sortableOptions" ng-model="objects">
+              <li class="object panel-item" ng-repeat="object in objects" ng-click="setAsActive(object)" ng-if="!object.ignore">
+                <i class="mdi mdi-remove-red-eye toggle-visibility" ng-class="{ 'not-visible': !object.visible }" ng-click="toggleVisibility(object); $event.stopPropagation();"></i>
+                <i class="mdi mdi-delete delete-object" ng-click="deleteObject(object); $event.stopPropagation();"></i>
+                <i class="mdi mdi-lock-outline lock-object" ng-class="{ 'not-locked': !object.locked }" ng-click="toggleLock(object); $event.stopPropagation();"></i>
+                {{ spacify(object.name) || spacify(object.type) }}
+              </li>
+              <li ng-if="!canvas.fabric._objects.length" class="text-center">
+                <h4>No layers found. You can add text, element, image etc. to the canvas to create a layer.</h4>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="history" class="md-whiteframe-z1 panel-hidden">
+          <h3 ed-toggle-panel-visibility="history"><span>History</span><i class="mdi mdi-expand-less"></i></h3>
+          <ul class="history-panel list-unstyled" ed-pretty-scrollbar ed-scroll-axis="y">
+            <li class="history-item panel-item" ng-click="history.load(item)" ng-repeat="item in history.all">
+              <i class="mdi mdi-{{ item.icon }} main-icon"></i>
+              {{ spacify(item.name) }}
+            </li>
+            <li ng-if="history.all.length === 0" class="text-center">
+              <h4>No history items yet.</h4>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <section ng-hide="!loading" id="spinner">
+        <md-progress-circular class="md-spinner" md-diameter="100" md-mode="indeterminate"></md-progress-circular>
+      </section>
+
+      <section id="left-sidebar" ed-tabs="basics" class="md-whiteframe-z1">
+        <div id="sidebar-toggler" ed-toggle-sidebar>
+          <md-button class="md-fab md-primary" aria-label="Toggle Sidebar">
+            <i class="mdi mdi-edit show-icon"></i>
+            <i class="mdi mdi-close close-icon"></i>
+          </md-button>
+        </div>
+        <div id="navigation-bar">
+          <div data-activates="basics" class="nav-item">
+            <i class="mdi mdi-tune"></i>
+
+            <i class="fa-solid fa-sliders"></i>
+            <div class="title">ADJUST</div>
+          </div>
+          <div data-activates="text" class="nav-item">
+            <i class="mdi mdi-format-text">T</i>
+            <div class="title pull-up">TEXT</div>
+          </div>
+          <!-- <div data-activates="frames" class="nav-item">
+            <i class="mdi mdi-frame-outline"></i>
+        
+            <i class="zmdi zmdi-border-outer"></i>
+       
+            <div class="title">FRAMES</div>
+           
+          </div> -->
+
+          <div data-activates="simple-shapes" class="nav-item">
+            <i class="mdi mdi-panorama-vertical"></i>
+            <i class="zmdi zmdi-shape"></i>
+            <div class="title">SHAPES</div>
+          </div>
+          <div data-activates="filters" class="nav-item">
+            <i class="mdi mdi-brightness-6"></i>
+            <div class="title">FILTERS</div>
+          </div>
+
+          <div data-activates="drawing" class="nav-item">
+            <i class="mdi mdi-brush"></i>
+            <div class="title">BRUSHES</div>
+          </div>
+          <div data-activates="stickers" class="nav-item">
+            <i class="mdi mdi-favorite"></i>
+            <div class="title pull-up">ICONS</div>
+          </div>
+        </div>
+        <div id="tabs">
+          <section id="basics" data-index="1" class="tab">
+            <h2 class=""></h2>
+            <div ng-controller="CropController" class="basics-item">
+              <div ng-click="cropper.start($event)">
+                <i class="mdi mdi-crop basics-icon"></i>
+                <div class="icon-title">Crop</div>
+              </div>
+
+              <div data-name="crop" class="actions-menu md-whiteframe-z1" ng-class="activePanel == 'crop' ? 'open' : 'closed'">
+                <div class="menu-header"><h3>Crop</h3></div>
+                <div class="row">
+                  <md-input-container class="col-sm-6">
+                    <label>Width</label>
+                    <input type="text" ng-model="width" ng-change="cropzone.setWidth(width)" />
+                  </md-input-container>
+                  <md-input-container class="col-sm-6">
+                    <label>Height</label>
+                    <input type="text" ng-model="height" ng-change="cropzone.setHeight(height)" />
+                  </md-input-container>
+                </div>
+                <div class="buttons">
+                  <md-button ng-click="cropper.stop()">cancel</md-button>
+                  <md-button ng-click="cropper.crop()" class="md-primary md-raised">crop</md-button>
+                </div>
+              </div>
+            </div>
+
+            <div ng-controller="RotateController" class="basics-item">
+              <div ng-click="startRotator($event)">
+                <i class="mdi mdi-rotate-right basics-icon"></i>
+                <div class="icon-title">Rotate</div>
+              </div>
+
+              <div data-name="rotate" class="actions-menu md-whiteframe-z1" ng-class="activePanel == 'rotate' ? 'open' : 'closed'">
+                <div class="menu-header"><h3>Rotate</h3></div>
+
+                <div class="rotate-icons">
+                  <i class="mdi mdi-rotate-left" ng-click="rotateProper(-90)"></i>
+                  <i class="mdi mdi-rotate-right" ng-click="rotateProper(90)"></i>
+                </div>
+
+                <section class="menu-group">
+                  <div class="md-slider">
+                    <div class="slider-label">Angle</div>
+                    <md-slider aria-label="Angle" step="1" ng-model="angle" ng-change="rotate(angle)" min="0" max="360"></md-slider>
+                  </div>
+                  <div class="slider-input">
+                    <input type="number" ng-model="angle" ng-change="rotate(angle)" min="0" max="360" />
+                  </div>
+                </section>
+
+                <div class="buttons">
+                  <md-button ng-click="cancel()">cancel</md-button>
+                  <md-button ng-click="applyRotation()" class="md-primary md-raised">apply</md-button>
+                </div>
+              </div>
+            </div>
+
+            <div ng-controller="ResizeController" class="basics-item">
+              <div ng-click="startResizer($event)">
+                <i class="mdi mdi-open-with basics-icon"></i>
+                <div class="icon-title">Resize</div>
+              </div>
+
+              <div data-name="resize" class="actions-menu md-whiteframe-z1" ng-class="activePanel == 'resize' ? 'open' : 'closed'">
+                <div class="menu-header"><h3>Resize</h3></div>
+
+                <div class="clearfix">
+                  <md-input-container class="col-sm-6">
+                    <label>Width</label>
+                    <input type="number" ng-model="width" ng-change="aspectToHeight(width)" />
+                  </md-input-container>
+
+                  <md-input-container class="col-sm-6">
+                    <label>Height</label>
+                    <input type="number" ng-model="height" ng-change="aspectToWidth(height)" />
+                  </md-input-container>
+                </div>
+
+                <md-checkbox ng-model="usePercentages" ng-change="togglePercentages(usePercentages)">Use Percentages</md-checkbox>
+                <md-checkbox ng-model="constrainProportions">Maintain Aspect Ratio</md-checkbox>
+
+                <div class="buttons margin-top">
+                  <md-button ng-click="close()">close</md-button>
+                  <md-button ng-click="apply()" class="md-primary md-raised">resize</md-button>
+                </div>
+              </div>
+            </div>
+
+            <div ng-controller="RoundedCornersController" class="basics-item">
+              <div ng-click="startRoundedCorners($event)">
+                <i class="mdi mdi-panorama-wide-angle basics-icon"></i>
+                <div class="icon-title">Round</div>
+              </div>
+
+              <div data-name="round" class="actions-menu md-whiteframe-z1" ng-class="activePanel == 'round' ? 'open' : 'closed'">
+                <div class="menu-header"><h3>Round</h3></div>
+
+                <section class="menu-group">
+                  <div class="md-slider">
+                    <div class="slider-label">Radius</div>
+                    <md-slider aria-label="Radius" step="1" ng-model="radius" ng-change="adjustPreview()" min="1" max="350"></md-slider>
+                  </div>
+                  <div class="slider-input">
+                    <input type="number" ng-model="radius" ng-change="adjustPreview()" />
+                  </div>
+                </section>
+
+                <div class="buttons">
+                  <md-button ng-click="cancel()">Cancel</md-button>
+                  <md-button ng-click="apply()" class="md-primary md-raised">Apply</md-button>
+                </div>
+              </div>
+            </div>
+
+            <div ng-controller="CanvasBackgroundController" class="basics-item">
+              <div ng-click="openPanel('canvasColor', $event)">
+                <i class="mdi mdi-format-color-fill basics-icon"></i>
+                <div class="icon-title">Color</div>
+              </div>
+
+              <div data-name="canvasColor" class="actions-menu md-whiteframe-z1 fluid" ng-class="activePanel == 'canvasColor' ? 'open' : 'closed'">
+                <div class="menu-header"><h3>Canvas Background Color</h3></div>
+
+                <input ed-flat ed-color-picker="setBackground(color)" type="text" />
+
+                <div class="buttons">
+                  <md-button ng-click="cancel()">Cancel</md-button>
+                  <md-button ng-click="apply()" class="md-primary md-raised">Apply</md-button>
+                </div>
+              </div>
+            </div>
+            <!-- 
+            <div
+              class="basics-item"
+              ng-class="{ disabled: canvas.fabric._objects.length <= 1 }"
+            >
+              <div ng-click="canvas.mergeObjects()">
+                <i class="mdi mdi-merge-type basics-icon"></i>
+                <div class="icon-title">Merge</div>
+              </div>
+            </div> -->
+          </section>
+
+          <section id="text" data-index="2" class="tab" ng-controller="TextController">
+            <h2 class="tab-title">Pick a Font</h2>
+
+            <div class="filter-inputs">
+              <div class="filter-input">
+                <md-select ng-model="filters.category" ng-change="fonts.paginator.filter(filters)" placeholder="Select a Type">
+                  <md-option value="serif">Serif</md-option>
+                  <md-option value="sans-serif">Sans Serif</md-option>
+                  <md-option value="display">Display</md-option>
+                  <md-option value="handwriting">Handwriting</md-option>
+                  <md-option value="monospace">Monospace</md-option>
+                </md-select>
+              </div>
+
+              <!-- <md-input-container class="filter-input">
+                <label>Search</label>
+                <input
+                  type="text"
+                  ng-model="filters.family"
+                  ng-change="fonts.paginator.filter(filters)"
+                />
+              </md-input-container> -->
+            </div>
+
+            <div ng-hide="activeTab !== 'text'" class="pagination md-whiteframe-z1" ed-fonts-pagination></div>
+
+            <section class="fonts-preview" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+              <div class="font" ng-style="{ 'font-family':  font.family }" ng-repeat="font in fonts.paginator.currentItems" ng-click="changeFont(font.family, $event)">{{ font.family }}</div>
+            </section>
+
+            <div data-name="text" class="actions-menu wider md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
+              <div class="menu-header"><h3>Text</h3></div>
+
+              <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                <div class="md-slider">
+                  <div class="slider-label">Opacity</div>
+                  <md-slider aria-label="text opacity" step="0.1" ng-model="opacity" ng-change="text.setProperty('opacity', opacity)" min="0" max="1"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input min="0.1" max="1" step="0.1" type="number" ng-change="text.setProperty('opacity', opacity)" ng-model="opacity" />
+                </div>
+
+                <div class="md-slider">
+                  <div class="slider-label">Font Size</div>
+                  <md-slider aria-label="text size" step="1" ng-change="text.setProperty('fontSize', fontSize)" ng-model="fontSize" min="1" max="100"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input type="number" ng-change="text.setProperty('fontSize', fontSize)" ng-model="fontSize" />
+                </div>
+
+                <div class="text-styles">
+                  <div class="text-style-toolbar" ed-text-align-buttons>
+                    <i data-align="left" class="mdi mdi-format-align-left"></i>
+                    <i data-align="center" class="mdi mdi-format-align-center active"></i>
+                    <i data-align="right" class="mdi mdi-format-align-right"></i>
+                  </div>
+                  <div class="text-style-toolbar text-decoration-buttons" ed-text-decoration-buttons>
+                    <div data-decoration="underline" class="underline toolbar-btn">U</div>
+                    <div data-decoration="line-through" class="line-through toolbar-btn">S</div>
+                    <div data-decoration="overline" class="overline toolbar-btn">O</div>
+                    <div data-decoration="italic" class="italic toolbar-btn">I</div>
+                  </div>
+                </div>
+
+                <div class="colorpicker">
+                  <div class="colorpicker-label"><span>Color</span></div>
+                  <input ed-color-picker="text.setProperty('fill', color)" type="text" />
+                </div>
+
+                <div class="colorpicker">
+                  <md-checkbox class="md-checkbox" ng-model="enableBackground" ng-change="text.toggleProperty('backgroundColor', enableBackground)" aria-label="Background">Background</md-checkbox>
+                  <input ed-color-picker="text.setProperty('backgroundColor', color)" ed-color-picker-disabled="{{ !enableBackground }}" type="text" />
+                </div>
+
+                <div class="colorpicker">
+                  <md-checkbox class="md-checkbox" ng-model="enableOutline" ng-change="text.toggleProperty('stroke', enableOutline)" aria-label="Outline">Outline</md-checkbox>
+                  <input ed-color-picker-disabled="{{ !enableOutline }}" ed-color-picker="text.setProperty('stroke', color)" type="text" />
+                </div>
+
+                <div class="md-inputs">
+                  <md-input-container>
+                    <label>Line Height</label>
+                    <input type="number" min="1" max="100" ng-model="lineHeight" ng-change="text.setProperty('lineHeight', lineHeight)" />
+                  </md-input-container>
+                  <md-input-container>
+                    <label>Outline Width</label>
+                    <input ng-disabled="!enableOutline" type="number" min="1" max="100" ng-model="strokeWidth" ng-change="text.setProperty('strokeWidth', strokeWidth)" />
+                  </md-input-container>
+                </div>
+
+                <div class="buttons">
+                  <md-button ng-click="finishAddingTextToCanvas()" class="md-primary md-raised">Save</md-button>
+                  <md-button ng-click="cancelAddingTextToCanvas()" class="md-raised">Cancel</md-button>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section id="drawing" class="tab" data-index="3" ng-controller="DrawingController">
+            <h2 class="tab-title">Pick a Brush</h2>
+            <div id="brushes">
+              <div ng-repeat="brush in drawing.availableBrushes" ng-class="{ active: drawing.activeBrushName == brush }" class="brush" ng-click="changeBrush(brush, $event)">
+                <img title="{{ brush }}" class="img-responsive" ng-src="advancedEditorAssests/images/brushes/{{brush}}.png" />
+              </div>
+            </div>
+
+            <div data-name="drawing" class="actions-menu wider md-whiteframe-z1" ng-class="activePanel == 'drawing' ? 'open' : 'closed'">
+              <div class="menu-header"><h3>Brush</h3></div>
+
+              <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                <div class="md-slider">
+                  <div class="slider-label">Brush Thickness</div>
+                  <md-slider aria-label="brush thickness" step="1" ng-model="drawing.params.brushWidth" ng-change="drawing.setProperty('width', drawing.params.brushWidth)" min="1" max="100"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input type="number" ng-change="drawing.setProperty('width', drawing.params.brushWidth)" ng-model="drawing.params.brushWidth" />
+                </div>
+
+                <div class="colorpicker">
+                  <div class="colorpicker-label"><span>Color</span></div>
+                  <input ng-model="drawing.params.brushColor" ed-color-picker="drawing.setProperty('color', color)" type="text" />
+                </div>
+
+                <div class="heading-with-switcher">
+                  <h3>Shadow</h3>
+                  <md-switch class="md-switch" ng-model="drawing.params.enableShadow" ng-change="drawing.toggleShadow(drawing.params.enableShadow)" aria-label="Enable Shadow"></md-switch>
+                </div>
+
+                <div class="md-slider">
+                  <div class="slider-label"><span>Blur</span></div>
+                  <md-slider aria-label="shadow blur" ng-disabled="!drawing.params.enableShadow" step="1" ng-model="drawing.params.shadowBlur" ng-change="drawing.setShadowProperty('blur', drawing.params.shadowBlur)" min="1" max="100"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input type="number" ng-change="drawing.setShadowProperty('blur', drawing.params.shadowBlur)" ng-disabled="!drawing.params.enableShadow" ng-model="drawing.params.shadowBlur" />
+                </div>
+
+                <div class="md-slider">
+                  <div class="slider-label"><span>Offset X</span></div>
+                  <md-slider ng-disabled="!drawing.params.enableShadow" aria-label="shadow blur" step="1" ng-model="drawing.params.shadowOffsetX" ng-change="drawing.setShadowProperty('offsetX', drawing.params.shadowOffsetX)" min="1" max="100"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input type="number" ng-change="drawing.setShadowProperty('offsetX', drawing.params.shadowOffsetX)" ng-disabled="!drawing.params.enableShadow" min="1" ng-model="drawing.params.shadowOffsetX" />
+                </div>
+
+                <div class="md-slider">
+                  <div class="slider-label"><span>Offset Y</span></div>
+                  <md-slider ng-disabled="!drawing.params.enableShadow" aria-label="shadow blur" step="1" ng-model="drawing.params.shadowOffsetY" ng-change="drawing.setShadowProperty('offsetY', drawing.params.shadowOffsetY)" min="1" max="100"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input type="number" ng-change="drawing.setShadowProperty('offsetY', drawing.params.shadowOffsetY)" ng-disabled="!drawing.params.enableShadow" min="1" ng-model="drawing.params.shadowOffsetY" />
+                </div>
+
+                <div class="colorpicker">
+                  <div class="colorpicker-label"><span>Color</span></div>
+                  <input ng-disabled="!drawing.params.enableShadow" ng-model="drawing.params.shadowColor" start-color="{{ drawing.params.shadowColor }}" ed-color-picker="drawing.setShadowProperty('color', color)" type="text" />
+                </div>
+
+                <div class="buttons">
+                  <md-button ng-click="finishAddingDrawingsToCanvas()" class="md-primary md-raised">Save</md-button>
+                  <md-button ng-click="cancelAddingDrawingsToCanvas()" class="md-raised">Cancel</md-button>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section id="filters" class="tab" data-index="4" ng-controller="FiltersController">
+            <h2 class="tab-title">Pick a Filter</h2>
+            <div class="filters-list row" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+              <figure ng-class="{ applied: filters.filterAlreadyApplied(filter.name) }" ng-repeat="filter in filters.all" ng-click="filters.applyFilter(filter)" class="filter col-sm-6">
+                <div class="filter-image">
+                  <img ng-src="advancedEditorAssests/images/filters/{{ filter.name.toLowerCase() }}.png" class="img-responsive md-whiteframe-z1" />
+                  <div ng-class="{ 'remove-only': !filter.options }" class="remove-filter-overlay">
+                    <i class="mdi mdi-cancel"></i>
+                    <i ng-if="filter.options" ng-click="filters.lastAppliedFilter = filter; $event.stopPropagation();" class="mdi mdi-settings"></i>
+                  </div>
+                </div>
+                <figcaption>{{ filter.displayName || filter.name }}</figcaption>
+              </figure>
+            </div>
+
+            <div class="actions-menu md-whiteframe-z1" ng-class="filters.lastAppliedFilter.options ? 'open' : 'closed'">
+              <div class="menu-header">
+                <h3>{{ filters.lastAppliedFilter.name }}</h3>
+              </div>
+
+              <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                <div ng-repeat="(key,value) in filters.lastAppliedFilter.options">
+                  <section ng-if="!value.colorpicker && !value.select">
+                    <div class="md-slider">
+                      <div class="slider-label">{{ key == filters.lastAppliedFilter.name ? 'amount' : key }}</div>
+                      <md-slider md-discrete aria-label="{{ key }}" step="{{ value.step ? value.step : 1 }}" ng-model="filters.lastAppliedFilter.options[key].current" ng-change="filters.applyValue(filters.lastAppliedFilter.name, key, filters.lastAppliedFilter.options[key].current)" min="{{ value.min ? value.min : 1 }}" max="{{ value.max ? value.max : 250 }}"></md-slider>
+                    </div>
+                    <div class="slider-input">
+                      <input ng-if="!value.colorpicker" type="number" ng-change="filters.applyValue(filters.lastAppliedFilter.name, key, filters.lastAppliedFilter.options[key].current)" ng-model="filters.lastAppliedFilter.options[key].current" />
+                    </div>
+                  </section>
+
+                  <section ng-if="value.colorpicker" class="colorpicker">
+                    <div class="colorpicker-label"><span>{{ key }}</span></div>
+                    <input ed-discrete ng-model="filters.lastAppliedFilter.options[key].current" start-color="{{ filters.lastAppliedFilter.options[key].current }}" ed-color-picker="filters.applyValue(filters.lastAppliedFilter.name, key, color)" type="text" />
+                  </section>
+
+                  <section ng-if="value.select">
+                    <div class="col-sm-8 pull-down">{{ key }}</div>
+                    <div class="col-sm-4 no-padding">
+                      <select class="form-control" ng-model="filters.lastAppliedFilter.options[key].current" ng-change="filters.applyValue(filters.lastAppliedFilter.name, key, filters.lastAppliedFilter.options[key].current)">
+                        <option ng-repeat="mode in filters.lastAppliedFilter.options[key].available" value="{{ mode }}">{{ mode }}</option>
+                      </select>
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section id="simple-shapes" class="tab" data-index="5" ng-controller="SimpleShapesController">
+            <h2 class="tab-title">Pick a Shape</h2>
+
+            <div class="shapes-list">
+              <div class="shape" data-name="{{ shape.name }}" ng-repeat="shape in shapes.available" ng-click="shapes.addToCanvas(shape)">
+                <div class="shape-image" id="{{ shape.name }}">
+                  <div class="css-shape"></div>
+                </div>
+                <div class="shape-name">{{ shape.displayName || shape.name }}</div>
+              </div>
+            </div>
+
+            <div class="actions-menu md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
+              <div class="menu-header">
+                <h3>{{ shapes.selected.displayName || shapes.selected.name }}</h3>
+              </div>
+
+              <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                <section id="object-fills">
+                  <div class="fill-activator">
+                    <div class="fill-activator-label">Image</div>
+                    <button class="fill-activator-button image-activator" ng-click="openBottomSheet('image')"></button>
+                  </div>
+
+                  <div class="fill-activator">
+                    <div class="fill-activator-label">Gradient</div>
+                    <button class="fill-activator-button gradient-activator" ng-click="openBottomSheet('gradient')"></button>
+                  </div>
+
+                  <div class="fill-activator">
+                    <div class="fill-activator-label">Color</div>
+                    <input ed-discrete start-color="{{ shapes.selected.options.main.fill.current }}" ng-model="shapes.selected.options.main.fill.current" ed-color-picker="shapes.applyValue('main', shapes.selected.name, 'fill', color)" type="text" />
+                  </div>
+                </section>
+
+                <div ng-repeat="group in shapes.selected.options | orderOptions" class="clearfix">
+                  <div ng-if="group.name !== 'main'" class="heading-with-switcher">
+                    <h3>{{ group.name }}</h3>
+                    <md-switch class="md-switch" ng-model="shapes.selected.options[group.name].enabled" ng-change="shapes[group.onToggle](shapes.selected.name, shapes.selected.options[group.name].enabled)" aria-label="Toggle {{ group.name }}"></md-switch>
+                  </div>
+
+                  <div ng-repeat="(optionName, option) in group">
+                    <section ng-if="option.type === 'slider'">
+                      <div class="md-slider">
+                        <div class="slider-label">{{ option.displayName || optionName }}</div>
+
+                        <md-slider md-discrete aria-label="{{ optionName }}" step="{{ option.step ? option.step : 1 }}" ng-model="shapes.selected.options[group.name][optionName].current" ng-change="shapes.applyValue(group.name, shapes.selected.name, optionName, shapes.selected.options[group.name][optionName].current)" min="{{ option.min ? option.min : 1 }}" max="{{ option.max ? option.max : 250 }}" ng-disabled="!group.enabled"></md-slider>
+                      </div>
+                      <div class="slider-input">
+                        <input type="number" ng-change="shapes.applyValue(group.name, shapes.selected.name, optionName, shapes.selected.options[group.name][optionName].current)" ng-disabled="!group.enabled" ng-model="shapes.selected.options[group.name][optionName].current" />
+                      </div>
+                    </section>
+
+                    <section ng-if="option.type === 'colorpicker' && !option.hidden" class="colorpicker">
+                      <div class="colorpicker-label">
+                        <span>{{ option.displayName || optionName }}</span>
+                      </div>
+                      <input start-color="{{ option.current }}" ed-discrete ng-disabled="!group.enabled" ng-model="shapes.selected.options[group.name][optionName].current" ed-color-picker="shapes.applyValue(group.name, shapes.selected.name, optionName, color)" type="text" />
+                    </section>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+
+          <section id="stickers" class="tab" data-index="6" ng-controller="StickersController">
+            <div data-name="stickers" class="actions-menu md-whiteframe-z1" ng-class="isPanelEnabled() ? 'open' : 'closed'">
+              <div class="menu-header"><h3>Sticker</h3></div>
+              <section class="actions-menu-inner" ng-style="{ 'max-height': maxPanelHeight }" ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light">
+                <div class="md-slider">
+                  <div class="slider-label">Opacity</div>
+                  <md-slider aria-label="shape opacity" step="0.1" ng-model="opacity" ng-change="setOpacity(opacity)" min="0" max="1"></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input type="number" ng-change="setOpacity(opacity)" step="0.1" min="0.1" max="1" ng-model="opacity" />
+                </div>
+                <section class="colorpicker" ng-if="activeStickerIsSvg()">
+                  <div class="colorpicker-label"><span>Color</span></div>
+                  <input start-color="#000" ng-model="color" ed-color-picker="setColor(color)" type="text" />
+                </section>
+              </section>
+            </div>
+            <div ed-pretty-scrollbar ed-scroll-axis="y" ed-scroll-theme="light" ed-stickers-categories style="height: 100%">
+              <section ng-repeat="category in categories" class="sticker-category-container">
+                <div class="category-header" data-name="{{ category.name }}">{{ category.name }}</div>
+                <div class="category-stickers" ng-class="{ 'open animated slideInDown': activeCategory === category.name, 'dark-bg': category.darkbg }">
+                  <div ng-repeat="doodle in category.items track by $index" ng-click="addToCanvas(category, $index+1, $event)" class="sticker">
+                    <img class="img-responsive" data-src="advancedEditorAssests/images/stickers/{{category.name}}/{{$index+1}}.{{ category.type }}" />
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section>
+          <!-- <section
+            id="frames"
+            class="tab"
+            data-index="7"
+            ng-controller="FramesController"
+          >
+            <div
+              data-name="frames"
+              class="actions-menu md-whiteframe-z1"
+              ng-class="isPanelEnabled() ? 'open' : 'closed'"
+            >
+              <div class="menu-header"><h3>Frames</h3></div>
+              <section
+                class="actions-menu-inner"
+                ng-style="{ 'max-height': maxPanelHeight }"
+                ed-pretty-scrollbar
+                ed-scroll-axis="y"
+                ed-scroll-theme="light"
+              >
+                <div class="md-slider">
+                  <div class="slider-label">Opacity</div>
+                  <md-slider
+                    aria-label="frame opacity"
+                    step="0.1"
+                    ng-model="opacity"
+                    ng-change="setOpacity(opacity)"
+                    min="0"
+                    max="1"
+                  ></md-slider>
+                </div>
+                <div class="slider-input">
+                  <input
+                    type="number"
+                    ng-change="setOpacity(opacity)"
+                    step="0.1"
+                    min="0.1"
+                    max="1"
+                    ng-model="opacity"
+                  />
+                </div>
+              </section>
+            </div>
+            <div
+              ed-pretty-scrollbar
+              ed-scroll-axis="y"
+              ed-scroll-theme="light"
+              ed-frames-categories
+              style="height: 100%"
+            >
+              <section
+                ng-repeat="category in frameCategories"
+                class="frame-category-container"
+              >
+                <div class="category-header" data-name="{{ category.name }}">
+                  {{ category.name }}
+                </div>
+                <div
+                  class="category-frames"
+                  ng-class="{ 'open animated slideInDown': activeCategory === category.name }"
+                >
+                  <div
+                    ng-repeat="frame in category.items track by $index"
+                    ng-click="addFrameToCanvas(category, $index+1, $event)"
+                    class="frame"
+                  >
+                    <img
+                      class="img-responsive"
+                      data-src="advancedEditorAssests/images/frames/{{category.name}}/{{$index+1}}.{{ category.type }}"
+                    />
+                  </div>
+                </div>
+              </section>
+            </div>
+          </section> -->
+        </div>
+      </section>
+
+      <section id="viewport">
+        <canvas ng-show="started" id="canvas" class="md-whiteframe-z2"></canvas>
+      </section>
+
+      <div id="bottom-bar" ng-controller="ZoomController">
+        <section class="zoom-container md-whiteframe-z1">
+          <div class="current-zoom">{{ getCurrentZoom() }}%</div>
+          <div class="zoom-slider">
+            <md-slider aria-label="zoom" step="1" ng-model="zoom" ng-change="doZoom()" min="{{ minScale }}" max="{{ maxScale }}"></md-slider>
+          </div>
+          <div class="action-icons">
+            <i ng-click="canvas.fitToScreen()" class="mdi mdi-filter-center-focus fit-to-screen"><md-tooltip md-delay="200">Fit to screen</md-tooltip></i>
+            <i ng-click="canvas.zoom(1)" class="mdi mdi-fullscreen original-size"><md-tooltip md-delay="200">Original size</md-tooltip></i>
+          </div>
+          <div ed-ie-slider-fix></div>
+        </section>
+      </div>
+
+      <script src="advancedEditorAssests/js/scripts.min.js?v23"></script>
+      <script src="./scripts/global.confetti.js"></script>
+
+      <script type="application/ng-template" id="gradient-sheet-template">
+        <md-bottom-sheet class="bottom-sheet gradients-sheet">
+            <div class="items-list" ed-pretty-scrollbar>
+                <div ng-repeat="g in shapes.gradients" ng-style="{background: 'url(advancedEditorAssests/images/gradients/'+($index+1)+'.png)'}" ng-click="shapes.fillWithGradient($index+1)" class="item md-whiteframe-z1"></div>
+            </div>
+        </md-bottom-sheet>
+      </script>
+
+      <script type="application/ng-template" id="image-sheet-template">
+        <md-bottom-sheet class="bottom-sheet images-sheet">
+            <div class="upload-new" ng-click="showDialog($event)">
+                <i class="mdi mdi-cloud-upload"></i>
+                <span class="icon-label">Upload</span>
+            </div>
+            <div class="items-list" ed-pretty-scrollbar>
+                <div ng-repeat="t in shapes.textures track by $index" ng-style="{background: 'url(advancedEditorAssests/images/textures/'+$index+'.png)'}" ng-click="shapes.fillWithImage('advancedEditorAssests/images/textures/'+$index+'.png')" class="item md-whiteframe-z1"></div>
+            </div>
+        </md-bottom-sheet>
+      </script>
+
+      <script type="application/ng-template" id="texture-upload-dialog-template">
+        <md-dialog class="upload-file-dialog">
+            <md-input-container>
+                <label>Image URL</label>
+                <input type="text" ng-model="imageBgUrl" ng-change="shapes.fillWithImage(imageBgUrl)" ng-model-options="{ debounce: 500 }">
+            </md-input-container>
+
+            <h2><span>OR</span></h2>
+
+            <label class="pretty-upload">
+                <input type="file" ed-file-uploader="shapes.fillWithImage" ed-close-after/>
+                <i class="mdi mdi-cloud-upload"></i>
+                <span class="upload-button-label">Upload From Computer</span>
+            </label>
+        </md-dialog>
+      </script>
+
+      <script type="application/ng-template" id="save-image-dialog">
+        <md-dialog class="upload-file-dialog save-dialog">
+            <md-input-container>
+                <label>File Name</label>
+                <input type="text" ng-model="imageName">
+            </md-input-container>
+
+            <md-radio-group ng-model="imageType">
+                <md-radio-button value="jpeg">JPEG</md-radio-button>
+                <md-radio-button value="png">PNG</md-radio-button>
+                <md-radio-button value="json">JSON</md-radio-button>
+            </md-radio-group>
+
+            <div ng-if="imageType === 'jpeg'">
+                <div class="slider-label">Quality {{ imageQuality }}</div>
+                <md-slider aria-label="Angle" md-discrete ng-model="imageQuality" step="1" min="1" max="10" ></md-slider>
+            </div>
+
+            <p ng-if="imageType === 'json'">This will download a file with current pixie editor state so you can load it into pixie later.</p>
+
+            <md-button ng-click="saveImage($event)" class="md-raised md-primary">Save</md-button>
+
+            <div class="demo-alert" ng-if="isDemo">Image saving is disabled on demo site.</div>
+        </md-dialog>
+      </script>
+
+      <script type="application/ng-template" id="main-image-upload-dialog-template">
+        <md-dialog class="upload-file-dialog">
+            <div ng-show="openImageMode === 'open'">
+                <md-input-container>
+                    <label>Image URL</label>
+                    <input type="text" ng-model="openImageUrl" ng-change="showImagePreview(openImageUrl)" ng-model-options="{ debounce: 500 }">
+                </md-input-container>
+
+                <h2><span>OR</span></h2>
+
+                <label class="pretty-upload">
+                    <input type="file" ed-file-uploader="showImagePreview"/>
+                    <i class="mdi mdi-cloud-upload"></i>
+                    <span class="upload-button-label">Upload From Computer</span>
+                </label>
+
+                <h2><span>OR</span></h2>
+
+                <div class="buttons" ng-show="!canOpenImage">
+                    <md-button ng-click="openImageMode = 'create'" class="md-primary create-btn">Create New</md-button>
+                    <md-button ng-click="openSampleImage()">Sample</md-button>
+                </div>
+
+                <div ng-show="canOpenImage">
+                    <div class="img-preview"></div>
+
+                    <div class="buttons">
+                        <md-button ng-click="openImage()" class="md-primary md-raised">Open</md-button>
+                        <md-button ng-click="closeUploadDialog()" class="md-raised">Close</md-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="new-canvas" ng-show="openImageMode === 'create'">
+                <md-input-container>
+                    <label>Width</label>
+                    <input min="1" max="5000" type="number" ng-model="canvasWidth">
+                </md-input-container>
+
+                <md-input-container>
+                    <label>Height</label>
+                    <input min="1" max="5000" type="number" ng-model="canvasHeight">
+                </md-input-container>
+
+                <div class="buttons">
+                    <md-button ng-click="openImageMode = 'open'" class="md-raised">Cancel</md-button>
+                    <md-button ng-click="createNewCanvas(canvasWidth, canvasHeight)" class="md-primary md-raised">Create</md-button>
+                </div>
+            </div>
+        </md-dialog>
+      </script>
+
+      <script type="text/ng-template" id="modals/polygon.html">
+        <md-dialog class="md-modal">
+            <div class="md-modal-header">
+                <h1>Polygon Instructions</h1>
+                <div ng-click="closeModal()" class="md-close-modal"><i class="mdi mdi-close"></i></div>
+            </div>
+
+            <ol>
+                <li>Click on the canvas where you want to start the polygon edge.</li>
+                <li>Drag your mouse.</li>
+                <li>Click again where you want to end the edge.</li>
+                <li>Repeat to add more edges.</li>
+                <li>Hit escape or click anywhere outside of canvas to finish.</li>
+            </ol>
+
+            <div class="buttons">
+                <md-button class="md-primary md-raised" ng-click="closeModal()">got it</md-button>
+            </div>
+        </md-dialog>
+      </script>
+    </div>
+  </body>
+</html>

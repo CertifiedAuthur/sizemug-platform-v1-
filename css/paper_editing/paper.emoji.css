@@ -1,0 +1,11 @@
+emoji-picker {
+  height: 400px;
+}
+
+#picker-container {
+  position: absolute;
+  z-index: 10000000;
+  border-radius: 15px;
+  overflow: hidden;
+  animation: GridFrame 0.2s ease;
+}

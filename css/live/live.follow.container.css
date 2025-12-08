@@ -1,0 +1,144 @@
+.live_follow_container {
+  width: 280px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.live_follow_container header {
+  width: 100%;
+  display: flex;
+}
+
+.live_follow_container header button {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--text-color-60);
+  transition: all 0.3s ease-in-out;
+}
+
+.live_follow_container header button::after {
+  content: "";
+  display: block;
+  width: 100%;
+  position: absolute;
+  left: 0%;
+  right: 20%;
+  bottom: 0;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8837e9, #373fd7);
+  opacity: 0;
+  transform: scaleX(0.7);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.live_follow_container header button[data-active]::after,
+.live_follow_container header button:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.live_follow_container header button[data-active],
+.live_follow_container header button:hover {
+  color: var(--text-primary-color);
+}
+
+.live_follow_container .follow_form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.live_follow_container form {
+  width: 100%;
+  min-width: 0;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.filter_follow {
+  padding: 6px 12px;
+  background: var(--live-container-bg);
+  border-radius: var(--radius-sm);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.follow_straight_container {
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.follow_straight_container li {
+  margin-bottom: 10px;
+}
+
+.follow_straight_container .follow_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 2px 4px;
+  background: var(--live-container-bg);
+  border-radius: var(--radius-sm);
+}
+
+.follow_content .follow_name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.follow_content .follow_bio {
+  font-size: 12px;
+  font-weight: 400;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.follow_content .follow_badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 3px 5px;
+  border-radius: var(--radius-sm);
+  background: #4963c425;
+}
+
+.follow_item_add {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.follow_content_title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.follow_content_title span {
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--primary-danger);
+  color: var(--primary-danger);
+  font-size: 10px;
+}

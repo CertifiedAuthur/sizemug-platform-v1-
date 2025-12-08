@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn how Sizemug meets WCAG 2.1 AA standards: keyboard navigation, screen reader support, captions, high-contrast, and more." />
+    <link rel="icon" href="./icons/favicon-sizemug.svg" />
+    <!-- Critical CSS -->
+    <link rel="preload" href="./css/help-desk/main.css" as="style" />
+    <link rel="stylesheet" href="./css/help-desk/main.css" />
+    <!-- FontAwesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Prerender key pages -->
+    <link rel="prerender" href="about.html" as="document" />
+    <link rel="prerender" href="community.html" as="document" />
+
+    <link rel="prerender" href="help-center.html" as="document" />
+    <link rel="prerender" href="contact.html" as="document" />
+    <link rel="prerender" href="feedback.html" as="document" />
+    <link rel="prerender" href="privacy.html" as="document" />
+    <link rel="prerender" href="copyright.html" as="document" />
+    <link rel="prerender" href="home.html" as="document" />
+    <link rel="prerender" href="terms.html" as="document" />
+    <link rel="prerender" href="creator.html" as="document" />
+    <link rel="prerender" href="creator-hub.html" as="document" />
+    <link rel="prerender" href="security.html" as="document" />
+    <link rel="prerender" href="user-agreement.html" as="document" />
+    <link rel="prerender" href="promotions.html" as="document" />
+    <link rel="prerender" href="rewards.html" as="document" />
+    <title>Accessibility - Sizemug</title>
+  </head>
+  <body id="main">
+    <!-- Mobile Header -->
+    <nav class="mobile-nav">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="home.html" class="logo-link">
+            <img src="./images/sizemug.svg" alt="Logo" width="100" height="40" loading="lazy" />
+          </a>
+          <p class="logo-text">Help Desk</p>
+        </div>
+        <i class="fas fa-bars menu-icon" aria-hidden="true"></i>
+      </div>
+    </nav>
+
+    <!-- Side Navigation -->
+    <nav class="side-nav" role="navigation" aria-label="Main navigation">
+      <div class="logo">
+        <a href="home.html" class="logo-link">
+          <img src="./images/sizemug.svg" alt="Sizemug Logo" class="logo-image" width="100" height="40" loading="lazy" />
+        </a>
+        <p class="logo-text">Help Desk</p>
+      </div>
+      <hr class="nav-divider" />
+      <div class="search-box">
+        <label for="search-input" class="sr-only">Search Topics</label>
+        <input type="text" id="search-input" placeholder="Search Topics..." class="search-input" />
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+      </div>
+      <div class="nav-links">
+        <section class="nav-section">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="home.html" class="nav-link">
+                Home
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">
+                About
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="community.html" class="nav-link">
+                Community
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="support.html" class="nav-link">
+                Support & Resources
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="nav-section">
+          <h6 class="nav-title">User Support</h6>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="help-center.html" class="nav-link">
+                Help Center
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">
+                Contact
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="feedback.html" class="nav-link">
+                Feedback
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="nav-section">
+          <h6 class="nav-title">Legal & Security</h6>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="privacy.html" class="nav-link">
+                Privacy Policy
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="security.html" class="nav-link">
+                Security
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="terms.html" class="nav-link">
+                Terms of Service
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="user-agreement.html" class="nav-link">
+                User Agreement
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="copyright.html" class="nav-link">
+                Copyright
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="accessibility.html" class="nav-link active">
+                Accessibility
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="nav-section">
+          <h6 class="nav-title">Creator Resources</h6>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="creator-hub.html" class="nav-link">
+                Creator Hub
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="creator.html" class="nav-link">
+                Creator Environment
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="promotions.html" class="nav-link">
+                Promotion & Advertising
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="rewards.html" class="nav-link">
+                Rewards & Gifts
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <hr class="nav-divider" />
+        <a href="/dashboard.html" class="nav-button" role="button">
+          <i class="fas fa-home nav-button-icon" aria-hidden="true"></i>
+          Go to Sizemug
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+      <section class="main-content">
+        <!-- Progress Bar -->
+        <header class="header">
+          <section class="progress-bar">
+            <div class="progress" style="width: 0%"></div>
+          </section>
+        </header>
+
+        <!-- Page Title -->
+        <section class="top-element" id="overview">
+          <section class="title-flex">
+            <h1 class="page-title">Accessibility</h1>
+          </section>
+          <p class="text">Sizemug is committed to providing an inclusive digital environment where all users, regardless of their abilities or disabilities, can fully engage with our platform's diverse range of features. Our platform integrates social productivity tools, task management, live video streaming, user-to-user payment processing, content creation, chat systems, and collaboration tools — all designed with accessibility as a core priority.</p>
+        </section>
+
+        <!-- UI & Navigation -->
+        <section class="section-content" id="ui-nav">
+          <h2 class="section-title">User Interface & Navigation</h2>
+          <p class="section-text">Sizemug's interface follows recognized accessibility standards such as the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. The platform supports keyboard navigation throughout, allowing users to move seamlessly through menus, tasks, and interactive components without requiring a mouse. Focus indicators are clearly visible to aid users relying on keyboard or assistive technology. Screen reader compatibility has been rigorously tested across popular assistive technologies like NVDA, JAWS, and VoiceOver, ensuring that all text, buttons, labels, and dynamic content updates are properly announced and understandable. Semantic HTML elements and ARIA landmarks are utilized to structure content logically, facilitating efficient navigation and orientation.</p>
+        </section>
+
+        <!-- Task Management -->
+        <section class="section-content" id="tasks">
+          <h2 class="section-title">Task Management & Productivity</h2>
+          <p class="section-text">Task lists, calendars, and project boards are designed with clarity and simplicity, providing text alternatives for icons and color-coded elements that do not rely solely on color to convey information. Users can create, edit, assign, and track tasks with easily identifiable controls that announce their state (e.g., completed, pending). Dynamic updates in task statuses and notifications are presented in ways accessible to screen readers and other assistive devices. Additionally, users can customize text size, contrast, and layout density to meet their individual needs.</p>
+        </section>
+
+        <!-- Video Streaming -->
+        <section class="section-content" id="video">
+          <h2 class="section-title">Video Live Streaming</h2>
+          <ul class="section-content">
+            <li class="section-list">
+              <h3 class="section-title">Captions & Transcripts</h3>
+              <p class="section-text">Where applicable, live streams provide real-time captions to support users who are deaf or hard of hearing. When captions are not feasible, transcripts or summary text are made available after the broadcast.</p>
+            </li>
+            <li class="section-list">
+              <h3 class="section-title">Keyboard Controls</h3>
+              <p class="section-text">Video players are fully operable via keyboard, allowing users to play, pause, adjust volume, and toggle captions without a mouse.</p>
+            </li>
+            <li class="section-list">
+              <h3 class="section-title">Screen Reader Support</h3>
+              <p class="section-text">Video controls and streaming status updates are accessible via screen readers, with clear announcements for actions and changes.</p>
+            </li>
+            <li class="section-list">
+              <h3 class="section-title">High Contrast</h3>
+              <p class="section-text">Controls use high-contrast design for better visibility, and users can enlarge the player interface for easier viewing.</p>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Payment System -->
+        <section class="section-content" id="payments">
+          <h2 class="section-title">Payment System</h2>
+          <p class="section-text">
+            Sizemug's peer-to-peer payment system is designed with secure and accessible input forms. Form fields have associated labels, instructions, and error messages that are clearly conveyed via assistive technologies. Users can navigate payment workflows entirely via keyboard and receive meaningful feedback for successful or failed transactions.
+            <br />
+            All financial data input respects privacy and security best practices while maintaining accessibility compliance. Alternative authentication methods, such as biometric or two-factor authentication, are supported in accessible ways to ensure all users can securely complete transactions.
+          </p>
+        </section>
+
+        <!-- Content Creation -->
+        <section class="section-content" id="content">
+          <h2 class="section-title">Content Creation & Collaboration</h2>
+          <ul class="section-content">
+            <li class="section-list">
+              <h3 class="section-title">Rich Text Editors</h3>
+              <p class="text">Fully keyboard-navigable with ARIA live regions for autosave and publish updates.</p>
+            </li>
+            <li class="section-list">
+              <h3 class="section-title">Image Alt Prompts</h3>
+              <p class="text">Users must provide alt text for uploads, aiding screen-reader users.</p>
+            </li>
+            <li class="section-list">
+              <h3 class="section-title">Comment Threads & Chat</h3>
+              <p class="text">Accessible focus management, live announcements, and customizable text/contrast.</p>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Customization -->
+        <section class="section-content" id="custom">
+          <h2 class="section-title">Customization & Preferences</h2>
+          <p class="section-text">Adjust text size, high-contrast/dark mode, motion settings, and RTL/localization to suit your needs.</p>
+        </section>
+
+        <!-- Continuous Improvement -->
+        <section class="section-content" id="improve">
+          <h2 class="section-title">Continuous Improvement & Support</h2>
+          <p class="section-text">We seek feedback from users with disabilities, partner with experts, and include accessibility tests in our workflow. Our help resources (plain-language docs, captioned tutorials) are fully accessible.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <section class="footer-content">
+            <section class="feedback">
+              <p class="feedback-text">Was this helpful?</p>
+              <div class="feedback-icons">
+                <button class="icon-link" aria-label="Thumbs up"><img src="assets/thumb_up.svg" class="feedback-icons" alt="upvote" /></button>
+                <button class="icon-link" aria-label="Thumbs down"><img src="assets/thumb_down.svg" class="feedback-icons" alt="downvote" /></button>
+              </div>
+            </section>
+            <section class="page-nav">
+              <div class="previous-link">
+                <p class="page-nav-text">Previous Page</p>
+                <div class="back-link">
+                  <a href="copyright.html" class="back-link-text">
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                    Copyright
+                  </a>
+                </div>
+              </div>
+              <div class="next-link">
+                <p class="page-nav-text">Next Page</p>
+                <div class="forward-link">
+                  <a href="creator-hub.html" class="forward-link-text">
+                    Creator Hub
+                    <i class="fas fa-arrow-right forward-arrow"></i>
+                  </a>
+                </div>
+              </div>
+            </section>
+          </section>
+        </footer>
+      </section>
+
+      <!-- Anchor Sidebar -->
+      <aside class="anchors">
+        <div class="anchor-content">
+          <h2>On this Page</h2>
+          <nav aria-label="Page Anchors">
+            <ul class="anchor-list">
+              <li class="anchor-item"><a href="#overview">Overview</a></li>
+              <li class="anchor-item"><a href="#ui-nav">UI &amp; Navigation</a></li>
+              <li class="anchor-item"><a href="#tasks">Task Management</a></li>
+              <li class="anchor-item"><a href="#video">Video Streaming</a></li>
+              <li class="anchor-item"><a href="#payments">Payments</a></li>
+              <li class="anchor-item"><a href="#content">Content &amp; Collaboration</a></li>
+              <li class="anchor-item"><a href="#custom">Customization</a></li>
+              <li class="anchor-item"><a href="#improve">Continuous Improvement</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </main>
+
+    <script src="scripts/progress.js" async></script>
+    <script src="scripts/anchor.js"></script>
+    <script src="scripts/pjax.js" async></script>
+    <script src="scripts/mobile-nav.js" defer></script>
+  </body>
+</html>

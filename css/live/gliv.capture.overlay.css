@@ -1,0 +1,101 @@
+.captured-overlay-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.captured-overlay-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+.captured-overlay {
+  width: 20rem;
+  height: 10rem;
+  border-radius: 8px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -10rem;
+  margin-top: -5rem;
+  background: transparent;
+  box-shadow: 0 0 0 100vw #000000cc;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: 800;
+  font-size: 2rem;
+  text-shadow: var(--sizemug-shadow-2xl);
+}
+
+.resize_handler {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.resize_handler.resize_handler--top-left {
+  top: -6px;
+  left: 4px;
+  cursor: nwse-resize;
+}
+
+.resize_handler.resize_handler--top-right {
+  top: -6px;
+  right: -12px;
+  cursor: nesw-resize;
+}
+
+.resize_handler.resize_handler--bottom-left {
+  bottom: -2px;
+  left: 3px;
+  cursor: nesw-resize;
+}
+
+.resize_handler.resize_handler--bottom-right {
+  bottom: -2px;
+  right: -12px;
+  cursor: nwse-resize;
+}
+
+.captured-overlay--actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  position: absolute;
+  bottom: 1rem;
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+}
+
+.captured-overlay--actions button {
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-size-md);
+  font-weight: 400;
+}
+
+.captured-overlay--actions button:first-child {
+  background: var(--modal-bg-color);
+}
+
+.captured-overlay--actions button:last-child {
+  background: var(--primary-color);
+}

@@ -1,0 +1,143 @@
+.hashtag_wrapper {
+  height: calc(100dvh - var(--header-nav-height));
+  overflow: hidden;
+  position: relative;
+}
+
+.mainHashTagContainer {
+  padding: 1rem !important;
+  height: calc(100dvh - var(--header-nav-height));
+  overflow-y: auto !important;
+  scrollbar-width: none;
+}
+
+.hashtag_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hashtag_header_info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hashtag_header_info h2 {
+  font-size: 5rem;
+}
+
+.hashtag_header_info h4 {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.hashtag_header_info p {
+  color: #0000009f;
+  font-size: 13px;
+}
+
+.hashtag_header_option_container {
+  position: relative;
+}
+
+.hashtag_header_option_container button {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hashtag_header_option_container button svg:last-child {
+  display: none;
+}
+
+.hashtag_header_option_container button[aria-expanded="true"] svg:first-child {
+  display: none;
+}
+
+.hashtag_header_option_container button svg:first-child,
+.hashtag_header_option_container button[aria-expanded="true"] svg:last-child {
+  display: block;
+}
+
+.hashtag_header_option_container button[aria-expanded="true"] ~ ul {
+  display: block;
+}
+
+.hashtag_header_option_container ul {
+  position: absolute;
+  top: 2rem;
+  right: 0.5rem;
+  z-index: 9999;
+
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 4px;
+
+  display: none;
+  width: 8rem;
+
+  background: #ffffff;
+}
+
+.hashtag_header_option_container ul li {
+  padding: 3px 6px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 5px;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.hashtag_header_option_container ul li:hover {
+  background: var(--border-color);
+}
+
+.hashtag_header_option_container ul li.save.saved span svg path {
+  fill: orange;
+}
+
+/*-----------------------------  --------------------------*/
+.popular_container {
+  padding-bottom: 10px;
+}
+
+.popular_container h3 {
+  font-size: 13px;
+  font-weight: bold;
+  color: #0000007e;
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+
+.popular_container_row {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.popular_container_row_item > * {
+  white-space: nowrap;
+  color: #3440547f;
+  font-size: 13px;
+}
+
+.popular_container_row_item h4 {
+  color: var(--global-red-color);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.hashtag--hidden {
+  display: none !important;
+}

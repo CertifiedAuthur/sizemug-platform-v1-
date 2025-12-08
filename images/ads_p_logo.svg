@@ -1,0 +1,25 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<circle cx="20" cy="20" r="19.85" fill="url(#paint0_linear_623_4459)" stroke="url(#paint1_linear_623_4459)" stroke-width="0.3"/>
+<ellipse cx="20.0009" cy="19.9999" rx="15.9462" ry="15.9462" fill="url(#paint2_linear_623_4459)"/>
+<path opacity="0.32" fill-rule="evenodd" clip-rule="evenodd" d="M18.8527 34.7986C27.6596 34.7986 34.7989 27.6592 34.7989 18.8524C34.7989 14.7407 33.2427 10.9925 30.6872 8.16455C33.9171 11.0827 35.9468 15.3044 35.9468 20.0001C35.9468 28.807 28.8074 35.9463 20.0006 35.9463C15.3054 35.9463 11.0842 33.9172 8.16602 30.6879C10.9938 33.2428 14.7416 34.7986 18.8527 34.7986Z" fill="#FFE26F"/>
+<path opacity="0.61" fill-rule="evenodd" clip-rule="evenodd" d="M31.8368 9.31365C29.0089 6.75801 25.2606 5.20173 21.1487 5.20173C12.3419 5.20173 5.20253 12.3411 5.20253 21.148C5.20253 25.2589 6.75814 29.0065 9.31281 31.8342C6.08375 28.9161 4.05469 24.695 4.05469 19.9999C4.05469 11.1931 11.1941 4.05371 20.0009 4.05371C24.6968 4.05371 28.9186 6.08354 31.8368 9.31365Z" fill="#F99335"/>
+<rect x="8" y="8" width="24" height="24" fill="url(#pattern0_623_4459)"/>
+<defs>
+<pattern id="pattern0_623_4459" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_623_4459" transform="scale(0.0104167)"/>
+</pattern>
+<linearGradient id="paint0_linear_623_4459" x1="7.4247" y1="4.42269" x2="32.1117" y2="34.5858" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFC700"/>
+<stop offset="1" stop-color="#FFA800"/>
+</linearGradient>
+<linearGradient id="paint1_linear_623_4459" x1="9.36293" y1="3.27624" x2="32.3549" y2="34.0649" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FB9B21" stop-opacity="0.75"/>
+<stop offset="1" stop-color="#F08906"/>
+</linearGradient>
+<linearGradient id="paint2_linear_623_4459" x1="12.4528" y1="10.7065" x2="28.9706" y2="32.072" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFA800"/>
+<stop offset="0.938927" stop-color="#FFC838"/>
+</linearGradient>
+<image id="image0_623_4459" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAACxLAAAsSwGlPZapAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAN2SURBVHgB7ZuBcdswDEXhTpANqhHiCZpMkHqC2BN0hIzQEdxM4GYCuRPEnUDsBG0nQIAjdfb57MQ2YYGS/rvDycnFOYkQKZB8IgIAAAAAAACMjQkVCDNXcriV0ONniZv0uUp/Uh35apD4txP68x+Jjf48mUw2VBjuCZDG1sbVxv4icZc+39B10KRoEn5JrCUha3LGJQGp0ecSD3TdBj+FtcQzxYQEGjLS8HcSNZfLSuKOhoZc1FzilftDIzGnvsPxjm+4vzTcx0TISd9w7M5DYcmxMjPH/CEsJ6oP1RUdLxX7SpCYWZeyn8gQafxHOdQ0vMZXKok6XaMZZj2AY/VQ0zi4t5pDmCQgjY9DvfMPoRO6qcW8wWoIeqLxNL6iE8clGZDdA0Y29OyTPRRZ9ADTh1LP+EqZWCTglsbLA2ViMQQxjRgZgrLa0HQeAM7HIgGBxkv2rNgiAS80XopIwE8aL8+USXYCUh28pvHxw2I5wnIp4pV8txa7JFCchAXKBItxlzG1WpY2K0NTd1xQXKgaKnptC8s9AWzInE6g0jdklHSC92RQIRSEVnrTSYFi17twtCEa7i8ND0FT4f4lQhWaOQ0NjppKybZEzR3f8V5qYkXRA31MRy9aV1SXU3Ri1XkFV4Qdne46DRV0O5Nz9bNHo+9isR+gM+CZpdiaeojGvqLeRnXkq2HnqPF/5/PmCue4kv85JU/S2PmXh/jQOoJc67d0zf6bUXsPsYavpPCVAB+wu8mbI9XEckiJ4He0evKGPy7rss0BL/iE9xnIGz6NRuI7x3WiokmN/sRpjP8IysTDiggU11ZeSnhHi7fvqKlior21OuPr2VZECVrKmmJdrvW5aal4CN6+gdnOObLmHUNIwD7tZEmPv2lbx1N7PJYk3j7427lCe9R5xO3O78wYYgJ6RQliVqDxAi/IGXhBzsALcgRekCOB4AW5Ai/ICXhBjgSCF+QGvCAnGoYX5AK8ICdqhhfUKfCCFIYXdDkMLwheUNcwvCAfGF6QDwwvyAeGF9Q9DC+oWxheELygLCy64R7wgs7hCgnoFfCCfIEX5Ay8IGfgBTkCL8iRQEZekMmmfDqRGY2HhdV8BV7QebRe0JqMgBd0OoHgBbkBL8iJhuEFuQAvyIma4QV1CrwgheEFlQXHUrbdqaqoQC8IAAAAAAAAAC7lDdup2Q8M5psRAAAAAElFTkSuQmCC"/>
+</defs>
+</svg>

@@ -1,0 +1,428 @@
+:root {
+  --time-display-color: #ffffff92;
+}
+
+.call_modal_overlay {
+  position: absolute;
+  background: black;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 999;
+}
+
+.call_modal_wrapper,
+.call_modal_container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.call_modal_container header {
+  height: calc(4.2rem - 10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px;
+}
+
+.call_modal_container header button.collapse_call_modal,
+.call_modal_container header button.call_options_btn {
+  background: #464646;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.call_modal_container header .call_modal_user {
+  color: white;
+  text-align: center;
+  line-height: 18px;
+}
+
+.call_modal_container header .call_modal_user .calling_time {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--time-display-color);
+}
+
+.call_modal_container header .call_modal_user div:has(h5) {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.call_modal_container header .call_modal_user span.online {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: var(--online-color);
+}
+
+.call_modal_actions {
+  position: relative;
+}
+
+.call_dropdown_options {
+  position: absolute;
+  top: 2rem;
+  right: 10px;
+
+  border-radius: 10px;
+  padding: 10px;
+  background: #424549;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 350px;
+  color: white;
+  z-index: 99;
+}
+
+.call_dropdown_options > div {
+  background: #2b2f34;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.call_dropdown_options > div:first-child {
+  align-items: center;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.call_dropdown_options .send_message {
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  background: #424549;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.call_dropdown_options .stretched_el,
+.call_dropdown_options div > button > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  width: 100%;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.stretched_el_profile {
+  position: relative;
+}
+
+.stretched_el_profile img {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+}
+
+.stretched_el_profile span {
+  width: 13px;
+  height: 13px;
+  background: var(--online-color);
+  border-radius: 100%;
+
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+}
+
+.call_dropdown_options > div > button {
+  width: 100%;
+  border-radius: 0;
+  background: none;
+
+  display: flex;
+  align-items: center;
+}
+
+.call_dropdown_options > div:last-child button {
+  color: var(--global-red-color) !important;
+}
+
+/*-------------------------------  Add Participant Dropdown -------------------------------*/
+.call_add_participants {
+  position: absolute;
+  top: 2rem;
+  right: 10px;
+
+  border-radius: 10px;
+  background: #424549;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 350px;
+  height: 70vh;
+  color: white;
+  overflow: hidden;
+  z-index: 99;
+}
+
+.call_add_participants_wrapper {
+  position: relative;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.call_add_participants_wrapper .top_bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+}
+
+.add_participants_tab {
+  display: flex;
+}
+
+.add_participants_tab button {
+  width: 100%;
+  text-align: center;
+  padding: 4px 0;
+  color: var(--time-display-color);
+}
+
+.add_participants_tab button.active {
+  border-bottom: 1px solid #ffffff;
+  color: white;
+}
+
+.add_participants_lists {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  overflow: auto;
+}
+
+.add_participants_lists ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  height: 100%;
+  padding: 10px 0;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+
+  padding-bottom: 4.7rem;
+
+  background: #2b2f34;
+}
+
+.add_participants_lists ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 13px;
+
+  padding: 3px 12px;
+}
+
+.add_participants_lists ul li img {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.add_participants_lists ul li button {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+
+  border: 1px solid var(--border-color);
+  margin-left: auto;
+}
+
+.add_participants_lists ul li button svg {
+  display: none;
+}
+
+.add_participants_lists ul li[aria-selected="true"] button {
+  background: var(--primary-color);
+  border: none;
+}
+
+.add_participants_lists ul li[aria-selected="true"] button svg {
+  display: block;
+}
+
+.add_participants_lists > div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: #424549;
+  padding: 10px;
+}
+
+.add_participants_lists #addParticipateBtn {
+  width: 100%;
+  text-align: center;
+  background: var(--primary-color);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+/*------------------------------- Single call -------------------------------*/
+.single_user_main {
+  height: 100%;
+  /* background: orangered; */
+}
+
+.single_user_container {
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10rem;
+}
+
+.single_user_container .calling_info {
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.single_user_container .calling_info img {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+}
+
+.calling_info_actions {
+  background: #1c1b1b;
+  border-radius: 40px;
+  padding: 7px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.calling_info_actions button {
+  background: #464646;
+  border-radius: 40px;
+  width: 70px;
+  height: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calling_info_actions button:disabled {
+  cursor: not-allowed;
+  background: #464646 !important;
+}
+
+.calling_info_actions button[aria-selected="true"] {
+  background: var(--primary-color);
+}
+
+.calling_info_actions button.end_call {
+  background: var(--global-red-color) !important;
+}
+
+/*-------------------------------    -------------------------------*/
+.on_call_container {
+  background: black;
+  color: white;
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  border: 1px solid var(--border-color);
+  box-shadow: 0 1px 2px 0 #0000000d;
+}
+
+.on_call_container > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.on_call_container .on_call_container_left {
+  font-size: 12px;
+}
+
+.on_call_container .on_call_container_left h3 {
+  font-weight: 500;
+}
+
+.on_call_container .on_call_container_left .on_call_time {
+  color: var(--time-display-color);
+}
+
+.on_call_container .on_call_container_left img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.on_call_container .on_call_container_right button {
+  background: #ffffff;
+  border-radius: 40px;
+  width: 40px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.on_call_container .on_call_container_right button.end_call {
+  background: var(--global-red-color);
+}

@@ -1,0 +1,115 @@
+/**------ OVERLAY ---------*/
+.interestsOverlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 0 !important;
+  animation: Modal 0.2s ease;
+  width: 100% !important;
+  height: auto;
+}
+
+.interestsOverlayWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.interestsOverlayWrapper #interestsModalMobileClose {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  align-self: flex-end;
+
+  display: none;
+}
+
+.interest_container {
+  width: 40rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffff;
+  border-radius: 20px;
+
+  position: static !important;
+}
+
+.interest_container header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.interest_container--main {
+  padding: 1rem;
+}
+
+.interest_container--main h2 {
+  color: #344054;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.interest-items {
+  padding: 0.8rem 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.interest-items .interest-item {
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  color: #363853;
+
+  padding: 0.4rem 0.8rem;
+}
+
+.interest-items .interest-item[data-active="true"] {
+  background: var(--primary-color);
+  color: white;
+}
+
+.interest_container footer {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+
+  padding: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.interest_container footer button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.interest_container footer button:last-child {
+  background: #000000;
+  color: white;
+}
+
+.interest_container footer button:first-child {
+  background: var(--border-color);
+}

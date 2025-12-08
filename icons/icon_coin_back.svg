@@ -1,0 +1,25 @@
+<svg width="62" height="62" viewBox="0 0 62 62" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<circle cx="30" cy="30" r="29.85" transform="matrix(0.999689 -0.0249235 -0.0198471 0.999803 1.19141 1.49609)" fill="url(#paint0_linear_2096_27582)" stroke="url(#paint1_linear_2096_27582)" stroke-width="0.3"/>
+<ellipse cx="23.9193" cy="23.9193" rx="23.9193" ry="23.9193" transform="matrix(0.999689 -0.0249235 -0.0198471 0.999803 7.15039 7.42383)" fill="url(#paint2_linear_2096_27582)"/>
+<path opacity="0.32" d="M46.9592 12.5897C51.718 16.8454 54.6377 23.1021 54.4979 30.1463C54.2356 43.3538 43.3177 54.3273 30.1117 54.6566C23.0683 54.8322 16.7969 51.9444 12.517 47.2072C16.6819 50.9361 22.2571 53.132 28.4247 52.9782C41.6307 52.6488 52.5487 41.6754 52.8109 28.4678C52.9334 22.2996 50.7093 16.7356 46.9592 12.5897Z" fill="#FFE26F"/>
+<path opacity="0.61" d="M31.0619 6.82768C38.1048 6.6521 44.3758 9.5396 48.6556 14.2762C44.4908 10.5479 38.9159 8.35236 32.7489 8.50611C19.5428 8.83548 8.62481 19.8099 8.36262 33.0175C8.24032 39.1847 10.4634 44.7481 14.2124 48.8937C9.45449 44.638 6.53585 38.3815 6.67567 31.3381C6.93793 18.1305 17.8558 7.15701 31.0619 6.82768Z" fill="#F99335"/>
+<rect width="16" height="16" transform="matrix(0.999689 -0.0249235 -0.0198471 0.999803 23.0312 23.2246)" fill="url(#pattern0_2096_27582)"/>
+<defs>
+<pattern id="pattern0_2096_27582" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="#image0_2096_27582" transform="scale(0.0104167)"/>
+</pattern>
+<linearGradient id="paint0_linear_2096_27582" x1="11.137" y1="6.63403" x2="48.1676" y2="51.8786" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFC700"/>
+<stop offset="1" stop-color="#FFA800"/>
+</linearGradient>
+<linearGradient id="paint1_linear_2096_27582" x1="14.0444" y1="4.91436" x2="48.5323" y2="51.0974" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FB9B21" stop-opacity="0.75"/>
+<stop offset="1" stop-color="#F08906"/>
+</linearGradient>
+<linearGradient id="paint2_linear_2096_27582" x1="12.5971" y1="9.97921" x2="37.3739" y2="42.0275" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFA800"/>
+<stop offset="0.938927" stop-color="#FFC838"/>
+</linearGradient>
+<image id="image0_2096_27582" width="96" height="96" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAACxLAAAsSwGlPZapAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAN2SURBVHgB7ZuBcdswDEXhTpANqhHiCZpMkHqC2BN0hIzQEdxM4GYCuRPEnUDsBG0nQIAjdfb57MQ2YYGS/rvDycnFOYkQKZB8IgIAAAAAAACMjQkVCDNXcriV0ONniZv0uUp/Uh35apD4txP68x+Jjf48mUw2VBjuCZDG1sbVxv4icZc+39B10KRoEn5JrCUha3LGJQGp0ecSD3TdBj+FtcQzxYQEGjLS8HcSNZfLSuKOhoZc1FzilftDIzGnvsPxjm+4vzTcx0TISd9w7M5DYcmxMjPH/CEsJ6oP1RUdLxX7SpCYWZeyn8gQafxHOdQ0vMZXKok6XaMZZj2AY/VQ0zi4t5pDmCQgjY9DvfMPoRO6qcW8wWoIeqLxNL6iE8clGZDdA0Y29OyTPRRZ9ADTh1LP+EqZWCTglsbLA2ViMQQxjRgZgrLa0HQeAM7HIgGBxkv2rNgiAS80XopIwE8aL8+USXYCUh28pvHxw2I5wnIp4pV8txa7JFCchAXKBItxlzG1WpY2K0NTd1xQXKgaKnptC8s9AWzInE6g0jdklHSC92RQIRSEVnrTSYFi17twtCEa7i8ND0FT4f4lQhWaOQ0NjppKybZEzR3f8V5qYkXRA31MRy9aV1SXU3Ri1XkFV4Qdne46DRV0O5Nz9bNHo+9isR+gM+CZpdiaeojGvqLeRnXkq2HnqPF/5/PmCue4kv85JU/S2PmXh/jQOoJc67d0zf6bUXsPsYavpPCVAB+wu8mbI9XEckiJ4He0evKGPy7rss0BL/iE9xnIGz6NRuI7x3WiokmN/sRpjP8IysTDiggU11ZeSnhHi7fvqKlior21OuPr2VZECVrKmmJdrvW5aal4CN6+gdnOObLmHUNIwD7tZEmPv2lbx1N7PJYk3j7427lCe9R5xO3O78wYYgJ6RQliVqDxAi/IGXhBzsALcgRekCOB4AW5Ai/ICXhBjgSCF+QGvCAnGoYX5AK8ICdqhhfUKfCCFIYXdDkMLwheUNcwvCAfGF6QDwwvyAeGF9Q9DC+oWxheELygLCy64R7wgs7hCgnoFfCCfIEX5Ay8IGfgBTkCL8iRQEZekMmmfDqRGY2HhdV8BV7QebRe0JqMgBd0OoHgBbkBL8iJhuEFuQAvyIma4QV1CrwgheEFlQXHUrbdqaqoQC8IAAAAAAAAAC7lDdup2Q8M5psRAAAAAElFTkSuQmCC"/>
+</defs>
+</svg>

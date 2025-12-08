@@ -1,0 +1,51 @@
+.upload-container-wrapper {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  width: 100%;
+  transition: background-color 0.4s ease;
+
+  padding: 2rem 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 0.9rem;
+}
+
+.upload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  text-align: center;
+  color: #667085;
+  font-weight: 400;
+
+  max-width: 17rem;
+}
+
+.upload-container .active:last-child {
+  background: #f3f3f355;
+}
+
+.upload-container .cloud--icon {
+  border: 8px solid #f9fafb;
+  background: #f2f4f7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+}
+
+.upload-container span:first-child {
+  color: #8837e9;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}

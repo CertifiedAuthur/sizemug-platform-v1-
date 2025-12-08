@@ -1,0 +1,213 @@
+.christmas_wrapper {
+  height: calc(100dvh - var(--header-nav-height));
+  overflow: hidden;
+  position: relative;
+}
+
+.christmas_main--container {
+  overflow-y: auto !important;
+  height: calc(100dvh - 4.2rem);
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+[role="button"],
+button {
+  cursor: pointer;
+}
+
+.christmas_main--container > *:not(:first-child) {
+  margin-bottom: 1rem;
+}
+
+.filter_christmas {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.filter_christmas,
+.filter_christmas button {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.filter_christmas {
+  column-gap: 15px;
+}
+
+.filter_christmas button {
+  width: fit-content;
+  background: none;
+  padding: 7px 15px;
+  border-radius: 20px;
+  border: 1px solid #eaecf0;
+  color: #363853;
+  transition: all 0.5s ease;
+}
+
+.filter_christmas button:hover {
+  background: linear-gradient(to right, #bd1a2f, #460297);
+  color: white;
+}
+
+.filter_christmas button.active {
+  background: linear-gradient(to right, #bd1a2f, #460297);
+  color: white;
+}
+
+.filter_christmas button img {
+  max-width: none;
+}
+
+/*
+- GRID COUNTDOWN
+*/
+.grid_countdown {
+  display: flex;
+  gap: 15px;
+}
+
+._container_grid {
+  padding: 10px;
+  border: 1px solid #f3f3f3;
+  border-radius: 15px;
+  flex-grow: 1;
+}
+
+.gridContainer,
+.gridContainerSkeleton {
+  width: 100%;
+}
+
+/* Timer */
+.grid_countdown aside {
+  width: 30%;
+}
+
+.grid_countdown aside h3,
+.grid_countdown .trending_lists h4 {
+  color: #36385383;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  padding-bottom: 10px;
+}
+
+.grid_countdown .time-block .label {
+  color: #363853;
+
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 7px;
+  display: block;
+}
+
+.grid_countdown .time-block-counter {
+  height: 5rem;
+  position: relative;
+}
+
+.grid_countdown .time-block-rounds {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.grid_countdown .time-block-rounds > div {
+  height: 50%;
+  border-radius: 15px;
+  background: linear-gradient(140deg, #bd1a2f, #460297 150%);
+}
+
+.grid_countdown .time-block .time-block-count {
+  color: #f2f2f2;
+  font-weight: bold;
+  font-size: 4rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Share Tech", sans-serif;
+}
+
+.grid_countdown .timer_countdown {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-bottom: 2rem;
+}
+
+.grid_countdown .timer_countdown .time-block {
+  width: 25%;
+  height: 100%;
+}
+
+.grid_countdown .timer_countdown .timer-block-stick {
+  height: 5px;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  /* z-index: 9999999; */
+  display: flex;
+  align-items: center;
+  background: #24475b;
+  border-radius: 10px;
+  gap: 0 !important;
+}
+
+.grid_countdown .timer_countdown .timer-block-stick div:first-child,
+.grid_countdown .timer_countdown .timer-block-stick div:last-child {
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  background: #24475b;
+  margin-bottom: 1px;
+}
+
+.grid_countdown .timer_countdown .timer-block-stick div:nth-child(2) {
+  flex-grow: 1;
+  height: 100%;
+  background: #24475b;
+}
+
+.grid_countdown .trending_lists li {
+  display: inline-block;
+  padding-right: 10px;
+  margin-bottom: 10px;
+}
+
+.grid_countdown .trending_lists li span {
+  background: linear-gradient(140deg, #bd1a2f, #460297 200%);
+  font-size: 1rem;
+  font-weight: 400;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.christ-hidden {
+  display: none !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .grid_countdown {
+    flex-direction: column-reverse;
+  }
+
+  .grid_countdown aside {
+    width: auto;
+  }
+}

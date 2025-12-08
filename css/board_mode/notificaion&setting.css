@@ -1,0 +1,221 @@
+.notifications_settings {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+
+  background: #ffff;
+  width: 320px;
+  border: 1px solid #eaecf0;
+  border-radius: 10px;
+  /* animation: Modal 0.1s ease; */
+
+  /* Popper transition styles */
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: var(--whiteboard-overlay-z-index);
+}
+
+.notifications_settings.visible {
+  opacity: 1;
+  z-index: 9999999999999;
+}
+
+.notifications_settings--event,
+.notifications_settings--event > button {
+  height: 100%;
+}
+
+.notifications_settings header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0.7rem;
+  border-bottom: 1px solid #eaecf0;
+}
+
+.notifications_settings header h2 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #050038;
+}
+
+.notifications_settings header #hide_notification:hover {
+  background: none;
+}
+
+.notifications_settings section {
+  padding: 0.7rem;
+}
+
+.notificaion_list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 200px;
+}
+
+.notificaion_list li:last-child {
+  padding-bottom: 1rem;
+}
+
+.notificaion_list p {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+}
+
+.notificaion_list p span {
+  font-weight: 700;
+}
+
+.settings_list {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.settings_list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings_list p {
+  display: flex;
+  gap: 3px;
+}
+
+.settings_list span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #344054;
+}
+
+.settings_side--containers {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -17.5rem;
+  z-index: -1;
+  width: 280px;
+  padding: 15px;
+  background: #fbfbfb;
+  border: 1px solid #e2e3e6;
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+}
+
+.settings_side--containers .heading_box {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  background: #ffffff;
+  margin-bottom: 10px;
+}
+
+.settings_side--containers h3 {
+  font-size: 20px;
+  color: #344054;
+}
+
+.settings_side--containers p {
+  color: #474747;
+  font-size: 12px;
+  line-height: 23px;
+}
+
+@media screen and (max-width: 850px) {
+  .mobile_notifications_container,
+  .mobile_setting_container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .mobile_notifications_container h1,
+  .mobile_setting_container h1 {
+    font-weight: 700;
+    font-size: 17px;
+    text-align: center;
+    border-bottom: 1px solid #ececec;
+    padding: 0 0 1rem 0;
+  }
+
+  .notificaion_list {
+    overflow-y: auto;
+    padding: 1rem;
+    padding-bottom: 0;
+    height: 45vh;
+  }
+
+  .mobile_setting_container section {
+    padding: 15px 12px;
+  }
+
+  .mobile_setting_container header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #fbfbfb;
+    margin-top: -20px;
+    padding: 13px 17px;
+  }
+
+  .mobile_setting_container header h1 {
+    padding: 0;
+    border: none;
+  }
+
+  .settings_side--containers {
+    position: static;
+    top: 0%;
+    transform: translateY(0%);
+    right: 0rem;
+    z-index: 0;
+    width: 100%;
+    background: #ffffff;
+    border: none;
+  }
+
+  .settings_side--containers .heading_box {
+    background: #fbfbfb;
+  }
+}
+
+/* outer: only Popper’s transform, no animation */
+.notification_container,
+.settings_container,
+.send_emoji_container_wrapper,
+.sticky_collaborators {
+  position: absolute;
+  /* no transition or transform here! */
+  z-index: var(--whiteboard-overlay-z-index);
+}
+
+.notification_panel,
+.settings_panel,
+.send_emoji_container_panel,
+.collaborators_panel {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notification_container.visible,
+.settings_container.visible,
+.send_emoji_container_wrapper.visible,
+.sticky_collaborators.visible {
+  pointer-events: auto;
+}
+
+.notification_container.visible .notification_panel,
+.settings_container.visible .settings_panel,
+.send_emoji_container_wrapper.visible .send_emoji_container_panel,
+.sticky_collaborators.visible .collaborators_panel {
+  opacity: 1;
+  transform: translateY(0);
+}

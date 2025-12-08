@@ -1,0 +1,20 @@
+.explore_main_wrapper {
+  height: calc(100dvh - var(--header-nav-height));
+  overflow: hidden;
+  position: relative;
+}
+
+.mainExploreContainer {
+  padding: 1rem !important;
+  height: calc(100dvh - 4.2rem);
+  overflow-y: auto !important;
+  scrollbar-width: none;
+}
+
+.content_area main > *:not(:first-child) {
+  margin-top: 10px;
+}
+
+.explore-hidden {
+  display: none !important;
+}

@@ -1,0 +1,576 @@
+/* Gift Popover Styles */
+.gift_popover {
+  background: white;
+  border-radius: 5px;
+  width: 450px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* border: 1px solid #e5e7eb; */
+  z-index: 15000;
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.gift_popover.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gift_popover_arrow {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+
+.gift_popover_arrow::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: white;
+  transform: rotate(45deg);
+}
+
+/* Arrow positioning for different placements */
+.gift_popover[data-popper-placement^="top"] .gift_popover_arrow {
+  bottom: -5px;
+}
+
+.gift_popover[data-popper-placement^="top"] .gift_popover_arrow::before {
+  border-bottom: none;
+  border-left: none;
+}
+
+.gift_popover[data-popper-placement^="bottom"] .gift_popover_arrow {
+  top: -5px;
+}
+
+.gift_popover[data-popper-placement^="bottom"] .gift_popover_arrow::before {
+  border-top: none;
+  border-right: none;
+}
+
+.gift_popover[data-popper-placement^="left"] .gift_popover_arrow {
+  right: -5px;
+}
+
+.gift_popover[data-popper-placement^="left"] .gift_popover_arrow::before {
+  border-left: none;
+  border-bottom: none;
+}
+
+.gift_popover[data-popper-placement^="right"] .gift_popover_arrow {
+  left: -5px;
+}
+
+.gift_popover[data-popper-placement^="right"] .gift_popover_arrow::before {
+  border-right: none;
+  border-top: none;
+}
+
+/* Arrow alignment */
+.gift_popover[data-popper-placement="top-start"] .gift_popover_arrow,
+.gift_popover[data-popper-placement="bottom-start"] .gift_popover_arrow {
+  left: 24px;
+}
+
+.gift_popover[data-popper-placement="top-end"] .gift_popover_arrow,
+.gift_popover[data-popper-placement="bottom-end"] .gift_popover_arrow {
+  right: 24px;
+}
+
+.gift_popover[data-popper-placement="left-start"] .gift_popover_arrow,
+.gift_popover[data-popper-placement="right-start"] .gift_popover_arrow {
+  top: 24px;
+}
+
+.gift_popover[data-popper-placement="left-end"] .gift_popover_arrow,
+.gift_popover[data-popper-placement="right-end"] .gift_popover_arrow {
+  bottom: 24px;
+}
+
+.gift_main_popover_container {
+  padding: 16px 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.gift_recipient {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-bottom: 10px;
+}
+
+.gift_icon {
+  font-size: 24px;
+
+  display: flex;
+  align-items: center;
+}
+
+.recipient_avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: -9px;
+  position: relative;
+  z-index: 5;
+  border: 1px solid #ffffff;
+}
+
+.gift_title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #101828;
+}
+
+.close_gift_modal {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: #f9fafb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close_gift_modal:hover {
+  background: #f3f4f6;
+  transform: scale(1.05);
+}
+
+.gift_search_container {
+  margin-bottom: 10px;
+}
+
+.gift_search_input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e4e7ec;
+  border-radius: 10px;
+  padding: 8px 10px;
+  transition: all 0.2s;
+}
+
+.gift_search_input svg {
+  flex-shrink: 0;
+}
+
+.gift_search_input input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #344054;
+  font-size: 16px;
+}
+
+.gift_search_input input::placeholder {
+  color: #98a2b3;
+}
+
+.gift_main_popover_container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.gift_selection_state_container {
+  max-height: 30rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.gifts_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db transparent;
+}
+
+.gifts_grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gifts_grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gifts_grid::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+
+.gifts_grid::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.gift_item {
+  position: relative;
+  background: white;
+  border: 2px solid #e4e7ec;
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.gift_item:hover {
+  border-color: #f43f5e;
+  background: #faf5ff;
+  box-shadow: 0 4px 12px #f43f5e1a;
+}
+
+.gift_item.selected {
+  border-color: #f43f5e;
+  background: #faf5ff;
+}
+
+.gift_selection_circle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d0d5dd;
+  border-radius: 50%;
+  background: white;
+  transition: all 0.2s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gift_item.selected .gift_selection_circle {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.gift_selection_circle svg {
+  display: none;
+}
+
+.gift_item.selected .gift_selection_circle svg {
+  display: block;
+}
+
+.gift_emoji img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.gift_name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #344054;
+}
+
+.gift_price {
+  font-size: 14px;
+  font-weight: 600;
+  color: #f59e0b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.gift_price img {
+  width: 16px;
+  height: 16px;
+}
+
+.send_gift_btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 30px;
+  border: none;
+  background: #f43f5e;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.send_gift_btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Gift Success Modal */
+.gift_success_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 16000;
+  padding: 2rem;
+}
+
+.gift_success_overlay.active {
+  display: flex;
+}
+
+.gift_success_modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 32px 24px;
+  text-align: center;
+  animation: giftSuccessSlideUp 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes giftSuccessSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gift_success_content {
+  position: relative;
+  z-index: 1;
+}
+
+.success_checkmark {
+  margin: 0 auto 24px;
+  animation: checkmarkBounce 0.6s ease;
+}
+
+@keyframes checkmarkBounce {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.gift_success_content h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #101828;
+  margin: 0 0 12px;
+}
+
+.gift_success_content p {
+  font-size: 16px;
+  color: #667085;
+  margin: 0 0 32px;
+}
+
+.success_recipient_name {
+  color: #8b5cf6;
+  font-weight: 600;
+}
+
+.gift_success_actions {
+  display: flex;
+  gap: 12px;
+}
+
+.cancel_gift_btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: 1px solid #d0d5dd;
+  border-radius: 12px;
+  background: white;
+  color: #344054;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel_gift_btn:hover {
+  background: #f9fafb;
+  border-color: #98a2b3;
+}
+
+.gift_popover_actions {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.gift_popover_actions {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.gift_popover_actions.active {
+  opacity: 1;
+  visibility: visible;
+  min-height: 65px;
+}
+
+/* Mobile responsive */
+@media (max-width: 640px) {
+  .gift_modal_overlay,
+  .gift_success_overlay {
+    padding: 1rem;
+  }
+
+  .gift_modal {
+    max-width: 100%;
+    max-height: 95vh;
+  }
+
+  .gift_success_modal {
+    max-width: 100%;
+    padding: 24px 20px;
+  }
+
+  .gifts_grid {
+    padding: 12px 20px;
+    max-height: 300px;
+  }
+
+  .gift_item {
+    padding: 16px 12px;
+  }
+
+  .gift_emoji {
+    font-size: 28px;
+  }
+
+  .gift_success_actions {
+    flex-direction: column;
+  }
+}
+
+/* Gift Success State within Popover */
+.gift_success_state {
+  padding-top: 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.gift_success_header {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-direction: column;
+}
+
+.gift_success_icon {
+  margin: 0 auto 24px;
+  animation: checkmarkBounce 0.6s ease;
+}
+
+.gift_success_state h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #101828;
+  margin: 0 0 12px;
+}
+
+.gift_success_state p {
+  font-size: 16px;
+  color: #667085;
+  margin: 0 0 32px;
+}
+
+.gift_success_state .success_recipient_name {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.gift_success_actions {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.cancel_gift_btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: 1px solid #d0d5dd;
+  border-radius: 30px;
+  background: white;
+  color: #344054;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel_gift_btn:hover {
+  background: #f9fafb;
+  border-color: #98a2b3;
+}
+
+.send_again_btn {
+  flex: 1;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  background: #f43f5e;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* State transitions */
+.gift_popover.success-mode .gift_selection_state_container,
+.gift_popover.success-mode .gift_popover_actions {
+  display: none;
+}
+
+.gift_popover.success-mode .gift_success_state {
+  display: block !important;
+}
+
+/* Default state - hide success, show selection */
+.gift_success_state {
+  display: none;
+}

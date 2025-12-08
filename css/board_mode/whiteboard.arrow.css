@@ -1,0 +1,55 @@
+.arrow_pre_colors button.active {
+  border: 2px solid #8837e9 !important;
+}
+
+.arrow_types {
+  gap: 5px;
+}
+
+.arrow_types button {
+  width: 30px;
+  height: 30px;
+  border-radius: 5px !important;
+  align-items: center;
+  height: 100%;
+}
+
+.arrow_types button.active {
+  background: #8837e9;
+}
+
+.arrow_types button.straight_arrow.active svg path {
+  fill: white;
+}
+
+.arrow_types button.curve_arrow.active svg g {
+  stroke: white;
+}
+
+/**
+
+
+
+
+
+
+
+
+
+ CURSOR DESIGNS
+
+
+
+
+
+ 
+
+
+
+**/
+
+/* .whiteboard-container::-webkit-scrollbar-track {
+  background: none !important;
+  width: 0;
+  height: 0;
+} */

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Welcome to Sizemug's Creator Hub—your all‑in‑one dashboard for content creation, collaboration, live streaming, payments, and analytics." />
+    <link rel="icon" href="./icons/favicon-sizemug.svg" />
+    <!-- Critical CSS -->
+    <link rel="preload" href="./css/help-desk/main.css" as="style" />
+    <link rel="stylesheet" href="./css/help-desk/main.css" />
+    <!-- FontAwesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Prerender key pages -->
+    <link rel="prerender" href="home.html" as="document" />
+    <link rel="prerender" href="about.html" as="document" />
+    <link rel="prerender" href="community.html" as="document" />
+    <title>Creator Hub – Sizemug</title>
+  </head>
+  <body id="main">
+    <!-- Mobile Header -->
+    <nav class="mobile-nav">
+      <div class="nav-container">
+        <div class="logo">
+          <a href="home.html" class="logo-link">
+            <img src="./images/sizemug.svg" alt="Logo" width="100" height="40" loading="lazy" />
+          </a>
+          <p class="logo-text">Help Desk</p>
+        </div>
+        <i class="fas fa-bars menu-icon" aria-hidden="true"></i>
+      </div>
+    </nav>
+
+    <!-- Side Navigation -->
+    <nav class="side-nav" role="navigation" aria-label="Main navigation">
+      <div class="logo">
+        <a href="home.html" class="logo-link">
+          <img src="./images/sizemug.svg" alt="Sizemug Logo" class="logo-image" width="100" height="40" loading="lazy" />
+        </a>
+        <p class="logo-text">Help Desk</p>
+      </div>
+      <hr class="nav-divider" />
+      <div class="search-box">
+        <label for="search-input" class="sr-only">Search Topics</label>
+        <input type="text" id="search-input" placeholder="Search Topics..." class="search-input" />
+        <i class="fas fa-search search-icon" aria-hidden="true"></i>
+      </div>
+      <div class="nav-links">
+        <section class="nav-section">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="home.html" class="nav-link">
+                Home
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="about.html" class="nav-link">
+                About
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="community.html" class="nav-link">
+                Community
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="support.html" class="nav-link">
+                Support & Resources
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="nav-section">
+          <h6 class="nav-title">User Support</h6>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="help-center.html" class="nav-link">
+                Help Center
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="contact.html" class="nav-link">
+                Contact
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="feedback.html" class="nav-link">
+                Feedback
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="nav-section">
+          <h6 class="nav-title">Legal & Security</h6>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="privacy.html" class="nav-link">
+                Privacy Policy
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="security.html" class="nav-link">
+                Security
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="terms.html" class="nav-link">
+                Terms of Service
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="user-agreement.html" class="nav-link">
+                User Agreement
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="copyright.html" class="nav-link">
+                Copyright
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="accessibility.html" class="nav-link">
+                Accessibility
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <section class="nav-section">
+          <h6 class="nav-title">Creator Resources</h6>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="creator-hub.html" class="nav-link active">
+                Creator Hub
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="creator.html" class="nav-link">
+                Creator Environment
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="promotions.html" class="nav-link">
+                Promotion & Advertising
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="rewards.html" class="nav-link">
+                Rewards & Gifts
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <hr class="nav-divider" />
+        <a href="/dashboard.html" class="nav-button" role="button">
+          <i class="fas fa-home nav-button-icon" aria-hidden="true"></i>
+          Go to Sizemug
+        </a>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="main-content">
+        <!-- Progress Bar -->
+        <header class="header">
+          <section class="progress-bar"><div class="progress" style="width: 0%"></div></section>
+        </header>
+
+        <!-- Creator Hub Intro -->
+        <section class="top-element" id="creator-hub-intro">
+          <section class="title-flex">
+            <h1 class="page-title">Creator Hub</h1>
+          </section>
+          <p class="section-text">Welcome to the Creator Hub, the all-in-one command center for creators, teams, and community builders on Sizemug. Designed to empower your productivity, creativity, and monetization in one seamless space, the Creator Hub gives you full control over your content, tasks, payments, collaborations, and live interactions.</p>
+          <p class="section-text">Whether you're a solo creator managing a loyal audience, a team building together, or a brand leveraging digital community tools this is where your vision gets done.</p>
+        </section>
+
+        <!-- Digital Workspace -->
+        <section class="section-content" id="digital-workspace">
+          <h2 class="section-title">Your Digital Workspace for Creation & Productivity</h2>
+          <p class="section-text">The Creator Hub brings your creative workflow and productivity toolkit together in a unified dashboard. Instantly create and organize:</p>
+          <br />
+          <ul class="section-content">
+            <li class="section-list">Posts with multimedia support (text, image, video, polls, documents)</li>
+            <li class="section-list">Tasks & projects, assignable to yourself or collaborators</li>
+            <li class="section-list">Workspaces, custom spaces where you can group content, chats, or objectives</li>
+          </ul>
+          <p class="section-text">Our intelligent layout makes it simple to focus on what matters most with drag-and-drop planning, daily agenda views, and AI-powered suggestions to streamline your time.</p>
+        </section>
+
+        <!-- Live Engagement -->
+        <section class="section-content" id="go-live">
+          <h2 class="section-title">Go Live, Build Engagement</h2>
+          <p class="section-text">With built-in live video streaming, you can host interactive events, tutorials, Q&As, or casual drop-ins directly from your Creator Hub. Engage your followers or collaborators in real-time with:</p>
+          <br />
+          <ul class="section-content">
+            <li class="section-list">Live chat & reactions</li>
+            <li class="section-list">Optional pay-to-access live sessions</li>
+            <li class="section-list">Auto-recording and replay for followers to view later</li>
+          </ul>
+          <p class="section-text">From a virtual coworking session to a paid masterclass, you control the format and visibility.</p>
+        </section>
+
+        <!-- Collaboration -->
+        <section class="section-content" id="collaboration">
+          <h2 class="section-title">Real-Time Collaboration & Communication</h2>
+          <p class="section-text">Productivity is social on Sizemug. Integrated chat channels and threads are built right into your creator space, enabling:</p>
+          <br />
+          <ul class="section-content">
+            <li class="section-list">One-on-one DMs</li>
+            <li class="section-list">Group chats</li>
+            <li class="section-list">Project-specific discussions</li>
+            <li class="section-list">Reactions, mentions, and task linkage in real time</li>
+          </ul>
+          <p class="section-text">No more juggling between platforms. Collaborate where the work and ideas are actually happening.</p>
+        </section>
+
+        <!-- Monetization -->
+        <section class="section-content" id="monetize">
+          <h2 class="section-title">Monetize on Your Terms</h2>
+          <p class="section-text">Your Creator Hub includes a secure, built-in payment system, making it easy to:</p>
+          <br />
+          <ul class="section-content">
+            <li class="section-list">Receive direct support from fans or clients</li>
+            <li class="section-list">Set up paid access to content, tasks, or mentorship</li>
+            <li class="section-list">Manage subscriptions, one-time payments, or tipping</li>
+          </ul>
+          <p class="section-text">Funds go straight from user to user, giving you full ownership of your income stream without third-party friction.</p>
+        </section>
+
+        <!-- Analytics -->
+        <section class="section-content" id="analytics">
+          <h2 class="section-title">Creator Analytics & Insights</h2>
+          <p class="section-text">Know what's working. The Creator Hub offers real-time analytics on:</p>
+          <br />
+          <ul class="section-content">
+            <li class="section-list">Content engagement (likes, comments, shares)</li>
+            <li class="section-list">Task/project completion rates</li>
+            <li class="section-list">Live stream attendance and retention</li>
+            <li class="section-list">Revenue tracking from user-to-user payments</li>
+          </ul>
+          <p class="section-text">Make informed decisions that grow your community and scale your output.</p>
+        </section>
+
+        <!-- Customization Tools -->
+        <section class="section-content" id="tools">
+          <h2 class="section-title">Tools That Work Like You Do</h2>
+          <p class="section-text">The Sizemug Creator Hub adapts to your workflow not the other way around. Customize your interface with:</p>
+          <br />
+          <ul class="section-content">
+            <li class="section-list">Templates for recurring content or task structures</li>
+            <li class="section-list">Tags and filters for fast search and sorting</li>
+            <li class="section-list">Integrations with tools like Notion, Google Calendar, and Figma</li>
+            <li class="section-list">AI assistance to generate post drafts, task summaries, or brainstorm ideas</li>
+          </ul>
+          <p class="section-text">It's your creative toolkit automated, personalized, and always on.</p>
+        </section>
+
+        <!-- Community Focus -->
+        <section class="section-content" id="community">
+          <h2 class="section-title">A Community-First Platform</h2>
+          <p class="section-text">Above all, the Creator Hub is designed for human-centered productivity. It's a space to build, share, and grow without the noise and silos of disconnected tools.</p>
+          <p class="section-text">Whether you're building a brand, collaborating with a global team, or managing a thriving creator economy, Sizemug gives you the platform to create, connect, and get paid all in one place.</p>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <section class="footer-content">
+            <section class="feedback">
+              <p class="feedback-text">Was this helpful?</p>
+              <div class="feedback-icons">
+                <button class="icon-link"><i class="fas fa-thumbs-up icon"></i></button>
+                <button class="icon-link"><i class="fas fa-thumbs-down icon"></i></button>
+              </div>
+            </section>
+            <section class="page-nav">
+              <div class="previous-link">
+                <p class="page-nav-text">Previous Page</p>
+                <div class="back-link">
+                  <a href="accessibility.html" class="back-link-text">
+                    <i class="fas fa-arrow-left back-arrow"></i>
+                    Accessibility
+                  </a>
+                </div>
+              </div>
+              <div class="next-link">
+                <p class="page-nav-text">Next Page</p>
+                <div class="forward-link">
+                  <a href="creator.html" class="forward-link-text">
+                    Creator Environment
+                    <i class="fas fa-arrow-right forward-arrow"></i>
+                  </a>
+                </div>
+              </div>
+            </section>
+          </section>
+        </footer>
+      </section>
+
+      <!-- Anchor Sidebar -->
+      <aside class="anchors">
+        <div class="anchor-content">
+          <h2>On this Page</h2>
+          <nav aria-label="Page Anchors">
+            <ul class="anchor-list">
+              <li class="anchor-item"><a href="#creator-hub-intro">Introduction</a></li>
+              <li class="anchor-item"><a href="#digital-workspace">Workspace</a></li>
+              <li class="anchor-item"><a href="#go-live">Go Live</a></li>
+              <li class="anchor-item"><a href="#collaboration">Collaboration</a></li>
+              <li class="anchor-item"><a href="#monetize">Monetization</a></li>
+              <li class="anchor-item"><a href="#analytics">Analytics</a></li>
+              <li class="anchor-item"><a href="#tools">Tools</a></li>
+              <li class="anchor-item"><a href="#community">Community</a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+    </main>
+
+    <script src="scripts/progress.js" async></script>
+    <script src="scripts/anchor.js"></script>
+    <script src="scripts/pjax.js" async></script>
+    <script src="scripts/mobile-nav.js" defer></script>
+  </body>
+</html>

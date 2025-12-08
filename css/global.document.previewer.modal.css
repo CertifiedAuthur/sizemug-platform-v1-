@@ -1,0 +1,223 @@
+.doc-preview {
+  width: 100%;
+  /* height: 80vh; */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+
+  position: fixed;
+  inset: 0;
+  z-index: 20000000000;
+}
+
+.doc-preview-hide-btn {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+
+  z-index: 20000;
+
+  box-shadow: 2px 5px 20px #0000001e;
+
+  width: 40px;
+  height: 40px;
+
+  background: white;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#sizemugDocPreviewContainer .header {
+  display: none !important;
+}
+
+.doc-preview-container {
+  width: 100%;
+  height: 100%;
+}
+
+.doc-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #555;
+  font-family: sans-serif;
+  font-size: 14px;
+}
+
+/* DOCX CSS */
+/* Loading state */
+.doc-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 16px;
+  color: #666;
+}
+
+.doc-loading::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: doc-spin 1s linear infinite;
+}
+
+@keyframes doc-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* DOCX content styling */
+.docx-content {
+  padding: 30px;
+  background: white;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+.docx-content h1,
+.docx-content h2,
+.docx-content h3,
+.docx-content h4 {
+  color: #333;
+  margin-top: 24px;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.docx-content h1 {
+  font-size: 2em;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+.docx-content h2 {
+  font-size: 1.5em;
+  color: #2c5aa0;
+}
+
+.docx-content h3 {
+  font-size: 1.3em;
+  color: #5a6c7d;
+}
+
+.docx-content p {
+  margin-bottom: 12px;
+  color: #444;
+  text-align: justify;
+}
+
+.docx-content strong {
+  font-weight: 600;
+  color: #333;
+}
+
+.docx-content em {
+  font-style: italic;
+  color: #555;
+}
+
+.docx-content ul,
+.docx-content ol {
+  margin: 12px 0 12px 20px;
+  padding-left: 20px;
+}
+
+.docx-content li {
+  margin-bottom: 6px;
+}
+
+.docx-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.docx-content table td,
+.docx-content table th {
+  border: 1px solid #ddd;
+  padding: 12px 8px;
+  text-align: left;
+}
+
+.docx-content table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.docx-content table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.docx-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 15px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Fallback and error styles */
+.doc-fallback {
+  padding: 40px;
+  text-align: center;
+  background: #fff;
+  border-radius: 6px;
+  margin: 20px;
+  border: 1px solid #ddd;
+}
+
+.doc-fallback a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.doc-fallback a:hover {
+  text-decoration: underline;
+}
+
+.doc-error {
+  background: #ffe6e6;
+  padding: 20px;
+  border-radius: 6px;
+  margin: 20px;
+  border: 1px solid #f5c6cb;
+}
+
+.doc-error a {
+  color: #721c24;
+  font-weight: 600;
+}
+
+/* target common toolbar/header classnames and role attr */
+embedpdf-container .embedpdf-header,
+embedpdf-container .embedpdf-toolbar,
+embedpdf-container [role="toolbar"],
+embedpdf-container [class="@container"] .header {
+  display: none !important;
+}
+
+/* a slightly broader selector if classes differ */
+embedpdf-container div[role="toolbar"] {
+  display: none !important;
+}

@@ -1,0 +1,22 @@
+.selection-box {
+  position: fixed;
+  left: -200rem;
+  top: -200rem;
+  width: 0;
+  height: 0;
+  border: 2px solid var(--primary-color);
+  background: none !important;
+  pointer-events: auto;
+  z-index: 10000000;
+  box-sizing: border-box;
+}
+
+.tools_action_btns_wrapper {
+  position: absolute;
+  z-index: 60;
+
+  transition: top 0.3s ease;
+  transition: left 0.3s ease;
+  transition: bottom 0.3s ease;
+  transition: right 0.3s ease;
+}

@@ -1,0 +1,180 @@
+.aside_monetize_container {
+  overflow-y: auto;
+  scrollbar-width: none;
+  height: 100%;
+}
+
+.monetization_analyzes_containers {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.monetization_analyzes_containers .monetize_analyzes_item {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color-20);
+  padding: 10px;
+  padding-bottom: 5px;
+}
+
+.monetization_analyzes_containers .monetize_analyzes_item:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.monetization_analyzes_containers header {
+  padding-bottom: 5px;
+}
+
+.monetization_analyzes_containers header > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.monetization_analyzes_containers header > div .expand_container--btn svg {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(0);
+}
+
+.monetization_analyzes_containers .monetize_analyzes_item.expanded .expand_container--btn svg {
+  transform: rotate(180deg);
+}
+
+.monetization_analyzes_containers header .header_title {
+  justify-content: space-between;
+  padding-bottom: 10px;
+  color: var(--text-gray-70);
+  font-size: 14px;
+}
+
+.monetization_analyzes_containers header .header_title h4 {
+  font-weight: 300;
+}
+
+.monetization_analyzes_containers header button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.monetization_analyzes_containers header img {
+  width: 25px;
+}
+
+.monetization_analyzes_containers header h1 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.monetization_analyzes_containers .monetize_analyzes_item ul {
+  border-top: 1px solid var(--border-color-20);
+  padding: 10px 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.monetize_analyzes_item ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.monetize_analyzes_item ul li .profile_wrapper {
+  position: relative;
+}
+
+.monetize_analyzes_item ul li .profile_wrapper img {
+  width: 35px;
+  height: 35px;
+  border: 2px solid transparent;
+  border-radius: 100%;
+}
+
+.monetize_analyzes_item ul li .profile_wrapper span {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  font-size: 11px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.monetize_analyzes_item ul li:first-child .profile_wrapper span {
+  background: #de9300;
+}
+
+.monetize_analyzes_item ul li:nth-child(3) .profile_wrapper span {
+  background: #db6836;
+}
+
+.monetize_analyzes_item ul li:nth-child(2) .profile_wrapper span {
+  background: #a7abb1;
+}
+
+.monetize_analyzes_item ul li:first-child .profile_wrapper img {
+  outline: 2px solid #de9300;
+}
+
+.monetize_analyzes_item ul li:nth-child(2) .profile_wrapper img {
+  outline: 2px solid #a7abb1;
+}
+
+.monetize_analyzes_item ul li:nth-child(3) .profile_wrapper img {
+  outline: 2px solid #db6836;
+}
+
+.monetize_analyzes_item ul li .viewer_sent {
+  margin-left: auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  font-weight: 500;
+}
+
+.monetize_analyzes_item.total_gifts_earned .viewer_sent,
+.monetize_analyzes_item.total_boost_earned .viewer_sent,
+.monetize_analyzes_item.total_super_boost_earned .viewer_sent {
+  background: linear-gradient(90deg, #f43f5e, #f43f5dad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+}
+
+.monetize_analyzes_item.total_coins_earned .viewer_sent {
+  background: linear-gradient(90deg, #ffa800, #ffc838);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+}
+
+.monetize_analyzes_item.total_super_boost_earned .viewer_sent {
+  background: linear-gradient(90deg, #ff6a00, #ff6a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  font-weight: 500;
+}
+
+.monetization_analyzes_containers .monetize_analyzes_item ul {
+  display: none;
+}
+
+.monetization_analyzes_containers .monetize_analyzes_item.expanded ul {
+  display: flex;
+}

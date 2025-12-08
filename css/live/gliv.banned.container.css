@@ -1,0 +1,307 @@
+.aside_banned_slider {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.banned_lists_container {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.banned_lists_container form {
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  background: var(--live-container-bg);
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.banned_lists_container form input {
+  width: 100%;
+}
+
+.banned_lists_container ul {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 1.5rem 0;
+}
+
+.banner_user_item {
+  display: flex;
+  gap: 10px;
+}
+
+.banner_user_item .profile_photo {
+  height: 100%;
+  display: flex;
+}
+
+.banner_user_item .profile_photo img {
+  align-self: flex-start;
+
+  min-width: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.banner_user_item .info > div {
+  display: flex;
+  gap: 6px;
+}
+
+.banner_user_item .info > div img {
+  width: 20px;
+}
+
+.banner_user_item .info p {
+  color: var(--text-color-60);
+  font-size: 13px;
+}
+
+.banner_user_item .info button {
+  display: none;
+}
+
+.banner_user_item:hover .info button {
+  display: inline;
+}
+
+.count_down_container {
+  margin-left: auto;
+  align-self: center;
+}
+
+.audience_controls_kick_body {
+  position: relative;
+  height: 100%;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  overflow-y: auto;
+}
+
+.audience_controls_kick_body h2 {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.audience_controls_kick_body form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  background: var(--live-container-bg);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.audience_controls_kick_body form input {
+  width: 100%;
+}
+
+.kick_banned_lists {
+  height: calc(100dvh - 19rem);
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+}
+
+.kick_banned_lists li {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.kick_banned_lists li h2 {
+  font-weight: 400;
+  font-size: var(--text-size-md);
+}
+
+.kick_banned_lists li img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.kick_banned_list--action {
+  margin-left: auto;
+  width: max-content;
+}
+
+.kick_actions_float {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: var(--modal-bg-color);
+  border-top: 1px solid var(--border-color-20);
+}
+
+.kick_actions_float button {
+  width: 100%;
+  padding: 5px 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.kick_actions_float button.kick {
+  background: var(--live-container-bg);
+  color: var(--primary-danger);
+}
+
+.kick_actions_float button.ban {
+  color: #f5f5f7;
+  background: var(--primary-danger);
+}
+
+.kick_actions_float button:disabled {
+  opacity: 0.5;
+}
+
+.audience_kick_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+.kick_check_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.kick_check_container {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+.kick_check_container .checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 0.9em;
+  width: 0.9em;
+  background: var(--live-container-bg);
+  border-radius: 5px;
+  border: 1px solid #394556;
+}
+
+.kick_check_container input:checked ~ .checkmark {
+  background-image: linear-gradient(var(--primary-color), var(--primary-color));
+}
+
+.kick_check_container .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.kick_check_container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.kick_check_container .checkmark:after {
+  left: 0.32em;
+  top: 0.1em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
+.audience_controls_kick_body .selection_counts {
+  color: var(--primary-color);
+  font-size: 13px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.audience_controls_kick_body .view_mode,
+.audience_controls_kick_body[data-mode="selection"] .select_mode,
+.audience_controls_kick_body[data-mode="selection"] .kick_option_check,
+.audience_controls_kick_body .kick_options,
+.audience_controls_kick_body[data-mode="selection"] .kick_actions_float,
+.aside_stream_management[data-mode="selection"] button#cancelAddMoreBannedUsers,
+.aside_stream_management button#addMoreBannedUsers {
+  display: flex;
+}
+
+.audience_controls_kick_body .select_mode,
+.audience_controls_kick_body[data-mode="selection"] .view_mode,
+.audience_controls_kick_body .kick_option_check,
+.audience_controls_kick_body .kick_actions_float,
+.audience_controls_kick_body[data-mode="selection"] .kick_options,
+.aside_stream_management button#cancelAddMoreBannedUsers,
+.aside_stream_management[data-mode="selection"] button#addMoreBannedUsers {
+  display: none;
+}
+
+.invites_container .kick_actions_float {
+  display: flex;
+}
+
+.invites_container .kick_actions_float button {
+  background: linear-gradient(to right, #8837e9, #373fd7) !important;
+}
+
+#sendInvitesLists .kick_check_container {
+  display: inline !important;
+}

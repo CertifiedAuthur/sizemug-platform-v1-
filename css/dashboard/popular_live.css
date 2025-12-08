@@ -1,0 +1,448 @@
+.popular_live_modal {
+  max-width: 76%;
+  width: 100%;
+  height: 90vh;
+  overflow-y: auto;
+
+  background: #ffff;
+  padding: 1rem;
+  border-radius: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbcbcb #e0e0e0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation-fill-mode: forwards;
+}
+
+.popular_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.popular_live_heading {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+.popular_live_heading > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popular_live_heading h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.popular_live_heading form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #fafafa;
+  transition: all 1s ease;
+}
+
+.popular_live_heading form:focus-within {
+  background: #f6f6f6;
+}
+
+.popular_live_heading form input {
+  background: none;
+  width: 100%;
+  border: none !important;
+  padding: 0;
+}
+
+.popular_live_heading form input:focus {
+  border: none !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.popular_live_heading > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* .popular_dropdown {
+  position: relative;
+}
+
+.popular_dropdown button {
+  border: 1px solid #eaecf0;
+  border-radius: 20px;
+  padding: 5px 8px;
+  font-size: 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px;
+  font-weight: 500;
+}
+
+.popular_dropdown > .options {
+  position: absolute;
+  top: 2.8rem;
+  left: 0;
+  right: 0;
+  border-radius: 4px;
+
+  background: #fffffff0;
+  z-index: 99999;
+  animation: Dropdown 0.3s ease;
+  box-shadow: 0 10px 10px #00000012;
+  border: 1px solid #eaecf066;
+  min-width: 16rem;
+  max-height: 12rem;
+  overflow: auto;
+  scrollbar-width: none !important;
+}
+
+.popular_dropdown > .options li {
+  padding: 4px 10px;
+  font-size: 1rem;
+  font-weight: 400;
+
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.popular_dropdown > .options li:hover {
+  background: #f4f4f498;
+}
+
+.popular_dropdown > .options li span:last-child {
+  display: none;
+}
+
+.popular_dropdown > .options li.active span:last-child {
+  display: block;
+} */
+
+#mobile_hide_popular {
+  display: none;
+}
+
+.popular_live_body,
+.popular_skeleton--grid {
+  padding: 2rem 0;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.popular_live_item {
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.popular_live_item .top_level {
+  position: relative;
+  height: 65%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.popular_live_item .bottom_level {
+  height: 35%;
+  padding-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.popular_live_item .live_overlay {
+  position: absolute;
+  background: #000000b5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.popular_live_item .live_overlay > div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popular_live_item .live_overlay .live_signal {
+  background: #8837e9;
+  padding: 2px 8px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.popular_live_item .live_overlay .viewers {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  background: #00000083;
+  border-radius: 20px;
+  border: 1px solid #eaecf03f;
+  color: #ffffff;
+}
+
+.popular_live_item .live_collaborators {
+  display: flex;
+  align-items: center;
+}
+
+.popular_live_item .live_collaborators img,
+.popular_live_item .live_collaborators div {
+  min-width: 30px;
+  max-width: 30px;
+  min-height: 30px;
+  max-height: 30px;
+  border-radius: 100%;
+  border: 2px solid #8837e9;
+  margin-right: -10px;
+  object-fit: cover;
+}
+
+.popular_live_item .live_collaborators img:last-child {
+  margin-right: 0 !important;
+}
+
+.popular_live_item .live_collaborators div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffff;
+  background: #8837e9;
+  font-size: 12px;
+  font-weight: 500;
+  margin-right: 0;
+}
+
+.popular_live_item .bottom_level > div img:first-child {
+  min-width: 50px;
+  max-width: 50px;
+  min-height: 50px;
+  max-height: 50px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.popular_live_item .live_overlay .live_hot {
+  background: white;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.popular_live_item .bottom_level h2 {
+  font-weight: 500;
+  color: #344054;
+  font-size: 0.9rem;
+
+  margin: 0;
+  max-height: 4rem;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-height: 1.2rem;
+}
+
+.popular_live_item .bottom_level .content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  padding-top: 10px;
+}
+
+.popular_live_item .bottom_level .content span {
+  width: 4px;
+  height: 4px;
+  background: #d9d9d9;
+  border-radius: 100%;
+}
+
+.popular_live_item .bottom_level .content h6 {
+  color: #667085;
+}
+
+.popular_live_item .bottom_level .content a {
+  color: #1c64f2;
+}
+
+.popular_show_more {
+  background: #1c64f2;
+  border-radius: 20px;
+  color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+
+  padding: 8px 13px;
+}
+
+/* SKELETON LOADING */
+.popular_skeleton_container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popular_skeleton_container .popular_skeleton--heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.popular_skeleton_container .popular_skeleton--heading div {
+  width: 200px;
+  border-radius: 8px;
+}
+
+.popular_skeleton--form {
+  height: 40px;
+  border-radius: 8px;
+}
+
+.popular_skeleton--options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.popular_skeleton--options > div {
+  width: 140px;
+  height: 35px;
+  border-radius: 20px;
+}
+
+.popular_skeleton--image {
+  height: 150px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.popular_skeleton--grid--item > div:last-child {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.popular_skeleton--grid--item .skeleton_image_holder .image {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.popular_skeleton--grid--item .desc {
+  width: 100%;
+}
+
+.popular_skeleton--grid--item .name {
+  width: 100%;
+  height: 25px;
+  border-radius: 20px;
+}
+.popular_skeleton--grid--item .interests {
+  height: 16px;
+  width: 80%;
+  border-radius: 20px;
+  margin-top: 4px;
+}
+
+.skeleton---loading {
+  background: linear-gradient(
+    90deg,
+    #f0f0f09f 25%,
+    #e0e0e0a7 50%,
+    #f0f0f0a4 75%
+  );
+  background-size: 200% 100%;
+  animation: SkeletonShimmer 1.5s infinite;
+}
+
+@media screen and (max-width: 667px) {
+  .popular_live_modal {
+    max-width: 100%;
+    height: 90vh;
+    border-radius: 10px 10px 0 0;
+
+    align-self: flex-end;
+  }
+
+  .popular_live {
+    align-items: flex-end;
+  }
+
+  .popular_live_heading h1 {
+    font-size: 1.3rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .popular_live_heading .hide_popular {
+    display: none;
+  }
+
+  #mobile_hide_popular {
+    display: block;
+    position: fixed;
+    right: 10px;
+    top: 1rem;
+    background: #ffffff;
+
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e9e9e9;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999999999999999;
+    border-radius: 100%;
+  }
+
+  /* Skeleton */
+  .popular_skeleton--heading button {
+    display: none;
+  }
+
+  .popular_skeleton_container .popular_skeleton--heading div {
+    min-height: 40px;
+    margin: auto;
+  }
+
+  .popular_skeleton--options {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+  }
+
+  .popular_skeleton--options > div {
+    min-width: 100px;
+  }
+}

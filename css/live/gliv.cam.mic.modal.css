@@ -1,0 +1,38 @@
+.cam_mic_modal {
+  z-index: 99999;
+}
+
+.cam_mic_modal_container {
+  background: var(--live-container-bg);
+  overflow: hidden;
+  width: 20rem;
+  border-radius: var(--radius-md);
+}
+
+.cam_mic_modal_container ul {
+  width: 100%;
+}
+
+.cam_mic_modal_container ul li {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cam_mic_modal_container ul li[data-active],
+.cam_mic_modal_container ul li:hover {
+  background: var(--primary-color);
+}
+
+.cam_mic_modal_container ul li svg {
+  margin-left: auto;
+  display: none;
+}
+
+.cam_mic_modal_container ul li[data-active] svg {
+  display: block;
+}

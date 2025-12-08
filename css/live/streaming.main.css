@@ -1,0 +1,46 @@
+.streaming_main_container {
+  height: 100vh;
+  /* background: purple; */
+  display: flex;
+}
+
+.streaming_spacer_component {
+  flex: 1;
+  background: var(--modal-bg-color);
+}
+
+/* Nav */
+.streaming_nav {
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border-color-20);
+}
+
+.streaming_nav > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.streaming_nav button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.live_chat_screen_view {
+  width: 100%;
+  height: calc(100dvh - 3.5rem);
+
+  display: flex;
+  /* background: orangered; */
+}
+
+/*  */
+.live_screen_view_container {
+  flex-grow: 1;
+}

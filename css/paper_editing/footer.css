@@ -1,0 +1,42 @@
+.paper_footer {
+  height: 2rem;
+  background: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  color: #6b7280;
+  font-size: 0.8rem;
+  border-top: 1px solid #9197a32f;
+}
+
+.paper_footer #zoom_level {
+  position: relative;
+  width: 100%;
+  background: #e8d4ff;
+}
+
+#zoom_level .zoom_level_line {
+  width: 6rem;
+  height: 4px;
+  border-radius: 10px;
+}
+
+#zoom_level .zoom_level_ball {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: #781fd1;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: grab;
+}
+
+@media screen and (max-width: 667px) {
+  .paper_footer {
+    display: none !important;
+  }
+}

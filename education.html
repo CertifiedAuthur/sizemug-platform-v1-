@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diversity - Sizemug</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon-sizemug.svg" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/output.css" />
+    <link rel="stylesheet" href="./css/sg-input-checkbox.css" />
+    <link rel="stylesheet" href="./css/sg-auth.css" />
+  </head>
+
+  <body>
+    <!-- #region header -->
+    <header id="header">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/sizemug.svg" alt="logo" />
+      </a>
+      <nav class="nav__menu" id="nav-menu" aria-expanded="false">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a href="#" class="nav__link">Explore</a>
+          </li>
+          <li class="nav__item">
+            <a href="#" class="nav__link">Live</a>
+          </li>
+          <li class="nav__item">
+            <a href="community.html" style="color: #8837e9" class="nav__link">Community</a>
+          </li>
+          <li class="nav__item">
+            <a href="company.html" class="nav__link">Company</a>
+          </li>
+          <li class="nav__item">
+            <a href="contact-and-support.html" class="nav__link">Support</a>
+          </li>
+        </ul>
+        <div class="flex items-center gap-4">
+          <button class="button-link" data-toggle="modal" data-target="#login_modal">Login</button>
+          <button class="button-primary" data-toggle="modal" data-target="#register_modal">Register</button>
+        </div>
+      </nav>
+      <div class="nav__toggle" id="nav-toggle">
+        <svg viewBox="0 0 100 100">
+          <path d="m 70,33 h -40 c 0,0 -8.5,-0.149796 -8.5,8.5 0,8.649796 8.5,8.5 8.5,8.5 h 20 v -20" />
+          <path d="m 70,50 h -40" />
+          <path d="m 30,67 h 40 c 0,0 8.5,0.149796 8.5,-8.5 0,-8.649796 -8.5,-8.5 -8.5,-8.5 h -20 v 20" />
+        </svg>
+      </div>
+    </header>
+    <!-- #endregion -->
+
+    <section class="header-content">
+      <div class="header-container">
+        <div class="header-container_route">
+          <span>community</span>
+          <span>education</span>
+        </div>
+        <div class="header-content__title">
+          <h1 style="color: white" id="pageTitle">Education</h1>
+        </div>
+        <div class="header-content__content">
+          <p>Embrace differences, empower voices, and thrive together as one team</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="community-blogs">
+      <div class="container">
+        <div class="blogs-sec">
+          <ul class="sidebar">
+            <li><a href="diversity.html">Diversity</a></li>
+            <li><a href="inclusion.html">Inclusion</a></li>
+            <li data-active><a>Education</a></li>
+            <li><a href="tech.html">Tech Volunteerism</a></li>
+            <li><a href="design.html">User-Centered Design</a></li>
+            <li><a href="innovation.html">Collaborative Innovation</a></li>
+          </ul>
+          <div class="blog-container">
+            <div class="blog_header">
+              <img src="assets/images/elise-sherlock.jpg" alt="" />
+              <div>
+                <h2>Elise Sherlock</h2>
+                <p>Content Writer</p>
+              </div>
+            </div>
+            <div class="blog_title">
+              <h2>What are the Benefits of Tech Education</h2>
+            </div>
+            <div class="blog_content">
+              <p>Tech education offers numerous benefits to students, professionals, and people in general. One of the significant advantages is that it equips individuals with technical skills that are relevant in today's digital age. With technology advancing rapidly, there is a tremendous demand for skilled tech experts who can develop innovative solutions to real-world problems. Moreover, tech education provides an excellent opportunity for learners to explore their interests and passions while gaining valuable knowledge and experience. Students can specialize in areas such as artificial intelligence, cyber security, data science or software engineering through various courses or degrees programs.</p>
+              <p>Another benefit of tech education is that it helps individuals stay ahead of the curve when it comes to career advancement opportunities. Tech skills are becoming increasingly sought after across industries making them more employable than ever before.</p>
+              <p>When it comes to getting the most out of tech education, there are a few things you can do to enhance your learning experience. Firstly, make sure that you choose a program or course that aligns with your interests and career goals</p>
+              <p>Additionally, supplementing your learning with online resources like tutorials, forums or blogs related to your area of study can also provide additional insights into the topics covered in class.</p>
+              <p>Practice what you learn by working on projects outside of class time. This not only helps solidify understanding but also provides valuable practical experience which is valued by employers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="join-today-sec">
+      <div class="container">
+        <div class="join-today-sec__text">
+          <h2>Join the Sizemug Community Today</h2>
+          <p>Ready to take your productivity to the next level? Sign up for Sizemug now and join a vibrant community of achievers, collaborators, and innovators.</p>
+          <button class="button-primary" data-toggle="modal" data-target="#suzemug_mobile_modal">
+            Get Started
+            <small class="text-gray/75">FOR FREE</small>
+          </button>
+        </div>
+        <div class="join-today-sec__img">
+          <img src="assets/images/comm-1.jpeg" class="large" alt="landscape" />
+          <img src="assets/images/coffe-8.jpeg" class="small" alt="portrait" />
+        </div>
+      </div>
+    </section>
+
+    <!-- #region footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__up">
+          <div class="footer__up--l">
+            <a href="#" class="logo">
+              <img src="assets/images/sizemug.svg" alt="logo" />
+            </a>
+            <div class="footer__items">
+              <div>
+                <h4>Pages</h4>
+                <ul class="item">
+                  <li><a href="index.html">Home</a></li>
+                  <li><a href="features.html">Features</a></li>
+                  <li><a href="contact-and-support.html">Contact</a></li>
+                  <li><a href="contact-and-support.html">Support</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4>More</h4>
+                <ul class="item">
+                  <li><a href="faqs.html">FAQ</a></li>
+                  <li><a href="security-home.html">Security</a></li>
+                  <li><a href="sitemap.html">Sitemap</a></li>
+                  <li><a data-toggle="modal" data-target="#suzemug_mobile_modal">Mobile App</a></li>
+                </ul>
+              </div>
+              <div>
+                <h4>Sizemug</h4>
+                <ul class="item">
+                  <li><a href="#">Marketplace</a></li>
+                  <li><a href="#">Live Streaming</a></li>
+                  <li><a href="#">Calendar</a></li>
+                  <li><a href="#">Board Mode</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer__up--r">
+            <h4>Subscribe</h4>
+            <p class="subscribe-text">Join our community to receive updates and exclusive offers.</p>
+            <form class="subscribe-form">
+              <input type="email" placeholder="Enter email address" />
+              <input type="submit" class="button-primary" value="Subscribe" />
+            </form>
+            <p class="agree">By subscribing, you agree to our Privacy Policy and consent to receive updates.</p>
+          </div>
+        </div>
+        <div class="footer__down">
+          <div class="copyright">
+            <span>©2024 Sizemug by Defopage</span>
+            <div>
+              <a href="/privacy.html">Privacy policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Cookies Settings</a>
+            </div>
+          </div>
+          <ul class="social-icons">
+            <li>
+              <a href="#" target="_blank">
+                <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 10.3033C20 4.7467 15.5229 0.242188 10 0.242188C4.47715 0.242188 0 4.7467 0 10.3033C0 15.325 3.65684 19.4874 8.4375 20.2422V13.2116H5.89844V10.3033H8.4375V8.08671C8.4375 5.56515 9.9305 4.17231 12.2146 4.17231C13.3088 4.17231 14.4531 4.36882 14.4531 4.36882V6.8448H13.1922C11.95 6.8448 11.5625 7.62041 11.5625 8.41609V10.3033H14.3359L13.8926 13.2116H11.5625V20.2422C16.3432 19.4874 20 15.3252 20 10.3033Z" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M16 3.24219H8C5.23858 3.24219 3 5.48077 3 8.24219V16.2422C3 19.0036 5.23858 21.2422 8 21.2422H16C18.7614 21.2422 21 19.0036 21 16.2422V8.24219C21 5.48077 18.7614 3.24219 16 3.24219ZM19.25 16.2422C19.2445 18.0348 17.7926 19.4867 16 19.4922H8C6.20735 19.4867 4.75549 18.0348 4.75 16.2422V8.24219C4.75549 6.44954 6.20735 4.99768 8 4.99219H16C17.7926 4.99768 19.2445 6.44954 19.25 8.24219V16.2422ZM16.75 8.49219C17.3023 8.49219 17.75 8.04447 17.75 7.49219C17.75 6.93991 17.3023 6.49219 16.75 6.49219C16.1977 6.49219 15.75 6.93991 15.75 7.49219C15.75 8.04447 16.1977 8.49219 16.75 8.49219ZM12 7.74219C9.51472 7.74219 7.5 9.75691 7.5 12.2422C7.5 14.7275 9.51472 16.7422 12 16.7422C14.4853 16.7422 16.5 14.7275 16.5 12.2422C16.5027 11.0479 16.0294 9.90176 15.1849 9.05727C14.3404 8.21278 13.1943 7.73953 12 7.74219ZM9.25 12.2422C9.25 13.761 10.4812 14.9922 12 14.9922C13.5188 14.9922 14.75 13.761 14.75 12.2422C14.75 10.7234 13.5188 9.49219 12 9.49219C10.4812 9.49219 9.25 10.7234 9.25 12.2422Z" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14.1761 0.242188H16.9362L10.9061 7.01959L18 16.2422H12.4456L8.0951 10.6488L3.11723 16.2422H0.35544L6.80517 8.99299L0 0.242188H5.69545L9.6279 5.35481L14.1761 0.242188ZM13.2073 14.6176H14.7368L4.86441 1.78147H3.2232L13.2073 14.6176Z" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 0.242188C0.67157 0.242188 0 0.913758 0 1.74219V16.7422C0 17.5706 0.67157 18.2422 1.5 18.2422H16.5C17.3284 18.2422 18 17.5706 18 16.7422V1.74219C18 0.913758 17.3284 0.242188 16.5 0.242188H1.5ZM5.52076 4.24491C5.52639 5.20116 4.81061 5.79038 3.96123 5.78616C3.16107 5.78194 2.46357 5.14491 2.46779 4.24632C2.47201 3.40116 3.13998 2.72194 4.00764 2.74163C4.88795 2.76132 5.52639 3.40679 5.52076 4.24491ZM9.2797 7.00395H6.75971H6.7583V15.5638H9.4217V15.3641C9.4217 14.9842 9.4214 14.6042 9.4211 14.2241C9.4203 13.2103 9.4194 12.1954 9.4246 11.1819C9.426 10.9358 9.4372 10.6799 9.5005 10.445C9.7381 9.56749 10.5271 9.00079 11.4074 9.14009C11.9727 9.22859 12.3467 9.55629 12.5042 10.0893C12.6013 10.4225 12.6449 10.7811 12.6491 11.1285C12.6605 12.1761 12.6589 13.2237 12.6573 14.2714C12.6567 14.6412 12.6561 15.0112 12.6561 15.381V15.5624H15.328V15.3571C15.328 14.9051 15.3278 14.4532 15.3275 14.0013C15.327 12.8718 15.3264 11.7423 15.3294 10.6124C15.3308 10.1019 15.276 9.59849 15.1508 9.10489C14.9638 8.37079 14.5771 7.76329 13.9485 7.32459C13.5027 7.01238 13.0133 6.81129 12.4663 6.78879C12.404 6.7862 12.3412 6.78281 12.2781 6.7794C11.9984 6.76428 11.7141 6.74892 11.4467 6.80285C10.6817 6.95613 10.0096 7.30629 9.5019 7.92359C9.4429 7.99439 9.3852 8.06629 9.2991 8.17359L9.2797 8.19789V7.00395ZM2.68164 15.5666H5.33242V7.00952H2.68164V15.5666Z" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" target="_blank">
+                <svg width="21" height="15" viewBox="0 0 21 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.5933 2.20301C20.4794 1.78041 20.2568 1.39501 19.9477 1.08518C19.6386 0.775338 19.2537 0.551868 18.8313 0.437007C17.2653 0.00700739 11.0003 7.5965e-06 11.0003 7.5965e-06C11.0003 7.5965e-06 4.73633 -0.00699261 3.16933 0.404007C2.74725 0.524154 2.36315 0.750785 2.0539 1.06214C1.74464 1.3735 1.52062 1.75913 1.40333 2.18201C0.99033 3.74801 0.98633 6.99601 0.98633 6.99601C0.98633 6.99601 0.98233 10.26 1.39233 11.81C1.62233 12.667 2.29733 13.344 3.15533 13.575C4.73733 14.005 10.9853 14.012 10.9853 14.012C10.9853 14.012 17.2503 14.019 18.8163 13.609C19.2388 13.4943 19.6241 13.2714 19.934 12.9622C20.2439 12.653 20.4677 12.2682 20.5833 11.846C20.9973 10.281 21.0003 7.03401 21.0003 7.03401C21.0003 7.03401 21.0203 3.76901 20.5933 2.20301ZM8.99633 10.005L9.00133 4.00501L14.2083 7.01001L8.99633 10.005Z" fill="currentColor" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="bg">
+        <img src="assets/images/footer-bg-left.svg" alt="bg" class="left" />
+        <img src="assets/images/footer-bg-right.svg" alt="bg" class="right" />
+      </div>
+    </footer>
+    <!-- #endregion -->
+
+    <!-- Login Auth Modal -->
+    <div id="login_modal" class="auth_modal auth--hidden">
+      <div class="auth_modal_wrapper">
+        <div class="auth_modal__content">
+          <header>
+            <div>
+              <img src="assets/images/sizemug-logo.svg" height="20" width="20" />
+              <h4>Sizemug</h4>
+            </div>
+          </header>
+
+          <form class="auth_modal__form" method="dialog">
+            <div class="auth_modal__title">
+              <h2>Sign in</h2>
+              <p>Sign in to connect, and stay on track with your goals.</p>
+            </div>
+
+            <div class="auth_form__social">
+              <button type="button">
+                <img src="assets/images/google-logo.png" />
+                Sign in with Google
+              </button>
+
+              <button type="button">
+                <img src="assets/images/apple-logo.png" />
+                Sign in with Apple
+              </button>
+            </div>
+
+            <div class="auth_form__divider">
+              <div></div>
+              <div>OR</div>
+              <div></div>
+            </div>
+
+            <div class="flash_auth auth--hidden" id="loginFlashAuth">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p>Fill in required fields</p>
+            </div>
+
+            <div class="flex flex-col gap-4 mb-4">
+              <div class="auth_input_field">
+                <label>Username</label>
+                <input type="text" id="loginEmailInput" name="username" placeholder="e.g. John123" required />
+              </div>
+
+              <div class="auth_input_field">
+                <label>Password</label>
+
+                <div class="auth_input_extra_wrap">
+                  <input type="password" id="loginPasswordInput" name="password" placeholder="••••••••" required />
+                  <button class="eye_tracker eyeTracker" data-state="on">
+                    <svg class="on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#53586280" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" /></svg>
+                    <svg class="off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#53586280" d="M11.83 9L15 12.16V12a3 3 0 0 0-3-3zm-4.3.8l1.55 1.55c-.05.21-.08.42-.08.65a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53a5 5 0 0 1-5-5c0-.79.2-1.53.53-2.2M2 4.27l2.28 2.28l.45.45C3.08 8.3 1.78 10 1 12c1.73 4.39 6 7.5 11 7.5c1.55 0 3.03-.3 4.38-.84l.43.42L19.73 22L21 20.73L3.27 3M12 7a5 5 0 0 1 5 5c0 .64-.13 1.26-.36 1.82l2.93 2.93c1.5-1.25 2.7-2.89 3.43-4.75c-1.73-4.39-6-7.5-11-7.5c-1.4 0-2.74.25-4 .7l2.17 2.15C10.74 7.13 11.35 7 12 7" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="auth_form_reminder">
+                <label class="sg-input-checkbox-label">
+                  <span class="input_checkbox">
+                    <input type="checkbox" name="remember" />
+                    <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></svg>
+                  </span>
+                  Remember this device
+                </label>
+
+                <a class="link" data-toggle="modal" data-target="#account_recovery_modal">Forgot password</a>
+              </div>
+              <button class="auth_form_submit_button" id="login_btn">
+                <!-- prettier-ignore -->
+                <svg xmlns="http://www.w3.org/2000/svg" style="display: none" id="login_loading" width="1.6em" height="1.6em" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5" /><path fill="#ffffff" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate" /></path></svg>
+                <span>Sign in</span>
+              </button>
+            </div>
+
+            <p class="auth_alternative">
+              Don’t have an account?
+              <a href="#" class="link" data-toggle="modal" data-target="#register_modal">Sign up</a>
+            </p>
+          </form>
+
+          <footer>&copy; Sizemug 2026</footer>
+        </div>
+
+        <div class="auth_modal__platform_brief sign_in">
+          <div class="hero">
+            <h1>
+              All-in-One Social Networking &
+              <br />
+              Productivity
+            </h1>
+            <p class="subtitle">Sign in to connect, and stay on track with your goals.</p>
+          </div>
+
+          <div style="position: relative">
+            <div class="scroll-container">
+              <div class="scroll-content">
+                <!-- First set -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
+                  Manage tasks & goals
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  Collaborate on projects
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                  Explore marketplace
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  Create documents
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
+                  Manage tasks & goals
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  Collaborate on projects
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                  Explore marketplace
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  Create documents
+                </div>
+              </div>
+            </div>
+
+            <div class="scroll-container">
+              <div class="scroll-content reverse">
+                <!-- First set -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+                  Meet like-minded people
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                  Use wallet & coins
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Get verified
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Calendar
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+                  Meet like-minded people
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                  Use wallet & coins
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Get verified
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Calendar
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer_decorator">
+            <img src="./assets/images/signin_decorator.png" alt="Auth Decorator" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Auth Modal -->
+    <div id="register_modal" class="auth_modal auth--hidden">
+      <div class="auth_modal_wrapper">
+        <div class="auth_modal__platform_brief sign_up">
+          <div class="hero">
+            <h1>
+              All-in-One Social Networking &
+              <br />
+              Productivity
+            </h1>
+            <p class="subtitle">Sign in to connect, and stay on track with your goals.</p>
+          </div>
+
+          <div style="position: relative">
+            <div class="scroll-container">
+              <div class="scroll-content">
+                <!-- First set -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
+                  Manage tasks & goals
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  Collaborate on projects
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                  Explore marketplace
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  Create documents
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path></svg>
+                  Manage tasks & goals
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                  Collaborate on projects
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path></svg>
+                  Explore marketplace
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                  Create documents
+                </div>
+              </div>
+            </div>
+
+            <div class="scroll-container">
+              <div class="scroll-content reverse">
+                <!-- First set -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+                  Meet like-minded people
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                  Use wallet & coins
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Get verified
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Calendar
+                </div>
+                <!-- Duplicate set for seamless loop -->
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 00-3-3.87"></path><path d="M16 3.13a4 4 0 010 7.75"></path></svg>
+                  Meet like-minded people
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"></path></svg>
+                  Use wallet & coins
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  Get verified
+                </div>
+                <div class="feature-card">
+                  <!-- prettier-ignore -->
+                  <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Calendar
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer_decorator">
+            <img src="./assets/images/signup_decorator.png" alt="Auth Decorator" />
+          </div>
+        </div>
+
+        <div class="auth_modal__content">
+          <header>
+            <div>
+              <img src="assets/images/sizemug-logo.svg" height="20" width="20" />
+              <h4>Sizemug</h4>
+            </div>
+          </header>
+
+          <form class="auth_modal__form" method="dialog">
+            <div class="auth_modal__title">
+              <h2>Sign up</h2>
+              <p>Collaborate, and connect with people who share your passions.</p>
+            </div>
+
+            <div class="auth_form__social">
+              <button type="button">
+                <img src="assets/images/google-logo.png" />
+                Sign in with Google
+              </button>
+
+              <button type="button">
+                <img src="assets/images/apple-logo.png" />
+                Sign in with Apple
+              </button>
+            </div>
+
+            <div class="auth_form__divider">
+              <div></div>
+              <div>OR</div>
+              <div></div>
+            </div>
+
+            <div class="flash_auth auth--hidden" id="registerFlashAuth">
+              <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#f59e0b" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <p>Fill in required fields</p>
+            </div>
+
+            <div class="flex flex-col gap-4 mb-4">
+              <div class="auth_input_field">
+                <label>First name</label>
+                <input type="text" id="registerFirstInput" name="email" placeholder="e.g. John" required />
+              </div>
+
+              <div class="auth_input_field">
+                <label>Last name</label>
+                <input type="text" id="registerLastInput" name="email" placeholder="e.g. John" required />
+              </div>
+
+              <div class="auth_input_field">
+                <label>Username</label>
+                <input type="text" id="registerUsernameInput" name="email" placeholder="e.g. AIEraDev" required />
+              </div>
+
+              <div class="auth_input_field">
+                <label>Email address</label>
+                <input type="email" id="registerEmailInput" name="email" placeholder="e.g. john@example.com" required />
+              </div>
+
+              <div class="auth_input_field">
+                <label>Password</label>
+
+                <div class="auth_input_extra_wrap">
+                  <input type="password" id="" name="password" placeholder="••••••••" required />
+                  <button class="eye_tracker eyeTracker" data-state="on">
+                    <svg class="on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#53586280" d="M12 9a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3m0 8a5 5 0 0 1-5-5a5 5 0 0 1 5-5a5 5 0 0 1 5 5a5 5 0 0 1-5 5m0-12.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5" /></svg>
+                    <svg class="off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#53586280" d="M11.83 9L15 12.16V12a3 3 0 0 0-3-3zm-4.3.8l1.55 1.55c-.05.21-.08.42-.08.65a3 3 0 0 0 3 3c.22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53a5 5 0 0 1-5-5c0-.79.2-1.53.53-2.2M2 4.27l2.28 2.28l.45.45C3.08 8.3 1.78 10 1 12c1.73 4.39 6 7.5 11 7.5c1.55 0 3.03-.3 4.38-.84l.43.42L19.73 22L21 20.73L3.27 3M12 7a5 5 0 0 1 5 5c0 .64-.13 1.26-.36 1.82l2.93 2.93c1.5-1.25 2.7-2.89 3.43-4.75c-1.73-4.39-6-7.5-11-7.5c-1.4 0-2.74.25-4 .7l2.17 2.15C10.74 7.13 11.35 7 12 7" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="auth_form_reminder">
+                <label class="sg-input-checkbox-label">
+                  <span class="input_checkbox">
+                    <input type="checkbox" name="remember" />
+                    <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></svg>
+                  </span>
+                  <span>
+                    By continuing, you agree to Sizemug’s
+                    <a href="#">Terms of Service</a>
+                    and
+                    <a href="">Privacy Policy.</a>
+                  </span>
+                </label>
+              </div>
+
+              <button class="auth_form_submit_button" id="register_btn">
+                <!-- prettier-ignore -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="auth--hidden" id="register_loading" width="1.6em" height="1.6em" viewBox="0 0 24 24"><path fill="#ffffff" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z" opacity="0.5" /><path fill="#ffffff" d="M20 12h2A10 10 0 0 0 12 2V4A8 8 0 0 1 20 12Z"><animateTransform attributeName="transform" dur="1s" from="0 12 12" repeatCount="indefinite" to="360 12 12" type="rotate" /></path></svg>
+                <span>Sign up</span>
+              </button>
+            </div>
+
+            <p class="auth_alternative">
+              Already have an account?
+              <a href="#" class="link" data-toggle="modal" data-target="#login_modal">Sign In</a>
+            </p>
+          </form>
+
+          <footer>&copy; Sizemug 2026</footer>
+        </div>
+      </div>
+    </div>
+
+    <div id="account_recovery_modal" class="auth_modal auth--hidden">
+      <aside>
+        <div class="auth_modal__image"></div>
+        <div class="auth_modal__content">
+          <header>
+            <img src="assets/images/sizemug-logo.svg" height="20" width="20" />
+            <h4>Sizemug</h4>
+            <button tabindex="-1" data-modal-close>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M18 6 6 18" />
+                <path d="m6 6 12 12" />
+              </svg>
+            </button>
+          </header>
+          <form class="auth_modal__form tabs" method="dialog">
+            <div id="recovery_email" class="tab__content" data-tab-initial>
+              <div class="auth_modal__title">
+                <h2>Account Recovery</h2>
+                <p>Enter your Sizemug account email. A recovery email will be sent</p>
+              </div>
+              <div class="flex flex-col gap-4 mb-4">
+                <label class="input_field">
+                  <span class="input_field__label">Email</span>
+                  <input type="email" name="email" placeholder="Enter your email" />
+                </label>
+                <button type="button" class="button-primary w-full" data-toggle="tab" data-target="#recovery_otp">Reset password</button>
+              </div>
+            </div>
+            <div id="recovery_otp" class="tab__content">
+              <div class="auth_modal__title">
+                <h2>Account Recovery</h2>
+                <p>A recover email has been sent to sizemug@gmail.com Change</p>
+              </div>
+              <div class="flex flex-col gap-4 mb-4">
+                <label class="input_otp" data-length="4"></label>
+                <button type="button" class="button-primary w-full" data-toggle="tab" data-target="#recovery_pass">Confirm</button>
+              </div>
+            </div>
+            <div id="recovery_pass" class="tab__content">
+              <div class="auth_modal__title">
+                <h2>Account Recovery</h2>
+                <p>You're all set! Create a new password ro recover your account</p>
+              </div>
+              <div class="flex flex-col gap-4 mb-4">
+                <label class="input_field">
+                  <span class="input_field__label">New Password</span>
+                  <input type="password" name="password" placeholder="Create a strong password" required />
+                </label>
+                <label class="input_field">
+                  <span class="input_field__label">Verify Password</span>
+                  <input type="password" name="password_c" placeholder="Confirm your password" required />
+                </label>
+                <button class="button-primary w-full">Reset password</button>
+              </div>
+            </div>
+            <p class="text-center mb-4">
+              Remember password?
+              <a href="#" class="link" data-toggle="modal" data-target="#login_modal">Login</a>
+            </p>
+            <p class="text-center text-sm">
+              <a href="/contact-and-support.html" class="link-muted">Contact</a>
+              &sdot;
+              <a href="/about.html" class="link-muted">About</a>
+              &sdot;
+              <a href="/privacy.html" class="link-muted">Privacy Policy & terms</a>
+              <span class="text-gray-dark">© 2024 Sizemug</span>
+            </p>
+          </form>
+        </div>
+      </aside>
+    </div>
+
+    <dialog id="suzemug_mobile_modal" class="banner_modal auth--hidden">
+      <aside>
+        <button tabindex="-1" data-modal-close>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round">
+            <path d="M18 6 6 18" />
+            <path d="m6 6 12 12" />
+          </svg>
+        </button>
+        <div class="mockup__container">
+          <div class="iphone_mockup">
+            <img src="assets/images/iphone-mockup.svg" class="mockup" alt="mockup" />
+            <img src="assets/images/portrait-placeholder-iphone.png" alt="potrait" />
+          </div>
+          <div class="iphone_mockup">
+            <img src="assets/images/iphone-mockup.svg" class="mockup" alt="mockup" />
+            <img src="assets/images/portrait-placeholder-iphone.png" alt="potrait" />
+          </div>
+        </div>
+        <div class="banner_modal__content">
+          <h2>
+            Sizemug
+            <br />
+            <span>Mobile app</span>
+          </h2>
+          <p>Ready to take your productivity to the next level? Sign up for Sizemug now and join a vibrant community of achievers, collaborators, and innovators.</p>
+          <p class="banner_modal__badges">
+            <a href="#">
+              <img src="assets/images/google-play-badge.png" class="aspect-[217/64]" alt="google-play-badge" />
+            </a>
+            <a href="#">
+              <img src="assets/images/apple-store-badde.png" class="aspect-[191/64]" alt="apple-store-badde" />
+            </a>
+          </p>
+        </div>
+      </aside>
+    </dialog>
+    <!-- #endregion -->
+
+    <!-- #region scripts -->
+    <script src="scripts/main.js"></script>
+    <!-- #endregion -->
+  </body>
+</html>

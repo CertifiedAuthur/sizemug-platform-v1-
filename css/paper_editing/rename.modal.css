@@ -1,0 +1,26 @@
+.rename_modal > div {
+  padding: 0.8rem 1rem;
+}
+
+.rename_modal > div * {
+  display: inline;
+  width: 100%;
+}
+
+.rename_modal label {
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.rename_modal input {
+  padding: 8px 10px;
+  margin-top: 6px;
+  border: 1px solid var(--border-color);
+  border-radius: 7px;
+}
+
+.rename_modal p,
+.rename_modal .counter {
+  font-size: 0.7rem;
+  color: var(--light-primary-text-color);
+}

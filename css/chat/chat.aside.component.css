@@ -1,0 +1,344 @@
+#mainChatContainer aside.expanded_aside {
+  width: 25rem;
+  min-width: 25rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+* {
+  outline: none;
+}
+
+@media screen and (max-width: 1024px) {
+  #mainChatContainer aside.expanded_aside {
+    width: 100%;
+  }
+}
+
+/*--------------------------- Chat Aside Tab Component ---------------------------*/
+/*--------------------------- Chat Tab  ---------------------------*/
+.chat_aside_scrollable_wrapper {
+  height: calc(100dvh - 13rem);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.chat_aside_scrollable_wrapper > *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.chat_aside_tab_component {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3px;
+
+  background: white;
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  border-radius: 2rem;
+
+  box-shadow: 0 1px 2px 0 #0000000d;
+}
+
+.chat_aside_tab_component button:not(:last-child) {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+  background: transparent;
+
+  transition: background-color 0.2s ease-in-out;
+}
+
+.chat_aside_tab_component button[aria-selected="true"],
+.chat_aside_tab_component button:hover {
+  background: var(--primary-color);
+}
+
+.chat_aside_tab_component button.inbox_tab[aria-selected="true"] svg path,
+.chat_aside_tab_component button.inbox_tab:hover svg path {
+  fill: white;
+}
+
+.chat_aside_tab_component button.inbox_tab[aria-selected="true"] svg ellipse,
+.chat_aside_tab_component button.inbox_tab[aria-selected="true"] svg circle,
+.chat_aside_tab_component button.inbox_tab:hover svg ellipse,
+.chat_aside_tab_component button.inbox_tab:hover svg circle {
+  stroke: white;
+  fill: white;
+}
+
+.chat_aside_tab_component button.group_tab[aria-selected="true"] svg path:first-child,
+.chat_aside_tab_component button.group_tab[aria-selected="true"] svg path:nth-child(2),
+.chat_aside_tab_component button.group_tab[aria-selected="true"] svg path:nth-child(3),
+.chat_aside_tab_component button.group_tab[aria-selected="true"] svg path:last-child,
+.chat_aside_tab_component button.group_tab:hover svg path:first-child,
+.chat_aside_tab_component button.group_tab:hover svg path:nth-child(2),
+.chat_aside_tab_component button.group_tab:hover svg path:nth-child(3),
+.chat_aside_tab_component button.group_tab:hover svg path:last-child {
+  stroke: white;
+}
+.chat_aside_tab_component button.group_tab[aria-selected="true"] svg path:nth-child(4),
+.chat_aside_tab_component button.group_tab[aria-selected="true"] svg path:nth-child(5),
+.chat_aside_tab_component button.group_tab:hover svg path:nth-child(4),
+.chat_aside_tab_component button.group_tab:hover svg path:nth-child(5) {
+  fill: white;
+}
+
+.chat_aside_tab_component button.task_tab[aria-selected="true"] svg path,
+.chat_aside_tab_component button.task_tab:hover svg path {
+  stroke: white;
+}
+
+.chat_aside_tab_component button.phone_calling_tab[aria-selected="true"] svg path,
+.chat_aside_tab_component button.phone_calling_tab:hover svg path {
+  fill: white;
+}
+
+.chat_aside_tab_component button.friend_tab[aria-selected="true"] svg circle,
+.chat_aside_tab_component button.friend_tab[aria-selected="true"] svg path,
+.chat_aside_tab_component button.friend_tab:hover svg circle,
+.chat_aside_tab_component button.friend_tab:hover svg path {
+  stroke: white;
+}
+
+.chat_aside_tab_component button.start_live_chat {
+  padding: 7px 15px;
+  border-radius: 2rem;
+
+  background: linear-gradient(to right, #46db6e, #35f67f);
+  color: white;
+  font-weight: 600;
+}
+
+/*--------------------------- Chat Filter section ---------------------------*/
+.chat_filter_section {
+  height: 100%;
+
+  background: white;
+  box-shadow: 0 1px 2px 0 #0000000d;
+
+  overflow: hidden;
+  border-radius: 1rem;
+}
+
+.chat_filter_section section {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat_section_header {
+  padding: 10px;
+}
+
+.chat_section_header .normal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat_filter_section > section > * {
+  padding: 0 6px;
+}
+
+.chat_filter_section > section {
+  padding-top: 6px;
+}
+
+.chat_section_header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: black;
+}
+
+.settings_container .header {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 10px;
+}
+
+.settings_container .header h5 {
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.settings_container .header p {
+  font-weight: 500;
+  color: #5c5a5a;
+  font-size: 14px;
+}
+
+.settings_container .setting_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px;
+}
+
+.settings_container .setting_item h4 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.settings_container .setting_item p,
+.settings_container .setting_item .shift_el {
+  font-size: 13px;
+  font-weight: 200;
+}
+
+.settings_container .setting_item .shift_el {
+  margin-left: auto;
+}
+
+.settings_container .setting_item .shift_el .dropdown {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+/*---------------------------                                ---------------------------*/
+/*---------------------------                                ---------------------------*/
+/*---------------------------                                ---------------------------*/
+/*---------------------------                                ---------------------------*/
+/*---------------------------                                ---------------------------*/
+/*---------------------------                                ---------------------------*/
+/*--------------------------- Chat Aside Collapsed Component ---------------------------*/
+#mainChatContainer aside.collapsed_aside {
+  width: 5rem;
+  min-width: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.collapsed_aside .chat_aside_tab_component button {
+  width: 100%;
+  padding: 6px;
+
+  display: flex;
+  justify-content: center;
+  border-radius: 2rem;
+
+  background: var(--primary-color);
+}
+
+.collapsed_aside_users_list ul {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  height: 100%;
+}
+
+.collapsed_aside_users_list {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  background: white;
+  color: #667085;
+  font-size: 12px;
+  font-weight: 500;
+
+  overflow: hidden;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.collapsed_aside_users_list_item {
+  padding: 10px;
+  text-align: center;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.collapsed_aside_users_list_item:not(.for_story):hover,
+.collapsed_aside_users_list_item:not(.for_story).active {
+  background: #8737e916;
+}
+
+.collapsed_aside_users_list_item > div {
+  height: 3.5rem;
+  max-height: 3.5rem;
+  max-width: 3.5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(to bottom, #eaeaef, #bdbdbe);
+  border-radius: 100%;
+
+  position: relative;
+}
+
+.collapsed_aside_users_list_item > div img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  border-radius: 100%;
+}
+
+.collapsed_aside_users_list_item button {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 100%;
+  background: linear-gradient(to bottom, #eaeaef, #bdbdbe);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.collapsed_aside_users_list_item .user_status {
+  width: 20px;
+  height: 20px;
+  border: 3px solid #ffffff;
+  border-radius: 100%;
+
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+}
+
+.collapsed_aside_users_list_item .user_status.online {
+  background: var(--online-color);
+}
+
+.collapsed_aside_users_list_item .user_status.offline {
+  background: var(--offline-color);
+}
+
+.collapsed_aside_users_list_item .new_messages_counts {
+  background: var(--primary-color);
+  border-radius: 20px;
+  color: white;
+
+  position: absolute;
+  top: -1px;
+  right: -1px;
+
+  padding: 1px 7px;
+  font-weight: 400;
+  font-size: 11px;
+}

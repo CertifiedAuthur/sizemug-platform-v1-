@@ -1,0 +1,99 @@
+.popular_container_row_item {
+  display: flex;
+  gap: 4px;
+}
+
+.hashtag_header_info_music {
+  display: flex;
+  gap: 0.9rem;
+}
+
+.hashtag_header_info_music .music_image {
+  width: 8rem;
+  height: 8rem;
+  border-radius: 100%;
+  object-fit: cover;
+
+  overflow: hidden;
+}
+
+.hashtag_header_info_music .music_image img {
+  width: 100%;
+  height: 100%;
+}
+
+.hashtag_header_info_music .music_info h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.posts {
+  color: #2121217f;
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  padding: 0.5rem 0;
+}
+
+.listen_to_music {
+  width: 35px;
+  height: 27px;
+  border-radius: 0.3rem;
+  background: #000000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.listen_to_music[data-mode="idle"] svg.play_icon,
+.listen_to_music[data-mode="playing"] svg.pause_icon,
+.listen_to_music[data-mode="paused"] svg.play_icon {
+  display: block;
+}
+
+.listen_to_music[data-mode="idle"] svg.pause_icon,
+.listen_to_music[data-mode="playing"] svg.play_icon,
+.listen_to_music[data-mode="paused"] svg.pause_icon {
+  display: none;
+}
+
+.hashtag_header_info_music .music_controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hashtag_header_info_music .music_controls > div {
+  width: 20rem;
+  height: 27px;
+  border-radius: 0.3rem;
+  background: #000000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.hashtag_header_info_music .music_controls .music_track {
+  background: #ffffff;
+  border-radius: 6px;
+  height: 8px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.hashtag_header_info_music .music_controls .music_track .music_progress {
+  background: var(--primary-color);
+  height: 100%;
+  width: 0%;
+
+  position: absolute;
+
+  transition: width 0.3s ease-in-out;
+}
+
+.musics-hidden {
+  display: none !important;
+}

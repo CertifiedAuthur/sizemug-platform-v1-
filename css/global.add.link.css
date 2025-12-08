@@ -1,0 +1,77 @@
+.add_link_overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: 99999999999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: Modal 0.2s ease;
+}
+
+.add_link_modal_wrapper {
+  width: 30rem;
+  background: #ffff;
+  border-radius: 10px;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.add_link_modal_wrapper h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.add_link_modal_wrapper--row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #e0e0e05b;
+  border-radius: 4px;
+  padding: 4px 6px;
+  transition: all 0.3s ease;
+}
+
+.add_link_modal_wrapper--row label {
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_link_modal_wrapper--row input {
+  width: 100%;
+  background: none;
+  font-size: 14px;
+  color: #1f1f1f91;
+}
+
+.add_link_modal_wrapper--row input:focus-visible {
+  outline: none;
+}
+
+.add_link_modal_wrapper--row input::placeholder {
+  font-size: 14px;
+}
+
+.add_link_modal_wrapper--row:focus-within {
+  background: #6e6e6e05;
+}
+
+.add_link_modal_wrapper button {
+  padding: 4px 20px;
+  background: #8837e9;
+  border-radius: 5px;
+  color: #ffff;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-top: 1rem;
+}

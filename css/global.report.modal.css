@@ -1,0 +1,210 @@
+/* 
+  Styles for the global report modal overlay 
+  - Centers the modal on the screen with a semi-transparent background
+*/
+.global_report_modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480; /* Semi-transparent background */
+  z-index: 1011; /* Ensures the modal is above other elements */
+
+  display: flex; /* Centers the modal using Flexbox */
+  justify-content: center;
+  align-items: center;
+}
+
+/* 
+  Styles for the report modal container 
+  - Defines the modal size and layout 
+*/
+.report_container {
+  width: 45rem;
+  height: 35rem;
+  background: white; /* White background for the modal */
+
+  overflow: hidden; /* Prevents content from overflowing */
+  border-radius: 1rem; /* Rounded corners */
+
+  display: flex;
+  flex-direction: column; /* Arranges content vertically */
+  color: black;
+}
+
+/* Header styles for the modal */
+.report_container header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color); /* Separator line */
+}
+
+/* Title styles inside the modal header */
+.report_container h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center; /* Centers the text */
+}
+
+/* Wrapper for the report content areas */
+.report_containers_wrapper {
+  height: 100%; /* Occupies full height of the modal */
+  display: flex;
+  flex-direction: column; /* Stacks child elements vertically */
+}
+
+/* Ensure all direct children of the wrapper take full height */
+.report_containers_wrapper > * {
+  height: 100%;
+}
+
+/* Main Entry Container styles */
+.main_report_entry_container {
+  padding: 1rem;
+  height: 100%;
+  text-align: center;
+}
+
+.main_report_entry_container h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding-bottom: 1rem;
+}
+
+/* Styles for the list of report purposes */
+.report_purpose {
+  display: flex;
+  flex-direction: column; /* Stacks list items vertically */
+  justify-content: space-between;
+  gap: 1rem; /* Space between list items */
+}
+
+/* Individual list items for report purposes */
+.report_purpose li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem;
+
+  background: #f4f4f4a6; /* Light gray background */
+  border-radius: 0.6rem; /* Rounded corners */
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  transition: background-color 0.4s ease; /* Smooth background color transition */
+}
+
+/* Hover effect for list items */
+.report_purpose li:hover {
+  background: #d1d1d1a2;
+}
+
+/* Focus-visible outline for accessibility */
+.report_purpose li:focus-visible {
+  outline: 1px solid var(--primary-color);
+}
+
+/* Selected Report Container styles */
+.selected_report_item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Footer for the selected report section */
+.selected_report_footer {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border-color); /* Separator line */
+}
+
+/* Buttons inside the selected report footer */
+.selected_report_footer button {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border-radius: 0.7rem;
+  text-align: center;
+}
+
+/* Styles for the cancel button */
+.selected_report_footer button:first-child {
+  background: #f4f4f4; /* Light gray */
+  color: black;
+}
+
+/* Styles for the confirm button */
+.selected_report_footer button:last-child {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Padding for the first child of selected report items */
+.selected_report_item > div:first-child {
+  padding: 1rem 1.5rem;
+}
+
+/* Heading styles in selected report sections */
+.selected_report_item h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: black;
+}
+
+/* Wrapper for the report content */
+.selected_report_content_wrapper {
+  margin-top: 10px;
+  background: #8e8e9315; /* Light grayish background */
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.3rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #8e8e93da; /* Subtle text color */
+}
+
+/* Paragraph styles inside the content wrapper */
+.selected_report_content_wrapper p {
+  padding-bottom: 1rem;
+}
+
+/* Unordered list styles inside the content wrapper */
+.selected_report_content_wrapper ul {
+  list-style-type: disc !important; /* Ensures bullet points */
+  margin-left: 2rem;
+}
+
+/* Input styles inside the content wrapper */
+.selected_report_content_wrapper input {
+  border-radius: 0.4rem;
+  background: #ffffff; /* White background */
+  padding: 0.6rem 0.9rem;
+  margin-top: 12px;
+  width: 100%; /* Full width */
+}
+
+/* Focus styles for inputs */
+.selected_report_content_wrapper input:focus {
+  outline: 1px solid var(--primary-color);
+}
+
+/* Media query for smaller screens (max-width: 900px) */
+@media screen and (max-width: 900px) {
+  .report_container {
+    width: 40rem; /* Adjusted width */
+  }
+}
+
+/* Media query for very small screens (max-width: 667px) */
+@media screen and (max-width: 667px) {
+  .report_container {
+    align-self: flex-end;
+    width: 100%; /* Full width */
+    height: initial; /* Adaptive height */
+    border-radius: 1rem 1rem 0 0; /* Rounded corners for top only */
+  }
+
+  .selected_report_footer {
+    flex-direction: column-reverse; /* Stacks buttons vertically */
+  }
+}

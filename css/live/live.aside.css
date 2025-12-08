@@ -1,0 +1,208 @@
+.live_aside_component {
+  width: 18rem;
+  height: calc(100dvh - var(--header-nav-height));
+  overflow-y: auto;
+  scrollbar-width: none;
+  padding: 6px 8px;
+  transition: width 0.03s linear;
+  flex-shrink: 0;
+}
+
+.live_aside_item {
+  width: 100%;
+}
+
+.live_aside_component.collapsed,
+.live_aside_component.full_collapsed {
+  width: 4.6rem;
+}
+
+.live_aside_component .aside_go_live {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: 700;
+
+  padding: 0.6rem;
+  background: linear-gradient(to right, #8837e9, #373fd7);
+  border-radius: 10px;
+}
+
+.live_aside_component.collapsed .aside_go_live span {
+  display: none;
+}
+
+.live_aside_component > ul {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+
+  padding: 2rem 0;
+}
+
+.live_aside_component > ul li {
+  position: relative;
+  padding: 7px 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-weight: 600;
+
+  transition: background 0.3s ease-in-out;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.live_aside_component > ul li[data-active] span {
+  background: linear-gradient(to right, #8837e9, #373fd7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.live_aside_component > ul li::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: linear-gradient(90deg, #8737e947 0%, #373fd747 100%);
+  pointer-events: none;
+  border-radius: var(--radius-sm);
+}
+
+.live_aside_component > ul li:hover::after {
+  opacity: 1;
+}
+
+.live_aside_component > ul li > * {
+  position: relative;
+  z-index: 1;
+}
+
+.live_aside_item .icon-gradient {
+  display: none;
+}
+
+.live_aside_item .icon-white {
+  display: inline;
+}
+
+.live_aside_item[data-active] .icon-gradient {
+  display: inline;
+}
+
+.live_aside_item[data-active] .icon-white {
+  display: none;
+}
+
+.live_aside_component.collapsed #mainLiveNavigation li span {
+  display: none;
+}
+
+/*------------------------------------ Top Creators ------------------------------------*/
+.top_creators_channel {
+  color: var(--text-primary-color);
+}
+
+.top_creators_channel h3 {
+  font-size: var(--text-size-md);
+  font-weight: 500;
+}
+
+.live_aside_component.collapsed .top_creators_channel h3 {
+  display: none;
+}
+
+.top_creators_channel ul {
+  padding: 0.6rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+}
+
+.top_creators_channel ul li {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: var(--text-size-sm);
+}
+
+.creator_bullet {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -15px;
+
+  display: block;
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--primary-danger);
+}
+
+.creator_add {
+  margin-left: auto;
+}
+
+.top_creators_channel .name {
+  font-size: 15px;
+  font-weight: 700;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.top_creators_channel .position {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.live_aside_component.collapsed .top_creator_info,
+.live_aside_component.collapsed .creator_add {
+  display: none;
+}
+
+.live_aside_component .aside_go_live span,
+.live_aside_component #mainLiveNavigation li span,
+.live_aside_component .top_creators_channel h3,
+.live_aside_component .top_creator_info,
+.live_aside_component .creator_add {
+  opacity: 0;
+  transition: opacity 0.1s;
+  pointer-events: none;
+}
+
+.live_aside_component.expanded .aside_go_live span,
+.live_aside_component.expanded #mainLiveNavigation li span,
+.live_aside_component.expanded .top_creators_channel h3,
+.live_aside_component.expanded .top_creator_info,
+.live_aside_component.expanded .creator_add {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.live_aside_component.aside_streamer_component {
+  height: calc(100dvh - 0.1rem) !important;
+}

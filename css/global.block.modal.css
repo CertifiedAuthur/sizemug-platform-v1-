@@ -1,0 +1,107 @@
+/* Styles for the global block modal overlay */
+.global_block_modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480; /* Semi-transparent dark background */
+  z-index: 1011; /* Ensures the modal is above other elements */
+
+  /* Center the modal content both horizontally and vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Wrapper for the modal content */
+.globalBlockWrapper {
+  background: white; /* Modal background color */
+  width: 35rem; /* Set modal width */
+  border-radius: 0.8rem; /* Rounded corners */
+
+  padding: 1rem; /* Padding inside the modal */
+
+  /* Layout settings */
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  gap: 1rem; /* Spacing between children */
+}
+
+/* Styles for the footer section of the modal */
+.globalBlockWrapper footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Spacing between footer buttons */
+}
+
+/* Styles for the buttons in the footer */
+.globalBlockWrapper footer button {
+  width: 100%; /* Full-width buttons */
+  padding: 0.5rem; /* Button padding */
+  border-radius: 0.6rem; /* Rounded corners */
+}
+
+/* Styles for the first button in the footer */
+.globalBlockWrapper footer button:first-child {
+  border: 1px solid var(--border-color); /* Border for outline */
+  color: black; /* Text color */
+}
+
+/* Styles for the last button in the footer */
+.globalBlockWrapper footer button:last-child {
+  background: var(--global-red-color); /* Background color for emphasis */
+  color: white; /* White text for contrast */
+}
+
+/* Circle icon styling within the modal */
+.globalBlockWrapper span {
+  width: 3rem;
+  height: 3rem;
+
+  /* Create a circular border */
+  border: 6px solid #f6d7d5d1; /* Border color */
+  background: #ff3a304e; /* Background color */
+  border-radius: 100%; /* Fully round */
+
+  /* Center the content inside the circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styles for the modal header (title) */
+.globalBlockWrapper h3 {
+  font-size: 1.2rem; /* Font size for the title */
+  font-weight: 600; /* Semi-bold text */
+  color: #101828; /* Dark text color for readability */
+}
+
+/* Styles for the descriptive text in the modal */
+.globalBlockWrapper p {
+  color: #667085; /* Gray text color for secondary content */
+  font-size: 1rem; /* Standard font size */
+  font-weight: 400; /* Normal font weight */
+  padding-top: 5px; /* Spacing above the text */
+}
+
+/* Responsive styles for smaller screens (width ≤ 667px) */
+@media screen and (max-width: 667px) {
+  .globalBlockWrapper {
+    width: 100%; /* Make the modal take full width */
+    align-self: flex-end; /* Align modal at the bottom of the screen */
+
+    /* Adjust border radius for mobile view */
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  /* Add spacing to the last child element */
+  .globalBlockWrapper > div {
+    padding-bottom: 1rem;
+  }
+
+  /* Stack footer buttons vertically on smaller screens */
+  .globalBlockWrapper footer {
+    flex-direction: column-reverse;
+  }
+}

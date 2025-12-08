@@ -1,0 +1,141 @@
+.resize_btn {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 100%;
+  border: 1px solid #8837e9;
+  background: white;
+}
+
+.insert_outer_wrapper {
+  margin-top: 3rem;
+  padding: 10px;
+  transition: transform 0.4s ease linear !important;
+  position: relative;
+}
+
+.insert_inner_wrapper {
+  position: relative;
+  height: 100%;
+  /* min-height: 150px; */
+}
+
+#inserted-table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+.table-cell-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.resize_btn {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.resize_top_left {
+  top: -5px;
+  left: -5px;
+  cursor: nwse-resize !important;
+}
+
+.resize_top_right {
+  top: -5px;
+  right: -5px;
+  cursor: nesw-resize !important;
+}
+
+.resize_bottom_left {
+  bottom: -5px;
+  left: -5px;
+  cursor: nesw-resize !important;
+}
+
+.resize_bottom_right {
+  bottom: -5px;
+  right: -5px;
+  cursor: nwse-resize !important;
+}
+
+.resize_middle_top {
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  cursor: ns-resize !important;
+}
+
+.resize_middle_bottom {
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  cursor: ns-resize !important;
+}
+
+.resize_middle_left {
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%) !important;
+  cursor: ew-resize !important;
+}
+
+.resize_middle_right {
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%) !important;
+  cursor: ew-resize !important;
+}
+
+.action_btn--wrapper,
+.quick_btn--wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) !important;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: default !important;
+}
+
+.action_btn--wrapper {
+  top: -30px;
+}
+
+.quick_btn--wrapper {
+  bottom: -30px;
+}
+
+.action_btn--wrapper button,
+.quick_btn--wrapper button {
+  width: 25px;
+  height: 25px;
+  background: white;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.action_btn--wrapper button.active {
+  background: #1c64f2 !important;
+}
+
+.action_btn--wrapper button.active svg path {
+  fill: white;
+}
+
+button.quick_table_btn:hover i {
+  opacity: 1;
+  visibility: visible;
+}

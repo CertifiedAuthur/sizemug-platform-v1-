@@ -1,0 +1,247 @@
+.stream_send_coins_modal,
+.stream_send_heart_modal {
+  z-index: 999;
+}
+
+.stream_send_heart_modal {
+  position: absolute;
+  top: 3rem;
+  left: 2rem;
+}
+
+.stream_send_heart_modal_container {
+  width: 250px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.stream_send_heart_modal_container li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  transition: background-color 0.4s ease-in-out;
+  font-size: 12px;
+}
+
+.stream_send_heart_modal_container li:not(:last-child) {
+  border-bottom: 1px solid var(--live-container-bg);
+}
+
+.stream_send_heart_modal_container li:hover {
+  background: var(--live-container-darken);
+}
+
+.stream_send_coins_modal_container {
+  padding: 10px;
+  width: 400px;
+  border-radius: var(--radius-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Animation classes - same as bag and boost modals */
+.stream_send_coins_modal_container header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stream_send_coins_modal_container header > * {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stream_send_coins_modal_container header .title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.stream_send_coins_modal_container header .title img {
+  width: 30px;
+}
+
+.stream_send_coins_modal_container header .coin_amount {
+  font-size: 12px;
+  color: #c5c6d0;
+}
+
+.stream_send_coins_modal_container header .coin_amount span:last-child {
+  font-weight: 600;
+  background: linear-gradient(to right, #ffa800, #ffc838);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.stream_send_coins_modal_container footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stream_send_coins_modal_container footer button {
+  flex-grow: 1;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-weight: 600;
+  background: var(--live-container-bg);
+}
+
+.stream_send_coins_modal_container footer button.send {
+  background: linear-gradient(to right, #ffa800, #ffc838);
+}
+
+.stream_send_coins_modal_container .select_receiver_from_stream {
+  padding: 8px 12px;
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stream_send_coins_modal_container .select_receiver_from_stream .sg_nav_profile {
+  margin-bottom: -3px;
+}
+
+.stream_send_coins_modal_container .select_receiver_from_stream h3 {
+  font-weight: 400;
+}
+
+.stream_send_coins_modal_container .select_receiver_from_stream > span {
+  font-size: 10px;
+  font-weight: 300;
+  background: #1f9640;
+  border-radius: 20px;
+  padding: 3px 8px;
+}
+
+.stream_send_coins_modal_container .select_receiver_from_stream > svg {
+  margin-left: auto;
+}
+
+.stream_send_coins_modal_container .select_receiver_from_stream .sg_live_avatar_btn {
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.stream_send_coins_modal_container .coins_selection p {
+  color: var(--text-gray);
+  font-size: 14px;
+  font-weight: 300;
+
+  padding-bottom: 10px;
+}
+
+.stream_send_coins_modal_container .coins_selection .select_coins_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.coins_grid_item_wrapper {
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+  padding: 2px;
+
+  transition: background-color 0.2s ease-in-out;
+}
+
+.coins_grid_item_wrapper.active {
+  background: linear-gradient(90deg, #8837e9, #373fd7);
+}
+
+.coins_grid_item_wrapper .coins_grid_item {
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.coins_grid_item_wrapper .coins_grid_item span {
+  font-weight: 600;
+  background: linear-gradient(to right, #ffa800, #ffc838);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.coin_status_container {
+  width: 100%;
+  padding: 1rem 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.coin_status_container.coin_success_sent h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: linear-gradient(to bottom, #8dff9e, #13d230);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.coin_status_container p {
+  text-align: center;
+  font-weight: 300;
+}
+
+.coin_status_container .coin_amount {
+  font-weight: 700;
+  background: linear-gradient(to bottom, #ffa800, #ffc838);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.coin_status_container .coin_receiver_name {
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.coin_status_container.coin_fail_sent h3 {
+  color: var(--primary-danger);
+}
+
+.coin_status_container.coin_not_enough_sent h3 {
+  color: #fda629;
+  background: transparent;
+}
+
+.coin_status_container.coin_not_enough_sent p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.coin_status_container.coin_not_enough_sent p * {
+  text-align: center;
+}
+
+.coin_status_container.coin_not_enough_sent p b {
+  color: #fda629;
+}

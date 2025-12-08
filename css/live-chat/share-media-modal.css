@@ -1,0 +1,257 @@
+/* Share Media Modal */
+.share-media-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.share-media-modal.live-chat-hidden {
+  display: none;
+}
+
+.share-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.share-modal-container {
+  position: relative;
+  background: #0c121c;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  border: 1px solid #464f5d;
+  box-shadow: 0 25px 50px -12px #00000099;
+  overflow: hidden;
+  transform: scale(0.9) translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.share-media-modal:not(.live-chat-hidden) .share-modal-container {
+  transform: scale(1) translateY(0);
+}
+
+/* Header */
+.share-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.share-modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.share-modal-close {
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  color: #7d8faa;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.share-modal-close:hover {
+  background: #2d2d44;
+  color: #ffffff;
+}
+
+/* Content */
+.share-modal-content {
+  padding: 0;
+  max-height: calc(80vh - 80px);
+  overflow-y: auto;
+}
+
+.share-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.share-modal-content::-webkit-scrollbar-track {
+  background: #1a1d2e;
+}
+
+.share-modal-content::-webkit-scrollbar-thumb {
+  background: #2d3548;
+  border-radius: 3px;
+}
+
+.share-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #3d4558;
+}
+
+/* Time Sections */
+.share-time-toggle {
+  width: 100%;
+  border: none;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  color: #7d8faa;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.share-time-toggle svg {
+  transition: transform 0.2s ease;
+}
+
+.share-time-toggle.active svg {
+  transform: rotate(180deg);
+}
+
+/* Media Grid */
+.share-media-grid {
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  background: #0f1419;
+}
+
+.share-media-grid.live-chat-hidden {
+  display: none;
+}
+
+.share-media-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  background: #2d2d44;
+}
+
+.share-media-item:hover {
+  transform: scale(1.05);
+}
+
+.share-media-item img,
+.share-media-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.share-media-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.7));
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.share-media-item:hover::after {
+  opacity: 1;
+}
+
+/* Video indicator */
+.share-media-item.video::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 4px;
+  z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M8 5V19L19 12L8 5Z' fill='white'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 12px;
+}
+
+/* Empty state */
+.share-media-empty {
+  padding: 40px 24px;
+  text-align: center;
+  color: #7d8faa;
+  font-size: 14px;
+}
+
+.share-media-empty svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .share-modal-container {
+    width: 95%;
+    max-height: 90vh;
+    margin: 20px;
+  }
+
+  .share-modal-header {
+    padding: 16px 20px;
+  }
+
+  .share-modal-header h3 {
+    font-size: 18px;
+  }
+
+  .share-media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 8px;
+    padding: 12px 20px;
+  }
+
+  .share-time-toggle {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .share-media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 6px;
+  }
+}
+
+/* Animation */
+.share-media-modal {
+  animation: shareModalFadeIn 0.3s ease;
+}
+
+@keyframes shareModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

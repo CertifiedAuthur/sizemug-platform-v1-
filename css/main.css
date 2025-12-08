@@ -1,0 +1,77 @@
+/* Main CSS entry point - imports all stylesheets */
+
+/* Base styles */
+@import "./app.root.css";
+
+/* Board mode styles */
+@import "./board_mode/auth.css";
+@import "./board_mode/dialog.css";
+@import "./board_mode/index.css";
+@import "./board_mode/whiteboard.css";
+@import "./board_mode/notificaion&setting.css";
+@import "./board_mode/whiteboard.board.css";
+@import "./board_mode/whiteboard.comments.css";
+@import "./board_mode/slider_switch.css";
+@import "./board_mode/whiteboard.mobilecomponent.css";
+@import "./board_mode/whiteboard.text.css";
+@import "./board_mode/whiteboard.note.css";
+@import "./board_mode/whiteboard.shape.css";
+@import "./board_mode/whiteboard.arrow.css";
+@import "./board_mode/boardmode.intro.css";
+@import "./board_mode/board.selection.box.css";
+
+/* Dashboard styles */
+@import "./landing_intro.css";
+
+/* Other styles */
+@import "./new_story.css";
+@import "./modal.collaboration.css";
+@import "./global.checkbox.switch.css";
+@import "./global.custom.dropdown.v2.css";
+@import "./global.link.modal.css";
+@import "./global.sg.custom.dropdown.css";
+@import "./global.share.modal.css";
+@import "./global.following.modal.css";
+@import "./converted.css";
+
+@import "./board_mode/template.modal.css";
+@import "./board_mode/search.tools.sidebar.css";
+@import "./board_mode/editor.publish.template.css";
+@import "./board_mode/whiteboard.card.css";
+@import "./board_mode/whiteboard.code.block.css";
+@import "./board_mode/whiteboard.dot.token.css";
+@import "./board_mode/whiteboard.flip.card.css";
+@import "./board_mode/whiteboard.people.card.css";
+@import "./board_mode/whiteboard.toolkit.css";
+@import "./board_mode/whiteboard.table.grid.css";
+@import "./board_mode/whiteboard.mind.map.css";
+@import "./board_mode/board-zoom-controls.css";
+
+:root {
+  --whiteboard-overlay-z-index: 999;
+}
+
+.whiteboard-container {
+  height: 100%;
+}
+
+#whiteboard {
+  height: 100%;
+}
+
+.plyr--video {
+  height: 100%;
+  width: 100%;
+}
+
+/* GOOD: can transition opacity & transform */
+.popper-hidden {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.board--hidden {
+  display: none !important;
+}

@@ -1,0 +1,165 @@
+.manage_story_container > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0;
+}
+
+.manage_story_container .header {
+  padding: 10px;
+}
+
+#whoCanViewStoryLists {
+  padding: 1px 15px;
+}
+
+#whoCanViewStoryLists li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 15px 2px;
+}
+
+#whoCanViewStoryLists li:first-child {
+  border-bottom: 1px solid var(--border-color);
+}
+
+#whoCanViewStoryLists li button {
+  border: 1px solid var(--border-color);
+
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#whoCanViewStoryLists li button svg {
+  display: none;
+}
+
+#whoCanViewStoryLists li button[aria-selected="true"] {
+  background: var(--primary-color);
+  border: none;
+}
+
+#whoCanViewStoryLists li button[aria-selected="true"] svg {
+  display: block;
+}
+
+#hideYourStoryFrom > div:last-child {
+  display: flex;
+  align-items: center;
+}
+
+/*------------------------- Hide Story From Home Display -------------------------*/
+#completedRemovingFromStoryViewers {
+  margin-left: auto;
+  color: var(--primary-color);
+  font-weight: 400;
+}
+
+.hide_who_can_view_story_body {
+  padding: 0 10px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.hide_who_can_view_story_body form {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  padding: 10px;
+
+  display: flex;
+  gap: 4px;
+}
+
+.hide_who_can_view_story_body form input {
+  width: 100%;
+  background: none;
+  outline: none;
+}
+
+.hide_who_can_view_story_lists {
+  height: 81%;
+  overflow-y: auto;
+}
+
+.hide_who_can_view_story_lists [role="button"] {
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 0;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hide_who_can_view_story_lists [role="button"] > div:has(img) {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.hide_who_can_view_story_lists [role="button"] > div:has(img) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hide_who_can_view_story_lists [role="button"] h2 {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.hide_who_can_view_story_lists [role="button"] a {
+  color: #6b6767;
+  font-size: 14px;
+}
+
+.hide_who_can_view_story_lists [role="button"] button {
+  margin-left: auto;
+}
+
+.hide_who_can_view_story_lists [role="button"] button.checkbox {
+  border: 1px solid var(--border-color);
+
+  width: 20px;
+  height: 20px;
+  padding: 1px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hide_who_can_view_story_lists [role="button"] button.block {
+  border-radius: 10px;
+  background: #edebeb;
+  padding: 3px 10px;
+  font-size: 14px;
+  font-weight: 400;
+  color: black;
+}
+
+.hide_who_can_view_story_lists [role="button"] button.checkbox svg {
+  display: none;
+}
+
+.hide_who_can_view_story_lists [role="button"] button.checkbox[aria-selected="true"] {
+  background: var(--primary-color);
+  border: none;
+}
+
+.hide_who_can_view_story_lists [role="button"] button.checkbox[aria-selected="true"] svg {
+  display: block;
+}

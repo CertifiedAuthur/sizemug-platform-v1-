@@ -1,0 +1,33 @@
+.floating_buttons {
+  position: fixed;
+  bottom: 6rem;
+  right: 15px;
+
+  display: none;
+  flex-direction: column;
+  gap: 0.8rem;
+  z-index: 20000;
+}
+
+.floating_buttons button {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffff;
+
+  box-shadow: 0 1px 3px 0 #00000084, 0 1px 2px -1px #00000084;
+}
+
+.floating_buttons button.floating_addition {
+  background: #8837e9;
+}
+
+@media screen and (max-width: 667px) {
+  .floating_buttons {
+    display: flex;
+  }
+}

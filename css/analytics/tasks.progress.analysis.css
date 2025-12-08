@@ -1,0 +1,202 @@
+/**************************************** Tasks/Marketplace/Collaboration Analytics  *****************************************/
+.task_progress_analysis_container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task_progress_analysis_container header > button {
+  padding: 0.3rem 0.7rem;
+  border-radius: 0.6rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.task_progress_analysis_container header > button[data-current-switch="missed"] {
+  background: black;
+}
+
+.task_progress_analysis_container header > button[data-current-switch="progress"] {
+  background: var(--global-red-color);
+}
+
+.task_progress_analysis_container header > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  font-size: 0.8rem;
+}
+
+.task_progress_analysis_container header h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: black;
+}
+
+.task_progress_analysis_container[data-current-view="missed-task"] header h4 {
+  color: var(--global-red-color);
+}
+
+.task_progress_analysis_container .this_week,
+.task_progress_analysis_container .last_week {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+}
+
+.task_progress_analysis_container .this_week span:first-child,
+.task_progress_analysis_container .last_week span:first-child {
+  min-width: 7px;
+  min-height: 7px;
+  max-width: 7px;
+  max-height: 7px;
+  border-radius: 100%;
+}
+
+.task_progress_analysis_container .this_week span:first-child {
+  background: black;
+}
+
+.task_progress_analysis_container .last_week span:first-child {
+  background: #aec7ed;
+}
+
+/* Tooltip */
+.tmc_chart_container {
+  padding-top: 5px;
+  position: relative;
+  width: 100%;
+  height: 85%;
+}
+
+#analysisTMCChart {
+  /* width: 100% !important;
+  height: 100% !important; */
+}
+
+.custom_analysis_tmc_chart_tooltip {
+  position: absolute;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 6px #0000001a;
+  font-size: 14px;
+  max-width: 15rem;
+  min-width: 15rem;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  transition: opacity 0.2s ease;
+  display: none;
+
+  z-index: 9999;
+}
+
+/******* Tasks tooltip design *******/
+.task_progress_analysis_container[data-status="progress"] .analysis_tooltip_item > p {
+  color: var(--primary-color);
+}
+
+.task_progress_analysis_container[data-status="missed"] .analysis_tooltip_item > p {
+  color: var(--global-red-color);
+}
+
+.analysis_tooltip_item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.analysis_tooltip_item p {
+  font-size: 0.7rem;
+  font-weight: 400;
+}
+
+.analysis_tooltip_item p.desc {
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  color: #0000006b;
+}
+
+.analysis_tooltip_item .about {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.analysis_tooltip_item .about img {
+  min-width: 50px;
+  max-width: 50px;
+  min-height: 54px;
+  max-height: 54px;
+  border-radius: 0.7rem;
+}
+
+.analysis_tooltip_item .about h3 {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.analysis_tooltip_item .about h3.marketplace {
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.analysis_tooltip_item .user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.analysis_tooltip_item .user img {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+}
+
+.analysis_tooltip_item_footer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding-top: 10px;
+}
+
+.analysis_tooltip_item_footer button {
+  padding: 4px 15px;
+  border-radius: 0.4rem;
+}
+
+.analysis_tooltip_item_footer button:first-child {
+  background: var(--link-color);
+  color: white;
+}
+
+.analysis_tooltip_item_footer button:last-child {
+  border: 1px solid var(--border-color);
+}
+
+#collaborationAnalysisTMCChartTooltip > div {
+  display: flex;
+  align-items: center;
+}
+
+#analysisTMCChartTooltip {
+  pointer-events: auto;
+  position: absolute;
+  display: none;
+  z-index: 1000;
+}

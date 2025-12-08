@@ -1,0 +1,145 @@
+.analytics_row_1 {
+  display: flex;
+  gap: 1rem;
+  max-height: 13rem;
+}
+
+.analytics_row_1 #templateImage {
+  width: 25rem;
+  height: 100%;
+
+  margin-bottom: 0 !important; /* Override slick.js default styling*/
+
+  border-radius: 1.1rem;
+  overflow: hidden;
+}
+
+.slick-dots {
+  bottom: 5px !important;
+  z-index: 9999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.slick-dots li button {
+  width: 20px;
+  height: 20px;
+
+  background: #898989ab;
+  border-radius: 100%;
+}
+
+.slick-dots li,
+.slick-dots li button {
+  width: initial !important;
+  height: initial !important;
+  color: transparent !important;
+  margin: 0 !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slick-dots li button:before,
+.slick-dots li.slick-active button:before {
+  display: none;
+}
+
+.slick-dots li button:before {
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+.analytics_row_1 #templateImage img {
+  width: 100%;
+  height: 100%;
+}
+
+.filter_items_container {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter_analytics {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.filter_analytics button {
+  padding: 0.4rem 0.8rem;
+  background: white;
+  color: #060606;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.filter_analytics button:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.filter_analytics button[aria-selected="true"] {
+  background: var(--primary-color);
+  color: white;
+}
+
+.filter_box_items {
+  flex: 1;
+
+  display: flex;
+  gap: 1rem;
+}
+
+.filter_box_items > div {
+  flex: 1;
+
+  background: white;
+  height: 100%;
+  border-radius: 1rem;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.filter_box_item header,
+.filter_box_item header * {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+.filter_box_item > div {
+  flex: 1;
+  position: relative;
+}
+
+.filter_box_item h3 {
+  position: absolute;
+  bottom: 0;
+  font-size: 2rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+.dot-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

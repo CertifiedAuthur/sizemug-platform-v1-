@@ -1,0 +1,167 @@
+.editor-container {
+  flex: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+  padding-right: 2rem;
+  padding-left: 9rem;
+
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.editor_paper {
+  transform-origin: top left;
+  transition: transform 0.3s ease;
+  min-width: 60%;
+  min-height: fit-content;
+  padding-bottom: 2rem;
+}
+
+.paper {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+.ql-toolbar.ql-snow {
+  border: none;
+}
+
+#editor-container u {
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+}
+
+#editor-container s {
+  text-decoration-line: line-through;
+  text-decoration-style: solid;
+}
+
+/* Default heading styles */
+#editor-container h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+#editor-container h2 {
+  font-size: 1.5em;
+  margin: 0.83em 0;
+}
+
+#editor-container h3 {
+  font-size: 1.17em;
+  margin: 1em 0;
+}
+
+#editor-container h4 {
+  font-size: 1em;
+  margin: 1.33em 0;
+}
+
+#editor-container h5 {
+  font-size: 0.83em;
+  margin: 1.67em 0;
+}
+
+#editor-container h6 {
+  font-size: 0.67em;
+  margin: 2.33em 0;
+}
+
+#editor-container h1,
+#editor-container h2,
+#editor-container h3,
+#editor-container h4,
+#editor-container h5,
+#editor-container h6 {
+  font-weight: bold;
+}
+
+.ql-editor p {
+  transition: margin-bottom 0.3s ease;
+}
+
+.paper-editor {
+  height: 1056px;
+  margin-bottom: 24px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.ql-editor {
+  height: 100% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+#editor_paper--wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.ql-editor::-webkit-scrollbar {
+  display: none;
+}
+
+.ql-citation:after {
+  content: "©";
+}
+
+.ql-editor .citation {
+  background-color: #e8f0fe;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+#mobileHideCitationModalBtn {
+  display: none;
+}
+
+@media screen and (max-width: 667px) {
+  .editor-container {
+    padding: 0;
+  }
+
+  .editor_paper {
+    transition: none !important;
+    min-width: initial;
+    padding: 0;
+    width: 100%;
+
+    transform: none !important;
+    transform-origin: initial !important;
+  }
+
+  #editor_paper--wrapper {
+    padding: 0 !important;
+  }
+
+  .editor-wrapper {
+    margin-bottom: 0 !important;
+  }
+
+  .paper-editor {
+    width: 100% !important;
+    max-height: 100% !important;
+    min-height: 100% !important;
+    max-width: none !important;
+    min-width: initial !important;
+  }
+
+  .ql-container.ql-snow {
+    border: none;
+  }
+
+  #mobileHideCitationModalBtn {
+    display: block;
+  }
+}

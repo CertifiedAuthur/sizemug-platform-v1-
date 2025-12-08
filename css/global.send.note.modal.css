@@ -1,0 +1,412 @@
+.send_note_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(2px);
+  background: #00000053;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: var(--overlay-z-index);
+}
+
+.send_note_container {
+  height: 80vh;
+  width: 30rem;
+
+  background: white;
+  border-radius: 1rem;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.send_note_container header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 0.6rem;
+}
+
+.send_note_container header h3 {
+  color: #0d021b;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.send_note_container footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.send_note_container footer button {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 0.6rem;
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+
+.send_note_container footer button:first-child {
+  background: none;
+  border: 1px solid var(--border-color);
+}
+
+.send_note_container footer button:last-child {
+  background: var(--primary-color);
+  color: white;
+}
+
+.send_note_main {
+  padding-bottom: 1rem;
+  border-top: 1px solid var(--border-color);
+
+  display: flex;
+  flex-direction: column;
+  height: 85%;
+}
+
+#sendNoteContentArea {
+  height: 100%;
+  background: #10deb5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  font-size: 16px;
+  outline: none;
+
+  overflow-y: auto;
+}
+
+#sendNoteContentArea ul {
+  list-style-type: disc !important;
+  margin-left: 25px;
+}
+
+#sendNoteContentArea ol {
+  list-style-type: decimal !important;
+  margin-left: 20px;
+}
+
+.send_note_tools {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5rem 0;
+}
+
+.send_note_tools button[aria-expanded="true"] svg path {
+  transition: all 0.4s ease-in-out;
+}
+
+.send_note_tools button[aria-expanded="true"] svg path {
+  fill: black;
+}
+
+.send_note_tools button#noteBold[aria-selected="true"] svg path,
+.send_note_tools button#noteItalic[aria-selected="true"] svg path {
+  stroke: black;
+  fill: none;
+}
+
+#noteOptionContainers > div {
+  padding: 10px 4px;
+}
+
+/* Lists Bullet & Number */
+#noteOptionLists {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  gap: 1rem;
+}
+
+#noteOptionLists button {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#noteOptionLists button[aria-selected="true"] {
+  color: var(--link-color);
+}
+
+#noteOptionLists button[aria-selected="true"] svg path {
+  fill: var(--link-color);
+}
+
+/* Color Options */
+.note_color_options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note_color_options button {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note_color_options button:nth-child(1) {
+  background: #ff5b89;
+}
+
+.note_color_options button:nth-child(2) {
+  background: #ffce5b;
+}
+
+.note_color_options button:nth-child(3) {
+  background: #adff5b;
+}
+
+.note_color_options button:nth-child(4) {
+  background: #10deb5;
+}
+
+.note_color_options button:nth-child(5) {
+  background: #c05bff;
+}
+
+.note_color_options button:nth-child(6) {
+  background: #5b6bff;
+}
+
+.note_color_options button:nth-child(7) {
+  background: #ffb05b;
+}
+
+.note_color_options button[aria-selected="true"] {
+  border: 1px solid #0d021b;
+}
+
+.note_color_options button[data-color="custom"] {
+  background: #d8d8d8;
+}
+
+/* Fonts Options */
+.note_font_options {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.note_font_options button {
+  white-space: nowrap;
+  color: #0d021b;
+  font-size: 1rem;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 5px;
+
+  text-transform: capitalize;
+}
+
+.note_font_options button[aria-selected="true"] {
+  color: var(--link-color);
+}
+
+.note_font_options button[aria-selected="true"] span:last-child {
+  display: block;
+}
+
+.note_font_options button span:last-child {
+  display: none;
+}
+
+/* EMOJI Options */
+.note_emoji_options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 4px;
+}
+
+.note_emoji_options button {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.note_emoji_options button[data-emoji="more-emoji"] {
+  background: #d8d8d8;
+}
+
+/*---------- Emoji Overlay ---------*/
+.emoji_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(2px);
+  background: #00000053;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: var(--overlay-z-index);
+}
+
+.emoji_overlay *:focus-visible {
+  outline: 1px solid var(--primary-color);
+}
+
+.emoji_container {
+  height: 70vh;
+  width: 35rem;
+
+  backdrop-filter: blur(2px);
+  background: #ededed6c;
+
+  border-radius: 0.4rem;
+
+  padding: 1rem;
+  border: 1px solid #ffffff46;
+
+  color: white;
+  font-size: 1.4rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.emoji_container .recent_container > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.all_emojis {
+  height: 85%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.emoji_container .recent_container .recent_lists,
+.emoji_container .all_emojis_lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 0.5rem;
+}
+
+.emoji_container .all_emojis_lists {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.emoji_container button {
+  padding: 0.1rem 0.7rem;
+  border-radius: 0.3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.emoji_container button:hover {
+  background: #ffffff61;
+}
+
+/* Text Size */
+.note_text_size_options {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.note_text_size_options button {
+  white-space: nowrap;
+  color: #0d021b;
+  font-size: 1rem;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  gap: 5px;
+}
+
+.note_text_size_options button[aria-selected="true"] {
+  color: var(--link-color);
+}
+
+.note_text_size_options button span:last-child {
+  display: none;
+}
+
+.note_text_size_options button[aria-selected="true"] span:last-child {
+  display: block;
+}
+
+@media screen and (max-width: 667px) {
+  .send_note_container {
+    height: 90dvh;
+    width: 100%;
+
+    align-self: flex-end;
+    border-radius: 1rem 1rem 0 0;
+
+    padding: 0.5rem;
+  }
+
+  .send_note_container footer {
+    flex-direction: column-reverse;
+    gap: 0.7rem;
+  }
+
+  .send_note_container footer button {
+    padding: 0.3rem;
+  }
+
+  .emoji_container {
+    align-self: flex-end;
+  }
+}

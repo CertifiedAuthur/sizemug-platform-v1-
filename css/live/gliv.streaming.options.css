@@ -1,0 +1,67 @@
+.streaming_options {
+  z-index: 9999;
+}
+
+ul.streaming_options_container {
+  width: 210px;
+  border: 1px solid var(--border-color-20);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  background: var(--live-darken-wrapper);
+}
+
+ul.streaming_options_container li {
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 14px;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+ul.streaming_options_container li:hover {
+  background: var(--modal-bg-color);
+}
+
+ul.streaming_options_container li.host {
+  border-top: 1px solid var(--border-color-20);
+  color: #1f9640;
+}
+
+ul.streaming_options_container li.disable {
+  color: var(--text-color-60);
+}
+
+ul.streaming_options_container li.delete {
+  color: #e1304e;
+}
+
+.mute_title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 8px 16px;
+}
+
+ul.streaming_options_container li#muteInChatOption,
+ul.streaming_options_container li#kickFromStream {
+  padding: 0;
+}
+
+.mute_title.expanded {
+  background: var(--primary-color);
+}
+
+.mute_title svg {
+  transition: transform 0.3s ease-in-out;
+  transform: rotate(0);
+}
+
+.mute_title.expanded svg {
+  transform: rotate(180deg);
+}
+
+.mute_submenu {
+  padding-left: 16px;
+}

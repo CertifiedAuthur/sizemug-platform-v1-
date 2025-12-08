@@ -1,0 +1,35 @@
+.canvas_note--wrapper {
+  min-width: 10rem;
+  min-height: 4rem;
+  position: absolute;
+  box-shadow: 0 10px 15px -5px #00000058;
+}
+
+.canvas_note {
+  height: 100%;
+  border-radius: 5px;
+  padding: 2px 4px;
+  font-size: 1rem;
+  outline: none;
+  overflow-y: auto;
+  scrollbar-width: none;
+  transition: all 0.1s ease;
+  border: 1px solid var(--primary-color);
+
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.canvas_note--wrapper--active {
+  border-radius: 8px;
+}
+
+#note_editor_wrapper,
+#noteActionBtnsWrapper {
+  position: absolute;
+  z-index: 1000001;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.board--hidden {
+  display: none !important;
+}

@@ -1,0 +1,108 @@
+.on_screen_chat_container {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 300px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  font-family: sans-serif;
+  padding: 10px 0 10px 0;
+
+  z-index: 1;
+}
+
+/* where messages go */
+#onScreenChat {
+  height: 350px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-bottom: 10px;
+  overflow-y: auto; /* allow vertical scroll */
+  overflow-x: hidden;
+  scrollbar-width: none; /* hide Firefox scrollbar */
+
+  /* apply the fade mask */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, /* ← was 20% */ black 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%), linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-composite: destination-in;
+}
+
+#onScreenChat::-webkit-scrollbar {
+  display: none; /* hide WebKit scrollbar */
+}
+
+/* each message bubble */
+.on_screen_message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  padding: 6px;
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: slideUp 0.4s forwards ease-out;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.on_screen_message > * {
+  /* Prevent dragging in WebKit/Blink */
+  -webkit-user-drag: none;
+  user-drag: none;
+
+  /* Prevent selection in all browsers */
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+
+  /* If you want to keep pointer-events working for the rest of the bubble/text, 
+     you can re-enable it for the meta/text and leave it off for the img: */
+  pointer-events: none;
+}
+
+.on_screen_message img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.on_screen_message .meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.on_screen_message .meta .name {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.on_screen_message .meta .text {
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.on_screen_chat_container .on_screen_chat_container_fade_top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px; /* ↑ cover more of the first few messages */
+  pointer-events: none;
+  z-index: 200;
+
+  /* background: linear-gradient(to bottom, rgba(18, 18, 18, 0.85) 0%, rgba(18, 18, 18, 0.7) 30%, rgba(18, 18, 18, 0.4) 60%, rgba(18, 18, 18, 0) 100%); */
+}

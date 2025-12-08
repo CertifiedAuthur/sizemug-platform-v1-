@@ -1,0 +1,37 @@
+.interest-changed-modal {
+  position: fixed;
+  top: -15rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  background: #000000;
+  border-radius: 10px;
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  z-index: 1000;
+  color: white;
+  transition: top 0.5s ease-in-out;
+}
+
+.interest-changed-modal.show {
+  top: 4.2rem;
+}
+
+.interest-changed-modal button.show-more {
+  color: var(--link-color);
+  padding-right: 20px;
+}
+
+.interest-changed-modal button.close {
+  background: #7e869e43;
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+  border-radius: 100%;
+
+  margin-left: auto;
+}

@@ -1,0 +1,300 @@
+:root {
+  --share-container-width: 38rem;
+}
+
+.share-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#shareOverlayWrapper {
+  position: relative;
+  background: white;
+  border-radius: 14px;
+  width: var(--share-container-width);
+}
+
+#shareOverlayWrapper > #shareModalMobileClose {
+  position: absolute;
+  top: -4rem;
+  right: 1rem;
+  z-index: var(--overlay-z-index);
+
+  background: white;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+main.share_container div:first-child,
+main.share_container div:last-child {
+  padding: 20px;
+}
+
+main.share_container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px !important;
+
+  border-bottom-width: 0px;
+  height: auto !important;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  background: #ffffff;
+}
+
+main.share_container h1 {
+  color: black;
+}
+
+main.share_container .header h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+main.share_container h1 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+main.share_container .header button {
+  width: 40px;
+  height: 40px;
+  background: #f4f4f4;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+main.share_container .header button:hover {
+  background: #e3e3e3;
+}
+
+main.share_container .share_options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px 0;
+  color: #363853;
+  font-size: 14px;
+}
+
+main.share_container .share_options button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: #363853;
+}
+
+main.share_container .share_options button.showAddStoryModal span:first-child {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: linear-gradient(to top right, #4d4bfe, #992df2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main.share_container .share_options button.share_following--tab span:first-child,
+main.share_container .share_options button.share_follower--tab span:first-child {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: #f4f4f4;
+  border: 1px solid #eaecf0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main.share_container .share_options button.repost_tab span:first-child {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background: #8837e9;
+  border: 1px solid #eaecf0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main.share_container .share_options button.telegram_tab span:first-child {
+  border: 1px solid #eaecf0;
+  border-radius: 50%;
+}
+
+main.share_container .share_options button.twitter_tab span:first-child {
+  border: 1px solid #eaecf0;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  background: #000000;
+  position: relative;
+}
+
+main.share_container .share_options button.twitter_tab span:first-child img {
+  padding: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+}
+
+main.share_container .clipboard {
+  background: #f4f4f4;
+  padding: 4px 16px !important;
+  padding-right: 5px !important;
+  border-radius: 40px;
+  color: #3638538e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main.share_container .clipboard button {
+  padding: 6px 12px;
+  background: var(--primary-color);
+  font-size: 11px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+main.share_container .clipboard .text-to-copy {
+  padding: 0px !important;
+  user-select: none;
+  font-size: 14px;
+}
+
+.share_recent_container {
+  padding: 0 1rem;
+}
+
+.share_recent_container p {
+  color: #707070e7;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.share_recent_container .share_recent_users {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+
+  padding: 10px 3px !important;
+}
+
+.share_recent_users .share_recent_user {
+  padding: 0 !important;
+
+  font-size: 13px;
+  color: #707070e7;
+  text-align: center;
+
+  position: relative;
+}
+
+.share_recent_users .share_recent_user > div {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  position: relative;
+
+  padding: 0 !important;
+}
+
+.share_recent_container .share_recent_users .share_recent_user img:not(.badge) {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+}
+
+.share_recent_users .share_recent_user img.badge {
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  z-index: 10;
+  background: none;
+}
+
+@media screen and (max-width: 667px) {
+  #shareOverlayWrapper {
+    align-self: flex-end;
+    width: 100%;
+    border-radius: 14px 14px 0 0;
+  }
+
+  #shareOverlayWrapper > #shareModalMobileClose {
+    display: flex;
+  }
+
+  /* Share Modal */
+  main.share_container div:first-child,
+  main.share_container div:last-child {
+    padding: 20px;
+  }
+
+  main.share_container .header {
+    border-bottom-width: 1px;
+    justify-content: center;
+  }
+
+  main.share_container .header .cancel-modal {
+    display: none;
+  }
+
+  main.share_container .header h1 {
+    font-size: 24px;
+  }
+
+  main.share_container .share_options {
+    padding: 20px;
+    gap: 30px;
+  }
+}
+
+.share_container {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+}

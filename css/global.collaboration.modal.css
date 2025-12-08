@@ -1,0 +1,124 @@
+.collaborators_overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: 99999999999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  animation: Modal 0.2s ease;
+}
+
+.collaborators_overlay_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.collaborators_overlay_mobile_cancel {
+  display: none;
+}
+
+.collaborators_modal {
+  background: #ffff;
+  border-radius: 16px;
+  width: 560px;
+}
+
+.collaborators_modal_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d7d7d7b7;
+  padding: 10px;
+}
+
+.collaborators_modal_header h1 {
+  width: 100%;
+  text-align: center !important;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.collaborators_modal .modal_footer {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid #d7d7d7b7;
+}
+
+.collaborators_modal .modal_footer button {
+  width: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.modal_footer button:first-child {
+  color: #000000;
+  background: #f4f4f4;
+}
+
+.modal_footer button:last-child {
+  color: #ffff;
+  background: #000000;
+}
+
+.collaborators_modal .collaborators {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 15px;
+}
+
+.collaborators_modal .collaborators button:hover {
+  background: #ff6363;
+  transition: all 0.3s ease;
+  color: #ffff;
+}
+
+.collaborators_modal .collaborator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.collaborators_modal .collaborator > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.collaborators_modal .collaborator img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #8837e9;
+  border-radius: 100%;
+}
+
+.collaborators_modal .collaborator h2 {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.collaborators_modal .collaborator p {
+  font-size: 13px;
+  color: #4646469e;
+}
+
+.collaborators_modal .collaborator button {
+  background: #f4f4f4;
+  font-size: 14px;
+  padding: 10px;
+  height: 40px !important;
+  width: 102px;
+  border-radius: 10px;
+}

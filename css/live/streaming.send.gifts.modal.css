@@ -1,0 +1,210 @@
+.stream_send_gifts_modal {
+  z-index: 999;
+}
+
+.stream_send_gifts_modal_container {
+  padding: 10px;
+  width: 450px;
+  height: 580px;
+  border-radius: var(--radius-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Animation classes - same as bag and boost modals */
+.stream_send_gifts_modal_container header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stream_send_gifts_modal_container header > * {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stream_send_gifts_modal_container header .title {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.stream_send_gifts_modal_container header .title img {
+  width: 30px;
+}
+
+.stream_send_gifts_modal_container header .coin_amount {
+  font-size: 12px;
+  color: #c5c6d0;
+}
+
+.stream_send_gifts_modal_container header .coin_amount span:last-child {
+  font-weight: 600;
+  background: var(--sg-gift);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.stream_send_gifts_modal_container form {
+  background: var(--live-container-bg);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stream_send_gifts_modal_container form input {
+  flex-grow: 1;
+}
+
+.stream_send_gifts_modal_container .gifts_selection_grid {
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+.gifts_selection_item {
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+  padding: 10px;
+}
+
+.gifts_selection_item .top_gift_part {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gifts_selection_item .top_gift_part .gift_main_actions {
+  font-size: 12px;
+}
+
+.gifts_selection_item .top_gift_part .gift_main_actions button {
+  display: flex;
+  align-items: center;
+}
+
+.gifts_selection_item .gift_main_actions button.add_more_bags {
+  gap: 5px;
+  color: var(--sg-gift);
+  width: 100%;
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.gifts_selection_item .gift_main_actions button.add_more_bags > * {
+  justify-self: flex-end;
+  /* align-items: flex-end; */
+}
+
+.gifts_selection_item .gift_main_actions button.send_gift {
+  background: var(--sg-gift);
+  padding: 3px 4px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  gap: 8px;
+}
+
+.gift_main_actions button.send_gift span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 5px;
+  border-radius: var(--radius-sm);
+  background: #1219249b;
+  font-size: 10px;
+}
+
+.gift_main_actions button.send_gift span img {
+  width: 12px;
+}
+
+.gifts_selection_item .bottom_gift_part {
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gifts_selection_item .bottom_gift_part h3 {
+  font-weight: 600;
+  font-size: var(--text-size-md);
+}
+
+.gifts_selection_item .bottom_gift_part p {
+  font-weight: 300;
+}
+
+.gifts_selection_item .bottom_gift_part p span {
+  color: var(--sg-gift);
+  font-weight: 700;
+}
+
+.gifts_selection_item .bottom_gift_part button {
+  width: 25px;
+  height: 20px;
+  background: #394454;
+  border-radius: 5px;
+  font-size: 12px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gifts_selection_item .bottom_gift_part button:disabled {
+  background: #3944544a;
+  color: #ffffff4a;
+}
+
+.gifts_selection_item .bottom_gift_part .gift_increment {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stream_gift_status_container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.stream_gift_status_container footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stream_gift_status_container footer button {
+  flex-grow: 1;
+  padding: 8px 10px;
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-weight: 600;
+  background: var(--live-container-bg);
+}
+
+.stream_gift_status_container footer button.send {
+  background: linear-gradient(to right, #ffa800, #ffc838);
+}
+
+#giftsStatusContainer footer button.send {
+  background: var(--sg-gift);
+}
+
+.coin_status_container {
+  height: 100%;
+}

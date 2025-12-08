@@ -1,0 +1,286 @@
+.people_container {
+  position: absolute;
+  top: 10rem;
+  left: 5rem;
+  z-index: 1000000;
+}
+
+.people_list_container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  height: 20rem;
+  background: white;
+  padding: 10px;
+  padding-bottom: 0;
+
+  width: 16rem;
+  border-radius: 10px;
+}
+
+.people_list_header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333333;
+}
+
+.people_list_header form {
+  display: flex;
+  gap: 6px;
+  background: var(--border-color);
+  border-radius: 8px;
+  padding: 3px 5px;
+  margin-top: 4px;
+}
+
+.people_list_header form input {
+  background: transparent;
+  flex: 1;
+  outline: none;
+  font-size: 12px;
+  color: #333333;
+  font-weight: 200;
+  padding-right: 5px;
+}
+
+.people_list_header form input::placeholder {
+  font-size: 12px;
+  font-weight: 200;
+}
+
+.people_list {
+  overflow-y: auto;
+  height: 100%;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.person_item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+
+  width: 100%;
+  user-select: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.person_item {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.person_item * {
+  pointer-events: none; /* Prevents selection of child elements */
+}
+
+.person_item img {
+  pointer-events: auto; /* Re-enable for images if needed */
+}
+
+.person_item .avatar {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+
+  position: relative;
+}
+
+.person_item .avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.person_item .avatar span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #26f433;
+  position: absolute;
+  bottom: -2px;
+  right: 3px;
+  border: 2px solid white;
+}
+
+.person_item .person_info {
+  flex: 1;
+  min-width: 0;
+}
+
+.person_item .person_info h4 {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.person_item .person_info span {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 400;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+/** Person editor toolbar styles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+.person-editor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.editor-section {
+  display: flex;
+  gap: 4px;
+}
+
+.editor-divider {
+  width: 1px;
+  height: 20px;
+  background: #e1e5e9;
+}
+
+.editor-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.editor-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.editor-btn.active {
+  background: #3b82f6;
+  color: white;
+}
+
+.editor-btn.locked {
+  background: #ef4444;
+  color: white;
+}
+
+/* Person item styles */
+.person-item {
+  position: absolute;
+  user-select: none;
+}
+
+.person-item.show-handles .handles {
+  display: block !important;
+}
+
+.person-item.locked {
+  opacity: 0.7;
+}
+
+.person-item.show-handles .resize-handle {
+  opacity: 1;
+}
+
+/* Optional: Add cursor feedback during drag */
+.person.interact-dragging {
+  cursor: grabbing !important;
+}
+
+/* Style the drag proxy */
+.drag-proxy {
+  cursor: grabbing !important;
+  background: white;
+}
+
+.person_editor_size_selector {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+  gap: 5px;
+}
+
+.person_editor_size_selector span {
+  font-size: 10px;
+  color: #ffffff60;
+}
+
+.person_editor_size_selector select {
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+}
+
+.person-content-element {
+  display: flex;
+  gap: 12px;
+
+  width: 100%;
+  height: 100%;
+}
+
+.person-content-name {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.person-content-span {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 400;
+
+  margin: 0;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}

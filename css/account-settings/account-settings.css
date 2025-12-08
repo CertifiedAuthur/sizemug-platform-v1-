@@ -1,0 +1,498 @@
+#account-settings {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 0.75rem;
+
+  border-radius: 0.75rem;
+  background: #fcfcfd;
+}
+
+#account-settings header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#account-settings header h2 {
+  font-size: 1.4rem;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+#account-settings .switch-account-container {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  background: white;
+
+  color: #344054;
+  font-weight: 400;
+
+  width: 15.5rem;
+}
+
+#account-settings .switch-account-container .switch-container {
+  margin-left: auto;
+}
+
+#account-settings header .account-header-top-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#account-settings header .account-header-top-left .current-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 3px 8px;
+  background: #ece6f6;
+  border-radius: 20px;
+}
+
+#account-settings header .account-header-top-left .current-profile img {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.account-header-top-left .current-profile h5 {
+  color: #8837e9;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.account-header-top-left .current-profile.creator-account h5 {
+  background: linear-gradient(to right, #4d4bfe, #992df2);
+  -webkit-background-clip: text; /* For WebKit browsers (e.g., Chrome, Safari) */
+  background-clip: text; /* Standard property */
+  color: transparent; /* Makes the text itself transparent so the background shows through */
+}
+
+@media not all and (min-width: 640px) {
+  #account-settings header h2 {
+    font-size: 1.1rem;
+    line-height: 1.75rem;
+  }
+}
+
+.tab-panel_header h4 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
+.tab-panel_header label {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.form-control {
+  width: 100%;
+  cursor: text;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
+  background-color: inherit;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.word-controller {
+  display: flex;
+  width: 100%;
+  gap: 0.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media not all and (min-width: 640px) {
+  .word-controller {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 640px) {
+  .word-controller {
+    align-items: center;
+  }
+}
+
+.word-controller select {
+  cursor: pointer;
+}
+
+.word-controller .word-formatter {
+  display: flex;
+  gap: 0.75rem;
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+/************************************** Ends Acount settings Header ***************************************/
+#account-settings .settings-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (min-width: 640px) {
+  #account-settings .settings-list {
+    border-bottom-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  }
+}
+
+#account-settings .settings-list .settings-tab {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+@media not all and (min-width: 640px) {
+  #account-settings .settings-list .settings-tab {
+    display: none;
+  }
+}
+
+#account-settings .settings-list .settings-tab-list {
+  cursor: pointer;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+#account-settings .settings-list .settings-tab-list[aria-selected="true"] {
+  border-bottom-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+#account-settings
+  .settings-list
+  .settings-tab-list[data-tab="delete-account"][aria-selected="true"] {
+  border-bottom-width: 2px;
+  --tw-border-opacity: 1;
+  border-color: rgb(224 36 36 / var(--tw-border-opacity));
+  font-weight: 600;
+  --tw-text-opacity: 1;
+  color: rgb(224 36 36 / var(--tw-text-opacity));
+}
+
+/*------------------------------ Mobile Account Setting Dropdown Tab ----------------------------*/
+.account_setting_dropdown {
+  display: none;
+}
+
+@media screen and (max-width: 667px) {
+  .account_setting_dropdown {
+    display: block;
+  }
+
+  .account_setting_dropdown {
+    position: relative;
+    width: 100%;
+  }
+
+  .account_setting_dropdown > button {
+    position: relative;
+    border: 1px solid var(--border-color);
+    border-radius: 0.8rem;
+    padding: 10px;
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+
+    transition: all 0.3s ease-in-out;
+  }
+
+  .account_setting_dropdown > button::after {
+    content: "";
+    position: absolute;
+    inset: -2px; /* Expands outward like an outline */
+    border-radius: 0.8rem;
+    border: 4px solid var(--primary-color-fade);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .account_setting_dropdown > button[aria-expanded="true"]::after {
+    opacity: 1;
+  }
+
+  .account_setting_dropdown ul {
+    position: absolute;
+    top: 3.2rem;
+    z-index: 99;
+
+    width: 100%;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 3px 0;
+    background: white;
+
+    animation: AccountSettingDropdown 0.2s ease;
+    display: none;
+
+    box-shadow: var(--global-box-shadow);
+  }
+
+  @keyframes AccountSettingDropdown {
+    from {
+      transform: translateY(-10px);
+      opacity: 0.7;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .account_setting_dropdown > button[aria-expanded="true"] .select_chevron {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .account_setting_dropdown > button[aria-expanded="true"] .select_chevron {
+    transform: rotate(180deg);
+  }
+
+  .account_setting_dropdown > button[aria-expanded="true"] ~ ul {
+    display: flex;
+  }
+
+  .account_setting_dropdown ul li {
+    padding: 10px 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s ease-in-out;
+
+    color: #101828;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .account_setting_dropdown ul li:hover,
+  .account_setting_dropdown ul li[aria-selected="true"] {
+    background: #f9fafb;
+  }
+
+  .account_setting_dropdown ul li span:last-child {
+    display: none;
+  }
+
+  .account_setting_dropdown ul li[aria-selected="true"] span:last-child {
+    display: block;
+  }
+}
+
+/*------------------------------ Blocking ----------------------------*/
+.setting-wrapper {
+  max-width: 70%;
+  background: white;
+  border-radius: 0.75rem;
+}
+
+@media screen and (max-width: 667px) {
+  .setting-wrapper {
+    max-width: 100%;
+  }
+}
+
+.blocking-container .s-card {
+  padding-top: 0;
+  gap: 0;
+}
+
+.block-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.block-list-user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.9rem;
+
+  padding: 0.8rem;
+}
+
+.block-list-user-pic {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.block-list-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.block-list-user-name {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 667px) {
+  .block-list-name-wrapper {
+    display: initial;
+    justify-content: initial;
+    align-items: initial;
+
+    width: initial;
+  }
+
+  .blocking-container {
+    max-width: 100%;
+  }
+}
+
+/* Data Privacy */
+.settings-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.settings-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.25rem;
+  overflow: hidden;
+}
+
+.settings-item-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 2rem;
+}
+
+.settings-item-content-title {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  --tw-text-opacity: 1;
+  color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.settings-item-content-toggle {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.settings-item-desc {
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 300;
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+@media screen and (max-width: 1024px) {
+  #account-settings header {
+  }
+}
+
+@media screen and (max-width: 667px) {
+  #account-settings header {
+    flex-direction: column;
+    align-items: initial;
+    gap: 15px;
+  }
+
+  #account-settings .switch-account-container {
+    width: 100%;
+  }
+
+  #account-settings header .account-header-top-left {
+    justify-content: space-between;
+  }
+
+  .settings-items {
+    gap: 1rem;
+  }
+
+  .word-controller {
+    padding: 0 0.8rem;
+  }
+}
+/* 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
+[x-cloak],
+.account-hidden {
+  display: none !important;
+}

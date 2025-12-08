@@ -1,0 +1,18 @@
+.chat_emoji_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#chatEmojiModalContainer {
+  border-radius: 10px;
+  overflow: hidden;
+}

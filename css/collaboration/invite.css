@@ -1,0 +1,285 @@
+.invite_modal {
+  background: white;
+  border: 1px solid #f3f3f3;
+  border-radius: 8px;
+  width: 95%;
+  position: absolute;
+  top: 3rem;
+  z-index: 999;
+  align-self: center;
+  box-shadow: 0 10px 10px #00000012;
+  animation: Dropdown 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes Dropdown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.invite_modal h2 {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.invite_modal .actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 15px 15px;
+}
+
+.invite_modal .actions button {
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+
+.invite_modal .actions button:first-child {
+  color: #000000;
+  background: #f4f4f4;
+}
+
+.invite_modal .actions button:last-child {
+  background: #000000;
+  color: #ffffff;
+}
+
+#invite_modal--step-1 {
+  padding: 15px;
+}
+
+.invite_modal .select_option .option {
+  position: relative;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+
+.invite_modal .select_option .option:not(:has(.collaboration-hidden)) #direct_select {
+  border: 2px solid #8737e956;
+}
+
+.invite_modal .select_option [role="button"] {
+  display: flex;
+  align-items: center;
+  border: 1px solid #f3f3f3;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-size: 0.9rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 400;
+  color: #667085;
+}
+
+.invite_modal .select_option p {
+  color: #344054;
+}
+
+.invite_modal .dropdown_option {
+  position: absolute;
+  top: 3rem;
+  background: white;
+  border: 1px solid #f3f3f3;
+  border-radius: 8px;
+
+  width: 100%;
+  z-index: 999999;
+  box-shadow: 0 10px 10px #00000012;
+
+  animation: Dropdown 0.3s ease;
+}
+
+.invite_modal .dropdown_option form {
+  display: flex;
+  gap: 5px;
+  padding: 5px 10px;
+  background: #f4f4f4;
+  border-radius: 3px;
+}
+
+.invite_modal .dropdown_option form input {
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  width: 100% !important;
+}
+
+.invite_modal .dropdown_option ul {
+  max-height: 15rem;
+  overflow-y: auto;
+
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbcbcbc0 #e0e0e0c6;
+}
+
+.invite_modal .dropdown_option ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 13px;
+  transition: all 300ms ease;
+  border-radius: 0 !important;
+  border: none !important;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.invite_modal .dropdown_option ul li.active {
+  background: #f9fafb;
+}
+
+.invite_modal .dropdown_option ul li:hover {
+  background: #f9fafb;
+}
+
+.invite_modal .dropdown_option ul li span:last-child {
+  display: none;
+}
+
+.invite_modal .dropdown_option ul li.active span:last-child {
+  display: block;
+}
+
+.invite_modal .dropdown_option ul li:last-child {
+  border-radius: 0 0 8px 8px !important;
+}
+
+#invite_modal--step-2 header {
+  display: flex;
+  gap: 3px;
+  padding: 15px;
+  padding-bottom: 0;
+  border-bottom: 1px solid #f3f3f3;
+
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+#invite_modal--step-2 header button {
+  padding: 0 1.7rem 0.4rem;
+  color: #00000065;
+}
+
+#invite_modal--step-2 header button.active {
+  color: black;
+  border-bottom: 2px solid #000000;
+}
+
+#invite_modal--step-2 header button:last-child {
+  margin-left: auto;
+  display: inline;
+  padding: 0;
+}
+
+.follow_items {
+  padding: 15px;
+
+  max-height: 40vh;
+  overflow-y: auto;
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbcbcbc0 #e0e0e0c6;
+}
+
+.follow_items .select_all {
+  font-size: 0.9rem;
+  color: #00000065;
+}
+
+.follow_items > div {
+  margin-bottom: 10px;
+}
+
+.follow_items > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.follow_items .item,
+.follow_items .item div {
+  display: flex;
+  align-items: center;
+}
+
+.follow_items .item div {
+  gap: 10px;
+}
+
+.follow_items .item h3 {
+  font-weight: 500;
+}
+
+.follow_items .item div img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.follow_items .item.active button {
+  background: #8837e9;
+  border: none;
+}
+
+.follow_items .item.active button img {
+  display: block;
+}
+
+.follow_items .item button {
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+  border: 1px solid #f3f3f3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 667px) {
+  .invite_modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999999;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .invite_modal .actions {
+    margin-top: auto;
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+
+  #invite_modal--step-2 header {
+    padding: 1.7rem 10px;
+    padding-bottom: 0;
+  }
+
+  #invite_modal--step-2 header button {
+    padding: 0 1.7rem 0.7rem;
+  }
+
+  .follow_items {
+    max-height: none;
+    height: 80vh !important;
+  }
+}

@@ -1,0 +1,264 @@
+.environment-changed-modal {
+  position: fixed;
+  top: -15rem;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0 auto;
+  background: #1c64f2;
+  border-radius: 10px;
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  z-index: 1000;
+  color: white;
+  width: 60vh;
+  transition: top 0.9s ease-in-out;
+}
+
+.environment-changed-modal.show {
+  top: 4.2rem;
+}
+
+.environment-changed-modal button {
+  background: #7e869e43;
+  border: none;
+  color: white;
+  font-size: 1.6rem;
+  cursor: pointer;
+  border-radius: 100%;
+
+  margin-left: auto;
+}
+
+/*------------------------------- Change Environment Modal ---------------------------- */
+.editEnvironmentModal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#editEnvironmentModalMobileCancel {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+
+  display: none;
+}
+
+.editEnvironmentContentArea {
+  height: 530px;
+  width: 90vw;
+  border-radius: 18px;
+  padding: 10px;
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editEnvironmentContentArea header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editEnvironmentContentArea header .editEnvironmentType {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.editEnvironmentContentArea header .editEnvironmentType--icon {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.editEnvironmentModal[data-env-opened="Default"] header .editEnvironmentType--icon {
+  background: var(--primary-color);
+}
+
+.editEnvironmentModal[data-env-opened="Bedroom"] header .editEnvironmentType--icon {
+  background: #008bff;
+}
+
+.editEnvironmentModal[data-env-opened="Living room"] header .editEnvironmentType--icon {
+  background: #ff4900;
+}
+
+.editEnvironmentModal[data-env-opened="Coffee shop"] header .editEnvironmentType--icon {
+  background: #ff9600;
+}
+
+.editEnvironmentModal[data-env-opened="Office"] header .editEnvironmentType--icon {
+  background: #00b7ff;
+}
+
+.editEnvironmentModal[data-env-opened="Classroom"] header .editEnvironmentType--icon {
+  background: #00e117;
+}
+
+.editEnvironmentModal[data-env-opened="Library"] header .editEnvironmentType--icon {
+  background: #ff86a3;
+}
+
+.editEnvironmentModal[data-env-opened="Reception"] header .editEnvironmentType--icon {
+  background: #6fbf73;
+}
+
+.editEnvironmentModal[data-env-opened="Restaurant"] header .editEnvironmentType--icon {
+  background: #d35400;
+}
+
+.editEnvironmentContentArea header .editEnvironmentType--icon svg path {
+  fill: white;
+}
+
+.editEnvironmentContentArea header .editEnvironmentType--text {
+  font-size: 1.2rem;
+  color: black;
+  font-weight: 700;
+}
+
+.editEnvironmentContentArea header button {
+  background: #000000;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 10px;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.available-environment-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.available-environment-list .available-env-item {
+  border: 1px dashed var(--border-color);
+  height: 95px;
+  border-radius: 10px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.available-environment-list .available-env-item:has(img) {
+  border: 1px solid var(--border-color);
+}
+
+.available-environment-list .available-env-item.selected {
+  border: 2px solid var(--primary-color);
+}
+
+.available-environment-list .available-env-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.available-env-action-items {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.available-env-action-items button {
+  width: 25px;
+  height: 25px;
+
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+
+  transition: background-color 0.4s ease;
+}
+
+.available-env-action-items button:first-child {
+  border: 1px solid #ffffff;
+}
+
+.available-env-action-items button:last-child {
+  border: 1px solid white;
+}
+
+.available-env-action-items button:first-child:hover {
+  background: #ff4900;
+}
+
+.available-env-action-items button.active:last-child,
+.available-env-action-items button:last-child:hover {
+  background: var(--primary-color);
+}
+
+.available-environment-list .available-env-item:hover .available-env-action-items {
+  display: flex;
+}
+
+.available-environment-list .available-env-item.selected .available-env-action-items {
+  display: flex;
+}
+
+@media screen and (max-width: 667px) {
+  #editEnvironmentModalMobileCancel {
+    display: flex !important;
+    position: absolute;
+    top: -50px;
+    right: 10px;
+  }
+
+  .environment-changed-modal {
+    /* right: 0; */
+    /* left: ; */
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .environment-changed-modal.show {
+    top: 4rem;
+  }
+}

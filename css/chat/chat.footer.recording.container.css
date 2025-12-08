@@ -1,0 +1,93 @@
+.voice_recording_footer {
+  background: white;
+}
+
+.voice_recording_footer .start_recording_state {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 6px;
+
+  color: var(--global-red-color);
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.voice_recording_footer .start_recording_state button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  transition: background-color 0.2s ease-in-out;
+  border: 1px solid var(--border-color);
+  padding: 5px 16px;
+  border-radius: 20px;
+}
+
+.voice_recording_footer > div:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.voice_recording_footer .voice_recording_spacer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  border: 1px solid var(--global-red-color);
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.voice_recording_footer .voice_recording_spacer.active {
+  border-color: var(--primary-color);
+}
+
+.voice_recording_footer button#sendVoiceNote {
+  padding: 10px;
+}
+
+.voice_recording_spacer > *:not(.voice_recording_waves) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.voice_recording_spacer .toggle_recording_state {
+  width: 25px;
+}
+
+.voice_recording_spacer .toggle_recording_state[data-mode="play"] svg.play,
+.voice_recording_spacer .toggle_recording_state[data-mode="pause"] svg.pause {
+  display: block;
+}
+
+.voice_recording_spacer .toggle_recording_state[data-mode="pause"] svg.play,
+.voice_recording_spacer .toggle_recording_state[data-mode="play"] svg.pause {
+  display: none;
+}
+
+.voice_recording_timer {
+  font-size: 13px;
+  color: #222222;
+}
+
+.voice_recording_waves {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  flex-direction: row;
+}
+
+.voice_recording_waves .wave_bar {
+  width: 3px;
+  height: 10%;
+  background: #00000051;
+  margin: 0 2px;
+  border-radius: 1px;
+  transition: height 0.3s ease;
+}

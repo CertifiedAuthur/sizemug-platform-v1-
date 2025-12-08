@@ -1,0 +1,516 @@
+:root {
+  --primary-color: #8837e9;
+  --primary-danger: #ff3535;
+  --primary-danger-25: #ff353525;
+  --primary-green: #13d22f;
+
+  --live-bg-color: #0c131c;
+  --live-container-bg: #212a37;
+  --live-container-darken: #0b111b;
+  --live-darken-wrapper: #0c121c;
+  --live-darken-wrapper-60: #0c121c55;
+  --live-darken-wrapper-40: #0c121c89;
+
+  --modal-bg-color: #121924;
+  --modal-bg-color-80: #121924db;
+  --modal-bg-color-60: #121924bc;
+
+  --text-primary-color: #ffffff;
+  --text-color-70: #ffffff70;
+  --text-color-60: #ffffffaf;
+  --text-color-40: #ffffff40;
+  --text-color-25: #ffffff25;
+  --text-gray-60: #eff0fabc;
+  --text-gray-70: #eff0fadd;
+  --text-gray: #eff0fa;
+  --sg-gift-color: #ff2d6c;
+  --sg-heart-color: #ef6a8b;
+  --border-color-20: #eaecf020;
+  --sg-gift-light: #f43f5e15;
+  --sg-gift: #f43f5e;
+  --sg-coins: #ffcc4d;
+  --sg-coins-light: #ffcc4d15;
+  --sg-heart-light: #e889ba15;
+  --sg-blue-25: #1c64f225;
+  --sg-boost: #fd2945;
+  --sg-boost-25: #fd294525;
+  --sg-fire-25: #ff6a0025;
+  --sg-fire: #ff6a00;
+  --header-nav-height: 4rem;
+  --sg-coin-hoarder: #fdefaf;
+  --sg-coin-hoarder-25: #fdefaf25;
+  --sg-combo: #0074eb;
+  --sg-combo-25: #0074eb25;
+  --sg-trophy-seeker: #f58d3f;
+  --sg-trophy-seeker-25: #f58d3f25;
+  --sg-pioneer: #4963c4;
+  --sg-pioneer-25: #4963c425;
+  --sg-global-creator-award-1: #ffa00f;
+  --sg-global-creator-award-1-25: #ffa00f25;
+  --sg-global-creator-award-2: #eaecef;
+  --sg-global-creator-award-2-25: #eaecef25;
+  --sg-global-creator-award-3: #d2855e;
+  --sg-global-creator-award-3-25: #d2855e25;
+  --sg-popular: #5df0ff;
+  --sg-popular-25: #5df0ff25;
+  --sg-100-day-streamer: #c1391e;
+  --sg-100-day-streamer-25: #c1391e25;
+  /* --sg-combo-100: #0074eb;
+  --sg-combo-100-25: #0074eb25;
+  --sg-combo-50: #0074eb;
+  --sg-combo-100-25: #0074eb25; */
+
+  --text-size-sm: 0.8rem;
+  --text-size-md: 1rem;
+  --text-size-lg: 1.4rem;
+  --text-size-20: 20px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 50%;
+}
+
+.circular.sg-global-creator-award-1 {
+  border: 2px solid var(--sg-global-creator-award-1);
+}
+
+.circular.sg-global-creator-award-2 {
+  border: 2px solid var(--sg-global-creator-award-2);
+}
+
+.circular.sg-global-creator-award-3 {
+  border: 2px solid var(--sg-global-creator-award-3);
+}
+
+.circular.sg-pioneer {
+  border: 2px solid var(--sg-pioneer);
+}
+
+.circular.sg-popular {
+  border: 2px solid var(--sg-popular);
+}
+
+.circular.sg-coin-hoarder {
+  border: 2px solid var(--sg-coin-hoarder);
+}
+
+.circular.sg-trophy-seeker {
+  border: 2px solid var(--sg-trophy-seeker);
+}
+
+.circular.sg-100-day-streamer,
+.circular.sg-50-day-streamer {
+  border: 2px solid var(--sg-100-day-streamer);
+}
+
+.circular.sg-combo-100,
+.circular.sg-combo-50 {
+  border: 2px solid var(--sg-combo);
+}
+
+.theme-text-light.sg-global-creator-award-1 {
+  color: var(--sg-global-creator-award-1);
+  background: var(--sg-global-creator-award-1-25);
+}
+
+.theme-text-light.sg-global-creator-award-2 {
+  color: var(--sg-global-creator-award-2);
+  background: var(--sg-global-creator-award-2-25);
+}
+
+.theme-text-light.sg-global-creator-award-3 {
+  color: var(--sg-global-creator-award-3);
+  background: var(--sg-global-creator-award-3-25);
+}
+
+.theme-text-light.sg-popular {
+  color: var(--sg-popular);
+  background: var(--sg-popular-25);
+}
+
+.theme-text-light.sg-coin-hoarder {
+  color: var(--sg-coin-hoarder);
+  background: var(--sg-coin-hoarder-25);
+}
+
+.theme-text-light.sg-trophy-seeker {
+  color: var(--sg-trophy-seeker);
+  background: var(--sg-trophy-seeker-25);
+}
+
+.theme-text-light.sg-pioneer {
+  color: var(--sg-pioneer);
+  background: var(--sg-pioneer-25);
+}
+
+.theme-text-light.sg-100-day-streamer,
+.theme-text-light.sg-50-day-streamer {
+  color: var(--sg-100-day-streamer);
+  background: var(--sg-100-day-streamer-25);
+}
+
+.theme-text-light.sg-combo-100,
+.theme-text-light.sg-combo-50 {
+  color: var(--sg-pioneer);
+  background: var(--sg-pioneer-25);
+}
+
+*,
+*::before,
+*::after {
+  background: none;
+  border: none;
+  outline: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+/* Animations */
+@keyframes modalFadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes modalFadeSlideOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+}
+
+@keyframes SlideRightOut {
+  from {
+    transform: translateX(-10px);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes SlideLeftIn {
+  from {
+    transform: translateX(10px);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+body {
+  background: var(--live-bg-color);
+  overflow: hidden;
+}
+
+section.picker {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.profile_circle_container {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  z-index: 99999;
+}
+
+.profile_circle_container .profile_photo {
+  width: 100%;
+  height: 100%;
+  outline: 2px solid orange;
+  border: 2px solid transparent;
+  border-radius: 100%;
+}
+
+.profile_circle_container .profile_badge {
+  width: 30px;
+  height: 30px;
+
+  position: absolute;
+  right: -6px;
+  bottom: -10px;
+}
+
+.profile_circle_container button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background: none;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile_circle_container:hover button {
+  display: flex;
+}
+
+.live_main_container {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.sg_dark_nav {
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 0.5rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sg_live_logo {
+  display: flex;
+  gap: 3px;
+  color: var(--text-primary-color);
+  font-size: var(--text-size-md);
+  text-transform: uppercase;
+}
+
+.sg_live_logo_text {
+  font-weight: 700;
+  font-size: var(--text-size-md);
+  align-self: flex-end;
+  background: linear-gradient(90deg, #8837e9, #373fd7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.sg_live_search_form {
+  min-width: 30rem;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 13px;
+  border-radius: var(--radius-md);
+  background: var(--live-container-bg);
+}
+
+.sg_live_search_input,
+.sg_live_search_input::placeholder {
+  width: 100%;
+  color: var(--text-color-60);
+}
+
+.sg_live_nav_actions,
+.sg_live_nav_actions > * {
+  display: flex;
+  align-items: center;
+}
+
+.sg_live_nav_actions {
+  gap: 12px;
+}
+
+.sg_live_nav_wallet {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sg_live_nav_wallet button,
+.sg_live_wallet_coin_balance {
+  padding: 7px 13px;
+  background: var(--live-container-bg);
+  border-radius: var(--radius-sm);
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-primary-color);
+}
+
+.sg_live_nav_wallet button .coin_text {
+  white-space: nowrap;
+}
+
+.sg_live_nav_wallet button * {
+  font-size: var(--text-size-md);
+}
+
+.sg_live_nav_main_buttons {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sg_live_avatar_btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  border: 2px solid #4963c4;
+  overflow: hidden;
+}
+
+.sg_live_avatar_btn img {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 1px solid transparent;
+}
+
+.sg_live_profile_avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.sg_live_nav_avatar_area .profile_header {
+  top: 55px;
+  right: 10px;
+
+  color: var(--live-bg-color);
+}
+
+.sg_nav_profile {
+  position: relative;
+}
+
+.sg_nav_profile .badge {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+
+  width: 20px;
+  max-width: 20px;
+  /* height: 20px; */
+}
+
+.sg_live_coin_amount {
+  font-weight: 600;
+  font-size: var(--text-size-sm);
+  background: linear-gradient(90deg, #ffa800, #ffc838);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.main_live_grid {
+  height: calc(100dvh - var(--header-nav-height));
+  display: flex;
+
+  position: relative;
+  z-index: 1;
+}
+
+.sg_live_logo_wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.live_sign {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  padding: 3px 6px;
+  background: #000000a0;
+  border-radius: var(--radius-sm);
+  color: var(--text-primary-color);
+  font-size: 13px;
+}
+
+.live_sign .live-blinking-signature {
+  min-width: 8px;
+  width: 8px;
+  height: 8px;
+  background: var(--primary-danger);
+  border-radius: 50%;
+  animation: live-blink 1s infinite alternate;
+}
+
+@keyframes live-blink {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+/* Generic modal animation classes for all modals (gift, mic, camera, etc.) */
+.modal-anim-in {
+  animation: modalFadeSlideIn 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.modal-anim-out {
+  animation: modalFadeSlideOut 0.22s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.aside_slides_containers {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+#windowConfetti,
+#burstConfettiCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.filter_follow_live {
+  z-index: 99999;
+}
+
+.filter_follow_live__container {
+  width: 15rem;
+  box-shadow: var(--sizemug-shadow-xl);
+  background: var(--modal-bg-color);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--live-container-bg);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.filter_follow_live__container button {
+  padding: 10px 1rem;
+  text-align: left;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.filter_follow_live__container button:hover {
+  background: var(--live-bg-color);
+}

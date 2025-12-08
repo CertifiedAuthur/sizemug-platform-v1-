@@ -1,0 +1,849 @@
+:root {
+  --primary: #8837e9;
+  --warning: #fda629;
+}
+
+.frame43 {
+  box-sizing: border-box;
+
+  padding: 16px;
+  gap: 16px;
+
+  width: 100%;
+
+  border: 1px solid #eaecf0;
+  border-radius: 16px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Four equal columns */
+  /*flex-basis: calc(50% - 8px);  Four items per row (25% width) with gap */
+  margin-bottom: 40px;
+
+  /* Frame 43 */
+
+  /* box-sizing: border-box; */
+
+  /* Auto layout */
+  /* display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+        gap: 16px;
+
+        border: 1px solid #EAECF0;
+        border-radius: 16px; */
+
+  /* Inside auto layout */
+  /* flex: none;
+        order: 1;
+        align-self: stretch;
+        flex-grow: 1; */
+}
+
+.no-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+
+  width: 426px;
+  height: 299px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.no-post span {
+  width: 137px;
+  height: 48px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 150%;
+  /* identical to box height, or 48px */
+  text-align: center;
+
+  color: rgba(0, 0, 0, 0.6);
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.no-post img,
+.no-post svg {
+  width: 426px;
+  height: 235px;
+
+  background: url(.png);
+  border-radius: 16px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.frame50 {
+  /* Frame 50 */
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  min-width: 170px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.frame45 {
+  /* Frame 45 */
+  /* Auto layout */
+  position: relative;
+  width: 100%;
+  height: 396px;
+
+  border-radius: 16px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  border-radius: 16px;
+}
+
+.frame65 {
+  /* Frame 65 */
+  z-index: 6;
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 100%;
+  height: 40px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.frame95 {
+  /* Frame 95 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  width: 115px;
+  height: 31px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.btn {
+  /* _Badge base */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 16px;
+
+  width: fit-content;
+  height: 31px;
+
+  /* Base color */
+  border-radius: 16px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  border: none;
+
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+}
+
+.btn-warning {
+  background: var(--warning);
+}
+
+.btn-primary:hover {
+}
+
+.btn span {
+  /* Text */
+
+  height: 27px;
+
+  /* Text/Medium/Medium */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 150%;
+  /* identical to box height, or 27px */
+  text-align: center;
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame94 {
+  /* Frame 94 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 8px;
+
+  width: 40px;
+  height: 40px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.frame94 button {
+  /* Button */
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  gap: 12px;
+
+  width: 40px;
+  height: 40px;
+
+  background: #ffffff;
+  border-radius: 12px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame94 button span.m {
+  /* Meatballs_menu */
+
+  width: 24px;
+  height: 24px;
+
+  background: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+span.m .m1 {
+  /* Ellipse 208 */
+  position: absolute;
+  left: 70.83%;
+  right: 20.83%;
+  top: 45.83%;
+  bottom: 45.83%;
+
+  /* Line_icon */
+  border: 2px solid #33363f;
+  border-radius: 2px;
+}
+
+.m2 {
+  /* Ellipse 207 */
+  position: absolute;
+  left: 20.83%;
+  right: 70.83%;
+  top: 45.83%;
+  bottom: 45.83%;
+
+  /* Line_icon */
+  border: 2px solid #33363f;
+  border-radius: 2px;
+}
+
+.frame59 {
+  /* Frame 59 */
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  margin: 0 auto;
+  width: 100%;
+  height: 112px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.frame58 {
+  /* Frame 58 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 8px;
+
+  width: 161px;
+  height: 24px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.group-ava-text {
+  /* Avatar label group */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+
+  width: 109px;
+  height: 24px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.group-ava-text img {
+  /* Avatar */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+
+  width: 24px;
+  height: 24px;
+
+  /* Avatar user square/Olivia Rhye */
+  border: 0.8px solid #ffffff;
+  border-radius: 200px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame58-user-name {
+  /* Text and supporting text */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 75px;
+  height: 20px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  /* Text */
+
+  width: 75px;
+  height: 20px;
+
+  /* Text sm/Semibold */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame58-follow {
+  /* Text and supporting text */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: 44px;
+  height: 20px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  /* Text */
+
+  width: 44px;
+  height: 20px;
+
+  /* Text sm/Semibold */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  /* Complementary */
+  color: #1c64f2;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame61 {
+  /* Frame 61 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+
+  width: 1052px;
+  height: 48px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.frame61-title {
+  /* Text */
+
+  width: 100%;
+  height: 24px;
+
+  /* Text/Regular/Semi Bold */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+  /* identical to box height, or 24px */
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.frame64 {
+  /* Frame 64 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+
+  width: 78px;
+  height: 20px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.frame62 {
+  /* Frame 62 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+
+  width: 36px;
+  height: 20px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame62 span {
+  /* Text */
+
+  width: 16px;
+  height: 20px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.frame62 i {
+  /* View_light */
+
+  width: 16px;
+  height: 16px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame63 {
+  /* Frame 63 */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 4px;
+
+  width: 26px;
+  height: 20px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.frame63 span {
+  /* Text */
+
+  width: 6px;
+  height: 20px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+  /* identical to box height, or 167% */
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.frame63 i {
+  /* Favorite_light */
+
+  width: 16px;
+  height: 16px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame59-text {
+  /* Text and supporting text */
+
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 0px;
+  gap: 8px;
+
+  width: 103px;
+  height: 24px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.frame59-text span {
+  /* Text */
+  height: 20px;
+
+  /* Text sm/Semibold */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  color: #acacac;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.frame59-text i {
+  /* like 1 */
+
+  width: 24px;
+  height: 24px;
+
+  background: url(like.png);
+
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.cover-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.img_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.bg-overlay {
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: #e87af44d;
+  background: linear-gradient(0deg, #401f1f80, #00000066);
+
+  border-radius: 16px;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: none;
+  opacity: 0;
+  /* Start with opacity 0 for fade-in effect */
+  transition: opacity 0.3s ease;
+}
+
+.h150 {
+  height: 150px !important;
+}
+
+.h170 {
+  height: 170px !important;
+}
+
+.h200 {
+  height: 200px !important;
+}
+
+.h230 {
+  height: 230px !important;
+}
+
+.h250 {
+  height: 250px !important;
+}
+
+.h270 {
+  height: 270px !important;
+}
+
+.h300 {
+  height: 300px !important;
+}
+
+.h320 {
+  height: 320px !important;
+}
+
+.h350 {
+  height: 350px !important;
+}
+
+.h370 {
+  height: 370px !important;
+}
+
+.h400 {
+  height: 400px !important;
+}
+
+.h420 {
+  height: 420px !important;
+}
+
+.h450 {
+  height: 450px !important;
+}
+
+.h500 {
+  height: 500px !important;
+}
+
+.frame53 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+
+  width: 259px;
+  height: 943px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+}
+
+.overlay {
+  overflow: hidden;
+  /* Frame 45 */
+  /* Auto layout */
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+  align-items: flex-end;
+  padding: 16px;
+  gap: 16px;
+
+  height: 100%;
+
+  border-radius: 16px;
+
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.frame45:hover .bg-overlay {
+  display: flex;
+  /* Show overlays when hovering over .frame1 */
+  opacity: 1;
+  z-index: 4;
+}
+
+.frame45:hover .overlay {
+  display: flex;
+  /* Show overlays when hovering over .frame1 */
+  opacity: 1;
+  z-index: 6;
+}
+
+/* Styles for mobile devices */
+@media (max-width: 467px) {
+  /* CSS styles for mobile view */
+  .frame43 {
+    grid-template-columns: repeat(1, 1fr); /* Four equal columns */
+  }
+}
+/* Styles for mobile devices */
+@media (min-width: 467px) and (max-width: 768px) {
+  /* CSS styles for mobile view */
+  .frame43 {
+    grid-template-columns: repeat(2, 1fr); /* Four equal columns */
+  }
+}
+
+/* Styles for tablets */
+@media (min-width: 768px) and (max-width: 1125px) {
+  .frame43 {
+    grid-template-columns: repeat(3, 1fr); /* Four equal columns */
+  }
+}

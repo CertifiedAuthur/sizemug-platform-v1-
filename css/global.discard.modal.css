@@ -1,0 +1,154 @@
+/**------ OVERLAY ---------*/
+.discard_overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border-radius: 0 !important;
+  animation: Modal 0.2s ease;
+  width: 100% !important;
+  height: auto;
+}
+
+.discardOverlayWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.discardOverlayWrapper #discardModalMobileClose {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  align-self: flex-end;
+
+  display: none;
+}
+
+.discard_container {
+  width: 450px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #ffff;
+  border-radius: 10px;
+
+  position: static !important;
+}
+
+.discard_modal_icon_layers {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  background: #fef3f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.discard_modal_icon_layers > div {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  background: #e9776d10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.discard_container h2 {
+  font-weight: 600;
+  font-size: 19px;
+  color: #080c15c7;
+}
+
+.discard_container p {
+  font-size: 15px;
+  color: #080c159c;
+}
+
+.discard_container .btns {
+  display: flex;
+  gap: 13px;
+  padding-top: 1rem;
+}
+
+.discard_container .btns button {
+  width: 100%;
+  height: 44px;
+  background: red;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+.discard_container .btns button:first-child {
+  background: none;
+  border: 0.8px solid #d0d5dd;
+  color: #344054;
+}
+
+.discard_container .btns button:last-child {
+  background: #b42318;
+  color: #ffff;
+  border: none !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .discard_container {
+    width: 100%;
+    height: 250px;
+  }
+}
+
+@media screen and (max-width: 667px) {
+  .discardOverlayWrapper {
+    position: relative;
+    align-self: flex-end;
+  }
+
+  .discard_container {
+    border-radius: 10px 10px 0 0 !important;
+  }
+
+  .discard_container h2 {
+    font-size: 16px;
+  }
+
+  .discard_container p {
+    font-size: 13px;
+  }
+
+  .discard_container .btns {
+    margin-top: auto;
+  }
+
+  .discard_container .btns button {
+    height: 35px;
+    font-size: 12px;
+  }
+
+  #discardModalMobileClose {
+    display: flex !important;
+    position: absolute;
+    top: -50px;
+    right: 10px;
+  }
+}

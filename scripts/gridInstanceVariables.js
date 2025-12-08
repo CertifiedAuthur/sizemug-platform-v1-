@@ -1,0 +1,5 @@
+// Masonry Instances
+let dashboardMainMasonryInstance;
+let masonryMainSuggestionGridContainer;
+let masonrySuggestionGridContainerSkeleton;
+let dashboardGridSkeletonInstance;

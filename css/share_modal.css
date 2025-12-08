@@ -1,0 +1,74 @@
+.share_modal {
+  background: #ffff;
+  border-radius: 16px;
+  width: 560px;
+}
+
+.share_modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px !important;
+  border-bottom-width: 0px;
+  height: auto !important;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.share_modal header h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.share_modal header button {
+  width: 40px;
+  height: 40px;
+  background: #f4f4f4;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.share_modal .share_options {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  padding: 10px 0;
+  color: #363853;
+  font-size: 14px;
+}
+
+.share_modal .share_options button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+}
+
+.share_modal footer {
+  padding: 20px;
+}
+
+.share_modal h1 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+.share_modal .clipboard {
+  background: #f4f4f4;
+  padding: 10px 15px !important;
+  border-radius: 10px;
+  color: #3638538e;
+  display: flex;
+  justify-content: space-between;
+}
+
+.share_modal .clipboard .text-to-copy {
+  padding: 0px !important;
+  user-select: none;
+}

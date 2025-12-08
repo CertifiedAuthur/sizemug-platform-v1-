@@ -1,0 +1,155 @@
+.dot_token_container_wrapper {
+  z-index: 99 !important;
+  transform-origin: 0 0;
+  box-sizing: border-box;
+
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+#dotVotingContainer {
+  /* if you want the container to float above everything */
+  z-index: 9999;
+  pointer-events: auto; /* ensure it receives pointer events */
+  touch-action: none; /* recommended for pointer dragging */
+  -webkit-user-select: none;
+  user-select: none;
+}
+#dotVotingContainer .dot_token_container h3 {
+  cursor: grab;
+}
+#dotVotingContainer .dot_token_container h3:active {
+  cursor: grabbing;
+}
+
+/* Dot voting */
+.dot_token_container {
+  width: 220px;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  font-family: sans-serif;
+  background-color: white;
+}
+
+.dot_token_container h3 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: #0a0a23;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dot_token_container .dot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.dot_token_container .dot {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 1px solid white;
+  box-shadow: 0 0 0 2px currentColor;
+
+  justify-self: center;
+  overflow: hidden;
+}
+
+.dot_token_container_wrapper .resize-handle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.dot_token_container_wrapper .handles {
+  border: 2px solid var(--primary-color);
+}
+
+/* hide handles by default */
+.dot_token_container_wrapper .resize-handle {
+  display: none;
+}
+
+/* show handles when selected */
+.dot_token_container_wrapper.show-handles .resize-handle {
+  display: block;
+}
+
+.dot_token_container .red {
+  background-color: #f44336;
+  color: #f44336;
+}
+
+.dot_token_container .blue {
+  background-color: #2196f3;
+  color: #2196f3;
+}
+
+.dot_token_container .green {
+  background-color: #4caf50;
+  color: #4caf50;
+}
+
+.dot_token_container .yellow {
+  background-color: #ffeb3b;
+  color: #ffeb3b;
+}
+
+.dot_token_container .purple {
+  background-color: #9c27b0;
+  color: #9c27b0;
+}
+
+.dot_token_container .orange {
+  background-color: #ff9800;
+  color: #ff9800;
+}
+
+.dot_token_container .teal {
+  background-color: #009688;
+  color: #009688;
+}
+
+.dot_token_container .pink {
+  background-color: #e91e63;
+  color: #e91e63;
+}
+
+.dot_token_container .lime {
+  background-color: #cddc39;
+  color: #cddc39;
+}
+
+.dot_token_container .navy {
+  background-color: #1a237e;
+  color: #1a237e;
+}
+
+.dot_token_container .cyan {
+  background-color: #004d40;
+  color: #004d40;
+}
+
+.dot_token_container .gray {
+  background-color: #9e9e9e;
+  color: #9e9e9e;
+}
+
+#dotVotingContainer h3 {
+  pointer-events: auto !important;
+  user-select: none;
+}

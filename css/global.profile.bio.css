@@ -1,0 +1,29 @@
+.profileGlobalInfo p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  width: 100%;
+  font-size: 15px;
+  --tw-text-opacity: 0.4;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.profileGlobalInfo p.clamp-2 {
+  color: black;
+  -webkit-line-clamp: 2;
+}
+
+.profileGlobalInfo .bio-wrapper[data-active="false"] p.clamp-2 {
+  --tw-text-opacity: 0.4;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
+.bio-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.bio-wrapper[data-active="true"] button {
+  display: none;
+}

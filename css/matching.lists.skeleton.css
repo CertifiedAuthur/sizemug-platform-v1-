@@ -1,0 +1,56 @@
+/* SKELETON DESIGN */
+@keyframes SkeletonShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+.skeleton_image,
+.skeleton_content a,
+.skeleton_content h2,
+.skeleton_content span {
+  background: linear-gradient(90deg, #f0f0f09f 25%, #e0e0e0a7 50%, #f0f0f0a4 75%);
+  background-size: 200% 100%;
+  animation: SkeletonShimmer 1.5s infinite;
+}
+
+.skeleton {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.skeleton_image {
+  position: relative;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 100%;
+}
+
+.skeleton_content > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.skeleton_content h2 {
+  width: 70px;
+  height: 10px;
+}
+
+.skeleton_content a {
+  width: 50px;
+  height: 10px;
+}
+
+.skeleton_content span {
+  width: 50px;
+  height: 10px;
+}
+
+.skeleton_content > div:last-child {
+  margin-top: 7px;
+}

@@ -1,0 +1,252 @@
+:root {
+  --bg: #f5f6f8;
+  --panel: #ffffff;
+  --muted: #9aa3ad;
+  --accent: #7a3cff;
+  --border: rgba(0, 0, 0, 0.06);
+  --code-bg: #fff;
+  --code-text: #111827;
+  --gutter: #f3f4f6;
+}
+[data-theme="dark"] {
+  --bg: #0b0f16;
+  --panel: #0f1720;
+  --muted: #9aa3ad;
+  --accent: #a277ff;
+  --border: rgba(255, 255, 255, 0.06);
+  --code-bg: #0b1016;
+  --code-text: #e6eef6;
+  --gutter: #071018;
+}
+
+/* body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue";
+  margin: 48px;
+  background: linear-gradient(180deg, var(--bg), #ffffff 40%);
+  color: var(--code-text);
+} */
+
+.tool-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel);
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(11, 12, 16, 0.08);
+  border: 1px solid var(--border);
+  width: max-content;
+  margin-bottom: 18px;
+}
+.select,
+.btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--code-text);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.small {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Editor container */
+.editor-wrap {
+  width: 760px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--accent);
+  box-shadow: 0 6px 20px rgba(122, 60, 255, 0.08);
+}
+
+.editor-header {
+  background: var(--gutter);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.title {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.badge {
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+.editor-body {
+  display: flex;
+  gap: 0;
+  background: var(--code-bg);
+  min-height: 160px;
+  position: relative;
+}
+
+/* gutter / line numbers */
+.gutter {
+  width: 52px;
+  background: linear-gradient(180deg, var(--gutter), transparent);
+  padding: 8px 10px;
+  text-align: right;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 13px;
+  line-height: 20px;
+  border-right: 1px solid var(--border);
+  user-select: none;
+}
+
+/* code area: we show pre (highlighted) behind, and a transparent textarea/contenteditable on top for real input */
+.code-panel {
+  flex: 1;
+  position: relative;
+  padding: 8px 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--code-text);
+}
+
+pre.highlight {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  pointer-events: none;
+  min-height: 120px;
+}
+
+/* editable overlay */
+.editor-input {
+  position: absolute;
+  inset: 8px 12px;
+  background: transparent;
+  color: transparent; /* keep caret visible only through custom caret */
+  caret-color: var(--code-text);
+  outline: none;
+  border: none;
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  z-index: 2;
+  white-space: pre-wrap;
+  overflow: auto;
+}
+
+/* basic syntax colors (small set) */
+.token.tag {
+  color: #c75a00;
+  font-weight: 600;
+}
+.token.attr {
+  color: #b58900;
+}
+.token.string {
+  color: #16a34a;
+}
+.token.comment {
+  color: #6b7280;
+  font-style: italic;
+}
+.token.keyword {
+  color: #7a3cff;
+  font-weight: 600;
+}
+.token.number {
+  color: #d65a9f;
+}
+.token.punct {
+  color: var(--muted);
+}
+
+/* small utilities */
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+}
+
+/* make selection visible in dark mode */
+.editor-input::selection {
+  background: rgba(122, 60, 255, 0.16);
+}
+
+/* responsive */
+@media (max-width: 800px) {
+  .editor-wrap {
+    width: 100%;
+  }
+}
+
+.codeblock-preview-pre,
+.codeblock-editor-input {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  white-space: pre-wrap;
+}
+.token.comment {
+  color: #6b7280;
+  font-style: italic;
+}
+.token.tag {
+  color: #c75a00;
+  font-weight: 600;
+}
+.token.attr {
+  color: #b58900;
+}
+.token.string {
+  color: #16a34a;
+}
+.token.keyword {
+  color: #7a3cff;
+  font-weight: 600;
+}
+.token.number {
+  color: #d65a9f;
+}
+.token.punct {
+  color: #9aa3ad;
+}
+
+/* CODE BLOCK STYLING */
+.whiteboard_editor_code_block {
+  height: 2rem !important;
+}
+
+.whiteboard_editor_code_block button.active {
+  background: var(--primary-color);
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.whiteboard_editor_code_block *:focus-visible {
+  outline: none;
+}
+
+#whiteboardEditorCodeBlock {
+  left: 4rem;
+  top: 10rem;
+}

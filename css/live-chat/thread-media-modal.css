@@ -1,0 +1,163 @@
+.media-preview-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: #0000004f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.media-preview-modal.live-chat-hidden {
+  display: none;
+}
+
+.media-modal-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.media-modal-container header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-bottom: 1px solid #33363f;
+
+  height: 3rem;
+}
+
+.media-modal-container header button {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+
+  transition: background-color 0.3s ease;
+}
+
+.media-modal-container header button:hover {
+  background: #ffffff1a;
+}
+
+.media-modal-content {
+  position: relative;
+  height: 100%;
+}
+
+.media-display-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.media-display-item {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.media-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 10001;
+}
+
+.media-nav-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.media-nav-prev {
+  left: 20px;
+}
+
+.media-nav-next {
+  right: 20px;
+}
+
+.media-counter {
+  font-size: 14px;
+  font-weight: 500;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .media-modal-container {
+    width: 95%;
+    height: 95%;
+  }
+
+  .media-nav-btn {
+    padding: 12px;
+  }
+
+  .media-nav-prev {
+    left: 10px;
+  }
+
+  .media-nav-next {
+    right: 10px;
+  }
+}
+
+/* Animation for smooth transitions */
+.media-display-item {
+  transition: opacity 0.3s ease;
+}
+
+.media-modal {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Ensure images in chat are clickable */
+#threadChatMessages img:not(.avatar):not(.icon):not([class*="avatar"]):not([class*="icon"]) {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#threadChatMessages img:not(.avatar):not(.icon):not([class*="avatar"]):not([class*="icon"]):hover {
+  transform: scale(1.02);
+}
+
+#threadChatMessages video {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#threadChatMessages video:hover {
+  transform: scale(1.02);
+}

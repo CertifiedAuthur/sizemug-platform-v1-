@@ -1,0 +1,261 @@
+.qrCodeModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0000002c;
+}
+
+#qrCodeContainerModalMobileCancel {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-end;
+
+  display: none;
+}
+
+@media screen and (max-width: 667px) {
+  #qrCodeContainerModalMobileCancel {
+    display: flex !important;
+    position: absolute;
+    top: -50px;
+    right: 10px;
+  }
+}
+
+/* -------------------------------- Main Container ------------------------ */
+.qrCodeContainerContentArea {
+  width: 30rem;
+  background: white;
+  border-radius: 15px;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.qrCodeContainerContentArea header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.qrCodeContainerContentArea header h2 {
+  color: #181c22;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.qrCodeContainerContentArea header button {
+  width: 30px;
+  height: 30px;
+  padding: 7px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #7e869e43;
+}
+
+.qrCodeContainerContentArea footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.qrCodeContainerContentArea footer * {
+  width: 100%;
+  padding: 6px;
+  color: black;
+  border-radius: 40px;
+  font-weight: 500;
+
+  text-align: center;
+}
+
+.qrCodeContainerContentArea footer #download-qrcode {
+  border: 1px solid #000000;
+  background: #000000;
+  color: white;
+}
+
+.qrCodeContainerContentArea footer #share-qrcode {
+  border: 1px solid var(--border-color);
+  background: none;
+}
+
+.qrCodeContainerContentArea .main-qrcode p {
+  font-size: 13px;
+  color: #667085;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.main-qrcode .main-qrcode-container {
+  background: linear-gradient(to top right, #4d4bfe, #992df2);
+  height: 25rem;
+  border-radius: 15px;
+  /* padding: 1rem 5rem; */
+  padding: 1rem;
+
+  justify-content: space-between !important;
+}
+
+.main-qrcode .main-qrcode-container,
+.main-qrcode .main-qrcode-container .user-profile-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-qrcode .main-qrcode-container .user-profile-detail {
+  margin-top: -2.5rem;
+  color: white;
+}
+
+.main-qrcode-container .user-profile-detail img {
+  width: 56px;
+  height: 56px;
+  border-radius: 100%;
+  border: 3px solid white;
+}
+
+.main-qrcode .main-qrcode-container .user-profile-detail h3 {
+  font-weight: 600;
+}
+
+.main-qrcode-footer {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  color: white;
+}
+
+#qrCodeContainerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.qrCodeContainerContentArea #mobileHeader {
+  display: none;
+}
+
+.qrcode_option_divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  color: #667085;
+  font-weight: 300;
+}
+
+.qrcode_option_divider .divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-color);
+}
+
+.qrcode_link_copy_footer {
+  width: 100%;
+  background: #f4f4f4;
+  border: 1px solid #d0d5dd;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.qrcode_link_copy_footer .company_name {
+  border-right: 1px solid #d0d5dd;
+}
+
+.qrcode_link_copy_footer > div {
+  padding: 5px 10px;
+  color: #667085;
+  font-size: 17px;
+
+  display: flex;
+  align-items: center;
+}
+
+.qrcode_link_copy_footer .content {
+  width: 100%;
+  gap: 5px;
+  justify-content: space-between;
+}
+
+.qrcode_link_copy_footer button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+
+  white-space: nowrap;
+  font-size: 15px;
+}
+
+.qrcode_link_copy_footer .username {
+  /* width: 100%; */
+}
+
+@media screen and (max-width: 667px) {
+  #qrCodeContainerWrapper {
+    align-self: flex-end;
+  }
+
+  .qrCodeContainerContentArea {
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+    gap: 10px;
+  }
+
+  .qrCodeContainerContentArea header {
+    display: none;
+  }
+
+  .qrCodeContainerContentArea #mobileHeader {
+    display: block;
+    text-align: center;
+    padding: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 700;
+    font-size: 1.4rem;
+  }
+
+  .main-qrcode {
+    padding: 1rem 0;
+  }
+
+  .qrCodeContainerContentArea footer {
+    flex-direction: column;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+  }
+
+  .qrCodeContainerContentArea footer * {
+    padding: 0.5rem;
+  }
+
+  .qrCodeContainerContentArea footer a {
+    padding: 0;
+  }
+}

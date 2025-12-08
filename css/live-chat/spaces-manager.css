@@ -1,0 +1,219 @@
+/* ============================================
+   Spaces Manager Styles
+   ============================================ */
+
+.spaces-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  /* margin: 16px 0; */
+}
+
+.spaces-list:has(.new-space-card-wrapper) {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.new-space-card-wrapper {
+  height: 6rem;
+}
+
+.space-card {
+  background: #121924;
+  border-radius: 12px;
+  padding: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  /* cursor: pointer; */
+}
+
+.space-card:hover {
+  border-color: #01c74a;
+}
+
+.space-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.space-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.aside-space-description {
+  text-align: center;
+  font-size: 15px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.space-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.space-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin: 0;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.space-add-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.space-add-btn:hover {
+  background: rgba(1, 199, 74, 0.1);
+}
+
+.space-add-btn:active {
+  transform: scale(0.95);
+}
+
+.space-card-body {
+  margin-bottom: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.thread-count {
+  font-size: 14px;
+  font-weight: 400;
+  display: block;
+}
+
+.space-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.space-activity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.activity-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.activity-time {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.visibility-icon {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .spaces-list {
+    /* grid-template-columns: 1fr; */
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .spaces-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Animation for new spaces */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.space-card {
+  animation: slideIn 0.3s ease;
+}
+
+/* Active state */
+.space-card.active {
+  border-color: #01c74a;
+  background: #20243a;
+}
+
+/* Loading state */
+.spaces-list.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* New Space Card */
+.new-space-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  height: 6rem;
+}
+
+.new-space-card:hover {
+  border-color: #01c74a;
+}
+
+.new-space-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.new-space-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.new-space-icon:hover {
+  transform: scale(1.1);
+}
+
+.new-space-icon:active {
+  transform: scale(0.95);
+}
+
+.new-space-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+  transition: color 0.3s ease;
+}

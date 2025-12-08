@@ -1,0 +1,240 @@
+.profile-header {
+  position: relative;
+  height: 15rem;
+  width: 100%;
+  border-radius: 0.75rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header .profile-environment-bg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+}
+
+.profile-header .profile-environment-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+.profile-env {
+  position: relative;
+  align-self: flex-end;
+  margin: 13px;
+  width: 14rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+  border-radius: 30px;
+
+  background: white;
+  border: 1px solid #f1f1f1;
+  padding: 8px 10px;
+  box-shadow: var(--global-box-shadow);
+  height: auto;
+  transition: height 3s ease;
+  z-index: calc(var(--overlay-z-index) - 30);
+}
+
+.profile-env > * {
+  display: flex;
+  align-items: center;
+}
+
+.profile-env #profileEnvironmentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.profile-env #profileEnvironmentWrapper > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-env .profileExpandEnvironmentBtn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100%;
+  background: #eaecf0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-env .environment-option-item span {
+  color: inherit;
+}
+
+.profile-env .environment-option-item[data-environment="default"].active {
+  color: var(--primary-color) !important;
+}
+
+.profile-env .environment-option-item[data-environment="bedroom"].active {
+  color: #008bff !important;
+}
+
+.profile-env .environment-option-item[data-environment="living-room"].active {
+  color: #ff4900 !important;
+}
+
+.profile-env .environment-option-item[data-environment="coffee-shop"].active {
+  color: #ff9600 !important;
+}
+
+.profile-env .environment-option-item[data-environment="office"].active {
+  color: #00b7ff !important;
+}
+
+.profile-env .environment-option-item[data-environment="classroom"].active {
+  color: #00e117 !important;
+}
+
+.profile-env .environment-option-item[data-environment="library"].active {
+  color: #ff86a3 !important;
+}
+
+.profile-env .environment-option-item[data-environment="reception"].active {
+  color: #6fbf73 !important;
+}
+
+.profile-env .environment-option-item[data-environment="restaurant"].active {
+  color: #d35400 !important;
+}
+
+.profile-env .profileExpandEnvironmentBtn svg {
+  transition: transform 0.4s ease;
+}
+
+.profile-env .profileExpandEnvironmentBtn.active svg {
+  transform: rotate(90deg);
+}
+
+.profile-env .environment-option-item[data-environment="default"].active .env-icon-house svg path {
+  fill: var(--primary-color);
+}
+
+.profile-env .environment-option-item[data-environment="bedroom"].active .env-icon-house svg path {
+  fill: #008bff;
+}
+
+.profile-env .environment-option-item[data-environment="living-room"].active .env-icon-house svg path {
+  fill: #ff4900;
+}
+
+.profile-env .environment-option-item[data-environment="coffee-shop"].active .env-icon-house svg path {
+  fill: #ff9600;
+}
+
+.profile-env .environment-option-item[data-environment="office"].active .env-icon-house svg path {
+  fill: #00b7ff;
+}
+
+.profile-env .environment-option-item[data-environment="classroom"].active .env-icon-house svg path {
+  fill: #00e117;
+}
+
+.profile-env .environment-option-item[data-environment="library"].active .env-icon-house svg path {
+  fill: #ff86a3;
+}
+
+.profile-env .environment-option-item[data-environment="reception"].active .env-icon-house svg path {
+  fill: #6fbf73;
+}
+
+.profile-env .environment-option-item[data-environment="restaurant"].active .env-icon-house svg path {
+  fill: #d35400;
+}
+
+.profile-env .env-text {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: black;
+}
+
+.profile-env #profileEnvironmentLabel {
+  color: #a3a3a3;
+  font-size: 0.9rem;
+  margin-top: -4px;
+}
+
+.profile-env > button {
+  padding: 0 15px;
+  background: #f6f6f6;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  width: 100%;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.4s ease;
+}
+
+.profile-env > button:hover {
+  background: #ececec;
+}
+
+.profile-env .environment-option-item > div:first-child {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.profile-env .environment-option-item.active > div:first-child {
+  justify-content: center;
+}
+
+.profile-env .environment-option-item.active:hover > div:first-child {
+  justify-content: flex-start;
+}
+
+.profile-env .environment-option-item > div:last-child {
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1c64f2;
+
+  display: none;
+}
+
+.profile-env .environment-option-item:hover > div:last-child {
+  display: flex;
+}
+
+.profile-env .environment-option-item .env-icon-house {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-env .environment-option-item {
+  display: none;
+}
+
+@media screen and (max-width: 667px) {
+  .profile-header .profile-environment-bg,
+  .profile-header .profile-environment-bg img {
+    border-radius: 0;
+  }
+
+  .profile-header {
+    height: 11rem;
+  }
+}

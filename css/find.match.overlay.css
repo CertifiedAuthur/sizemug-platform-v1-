@@ -1,0 +1,92 @@
+.find_matching_overlay {
+  align-self: flex-end;
+  background: #ffff;
+  width: 100%;
+
+  border-radius: 16px 16px 0 0;
+
+  position: relative;
+}
+
+.find_matching_overlay > button {
+  position: absolute;
+  top: -3.5rem;
+  right: 0.7rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background: white;
+}
+
+.find_matching_overlay div {
+  padding-top: 10px;
+}
+
+.find_matching_overlay .find_wrapper > *:first-child,
+.find_matching_overlay .find_wrapper > *:nth-child(2) {
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.find_matching_overlay .find_wrapper > * {
+  padding: 10px;
+  width: 100%;
+}
+
+.find_matching_overlay .find_wrapper footer button {
+  width: 100%;
+  border-radius: 30px;
+  padding: 0.8rem;
+  color: #fff;
+  background: #1c64f2;
+}
+
+.find_matching_overlay .find_wrapper footer button:disabled {
+  background: #1c63f29c;
+  cursor: not-allowed;
+}
+
+.find_matching_overlay .find_wrapper p {
+  padding-bottom: 10px;
+}
+
+.find_matching_overlay .find_wrapper .find_matching_textarea {
+  border: 1px solid var(--border-color);
+  background: #f8fafc;
+  border-radius: var(--border-radius);
+  padding: 10px;
+  resize: none;
+  height: 103px;
+  font-size: 0.9rem;
+  scrollbar-width: none;
+  width: 100%;
+
+  -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+header.nice_custom_header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+header.nice_custom_header span {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  transition: all 1s ease;
+  box-shadow: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+}
+
+header.nice_custom_header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}

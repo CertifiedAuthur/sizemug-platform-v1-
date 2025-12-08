@@ -1,0 +1,418 @@
+/* ============================================
+   Thread Messages Styles
+   ============================================ */
+
+.thread-chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 5px;
+  overflow-y: auto;
+  height: 100%;
+  padding-left: 15px;
+
+  /* Default thread color (will be overridden by JavaScript) */
+  --thread-color: #3b82f6;
+  --thread-color-light: rgba(59, 130, 246, 0.1);
+  --thread-color-medium: rgba(59, 130, 246, 0.2);
+}
+
+/* Load More Button */
+.thread-load-more {
+  display: flex;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+.thread-load-more-btn {
+  background: transparent;
+  color: #7d8faa;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.thread-load-more-btn:hover {
+  color: #01c74a;
+}
+
+/* Message Item */
+.thread-message-item {
+  display: flex;
+  gap: 12px;
+  animation: fadeInUp 0.3s ease;
+  border-radius: 12px;
+}
+
+.thread-message-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.thread-message-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Message Header */
+.thread-message-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.thread-message-author {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.thread-message-role {
+  font-size: 12px;
+  font-weight: 500;
+  color: #7d8faa;
+  padding: 2px 8px;
+  background: #20243a;
+  border-radius: 4px;
+}
+
+.thread-message-time {
+  font-size: 12px;
+  color: #7d8faa;
+}
+
+.thread-message-replying {
+  font-size: 12px;
+  color: #01c74a;
+  font-style: italic;
+}
+
+/* Message Text */
+.thread-message-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e5e7eb;
+  margin: 0;
+  word-wrap: break-word;
+  font-weight: 300;
+
+  background: rgba(var(--space-color-rgb, 59, 130, 246), 0.3);
+  padding: 12px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+/* Message Images */
+.thread-message-images {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.thread-message-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.thread-message-image:hover {
+  transform: scale(1.05);
+}
+
+.thread-message-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Message Actions */
+.thread-message-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.thread-message-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 2px 4px;
+  background: transparent;
+  color: #7d8faa;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.thread-message-action-btn.active[data-action="dislike"] svg path {
+  stroke: #f04438;
+}
+
+.thread-message-action-btn.active[data-action="like"] svg path {
+  stroke: #1c64f2;
+}
+
+.thread-message-action-btn.active[data-action="star"] svg path {
+  stroke: #ffa800;
+}
+
+.thread-message-action-btn.active[data-action="love"] svg path {
+  stroke: #ee46bc;
+}
+
+.thread-message-action-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.action-count {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.thread-message-action-btn.active
+
+/* Message Replies */
+.thread-message-replies {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+  margin-left: 20px;
+  padding-left: 20px;
+  border-left: 2px solid #2d3548;
+}
+
+.thread-message-reply {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.thread-message-reply-line {
+  position: absolute;
+  left: -20px;
+  top: 20px;
+  width: 20px;
+  height: 2px;
+  background: #2d3548;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .thread-chat-messages {
+    padding: 16px;
+    gap: 20px;
+  }
+
+  .thread-message-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .thread-message-author {
+    font-size: 13px;
+  }
+
+  .thread-message-text {
+    font-size: 13px;
+  }
+
+  .thread-message-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .thread-message-action-btn {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .thread-message-replies {
+    margin-left: 12px;
+    padding-left: 12px;
+  }
+}
+
+/* Scrollbar styling */
+.thread-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.thread-chat-messages::-webkit-scrollbar-track {
+  background: #1a1d2e;
+}
+
+.thread-chat-messages::-webkit-scrollbar-thumb {
+  background: #2d3548;
+  border-radius: 3px;
+}
+
+.thread-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #3d4558;
+}
+
+.thread-chat-external-event {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Thread Closed Message Styles */
+.thread-closed-message {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1a1d29;
+  border-top: 1px solid #2d3748;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.thread-closed-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #7d8faa;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.thread-closed-content svg {
+  flex-shrink: 0;
+}
+
+/* Update thread status color when closed */
+.thread-chat-status.closed {
+  color: #f04438 !important;
+}
+
+/* Mobile responsive for closed message */
+@media (max-width: 768px) {
+  .thread-closed-message {
+    padding: 12px 16px;
+  }
+
+  .thread-closed-content {
+    font-size: 13px;
+    gap: 8px;
+  }
+}
+
+/* Boost Notifications in Chat */
+.boost-notification-container {
+  margin: 0;
+  padding: 0;
+}
+
+.boost-notification-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.boost-notification-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.boost-notification-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: boostItemSlideIn 0.3s ease-out;
+}
+
+.boost-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.boost-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.boost-amount {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ff6b35;
+  background: rgba(255, 107, 53, 0.2);
+  padding: 2px 6px;
+  border-radius: 8px;
+}
+
+@keyframes boostItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .boost-notification-item {
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .boost-avatar {
+    width: 18px;
+    height: 18px;
+  }
+
+  .boost-name {
+    font-size: 11px;
+  }
+
+  .boost-amount {
+    font-size: 11px;
+    padding: 1px 4px;
+  }
+}

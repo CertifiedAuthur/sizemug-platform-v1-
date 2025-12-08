@@ -1,0 +1,210 @@
+.custom-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+  color: #8837e9;
+  transition: color 0.3s;
+
+  align-self: flex-start;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox .checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #8837e9;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+  transform-style: preserve-3d;
+}
+
+.custom-checkbox .checkmark::before {
+  content: "\2713";
+  font-size: 16px;
+  color: transparent;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background-color: #8837e9;
+  border-color: #8837e9;
+  transform: scale(1.1) rotateZ(360deg) rotateY(360deg);
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::before {
+  color: #fff;
+}
+/* 
+.custom-checkbox:hover {
+  color: #666;
+}
+
+.custom-checkbox:hover .checkmark {
+  border-color: #666;
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+} */
+
+.custom-checkbox input[type="checkbox"]:focus + .checkmark {
+  box-shadow: 0 0 3px 2px #00000033;
+  outline: none;
+}
+
+.custom-checkbox .checkmark,
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  transition: background-color 1.3s, border-color 1.3s, color 1.3s, transform 0.3s;
+}
+
+/**
+*
+*
+*
+*
+*/
+.request_join_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #34405480;
+  z-index: var(--overlay-z-index);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.request_join_container {
+  width: 30rem;
+  background: var(--live-darken-wrapper);
+  border-radius: var(--radius-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.request_join_container header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color-20);
+
+  height: 3rem;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.request_join_container header button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.request_join_container header span {
+  width: 30px;
+}
+
+.request_join_container form {
+  padding: 10px;
+}
+
+.request_join_container form .join_options {
+  position: relative;
+}
+
+.request_join_container form h4 {
+  margin-bottom: 6px;
+}
+
+.request_join_container .join_options button {
+  width: 100%;
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+}
+
+.request_join_container .join_options button[aria-expanded="true"] ~ ul {
+  display: block !important;
+}
+
+.request_join_container .join_options ul {
+  background: var(--live-container-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  z-index: 9;
+}
+
+.request_join_container .join_options ul li {
+  width: 100%;
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  transition: background-color 0.2s ease-in-out;
+}
+
+.request_join_container .join_options ul li.active,
+.request_join_container .join_options ul li:hover {
+  background: var(--primary-color);
+}
+
+.request_join_container .join_options ul li svg {
+  display: none;
+}
+
+.request_join_container .join_options ul li.active svg {
+  display: block;
+}
+
+.request_join_container .accept_requirement {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  padding: 10px 0;
+}
+
+.request_join_container .accept_requirement input {
+  align-self: flex-start;
+}
+
+.request_join_container footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.request_join_container footer button {
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: var(--radius-md);
+
+  background: var(--live-container-bg);
+}
+
+.request_join_container footer button.request {
+  background: linear-gradient(to right, #8837e9, #373fd7);
+}
+
+.request_join_container footer button:disabled {
+  color: #ffffffc4;
+}

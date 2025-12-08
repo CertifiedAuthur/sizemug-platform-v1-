@@ -1,0 +1,73 @@
+.analytics_row_3 {
+  display: flex;
+  gap: 1rem;
+}
+
+.analytics_row_3 > div {
+  flex: 1;
+
+  background: white;
+  border-radius: 0.7rem;
+  padding: 1rem;
+}
+
+.analytics_row_3 h4 {
+  font-weight: 600;
+  padding-bottom: 0.9rem;
+}
+
+.analytics_row_3 .chart_row {
+  display: flex;
+  align-items: center;
+}
+
+.analytics_row_3 .chart_row canvas {
+  width: 20rem;
+}
+
+.analytics_row_3 .chart_row ul {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.analytics_row_3 .chart_row ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.analytics_row_3 .chart_row ul li span:first-child {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+}
+
+.analytics_row_3 .chart_row ul li span:last-child {
+  margin-left: auto;
+}
+
+.analytics_row_3 ul li span.purple {
+  background: #8837e9;
+}
+
+.analytics_row_3 ul li span.blue {
+  background: #1c64f2;
+}
+
+.analytics_row_3 ul li span.orange {
+  background: #fda629;
+}
+
+.analytics_row_3 ul li span.light-gray {
+  background: #aec7ed;
+}
+
+#locationChart {
+  margin-right: 20px;
+}

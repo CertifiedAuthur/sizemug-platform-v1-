@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  @apply font-inter min-h-dvh flex flex-col;
+}
+
+img {
+  @apply object-cover;
+}
+
+hr {
+  @apply border-gray-200 my-4;
+}
+
+svg[data-icon] {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+:root {
+  --header-nav-height: theme("spacing.20");
+}
+
+.content_area {
+  @apply grid flex-1 grid-cols-[auto,1fr];
+}
+.content_area main {
+  @apply p-6 overflow-hidden;
+}
+
+@layer components {
+  .popup {
+    @apply absolute z-50 transition-all mx-0;
+    @apply pointer-events-none opacity-0 scale-90;
+  }
+  .popup.open {
+    @apply pointer-events-auto opacity-100 scale-100 translate-y-0;
+  }
+  .chip {
+    @apply cursor-pointer rounded-full shrink-0 inline-flex items-center;
+  }
+  .chip span {
+    @apply inline-flex px-8 py-3 leading-none items-center;
+    @apply rounded-full border border-gray-200 pointer-events-none;
+  }
+  .chip input:checked + span {
+    @apply text-white bg-black border-black;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    @apply appearance-none hidden;
+  }
+}
+
+.navbar {
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  @apply h-20 md:h-28 place-items-stretch z-50;
+  @apply p-4 md:py-6 gap-4 grid lg:hidden fixed inset-x-0 bottom-0;
+  @apply bg-white bg-opacity-60 border-t border-gray-200 backdrop-blur-xl;
+}
+.navbar_item {
+  @apply flex items-center justify-center flex-col;
+  @apply text-gray-700 relative;
+}
+.navbar_item[data-notification]::before {
+  @apply absolute [content:""] -bottom-1 left-1/2 -translate-x-1/2;
+  @apply size-2 bg-red-500 rounded-full hidden md:flex;
+}
+.navbar_item::after {
+  @apply absolute -inset-2 [content:""] rounded-xl;
+  @apply -z-10 bg-[--current-bg,transparent] hidden md:block;
+}
+.navbar_item:is(:hover, :focus-visible) {
+  --current-bg: black;
+  @apply md:text-white;
+}
+.navbar_item span {
+  @apply text-xs mt-1;
+}
+.navbar_item__bold {
+  @apply text-white after:hidden rounded-full bg-black place-self-center px-4 py-3;
+}
+.navbar_item.tablet_only {
+  @apply hidden md:flex;
+}
+.navbar_item.mobile_only {
+  @apply flex md:hidden;
+}
+
+.navbar_popup {
+  @apply absolute bottom-full -mb-4 left-auto right-6 origin-bottom;
+  @apply rounded-xl border border-gray-200 w-64 px-2 py-3 bg-white;
+}
+
+/*# sourceMappingURL=outputs.css.map */
