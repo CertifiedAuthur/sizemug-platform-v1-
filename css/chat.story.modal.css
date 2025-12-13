@@ -1,0 +1,156 @@
+/* Chat Page Story Modal - Centered Popup Overlay */
+
+/* Override explore page story modal styles for chat page */
+#storyModalContainer.story_modal_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center the story display */
+#storyModalContainer .story_modal-contents {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Story view container - full height, centered */
+#storyModalContainer .story__view {
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Story display - mobile-like appearance */
+#storyModalContainer .story_display {
+  width: 100%;
+  height: 100%;
+  max-height: 90vh;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* No story placeholder */
+#storyModalContainer .no_story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* Story load area */
+#storyModalContainer .story__load {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: #000;
+}
+
+/* Navigation arrows - positioned outside story on dark background */
+#storyModalContainer .previous_story_media,
+#storyModalContainer .next_story_media {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 80px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+  transition: all 0.3s ease;
+}
+
+#storyModalContainer .previous_story_media {
+  left: 0;
+}
+
+#storyModalContainer .next_story_media {
+  right: 0;
+}
+
+/* Arrow icons using ::before pseudo-elements */
+#storyModalContainer .previous_story_media::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+#storyModalContainer .next_story_media::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 32px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+}
+
+#storyModalContainer .previous_story_media:hover::before,
+#storyModalContainer .next_story_media:hover::before {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #storyModalContainer .story_modal-contents {
+    max-width: 100%;
+    max-height: 100vh;
+  }
+
+  #storyModalContainer .story_display {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  /* Narrower hover areas on mobile */
+  #storyModalContainer .previous_story_media,
+  #storyModalContainer .next_story_media {
+    width: 60px;
+  }
+
+  #storyModalContainer .previous_story_media::before,
+  #storyModalContainer .next_story_media::before {
+    background-size: 28px;
+  }
+}
+
+/* Hide modal when chat-hidden class is present */
+#storyModalContainer.chat-hidden {
+  display: none;
+}

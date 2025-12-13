@@ -104,6 +104,7 @@
     <link rel="stylesheet" href="./css/global.something.modal.css" />
     <link rel="stylesheet" href="./css/global.color.picker.css" />
     <link rel="stylesheet" href="./css/explore/story.css" />
+    <link rel="stylesheet" href="./css/chat.story.modal.css" />
 
     <!-------------------------------- Chat CSS ----------------------------->
     <link rel="stylesheet" href="./css/chat/chat.aside.component.css" />
@@ -8813,6 +8814,191 @@
       </div>
     </div>
 
+    <!-- Story Modal - Chat Page Popup (No Sidebar) -->
+    <div class="story_modal_container animation-modal chat-hidden" id="storyModalContainer">
+      <div class="story_modal-contents">
+        <!-- Only Story Display Area (No Sidebar) -->
+        <div class="story__view" id="storyViewContainer">
+          <div class="no_story" id="storyDisplayPlaceholderContainer">
+            <p>Click on a contact to view their history</p>
+          </div>
+
+          <!-- Story Goes here -->
+          <div class="story_display chat-hidden" id="storyDisplayContainer">
+            <div class="story__load">
+              <header>
+                <!-- Story Progress -->
+                <ul class="story-progress story_progress">
+                  <!-- Story Progress Items -->
+                </ul>
+
+                <!-- User Stories -->
+                <div class="user_story">
+                  <div class="user_brief">
+                    <div class="user_min_profile">
+                      <div class="profile-image">
+                        <img id="currentStoryUserImage" src="./images/exploreImages/2.png" alt="avatar" />
+                      </div>
+                      <div class="story-disc">
+                        <div class="profile-name">
+                          <b id="currentStoryUserName">Musa Abdulkabir Adekunle</b>
+
+                          <div class="expires-in">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24">
+                              <g fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                <circle cx="12" cy="12" r="9" />
+                                <path d="M11 8v5h5" />
+                              </g>
+                            </svg>
+                            <span>Expires in 9hr</span>
+                          </div>
+                        </div>
+                        <div class="story-music">
+                          <span>2 min ago</span>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                              <path fill="#fff" d="M12 10a2 2 0 0 0-2 2a2 2 0 0 0 2 2c1.11 0 2-.89 2-2a2 2 0 0 0-2-2" />
+                            </svg>
+                          </span>
+                          <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                              <path fill="#fff" d="m12.75 12.508l8.5-3.4v5.653a3.25 3.25 0 1 0 1.5 2.74V7.945c0-1.143 0-2.101-.08-2.865a8 8 0 0 0-.04-.315c-.078-.522-.214-1.008-.479-1.415a2.2 2.2 0 0 0-.62-.63l-.007-.005c-.708-.47-1.503-.437-2.322-.228c-.792.202-1.774.613-2.978 1.117l-2.094.876c-.565.236-1.043.437-1.418.644c-.4.22-.743.48-1.001.868s-.366.805-.415 1.259c-.046.426-.046.945-.046 1.557v7.952a3.25 3.25 0 1 0 1.5 2.74z" />
+                              <path fill="#fff" d="M7.75 2a.75.75 0 0 0-1.5 0v5.76a3.25 3.25 0 1 0 1.5 2.74V5.005c.699.504 1.53.745 2.25.745a.75.75 0 0 0 0-1.5a2.44 2.44 0 0 1-1.488-.552c-.434-.357-.762-.9-.762-1.698" opacity="1" />
+                            </svg>
+                          </span>
+                          <span>Chill Vibes by Liam Carter</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="story_menu viewStoryLargeOption--menu">
+                    <span role="button" id="viewStoryLargeOption">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 21 21"><g fill="none" fill-rule="evenodd" transform="translate(2 2)"><circle cx="8.5" cy="8.5" r="8" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/><path fill="#fff" d="M8.5 9.5c.5 0 1-.5 1-1s-.5-1-1-1s-.999.5-.999 1s.499 1 .999 1m-4 0c.5 0 1-.5 1-1s-.5-1-1-1s-.999.5-.999 1s.499 1 .999 1m8 0c.5 0 1-.5 1-1s-.5-1-1-1s-.999.5-.999 1s.499 1 .999 1"/></g></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="chat-hidden" id="viewing_story_times" width="20" height="20" viewBox="0 0 24 24" > <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m5 19l7-7m0 0l7-7m-7 7L5 5m7 7l7 7" /></svg>
+                    </span>
+
+                    <ul class="menu_list animation-dropdown chat-hidden" id="exploreStoryMenuPanel">
+                      <li class="save" role="button" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="m3 21l5-5m5.259 2.871c-3.744-.85-7.28-4.386-8.13-8.13c-.135-.592-.202-.888-.007-1.369c.194-.48.433-.63.909-.927c1.076-.672 2.242-.886 3.451-.78c1.697.151 2.546.226 2.97.005c.423-.22.71-.736 1.286-1.767l.728-1.307c.48-.86.72-1.291 1.285-1.494s.905-.08 1.585.166a5.63 5.63 0 0 1 3.396 3.396c.246.68.369 1.02.166 1.585c-.203.564-.633.804-1.494 1.285l-1.337.745c-1.03.574-1.544.862-1.765 1.289c-.22.428-.14 1.258.02 2.918c.118 1.22-.085 2.394-.766 3.484c-.298.476-.447.714-.928.909c-.48.194-.777.127-1.37-.008" color="#000" />
+                        </svg>
+                        <span>Pin Story</span>
+                      </li>
+                      <li class="mark-as-view" role="button" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+                            <path d="M15 12a3 3 0 1 1-6 0a3 3 0 0 1 6 0" />
+                            <path d="M2 12c1.6-4.097 5.336-7 10-7s8.4 2.903 10 7c-1.6 4.097-5.336 7-10 7s-8.4-2.903-10-7" />
+                          </g>
+                        </svg>
+                        <span>Mark as Viewed</span>
+                      </li>
+                      <li class="report" role="button" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a5 5 0 0 1 7 0a5 5 0 0 0 7 0v9a5 5 0 0 1-7 0a5 5 0 0 0-7 0zm0 16v-7" />
+                        </svg>
+                        <span>Report</span>
+                      </li>
+                      <li class="block" role="button" tabindex="0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <path fill="#ed0808" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2M4 12c0-4.42 3.58-8 8-8c1.85 0 3.55.63 4.9 1.69L5.69 16.9A7.9 7.9 0 0 1 4 12m8 8c-1.85 0-3.55-.63-4.9-1.69L18.31 7.1A7.9 7.9 0 0 1 20 12c0 4.42-3.58 8-8 8" />
+                        </svg>
+                        <span>Block</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </header>
+
+              <!-- Load Story Media -->
+              <div class="story_media_wrapper" id="storyMediaWrapper"></div>
+
+              <div class="footer">
+                <div class="story_caption" id="storyCaptionWrapper">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><g fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M8.5 13L12 9.5l3.5 3.5" /><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" /></g></svg>
+                  <span>Replay</span>
+                </div>
+                <div class="message_icon_gift chat-hidden" id="messageIconGift">
+                  <div class="chat_msg_box">
+                    <input type="text" placeholder="Send a message..." name="chat" id="chat" />
+                    <div class="chat_btn_grp">
+                      <button class="emoji" id="storyReactWithEmoji">
+                        <span>
+                          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.9987 25.6654C20.442 25.6654 25.6654 20.442 25.6654 13.9987C25.6654 7.55538 20.442 2.33203 13.9987 2.33203C7.55538 2.33203 2.33203 7.55538 2.33203 13.9987C2.33203 20.442 7.55538 25.6654 13.9987 25.6654Z" stroke="#ffffff" stroke-width="2"/><path d="M10.3984 18.5876C11.8665 18.9555 13.532 18.9558 15.208 18.5066C16.8841 18.0576 18.3263 17.2246 19.4137 16.1719" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/><path d="M17.3804 13.0944C18.0028 12.9276 18.3046 12.0356 18.0544 11.1021C17.8043 10.1685 17.0969 9.5469 16.4746 9.71367C15.8522 9.88043 15.5504 10.7724 15.8006 11.706C16.0507 12.6396 16.7581 13.2612 17.3804 13.0944Z" fill="#ffffff"/><path d="M10.6187 14.9069C11.2411 14.7401 11.5428 13.8481 11.2927 12.9146C11.0425 11.981 10.3352 11.3594 9.71285 11.5262C9.09047 11.6929 8.78872 12.5849 9.03887 13.5185C9.28902 14.4521 9.99634 15.0737 10.6187 14.9069Z" fill="#ffffff"/><path d="M15.168 18.6655L15.7256 19.8016C16.1472 20.6605 17.1804 21.0215 18.0451 20.6121C18.9273 20.1945 19.2973 19.1358 18.8672 18.2595L18.3314 17.168" stroke="#ffffff" stroke-width="2"/></svg>
+                        </span>
+                      </button>
+                      <button class="send_chat">
+                        <img src="/images/exploreImages/send_icon.svg" alt="" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="coin_gift">
+                    <button class="send_coin"></button>
+                    <button class="send_gift"></button>
+                    <button class="send_reaction" aria-haspopup="menu"></button>
+                    <dialog class="send_reaction__menu chat-hidden">
+                      <ul>
+                        <li>
+                          <img src="../images/wave.svg" alt="" />
+                          <h3>Send Wave</h3>
+                        </li>
+                        <li>
+                          <img src="../images/smile.svg" alt="" />
+                          <h3>Send Smile</h3>
+                        </li>
+                        <li>
+                          <img src="../images/heart.svg" alt="" />
+                          <h3>Send Hearth</h3>
+                        </li>
+                        <li>
+                          <img src="./images/fire.svg" alt="" />
+                          <h3>Boost Live</h3>
+                        </li>
+                      </ul>
+                    </dialog>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Task/Board/Live Overlay -->
+              <div id="shareStoryOverlay" class="share_story_overlay chat-hidden" data-story-mode="task">
+                <div class="share_story_overlay_wrapper">
+                  <div class="main_share_story_overlay">
+                    <div class="top_header">
+                      <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                          <path fill="#e93737" d="m13.06 12l4.42-4.42a.75.75 0 1 0-1.06-1.06L12 10.94L7.58 6.52a.75.75 0 0 0-1.06 1.06L10.94 12l-4.42 4.42a.75.75 0 0 0 0 1.06a.75.75 0 0 0 1.06 0L12 13.06l4.42 4.42a.75.75 0 0 0 1.06 0a.75.75 0 0 0 0-1.06Z" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div class="content">
+                      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" alt="" />
+                      <p>You</p>
+                      <h2>Wants to collaborate on a task</h2>
+                      <button>Collaborate</button>
+                    </div>
+                  </div>
+
+                  <div class="positon_share_overlay">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="task" width="30" height="30" viewBox="0 0 36 36"><path fill="#8837E9" d="M29.29 4.95h-7.2a4.31 4.31 0 0 0-8.17 0H7a1.75 1.75 0 0 0-2 1.69v25.62a1.7 1.7 0 0 0 1.71 1.69h22.58A1.7 1.7 0 0 0 31 32.26V6.64a1.7 1.7 0 0 0-1.71-1.69m-18 3a1 1 0 0 1 1-1h3.44v-.63a2.31 2.31 0 0 1 4.63 0V7h3.44a1 1 0 0 1 1 1v1.8H11.25Zm14.52 9.23l-9.12 9.12l-5.24-5.24a1.4 1.4 0 0 1 2-2l3.26 3.26l7.14-7.14a1.4 1.4 0 1 1 2 2Z" class="clr-i-solid clr-i-solid-path-1"/><path fill="none" d="M0 0h36v36H0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="collaborate" width="30" height="30" viewBox="0 0 24 24"><g fill="none"><path stroke="#1C64F2" stroke-width="2" d="M9 6a3 3 0 1 0 6 0a3 3 0 0 0-6 0Zm-4.562 7.902a3 3 0 1 0 3 5.195a3 3 0 0 0-3-5.196Zm15.124 0a2.999 2.999 0 1 1-2.998 5.194a2.999 2.999 0 0 1 2.998-5.194Z"></path><path fill="#1C64F2" fill-rule="evenodd" d="M9.07 6.643a3 3 0 0 1 .42-2.286a9 9 0 0 0-6.23 10.79a3 3 0 0 1 1.77-1.506a7 7 0 0 1 4.04-6.998m5.86 0a7 7 0 0 1 4.04 6.998a3 3 0 0 1 1.77 1.507a9 9 0 0 0-6.23-10.79a3 3 0 0 1 .42 2.285m3.3 12.852a3 3 0 0 1-2.19-.779a7 7 0 0 1-8.08 0a3 3 0 0 1-2.19.78a9 9 0 0 0 12.46 0" clip-rule="evenodd"></path></g></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="live" width="30" height="30" viewBox="0 0 20 20"><path fill="#8837E9" d="M5.453 4.167a.726.726 0 0 0-1.027-.01A8.23 8.23 0 0 0 2 10a8.23 8.23 0 0 0 2.604 6.015a.725.725 0 0 0 1.01-.025c.316-.316.277-.819-.027-1.11A6.73 6.73 0 0 1 3.5 10c0-1.846.741-3.52 1.943-4.738c.29-.295.32-.785.01-1.095M7.214 5.93a.714.714 0 0 0-1.008-.016A5.73 5.73 0 0 0 4.5 10c0 1.692.73 3.213 1.893 4.265a.713.713 0 0 0 .983-.038c.328-.328.267-.844-.041-1.134A4.24 4.24 0 0 1 6 10c0-1.15.457-2.194 1.2-2.96c.286-.294.333-.793.014-1.111m5.572 0a.714.714 0 0 1 1.008-.016A5.73 5.73 0 0 1 15.5 10c0 1.692-.73 3.213-1.893 4.265a.713.713 0 0 1-.983-.038c-.328-.328-.267-.844.041-1.134A4.24 4.24 0 0 0 14 10c0-1.15-.457-2.194-1.2-2.96c-.286-.294-.333-.793-.014-1.111m1.761-1.762a.726.726 0 0 1 1.027-.01A8.23 8.23 0 0 1 18 10a8.23 8.23 0 0 1-2.604 6.015a.725.725 0 0 1-1.01-.025c-.316-.316-.277-.819.028-1.11A6.73 6.73 0 0 0 16.5 10c0-1.846-.741-3.52-1.943-4.738c-.29-.295-.32-.785-.01-1.095M10 8.5a1.5 1.5 0 1 0 0 3a1.5 1.5 0 0 0 0-3"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Arrows (Outside Story Content) -->
+          <div class="previous_story_media" id="previousStoryMedia"></div>
+          <div class="next_story_media" id="nextStoryMedia"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Invite Code Modal  -->
     <div class="invite_friend_modal animation-modal chat-hidden" id="inviteCodeModal">
       <div class="invite_code_modal">
@@ -11459,5 +11645,9 @@
     <script src="./scripts/chat/chat.create.task.js"></script>
     <script src="./scripts/chat/chat.location.tracker.js"></script>
     <script src="./scripts/folder-manager.js"></script>
+    
+    <!-- Story Scripts -->
+    <script src="./scripts/explore/scrollStories.js"></script>
+    <script src="./scripts/explore/storiesModal.js?v=6"></script>
   </body>
 </html>

@@ -1890,7 +1890,8 @@ label.search_dialog:focus-within {
   object-fit: cover;
 }
 
-.story_modal-contents .story__view .story__load .previous_story_media {
+/* Navigation Arrows - Positioned in Background Area */
+.story_modal-contents .story__view .previous_story_media {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -1899,9 +1900,41 @@ label.search_dialog:focus-within {
   cursor: pointer;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
   --tw-bg-opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  z-index: 100;
+  transition: background-color 0.3s ease;
 }
 
-.story_modal-contents .story__view .story__load .next_story_media {
+.story_modal-contents .story__view .previous_story_media:hover {
+  --tw-bg-opacity: 0.2;
+}
+
+.story_modal-contents .story__view .previous_story_media::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.story_modal-contents .story__view .previous_story_media:hover::before {
+  opacity: 1;
+}
+
+.story_modal-contents .story__view .next_story_media {
   position: absolute;
   top: 0px;
   right: 0px;
@@ -1910,6 +1943,38 @@ label.search_dialog:focus-within {
   cursor: pointer;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
   --tw-bg-opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  z-index: 100;
+  transition: background-color 0.3s ease;
+}
+
+.story_modal-contents .story__view .next_story_media:hover {
+  --tw-bg-opacity: 0.2;
+}
+
+.story_modal-contents .story__view .next_story_media::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.story_modal-contents .story__view .next_story_media:hover::before {
+  opacity: 1;
 }
 
 .story_modal-contents .story__view .story__load .preloader {

@@ -709,6 +709,11 @@ gridContainer.addEventListener("click", function (e) {
     return;
   }
 
+  // Prevent opening comment modal when clicking Boost button (Issue #8 fix)
+  if (target.closest(".boost")) {
+    return;
+  }
+
   // Show comments modal
   showCommentModalGlobalHandler(item);
   return;

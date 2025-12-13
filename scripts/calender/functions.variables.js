@@ -530,6 +530,9 @@ function generateWeekView(date) {
   const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dates = [];
 
+  // Add empty header for time column
+  html += `<th class="est"></th>`;
+
   // Generate day headers
   for (let i = 0; i < 7; i++) {
     const day = new Date(weekStart);
@@ -581,22 +584,28 @@ function generateWeekView(date) {
 
   html += `</tr>`;
 
-  // Generate time rows
-  for (let hour = 7; hour <= 30; hour++) {
-    const adjustedHour = hour > 24 ? hour - 24 : hour;
-    const time = adjustedHour <= 11 ? `${adjustedHour} AM` : adjustedHour === 12 ? `12 PM` : `${adjustedHour - 12} PM`;
+  // Generate time rows - changed to 1-hour intervals as requested
+  for (let hour = 7; hour <= 23; hour++) {
+    // Keep `time` in the same format as `staticContent` keys (e.g. "7 AM")
+    const time = hour <= 11 ? `${hour} AM` : hour === 12 ? `12 PM` : `${hour - 12} PM`;
+    // Only control what the user sees in the UI (e.g. "7am")
+    const timeLabel = hour === 0 ? "12am" : hour < 12 ? `${hour}am` : hour === 12 ? "12pm" : `${hour - 12}pm`;
 
     html += `<tr>`;
+
+    // Time label column (UI only) - FIRST column
+    html += `<td class="time-column"><span class="time-label">${timeLabel}</span></td>`;
 
     // Generate cells for each day
     for (let j = 0; j < 7; j++) {
       const { dayName, date: fullDate } = dates[j];
       const content = staticContent[currentView][dayName]?.[time];
       const weekendClass = j === 0 || j === 6 ? "weekend-column" : "";
+      const lastColumnClass = j === 6 ? "last-column-white" : "";
       const thuDay = j === 4 ? "thuDay" : "";
       const highlightedClass = content?.highlighted ? "highlighted" : "";
 
-      html += `<td class="${thuDay} ${weekendClass} ${highlightedClass} ${content?.category ? `static-${content.category}` : ""}" data-day="${dayName}" data-time="${time}" data-date="${fullDate}" id="${dayName}-${time.replace(" ", "-")}">`;
+      html += `<td class="${thuDay} ${weekendClass} ${lastColumnClass} ${highlightedClass} ${content?.category ? `static-${content.category}` : ""}" data-day="${dayName}" data-time="${time}" data-date="${fullDate}" id="${dayName}-${time.replace(" ", "-")}">`;
 
       if (content) {
         html += generateCellContent(content);
@@ -755,17 +764,14 @@ function generateMonthView(date) {
   };
 
   let html = "<tr>";
-  ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"].forEach((day, index) => {
-    const grayClass = index === 0 || index === 6 ? "gray-column" : "";
-    html += `<th class="${grayClass}">${day}</th>`;
-  });
+  // Removed weekday headers (SUN, MON, TUE, etc.) as requested
   html += "</tr><tr>";
 
   // Add previous month's days
   for (let i = firstDay; i > 0; i--) {
     const colIndex = firstDay - i;
     const grayClass = colIndex === 0 ? "gray-column" : "";
-    html += `<td class="less-bold ${grayClass}"><div class="day-number" style="color: #9CA3AF; font-size: 14px;">${prevMonthDays - i + 1}</div></td>`;
+    html += `<td class="less-bold ${grayClass}"><div class="day-number" style="color: #9CA3AF; font-size: 14px; text-align: right; padding-right: 8px;">${prevMonthDays - i + 1}</div></td>`;
   }
 
   // Add current month's days
@@ -777,8 +783,8 @@ function generateMonthView(date) {
       html += "</tr><tr>"; // Start a new row every Sunday
     }
 
-    // Add the day number at the top
-    const dayContent = day === 1 ? `<div class="day-number"><strong>${date.toLocaleString("default", { month: "long" })} ${day}</strong></div>` : `<div class="day-number">${day}</div>`;
+    // Add the day number at the top (moved to right)
+    const dayContent = day === 1 ? `<div class="day-number" style="text-align: right; padding-right: 8px;"><strong>${date.toLocaleString("default", { month: "long" })} ${day}</strong></div>` : `<div class="day-number" style="text-align: right; padding-right: 8px;">${day}</div>`;
 
     let items = "";
     const maxVisibleItems = 6;
@@ -844,7 +850,7 @@ function generateMonthView(date) {
   // Add next month's days
   const remainingDays = (7 - ((firstDay + daysInMonth) % 7)) % 7;
   for (let i = 1; i <= remainingDays; i++) {
-    html += `<td class="less-bold gray-column"><div class="day-number" style="color: #9CA3AF; font-size: 14px;">${i}</div></td>`;
+    html += `<td class="less-bold gray-column"><div class="day-number" style="color: #9CA3AF; font-size: 14px; text-align: right; padding-right: 8px;">${i}</div></td>`;
   }
 
   html += "</tr>";
@@ -852,14 +858,16 @@ function generateMonthView(date) {
 
   // Attach click event to dynamically generated `td`
   $("#month-view td").on("click", function (event) {
-    if ($(event.target).is(".see-more-item")) return;
+    // Don't switch to week view if clicking on event items or see-more button
+    if ($(event.target).closest(".month-event-item").length) return;
+    if ($(event.target).is(".see-more-item") || $(event.target).closest(".see-more-item").length) return;
 
     const clickedDay = parseInt($(this).data("day"), 10);
     if (isNaN(clickedDay)) return;
 
     selectedDate.setDate(clickedDay);
 
-    // Switch to week view
+    // Switch to week view only when clicking empty space in the cell
     $("[data-view='week']").trigger("click");
     updateMainCalendar();
   });
@@ -1266,17 +1274,8 @@ function generateYearView(year) {
       const isToday = year === todayYear && month === todayMonth && day === todayDate;
       const todayClass = isToday ? "today-circle" : "";
 
-      html += `<span class="day-with-dot ${todayClass}" data-day="${day}">${day} 
-                <div class="dots-container">`;
-
-      if (dateDots[day]) {
-        dateDots[day].forEach((color) => {
-          html += `<span class="dot" style="background-color: ${color};"></span>`;
-        });
-      }
-
-      html += `</div>
-              </span>`;
+      // Removed dots display as requested
+      html += `<span class="day-with-dot ${todayClass}" data-day="${day}">${day}</span>`;
     }
 
     const remainingCells = (firstDay + daysInMonth) % 7;
@@ -1340,17 +1339,8 @@ function generateMobileYearView(year) {
       const isToday = year === todayYear && month === todayMonth && day === todayDate;
       const todayClass = isToday ? "today-circle" : "";
 
-      html += `<span class="day-with-dot ${todayClass}">${day} 
-                <div class="dots-container">`;
-
-      if (dateDots[day]) {
-        dateDots[day].forEach((color) => {
-          html += `<span class="dot" style="background-color: ${color};"></span>`;
-        });
-      }
-
-      html += `</div>
-              </span>`;
+      // Removed dots display as requested
+      html += `<span class="day-with-dot ${todayClass}">${day}</span>`;
     }
 
     const remainingCells = (firstDay + daysInMonth) % 7;

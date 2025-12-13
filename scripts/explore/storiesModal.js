@@ -160,6 +160,8 @@ let currentStoryUser; // store users info array of medias
 let currentDisplayMediaIndex;
 let maxSeconds;
 let mediaPaused = false;
+let shouldStartFromLastMedia = false; // Flag to indicate if we should start from last media
+let targetMediaIndex = 0; // Target media index to jump to
 
 const previousStoryMedia = document.getElementById("previousStoryMedia");
 const nextStoryMedia = document.getElementById("nextStoryMedia");
@@ -167,8 +169,9 @@ const storyDisplayPlaceholderContainer = document.getElementById("storyDisplayPl
 const storyDisplayContainer = document.getElementById("storyDisplayContainer");
 const storyMediaWrapper = document.getElementById("storyMediaWrapper");
 
-nextStoryMedia.addEventListener("click", handleDisplayNextStory);
-previousStoryMedia.addEventListener("click", handleDispalyPreviousStory);
+// Arrows navigate between users only
+nextStoryMedia.addEventListener("click", handleArrowNextUser);
+previousStoryMedia.addEventListener("click", handleArrowPreviousUser);
 
 const storyProgress = storyDisplayContainer.querySelector(".story_progress");
 
@@ -199,31 +202,31 @@ storyProgress.addEventListener("click", (e) => {
   }
 });
 
-// Play/Pause Event on image/Video
-storyMediaWrapper.addEventListener("click", function () {
-  const image = this.querySelector("img");
-
-  if (image) {
-    if (!mediaPaused) {
-      clearInterval(storyInterval);
-      mediaPaused = true;
-    } else {
-      initialInterval();
-      mediaPaused = false;
-    }
-
-    return;
+// WhatsApp-style navigation: Left side = backward, Right side = forward
+storyMediaWrapper.addEventListener("click", function (e) {
+  const rect = this.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const clickPercent = (clickX / rect.width) * 100;
+  
+  // Left third = go backward (previous story of same user)
+  if (clickPercent < 33) {
+    handleDispalyPreviousStory();
+  } 
+  // Right two-thirds = go forward (next story of same user)
+  else {
+    handleDisplayNextStory();
   }
 });
 
 function handleDisplayNextStory() {
   clearInterval(storyInterval);
-
-  // storyInterval = null;
+  storyInterval = null;
   intervalSeconds = 1;
   maxSeconds = null;
 
   if (currentStoryUser[currentDisplayMediaIndex + 1]) {
+    // Navigate to next media of the same user
+    console.log("Navigating to next media of same user");
     Array.from({ length: currentDisplayMediaIndex + 1 }, (_, i) => i).map((index) => {
       const progressBar = document.getElementById(`lineProgress--${index}`).querySelector("#lineProgress");
 
@@ -234,35 +237,260 @@ function handleDisplayNextStory() {
     currentDisplayMediaIndex = currentDisplayMediaIndex + 1;
     handleCurrentDisplayingMedia(currentStoryUser[currentDisplayMediaIndex]);
   } else {
+    // Mark current story as seen
     const asideStoryItem = document.querySelector(`.view_story-list-item[data-story-id="${currentViewingStoryId}"]`);
-    asideStoryItem.querySelector(".story_seen_overlay").classList.remove(HIDDEN);
+    if (asideStoryItem) {
+      asideStoryItem.querySelector(".story_seen_overlay")?.classList.remove(HIDDEN);
+    }
 
+    console.log("End of current user's stories, looking for next user. Current ID:", currentViewingStoryId);
+
+    // Navigate to next user's story - use a more robust approach
+    const currentStoryElement = document.querySelector(`.view_story-list-item[data-story-id="${currentViewingStoryId}"]`);
+    if (currentStoryElement) {
+      // Get all valid story items
+      const allStoryItems = Array.from(document.querySelectorAll('.view_story-list-item')).filter(item => 
+        !item.classList.contains('no-story') && !item.classList.contains('add_new_story')
+      );
+      
+      console.log("Total valid story items:", allStoryItems.length);
+      
+      // Find current index
+      const currentIndex = allStoryItems.indexOf(currentStoryElement);
+      console.log("Current index:", currentIndex);
+      
+      // Try to find next story (loop through remaining stories)
+      if (currentIndex !== -1 && currentIndex < allStoryItems.length - 1) {
+        const nextStoryElement = allStoryItems[currentIndex + 1];
+        const nextStoryId = parseInt(nextStoryElement.dataset.storyId);
+        
+        console.log("Next story ID:", nextStoryId);
+        
+        if (nextStoryId) {
+          // Load the next user's story
+          renderClickUserStories(nextStoryId);
+          return;
+        }
+      } else {
+        console.log("No more stories available");
+      }
+    } else {
+      console.log("Could not find current story element");
+    }
+    
+    // No more stories, hide the container
     hideStoryDisplayContainer();
   }
 }
 
+// Arrow navigation - jumps directly to next user (not next story of same user)
+function handleArrowNextUser() {
+  clearInterval(storyInterval);
+  storyInterval = null;
+  intervalSeconds = 1;
+  maxSeconds = null;
+
+  // Mark current story as seen (explore page only)
+  const asideStoryItem = document.querySelector(`.view_story-list-item[data-story-id="${currentViewingStoryId}"]`);
+  if (asideStoryItem) {
+    asideStoryItem.querySelector(".story_seen_overlay")?.classList.remove(HIDDEN);
+  }
+
+  console.log("Arrow: Jumping to next user. Current ID:", currentViewingStoryId);
+
+  // Try to find current story element - support both explore and chat pages
+  let currentStoryElement = document.querySelector(`.view_story-list-item[data-story-id="${currentViewingStoryId}"]`);
+  let allStoryItems = [];
+  let storyIdAttr = 'storyId';
+  
+  if (currentStoryElement) {
+    // Explore page
+    allStoryItems = Array.from(document.querySelectorAll('.view_story-list-item')).filter(item => 
+      !item.classList.contains('no-story') && !item.classList.contains('add_new_story')
+    );
+    storyIdAttr = 'storyId';
+  } else {
+    // Chat page - try alternative selector
+    currentStoryElement = document.querySelector(`.story-list-item[data-story-user-id="${currentViewingStoryId}"]`);
+    if (currentStoryElement) {
+      allStoryItems = Array.from(document.querySelectorAll('.story-list-item'));
+      storyIdAttr = 'storyUserId';
+    }
+  }
+  
+  if (currentStoryElement && allStoryItems.length > 0) {
+    // Find current index
+    const currentIndex = allStoryItems.indexOf(currentStoryElement);
+    
+    // Jump to next user
+    if (currentIndex !== -1 && currentIndex < allStoryItems.length - 1) {
+      const nextStoryElement = allStoryItems[currentIndex + 1];
+      const nextStoryId = parseInt(nextStoryElement.dataset[storyIdAttr]);
+      
+      console.log("Arrow: Next user story ID:", nextStoryId);
+      
+      if (nextStoryId) {
+        // Load the next user's story (start from first story)
+        renderClickUserStories(nextStoryId);
+        return;
+      }
+    } else {
+      console.log("Arrow: No more users available");
+    }
+  } else {
+    console.log("Arrow: Could not find current story element");
+  }
+  
+  // No more stories, hide the container
+  hideStoryDisplayContainer();
+}
+
+// Arrow navigation - jumps directly to previous user (not previous story of same user)
+function handleArrowPreviousUser() {
+  clearInterval(storyInterval);
+  storyInterval = null;
+  intervalSeconds = 1;
+  maxSeconds = null;
+
+  console.log("Arrow: Jumping to previous user. Current ID:", currentViewingStoryId);
+  
+  // Try to find current story element - support both explore and chat pages
+  let currentStoryElement = document.querySelector(`.view_story-list-item[data-story-id="${currentViewingStoryId}"]`);
+  let allStoryItems = [];
+  let storyIdAttr = 'storyId';
+  
+  if (currentStoryElement) {
+    // Explore page
+    allStoryItems = Array.from(document.querySelectorAll('.view_story-list-item')).filter(item => 
+      !item.classList.contains('no-story') && !item.classList.contains('add_new_story')
+    );
+    storyIdAttr = 'storyId';
+  } else {
+    // Chat page - try alternative selector
+    currentStoryElement = document.querySelector(`.story-list-item[data-story-user-id="${currentViewingStoryId}"]`);
+    if (currentStoryElement) {
+      allStoryItems = Array.from(document.querySelectorAll('.story-list-item'));
+      storyIdAttr = 'storyUserId';
+    }
+  }
+  
+  if (currentStoryElement && allStoryItems.length > 0) {
+    console.log("Total valid story items:", allStoryItems.length);
+    
+    // Find current index
+    const currentIndex = allStoryItems.indexOf(currentStoryElement);
+    console.log("Current index:", currentIndex);
+    
+    // Jump to previous user
+    if (currentIndex > 0) {
+      const prevStoryElement = allStoryItems[currentIndex - 1];
+      const prevStoryId = parseInt(prevStoryElement.dataset[storyIdAttr]);
+      
+      console.log("Arrow: Previous user story ID:", prevStoryId);
+      
+      if (prevStoryId) {
+        // Load the previous user's story (start from their last media)
+        const prevStory = scrollStoriesData.find((story) => story.id === prevStoryId);
+        if (prevStory && prevStory.medias && prevStory.medias.length > 0) {
+          // Set flag to start from last media
+          shouldStartFromLastMedia = true;
+          targetMediaIndex = prevStory.medias.length - 1;
+          renderClickUserStories(prevStoryId);
+          return;
+        }
+      }
+    } else {
+      console.log("Arrow: Already at first user");
+    }
+  } else {
+    console.log("Arrow: Could not find current story element");
+  }
+  
+  // Stay at current position if no previous user
+  currentDisplayMediaIndex = 0;
+  const progressBar = document.getElementById(`lineProgress--0`)?.querySelector("#lineProgress");
+  if (progressBar) {
+    progressBar.style.transition = "none";
+    progressBar.style.width = "0%";
+  }
+  handleCurrentDisplayingMedia(currentStoryUser[0]);
+}
+
 function handleDispalyPreviousStory() {
   clearInterval(storyInterval);
-
-  // storyInterval = null;
+  storyInterval = null;
   intervalSeconds = 1;
   maxSeconds = null;
 
   if (currentDisplayMediaIndex === 0) {
+    console.log("At first media, looking for previous user. Current ID:", currentViewingStoryId);
+    
+    // Already at first media of current user, try to go to previous user
+    const currentStoryElement = document.querySelector(`.view_story-list-item[data-story-id="${currentViewingStoryId}"]`);
+    if (currentStoryElement) {
+      // Get all valid story items
+      const allStoryItems = Array.from(document.querySelectorAll('.view_story-list-item')).filter(item => 
+        !item.classList.contains('no-story') && !item.classList.contains('add_new_story')
+      );
+      
+      console.log("Total valid story items:", allStoryItems.length);
+      
+      // Find current index
+      const currentIndex = allStoryItems.indexOf(currentStoryElement);
+      console.log("Current index:", currentIndex);
+      
+      // Try to find previous story
+      if (currentIndex > 0) {
+        const prevStoryElement = allStoryItems[currentIndex - 1];
+        const prevStoryId = parseInt(prevStoryElement.dataset.storyId);
+        
+        console.log("Previous story ID:", prevStoryId);
+        
+        if (prevStoryId) {
+          // Load the previous user's story (start from their last media)
+          const prevStory = scrollStoriesData.find((story) => story.id === prevStoryId);
+          if (prevStory && prevStory.medias && prevStory.medias.length > 0) {
+            // Set flag to start from last media
+            shouldStartFromLastMedia = true;
+            targetMediaIndex = prevStory.medias.length - 1;
+            renderClickUserStories(prevStoryId);
+            return;
+          }
+        }
+      } else {
+        console.log("Already at first story");
+      }
+    } else {
+      console.log("Could not find current story element");
+    }
+    
+    // Stay at current position if no previous user
     currentDisplayMediaIndex = 0;
+    const progressBar = document.getElementById(`lineProgress--0`)?.querySelector("#lineProgress");
+    if (progressBar) {
+      progressBar.style.transition = "none";
+      progressBar.style.width = "0%";
+    }
+    handleCurrentDisplayingMedia(currentStoryUser[0]);
   } else {
+    // Navigate to previous media of the same user
+    console.log("Navigating to previous media of same user");
     currentDisplayMediaIndex = currentDisplayMediaIndex - 1;
+
+    const progressBar = document.getElementById(`lineProgress--${currentDisplayMediaIndex}`)?.querySelector("#lineProgress");
+    const prevProgressBar = document.getElementById(`lineProgress--${currentDisplayMediaIndex + 1}`)?.querySelector("#lineProgress");
+
+    if (prevProgressBar) {
+      prevProgressBar.style.transition = "none";
+      prevProgressBar.style.width = "0%";
+    }
+    if (progressBar) {
+      progressBar.style.transition = "none";
+      progressBar.style.width = "0%";
+    }
+
+    handleCurrentDisplayingMedia(currentStoryUser[currentDisplayMediaIndex]);
   }
-
-  const progressBar = document.getElementById(`lineProgress--${currentDisplayMediaIndex}`).querySelector("#lineProgress");
-  const prevProgressBar = document.getElementById(`lineProgress--${currentDisplayMediaIndex + 1}`).querySelector("#lineProgress");
-
-  prevProgressBar.style.transition = "none";
-  prevProgressBar.style.width = "0%";
-  progressBar.style.transition = "none";
-  progressBar.style.width = "0%";
-
-  handleCurrentDisplayingMedia(currentStoryUser[currentDisplayMediaIndex]);
 }
 
 function hideStoryDisplayContainer() {
@@ -279,6 +507,9 @@ function renderClickUserStories(storyId) {
   const clickedStory = scrollStoriesData.find((story) => story.id === storyId);
 
   if (clickedStory) {
+    // Update current viewing story ID - CRITICAL for navigation
+    currentViewingStoryId = storyId;
+    
     currentStoryUser = clickedStory.medias;
 
     // update current story user info
@@ -297,8 +528,27 @@ function renderClickUserStories(storyId) {
     // update story progress line
     renderProgressLine(clickedStory.medias.length);
 
-    // Display Active Status
-    handleDisplayCurrentContent(0);
+    // Check if we should start from last media (when navigating backward)
+    if (shouldStartFromLastMedia && targetMediaIndex >= 0) {
+      // Mark all progress bars as complete except the target one
+      Array.from({ length: targetMediaIndex }, (_, i) => i).forEach((index) => {
+        const progressBar = document.getElementById(`lineProgress--${index}`)?.querySelector("#lineProgress");
+        if (progressBar) {
+          progressBar.style.transition = "none";
+          progressBar.style.width = "100%";
+        }
+      });
+      
+      // Display from target media index
+      handleDisplayCurrentContent(targetMediaIndex);
+      
+      // Reset flags
+      shouldStartFromLastMedia = false;
+      targetMediaIndex = 0;
+    } else {
+      // Display Active Status from beginning
+      handleDisplayCurrentContent(0);
+    }
 
     // Reset replay state for new story
     replayClickedForCurrentStory = false;
@@ -722,10 +972,16 @@ viewStoryList.addEventListener("click", (e) => {
 const viewStoryLargeOption = document.getElementById("viewStoryLargeOption");
 const exploreStoryMenuPanel = document.getElementById("exploreStoryMenuPanel");
 
+// Detect which page we're on and use appropriate hidden class
+const isOnChatPage = document.body.classList.contains('chat-page') || window.location.pathname.includes('chat.html');
+const MENU_HIDDEN_CLASS = isOnChatPage ? 'chat-hidden' : HIDDEN;
+
 viewStoryLargeOption.addEventListener("click", () => {
   clearInterval(storyInterval);
 
   exploreStoryMenuPanel.classList.remove(HIDDEN);
+  exploreStoryMenuPanel.classList.remove('chat-hidden');
+  exploreStoryMenuPanel.classList.remove('explore-hidden');
 });
 
 exploreStoryMenuPanel.addEventListener("click", (e) => {
@@ -749,7 +1005,8 @@ exploreStoryMenuPanel.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".viewStoryLargeOption--menu")) {
-    exploreStoryMenuPanel.classList.add(HIDDEN);
+    exploreStoryMenuPanel.classList.add('explore-hidden');
+    exploreStoryMenuPanel.classList.add('chat-hidden');
   }
 });
 

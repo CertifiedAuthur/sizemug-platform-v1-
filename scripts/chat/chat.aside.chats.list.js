@@ -1367,6 +1367,7 @@ class ChatAsideSidebarStory {
   constructor() {
     this.chatStoryItems = document.getElementById("chatStoryItems");
     this.init();
+    this.attachEventListeners();
   }
 
   init() {
@@ -1374,13 +1375,13 @@ class ChatAsideSidebarStory {
 
     if (storyNotice) {
       for (const story of scrollStoriesData) {
-        const { watched, medias, userPhoto, fullName, pinIcon } = story;
+        const { watched, medias, userPhoto, fullName, pinIcon, id } = story;
 
         const firstMedia = medias?.[0];
         // const mediaLength = Array.from({ length: medias?.length || 0 }, (_, i) => i + 1);
 
         const markup = `
-          <li class="story-list-item ${watched ? "viewed_update" : "new_update"}" id="storyItem">
+          <li class="story-list-item ${watched ? "viewed_update" : "new_update"}" id="storyItem" data-story-user-id="${id}">
             <div class="story-media">
               ${firstMedia?.type === "video" ? `<img src="${firstMedia.media}"></img>` : `<img src="${firstMedia.media}" />`}
               <div class="story-overlay"></div>
@@ -1418,6 +1419,43 @@ class ChatAsideSidebarStory {
       });
 
       localStorage.setItem("sizemug_chat_story_notice", "true");
+    }
+  }
+
+  attachEventListeners() {
+    // Use event delegation to handle story item clicks - match explore.html pattern
+    this.chatStoryItems.addEventListener("click", (e) => {
+      const storyItem = e.target.closest("#storyItem");
+      if (storyItem) {
+        const storyUserId = storyItem.dataset.storyUserId;
+        if (storyUserId) {
+          // Get the hidden class name from chat.html context
+          const HIDDEN = "chat-hidden";
+          const storyModalContainer = document.getElementById("storyModalContainer");
+          
+          // First, remove hidden class to show modal (like explore.html does with removeClass)
+          if (storyModalContainer) {
+            storyModalContainer.classList.remove(HIDDEN);
+          }
+          
+          // Then render the clicked user's stories
+          if (typeof renderClickUserStories === "function") {
+            renderClickUserStories(parseInt(storyUserId, 10));
+          }
+        }
+      }
+    });
+
+    // Close story modal when clicking outside (on the overlay)
+    const storyModalContainer = document.getElementById("storyModalContainer");
+    const HIDDEN = "chat-hidden";
+
+    if (storyModalContainer) {
+      storyModalContainer.addEventListener("click", function (e) {
+        if (e.target.id === "storyModalContainer") {
+          this.classList.add(HIDDEN);
+        }
+      });
     }
   }
 }

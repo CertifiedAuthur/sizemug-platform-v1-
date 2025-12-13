@@ -75,17 +75,17 @@ class BoostModal {
       e.stopPropagation();
     });
 
-    // Boost trigger buttons
-    this.boostTriggerBtns.forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        this.currentTriggerBtn = btn;
-        this.togglePopover();
-      });
-    });
-
-    // Close popover when clicking outside
+    // Use event delegation for dynamically created boost buttons
     document.addEventListener("click", (e) => {
+      const boostBtn = e.target.closest(".boost");
+      if (boostBtn) {
+        e.stopPropagation();
+        this.currentTriggerBtn = boostBtn;
+        this.togglePopover();
+        return;
+      }
+      
+      // Close popover when clicking outside
       if (this.boostPopover && this.boostPopover.classList.contains("active")) {
         if (!this.boostPopover.contains(e.target) && !this.currentTriggerBtn?.contains(e.target)) {
           this.closePopover();

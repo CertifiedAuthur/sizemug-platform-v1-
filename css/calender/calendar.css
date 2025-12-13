@@ -49,6 +49,15 @@
   border: none; /* Avoid conflicting with actual borders */
 }
 
+/* Highlighted event in month view */
+.highlighted-event {
+  box-shadow: 0 0 0 2px #8b5cf6 !important;
+  border-radius: 4px !important;
+  background-color: rgba(139, 92, 246, 0.1) !important;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
 /* Week View Modal */
 .active-week-view-modal,
 /* .week_view_modal_wrapper, */
@@ -772,14 +781,21 @@ td {
   height: 72px;
   position: relative;
   text-align: left;
+  border-right: 2px solid #d1d5db !important; /* More visible vertical grid lines */
+  border-bottom: 2px solid #d1d5db !important; /* More visible horizontal grid lines */
 }
 th {
   border-top: none !important;
+  border-bottom: 2px solid #d1d5db !important; /* Add border at top of first data row */
 }
 #week-view td:last-child,
 #week-view td:first-child {
   border-right: none;
-  border-top: none;
+  /* Keep border-bottom to maintain horizontal grid lines across all columns */
+}
+/* White background for last column (Sunday) */
+#week-view td.last-column-white {
+  background-color: #ffffff !important;
 }
 #week-view td:nth-child(8n),
 #week-view th:nth-child(8n) {
@@ -795,6 +811,15 @@ th {
   color: #71717a;
   width: 70px !important;
   padding-left: 0.75rem;
+}
+
+/* Week view: show clean labels like 7am/8am; hide any legacy/internal time strings if present */
+#week-view .time-column .time-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  color: #71717a;
+  text-transform: lowercase;
 }
 .day-column {
   width: auto;
@@ -1137,9 +1162,9 @@ th {
   }
 
   #mobile-view .static-event {
-    background-color: rgba(14, 165, 233, 0.1);
-    color: #0369a1;
-    border-left: 3px solid #0ea5e9;
+    background-color: #E7E1F9 !important;
+    color: #6B46C1 !important;
+    border-left: 3px solid #6B46C1 !important;
     padding: 5px;
     border-radius: 5px;
     font-size: 12px;
@@ -1152,11 +1177,11 @@ th {
   /* Styling for tasks */
   #mobile-view .static-task,
   #mobile-view .task-item {
-    background-color: rgba(139, 92, 246, 0.1);
-    color: #6d28d9;
+    background-color: #E7E1F9 !important;
+    color: #6B46C1 !important;
     padding: 5px;
     /* border-radius: 5px; */
-    border-left: 3px solid #8b5cf6;
+    border-left: 3px solid #6B46C1 !important;
     font-size: 12px;
     font-weight: 600;
     text-align: justify;
@@ -1173,8 +1198,8 @@ th {
 
   /* Styling for birthdays */
   #mobile-view .static-birthday {
-    background-color: #f43f5e;
-    color: white;
+    background-color: #E7E1F9 !important;
+    color: #6B46C1 !important;
     padding: 5px;
     border-radius: 6px;
     font-size: 12px;
@@ -1718,7 +1743,7 @@ table {
 .day-time-column {
   width: 80px;
   background: #f8f9fa;
-  border-right: 1px solid #e5e7eb;
+  border-right: 2px solid #d1d5db; /* Visible vertical grid line */
   flex-shrink: 0;
 }
 
@@ -1866,23 +1891,23 @@ table {
 }
 
 .day-event-block.event-type-task {
-  background: #8b5cf6;
+  background: #E7E1F9 !important;
 }
 
 .day-event-block.event-type-event {
-  background: #3b82f6;
+  background: #E7E1F9 !important;
 }
 
 .day-event-block.event-type-meeting {
-  background: #10b981;
+  background: #E7E1F9 !important;
 }
 
 .day-event-block.event-type-holiday {
-  background: #f59e0b;
+  background: #E7E1F9 !important;
 }
 
 .day-event-block.event-type-birthday {
-  background: #f43f5e;
+  background: #E7E1F9 !important;
 }
 
 .day-event-header {
@@ -1896,11 +1921,12 @@ table {
   font-size: 12px;
   font-weight: 600;
   opacity: 0.9;
+  color: #6B46C1 !important;
 }
 
 .day-event-notification {
-  background: #ef4444;
-  color: white;
+  background: #E7E1F9 !important;
+  color: #6B46C1 !important;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -1917,6 +1943,7 @@ table {
   font-weight: 600;
   margin-bottom: 8px;
   line-height: 1.3;
+  color: #6B46C1 !important;
 }
 
 .day-event-footer {
@@ -1937,6 +1964,7 @@ table {
   font-size: 12px;
   opacity: 0.9;
   font-weight: 500;
+  color: #6B46C1 !important;
 }
 .day-items {
   /* display: flex; */
@@ -1955,12 +1983,12 @@ table {
 }
 .day-items .holiday {
   color: white;
-  background-color: #fda629 !important;
+  background-color: #E7E1F9 !important;
   padding: 2px 5px;
   border-radius: 3px;
 }
 .day-items .birthday {
-  background-color: #f43f5e !important;
+  background-color: #E7E1F9 !important;
   color: white;
 
   padding: 2px 5px;
@@ -2091,14 +2119,14 @@ table {
   background-color: #fff !important;
 }
 .holiday-highlight {
-  background: #f59e0b;
-  color: #fff;
+  background: #E7E1F9 !important;
+  color: #6B46C1 !important;
   padding: 0 6px;
   border-radius: 6px;
 }
 .birthday-highlight {
-  background: #f43f5e;
-  color: #fff;
+  background: #E7E1F9 !important;
+  color: #6B46C1 !important;
   padding: 0 6px;
   border-radius: 6px;
 }
@@ -3475,8 +3503,8 @@ label {
 /* Week view tatic contents */
 /* Styling for events */
 .static-event {
-  background-color: rgba(14, 165, 233, 0.1);
-  color: #0369a1;
+  background-color: #E7E1F9 !important;
+  color: #6B46C1 !important;
   /* border-left: 3px solid #0ea5e9; */
   padding: 5px;
   border-radius: 4px;
@@ -3484,15 +3512,15 @@ label {
   font-weight: 600;
   text-align: left;
   vertical-align: top;
-  box-shadow: inset 3px 0 0 0 #0ea5e9;
+  box-shadow: inset 3px 0 0 0 #6B46C1 !important;
   cursor: pointer;
 }
 
 /* Styling for tasks */
 .static-task,
 .task-item {
-  background-color: rgba(139, 92, 246, 0.1);
-  color: #6d28d9;
+  background-color: #E7E1F9 !important;
+  color: #6B46C1 !important;
   padding: 5px;
   border-radius: 4px;
   /* border-left: 3px solid #8b5cf6; */
@@ -3502,30 +3530,42 @@ label {
   vertical-align: top;
   height: 100%;
   width: 100%;
-  box-shadow: inset 3px 0 0 0 #8b5cf6;
+  box-shadow: inset 3px 0 0 0 #6B46C1 !important;
   cursor: pointer;
   padding-left: 0.5rem;
 }
 
 /* Styling for birthdays */
 .static-birthday {
-  background-color: #f43f5e;
-  color: white;
+  background-color: #fee2e2 !important;
+  color: #dc2626 !important;
   padding: 5px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: inset 3px 0 0 0 #dc2626 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-wrap: break-word;
+  min-height: fit-content;
 }
 
 /* Styling for holidays */
 .static-holiday {
-  background-color: orange;
-  color: white;
+  background-color: #fef3c7 !important;
+  color: #ca8a04 !important;
   padding: 5px;
   border-radius: 5px;
   width: 100%;
   cursor: pointer;
+  box-shadow: inset 3px 0 0 0 #ca8a04 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  word-wrap: break-word;
+  min-height: fit-content;
 }
 
 @media (min-width: 760px) and (max-width: 835px) {
@@ -4031,8 +4071,8 @@ label {
 }
 
 .multi-day-event-notification {
-  background: #ef4444;
-  color: white;
+  background: #E7E1F9;
+  color: #6B46C1;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -4049,6 +4089,7 @@ label {
   font-weight: 600;
   margin-bottom: 8px;
   line-height: 1.3;
+  color: #6B46C1 !important;
 }
 
 .multi-day-event-footer {
@@ -4071,6 +4112,7 @@ label {
   font-size: 12px;
   opacity: 0.9;
   font-weight: 500;
+  color: #6B46C1 !important;
 }
 
 /* Multi-day event wrapper and block */
@@ -4097,23 +4139,23 @@ label {
 }
 
 .multi-day-event-block.event-type-task {
-  background: #8b5cf6;
+  background: #E7E1F9 !important;
 }
 
 .multi-day-event-block.event-type-event {
-  background: #3b82f6;
+  background: #E7E1F9 !important;
 }
 
 .multi-day-event-block.event-type-meeting {
-  background: #10b981;
+  background: #E7E1F9 !important;
 }
 
 .multi-day-event-block.event-type-holiday {
-  background: #f59e0b;
+  background: #E7E1F9 !important;
 }
 
 .multi-day-event-block.event-type-birthday {
-  background: #f43f5e;
+  background: #E7E1F9 !important;
 }
 
 .multi-day-event-header {
@@ -4127,11 +4169,12 @@ label {
   font-size: 12px;
   font-weight: 600;
   opacity: 0.9;
+  color: #6B46C1 !important;
 }
 
 .multi-day-event-notification {
-  background: #ef4444;
-  color: white;
+  background: #E7E1F9;
+  color: #6B46C1;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -4148,6 +4191,7 @@ label {
   font-weight: 600;
   margin-bottom: 8px;
   line-height: 1.3;
+  color: #6B46C1 !important;
 }
 
 .multi-day-event-avatar {
@@ -4162,6 +4206,7 @@ label {
   font-size: 12px;
   opacity: 0.9;
   font-weight: 500;
+  color: #6B46C1 !important;
 }
 /* Height variants for event wrappers */
 .multi-day-event-wrapper.full-height {
@@ -4197,11 +4242,20 @@ label {
   opacity: 0.8;
   flex-shrink: 0;
 }
+
+/* FORCE LIGHT PURPLE NOTIFICATIONS - Override any other styles! */
+.day-event-notification,
+.multi-day-event-notification,
+.multi-day-event-icon {
+  background: #E7E1F9 !important;
+  color: #6B46C1 !important;
+}
+
 /* Day hour slots for proper event organization */
 .day-hour-slot {
   min-height: 100px; /* Match the time slot height */
   position: relative;
-  border-bottom: 1px solid #f3f4f6;
+  border-bottom: 2px solid #d1d5db !important; /* Visible grid lines */
 }
 
 .day-hour-slot[data-hour="7"] {
@@ -4215,4 +4269,21 @@ label {
 /* Debug: Add background colors to see time slots */
 .day-hour-slot:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Global override: Force all event blocks to light purple */
+.day-event-block,
+.multi-day-event-block,
+.day-event-block.event-type-task,
+.day-event-block.event-type-event,
+.day-event-block.event-type-meeting,
+.day-event-block.event-type-holiday,
+.day-event-block.event-type-birthday,
+.multi-day-event-block.event-type-task,
+.multi-day-event-block.event-type-event,
+.multi-day-event-block.event-type-meeting,
+.multi-day-event-block.event-type-holiday,
+.multi-day-event-block.event-type-birthday {
+  background: #E7E1F9 !important;
+  background-color: #E7E1F9 !important;
 }

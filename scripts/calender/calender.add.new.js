@@ -15,6 +15,117 @@ const addEventModal = document.getElementById("addEventModal");
 let firstTimeAddNew = true;
 let path = "";
 
+/**
+ * ============================================
+ * ISSUE #1: CLICK OUTSIDE TO CLOSE MODALS
+ * ============================================
+ */
+function setupClickOutsideToClose(modalId) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+
+  modal.addEventListener("click", function(event) {
+    // Check if the click is on the modal background (not on the content)
+    if (event.target === modal) {
+      modal.classList.add("cal-hidden");
+    }
+  });
+
+  // Find the modal content and prevent clicks from bubbling up
+  const modalContent = modal.querySelector(".cal-modal-content, .modal-mobile-container");
+  if (modalContent) {
+    modalContent.addEventListener("click", function(event) {
+      event.stopPropagation();
+    });
+  }
+
+  // Setup close button if exists
+  const closeButton = modal.querySelector(".close-modal");
+  if (closeButton) {
+    closeButton.addEventListener("click", function() {
+      modal.classList.add("cal-hidden");
+    });
+  }
+}
+
+// Apply to all add modals
+setupClickOutsideToClose("addEventModal");
+setupClickOutsideToClose("addTaskModal");
+setupClickOutsideToClose("addHolidayModal");
+setupClickOutsideToClose("addBirthdayModal");
+setupClickOutsideToClose("addTaskOption");
+setupClickOutsideToClose("importModal");
+setupClickOutsideToClose("upload-interest");
+
+/**
+ * ============================================
+ * ISSUE #2: ADD AND CANCEL BUTTONS
+ * ============================================
+ */
+function setupModalButtons(modalId, submitBtnId) {
+  const modal = document.getElementById(modalId);
+  if (!modal) return;
+
+  // Cancel button
+  const cancelBtn = modal.querySelector(".to-cancel");
+  if (cancelBtn) {
+    cancelBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      modal.classList.add("cal-hidden");
+      // Clear form if exists
+      const form = modal.querySelector("form");
+      if (form) form.reset();
+    });
+  }
+
+  // Add/Submit button - will be handled by existing submit handlers
+  // but we ensure modal closes after successful add
+}
+
+// Setup buttons for all modals
+setupModalButtons("addEventModal", "eventSubmitBtn");
+setupModalButtons("addTaskModal", "nextTaskModal");
+setupModalButtons("addHolidayModal", "holidaySubmitBtn");
+setupModalButtons("addBirthdayModal", null);
+
+/**
+ * ============================================
+ * ISSUE #5: PRIVATE/PUBLIC TOGGLE MOVEMENT
+ * ============================================
+ */
+function setupPrivatePublicToggle() {
+  const allToggles = document.querySelectorAll(".switch_buttons_wrapper");
+  
+  allToggles.forEach((wrapper) => {
+    const buttons = wrapper.querySelectorAll(".switch_buttons button");
+    const slider = wrapper.querySelector(".switch_sliding--slider");
+    
+    if (!buttons.length || !slider) return;
+    
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", function(e) {
+        e.preventDefault();
+        
+        // Remove clicked class from all buttons
+        buttons.forEach(btn => btn.classList.remove("clicked"));
+        
+        // Add clicked class to current button
+        this.classList.add("clicked");
+        
+        // Move the slider
+        if (this.classList.contains("public")) {
+          slider.style.transform = "translateX(100%)";
+        } else if (this.classList.contains("private")) {
+          slider.style.transform = "translateX(0%)";
+        }
+      });
+    });
+  });
+}
+
+// Initialize toggle functionality
+setupPrivatePublicToggle();
+
 addEventBtn.addEventListener("click", () => {
   addNewModal.classList.add(HIDDEN);
 
@@ -246,3 +357,131 @@ monthPrevButton.addEventListener("click", () => {
   currentMonthIndex = (currentMonthIndex - 1 + 12) % 12; // Wrap around to 11 from 0
   goToMonthSlider(currentMonthIndex);
 });
+
+/**
+ * ============================================
+ * ISSUE #6 & #7: MONTH VIEW EVENT DETAILS & SEE MORE
+ * ============================================
+ */
+
+// Create see more modal if it doesn't exist
+function createSeeMoreModal() {
+  if (document.getElementById("seeMoreModal")) return;
+
+  const modalHTML = `
+    <div id="seeMoreModal" class="cal-modal cal-hidden" style="z-index: 10000;">
+      <div class="modal-mobile-container">
+        <div class="close-mobile close-modal">
+          <img src="./images/calender/icons/close-mobile.svg" />
+        </div>
+        <div class="cal-modal-content">
+          <h3 class="modal-title" id="seeMoreTitle">All Events</h3>
+          <div id="seeMoreContent" style="max-height: 400px; overflow-y: auto; padding: 20px 0;">
+            <!-- Events will be populated here -->
+          </div>
+          <div class="footers">
+            <button class="to-cancel">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
+  setupClickOutsideToClose("seeMoreModal");
+}
+
+// Initialize modals
+createSeeMoreModal();
+
+// Handle month event clicks - Use existing week calendar modal
+document.addEventListener("click", function(e) {
+  // Handle individual event clicks - Show same modal as week view
+  if (e.target.closest(".month-event-item")) {
+    e.stopPropagation();
+    const eventItem = e.target.closest(".month-event-item");
+    const td = eventItem.closest("td");
+    const day = td.dataset.day;
+    
+    // Extract event details from the clicked item
+    const title = eventItem.querySelector(".event-content span") ? eventItem.querySelector(".event-content span").textContent : "Event";
+    const time = eventItem.querySelector(".event-time") ? eventItem.querySelector(".event-time").textContent : "";
+    
+    // Use the existing week calendar modal
+    const modal = $("#eventDetailModal");
+    if (modal.length) {
+      modal.find(".event-title").text(title);
+      modal.find(".event-date").text(`Date: ${selectedDate.toLocaleDateString("default", { month: "long" })} ${day}, ${selectedDate.getFullYear()}`);
+      modal.find(".event-time").text(`Time: ${time}`);
+      modal.find(".event-description").text(""); // Can be populated if available
+      
+      // Highlight the clicked event by adding a class
+      $("#month-view .month-event-item").removeClass("highlighted-event");
+      $(eventItem).addClass("highlighted-event");
+      
+      // Position modal near the clicked event
+      const itemOffset = $(eventItem).offset();
+      modal.css({
+        top: itemOffset.top + $(eventItem).outerHeight(),
+        left: itemOffset.left,
+      });
+      
+      modal.removeClass("cal-hidden").fadeIn();
+    }
+  }
+  
+  // Handle "See more" button clicks
+  if (e.target.closest(".see-more-item")) {
+    e.stopPropagation();
+    const button = e.target.closest(".see-more-item");
+    const day = button.dataset.day;
+    const td = button.closest("td");
+    
+    // Get all events for this day
+    const allEvents = td.querySelectorAll(".month-event-item");
+    let eventsHTML = "";
+    
+    allEvents.forEach((event, index) => {
+      const title = event.querySelector(".event-content span") ? event.querySelector(".event-content span").textContent : "Event";
+      const time = event.querySelector(".event-time") ? event.querySelector(".event-time").textContent : "";
+      const profileImg = event.querySelector(".event-profile img") ? event.querySelector(".event-profile img").src : "";
+      
+      eventsHTML += `
+        <div style="display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #e5e7eb; cursor: pointer;" class="see-more-event-item" data-event-title="${title}" data-event-time="${time}">
+          ${profileImg ? `<div style="margin-right: 10px;">
+            <img src="${profileImg}" alt="Profile" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+          </div>` : ''}
+          <div style="flex: 1;">
+            <div style="font-weight: 600; color: #374151;">${title}</div>
+            <div style="font-size: 12px; color: #9CA3AF;">${time}</div>
+          </div>
+        </div>
+      `;
+    });
+    
+    document.getElementById("seeMoreTitle").textContent = `All Events - ${selectedDate.toLocaleDateString("default", { month: "long" })} ${day}`;
+    document.getElementById("seeMoreContent").innerHTML = eventsHTML;
+    document.getElementById("seeMoreModal").classList.remove("cal-hidden");
+    
+    // Add click handlers to events in see more modal to show detail modal
+    $("#seeMoreContent .see-more-event-item").on("click", function() {
+      const itemTitle = $(this).data("event-title");
+      const itemTime = $(this).data("event-time");
+      
+      // Close see more modal
+      $("#seeMoreModal").addClass("cal-hidden");
+      
+      // Show detail modal
+      const modal = $("#eventDetailModal");
+      if (modal.length) {
+        modal.find(".event-title").text(itemTitle);
+        modal.find(".event-date").text(`Date: ${selectedDate.toLocaleDateString("default", { month: "long" })} ${day}, ${selectedDate.getFullYear()}`);
+        modal.find(".event-time").text(`Time: ${itemTime}`);
+        modal.find(".event-description").text("");
+        
+        modal.removeClass("cal-hidden").fadeIn();
+      }
+    });
+  }
+});
+
