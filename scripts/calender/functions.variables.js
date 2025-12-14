@@ -555,26 +555,10 @@ function generateWeekView(date) {
                   ${
                     headerText
                       ? `
-                  <div data-current-count="1" data-total-count="3" class="header-content-container ${headerClass}">
-                    <div class="header-content active" data-index="1" data-day="${dayName}" data-category="${headerCategory}">
-                      <p>1 ${headerText}</p>
+                  <div data-current-count="1" data-total-count="1" class="header-content-container ${headerClass}">
+                    <div class="header-content active" data-index="1" data-day="${dayName}" data-category="${headerCategory}" data-date="${fullDate}">
+                      <p>${headerText}</p>
                     </div>
-                    <div class="header-content" data-index="2" data-day="${dayName}" data-category="${headerCategory}">
-                      <p>2 ${headerText}</p>
-                    </div>
-                    <div class="header-content" data-index="3" data-day="${dayName}" data-category="${headerCategory}">
-                      <p>3 ${headerText}</p>
-                    </div>
-
-                    <div class="day-date-slider-btns">
-                      <button class="event-slider-prev-btn" disabled>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="#ffffff" stroke-width="2" d="m15 6l-6 6l6 6"/></svg>
-                      </button>
-                      
-                      <button class="event-slider-next-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" stroke="#ffffff" stroke-width="2" d="m9 6l6 6l-6 6"/></svg>
-                      </button>
-                    <div>
                   </div>`
                       : ""
                   }
@@ -750,10 +734,12 @@ function generateMonthView(date) {
           } else if (content && typeof content === "object") {
             events.push({
               type: content.category || "task",
-              title: content.text_1 || content.text || "Task",
+              title: content.text_2 || content.text || "Task",
               time: time,
               isHeader: false,
               images: content.images || [],
+              description: content.description || "",
+              data: content, // Store full content for modal
             });
           }
         }
@@ -811,7 +797,7 @@ function generateMonthView(date) {
         const profileImage = event.images && event.images.length > 0 ? event.images[0] : "./icons/Avatar.svg";
 
         items += `
-          <div class="month-event-item" style="display: flex; align-items: center; margin: 2px 0; font-size: 10px; line-height: 1.2;">
+          <div class="month-event-item" style="display: flex; align-items: center; margin: 2px 0; font-size: 10px; line-height: 1.2;" data-event-index="${index}" data-day="${day}">
             <div class="event-number" style="background-color: ${circleColor}; color: white; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; margin-right: 4px; flex-shrink: 0;">
               ${index + 1}
             </div>
@@ -871,6 +857,148 @@ function generateMonthView(date) {
     $("[data-view='week']").trigger("click");
     updateMainCalendar();
   });
+
+  // Handle month event item clicks - show modal like week view
+  $("#month-view").on("click", ".month-event-item", async function (event) {
+    event.stopPropagation();
+    
+    const $item = $(this);
+    const day = parseInt($item.data("day"), 10);
+    const eventIndex = parseInt($item.data("event-index"), 10);
+    
+    // Get the event data
+    const events = getEventsForDay(day);
+    const eventData = events[eventIndex];
+    
+    if (!eventData || !eventData.data) return;
+    
+    const content = eventData.data;
+    const dayDate = new Date(year, month, day);
+    const fullDate = dayDate.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
+    const time = eventData.time !== "All day" ? eventData.time : "";
+    
+    // Generate profile images HTML
+    const profileImagesHtml = await generateProfileImagesHtml(content.images || []);
+    
+    // Get truncated description
+    const descriptionData = getTruncatedDescription(content.description || "");
+    
+    // Determine category dot class
+    const categoryDotClass = {
+      task: "purple-dot",
+      event: "blue-dot",
+      holiday: "green-dot",
+      birthday: "yellow-dot",
+    }[content.category] || "";
+    
+    const descriptionHtml = `
+      <div class="det-description">
+        <strong><img src="./images/calender/icons/det-Paper.svg" /></strong>
+        <div class="des-expand">
+          <p class="description-text">${descriptionData.truncated}</p>
+          ${descriptionData.full ? `<button class="read-more-btn">Read All</button>` : ""}
+          ${descriptionData.full ? `<p class="full-description">${descriptionData.full}</p>` : ""}
+        </div>
+      </div>
+    `;
+    
+    // Create modal HTML (same as week view)
+    const modalContent = `
+      <div class="modal-header">
+        <div class="title-dot">
+          <div class="${categoryDotClass}"></div>
+          <h2>${content.text_2 || content.text || "No Title"}</h2>
+        </div>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p><strong><img src="./images/calender/icons/det-Calendar.svg" /></strong> ${fullDate}</p>
+        ${time ? `<p><strong><img src="./images/calender/icons/det-Time.svg" /></strong> ${time}</p>` : ""}
+        ${descriptionHtml}
+        <div class="invite-box"> 
+          <img src="./images/calender/icons/det-invite.svg" />
+          ${profileImagesHtml ? `<div class="profile-images">${profileImagesHtml}</div>` : ""}
+        </div>
+        <div class="another-picture"></div>
+        <div class="see-all-profile">See all</div>
+        <div class="modal-actions">
+          <div>
+            <button class="invite-btn"><img src="./images/calender/icons/det-invite2.svg"/></button>
+            <button class="delete-btn"><img src="./images/calender/icons/det-Trash.svg" /></button>
+          </div>
+          <button class="edit-btn">Edit</button>
+        </div>
+      </div>
+    `;
+    
+    // Highlight the clicked event item
+    $("#month-view .month-event-item").removeClass("highlighted-event");
+    $item.addClass("highlighted-event");
+    
+    // Show modal using the calendar's event handler
+    if (window.calendar && window.calendar.eventHandler) {
+      window.calendar.eventHandler.modalElement.find(".week-view-modal").html(modalContent);
+      window.calendar.eventHandler.showModal(modalContent, this);
+    } else {
+      // Fallback: create modal wrapper if calendar instance not available
+      $(".week_view_modal_wrapper").remove();
+      
+      const modalWrapper = $(`
+        <div class="week_view_modal_wrapper" style="position: fixed; z-index: 9999;">
+          <div style="position: relative; height: 100%">
+            <div class="week-view-modal">
+              ${modalContent}
+            </div>
+          </div>
+        </div>
+      `);
+      
+      $("body").append(modalWrapper);
+      
+      // Position modal
+      const itemOffset = $item.offset();
+      const windowWidth = $(window).width();
+      const windowHeight = $(window).height();
+      
+      let left = itemOffset.left;
+      let top = itemOffset.top + $item.outerHeight() + 10;
+      
+      // Adjust if modal would go off screen
+      if (left + 400 > windowWidth) {
+        left = windowWidth - 420;
+      }
+      if (left < 10) {
+        left = 10;
+      }
+      if (top + 300 > windowHeight) {
+        top = itemOffset.top - 310;
+      }
+      if (top < 10) {
+        top = 10;
+      }
+      
+      modalWrapper.css({
+        left: left + "px",
+        top: top + "px",
+        display: "block",
+      });
+      
+      // Close modal handler
+      modalWrapper.find(".close-modal").on("click", function() {
+        modalWrapper.remove();
+        $("#month-view .month-event-item").removeClass("highlighted-event");
+      });
+      
+      // Close on click outside
+      $(document).on("click.monthModal", function(e) {
+        if (!$(e.target).closest(".week_view_modal_wrapper").length && !$(e.target).closest(".month-event-item").length) {
+          modalWrapper.remove();
+          $("#month-view .month-event-item").removeClass("highlighted-event");
+          $(document).off("click.monthModal");
+        }
+      });
+    }
+  });
 }
 
 function generateDayView(date) {
@@ -911,6 +1039,24 @@ function generateDayView(date) {
   const getDayEvents = (dayShort) => {
     const events = [];
 
+    // Helper function to convert "7 AM" or "12 PM" format to "7:00" or "12:00" 24-hour format
+    const convertTo24Hour = (timeStr) => {
+      const match = timeStr.match(/(\d+)\s*(AM|PM)/i);
+      if (!match) return timeStr; // Return as-is if not in expected format
+      
+      let hours = parseInt(match[1], 10);
+      const period = match[2].toUpperCase();
+      
+      // Convert to 24-hour format
+      if (period === "PM" && hours !== 12) {
+        hours += 12;
+      } else if (period === "AM" && hours === 12) {
+        hours = 0;
+      }
+      
+      return `${hours}:00`;
+    };
+
     // Add events from static content if available
     if (staticContent[currentView] && staticContent[currentView][dayShort]) {
       const dayContent = staticContent[currentView][dayShort];
@@ -919,14 +1065,16 @@ function generateDayView(date) {
       Object.keys(dayContent).forEach((time) => {
         if (time !== "header") {
           const content = dayContent[time];
+          const time24 = convertTo24Hour(time); // Convert "7 AM" to "7:00"
+          
           if (Array.isArray(content)) {
             content.forEach((item) => {
               events.push({
                 type: item.category || "task",
-                title: item.text_1 || item.text || "Task",
-                time: time,
-                startTime: time,
-                endTime: calculateEndTime(time, 60),
+                title: item.text_2 || item.text || "Task", // Use text_2 for title, not text_1 which is the time
+                time: time24, // Use converted 24-hour format for display
+                startTime: time24, // Use converted format for positioning
+                endTime: calculateEndTime(time24, 60),
                 isHeader: false,
                 images: item.images || [],
                 organizer: getOrganizerName(),
@@ -935,10 +1083,10 @@ function generateDayView(date) {
           } else if (content && typeof content === "object") {
             events.push({
               type: content.category || "task",
-              title: content.text_1 || content.text || "Task",
-              time: time,
-              startTime: time,
-              endTime: calculateEndTime(time, 60),
+              title: content.text_2 || content.text || "Task", // Use text_2 for title, not text_1
+              time: time24, // Use converted 24-hour format for display
+              startTime: time24, // Use converted format for positioning
+              endTime: calculateEndTime(time24, 60),
               isHeader: false,
               images: content.images || [],
               organizer: getOrganizerName(),
@@ -1004,6 +1152,43 @@ function generateDayView(date) {
     return hours * 60 + minutes;
   };
 
+  // --- Day view positioning helpers (single-source-of-truth constants) ---
+  const DAY_START_HOUR = 7;
+  const DAY_END_HOUR = 23;
+  const DAY_SPACER_PX = 90;
+  // Increase spacing: bigger hour blocks -> more vertical room between times
+  const PX_PER_HOUR = 140;
+  const MINUTES_PER_INTERVAL = 15;
+  const PX_PER_INTERVAL = PX_PER_HOUR / (60 / MINUTES_PER_INTERVAL); // 35px per 15 mins
+
+  const roundDownToInterval = (minutes, interval = MINUTES_PER_INTERVAL) =>
+    Math.floor(minutes / interval) * interval;
+
+  const roundUpToInterval = (minutes, interval = MINUTES_PER_INTERVAL) =>
+    Math.ceil(minutes / interval) * interval;
+
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+  const getDayViewEventRect = (startTime, endTime) => {
+    const startMinutes = timeToMinutes(startTime);
+    const endMinutes = timeToMinutes(endTime);
+
+    const dayStartMin = DAY_START_HOUR * 60;
+    const dayEndMin = (DAY_END_HOUR + 1) * 60; // allow events up to 24:00
+
+    // Snap to 15-min grid
+    const snappedStart = clamp(roundDownToInterval(startMinutes), dayStartMin, dayEndMin);
+    const snappedEnd = clamp(roundUpToInterval(endMinutes), dayStartMin, dayEndMin);
+
+    const duration = Math.max(MINUTES_PER_INTERVAL, snappedEnd - snappedStart);
+    const offsetMinutes = snappedStart - dayStartMin;
+
+    const top = DAY_SPACER_PX + (offsetMinutes / MINUTES_PER_INTERVAL) * PX_PER_INTERVAL;
+    const height = (duration / MINUTES_PER_INTERVAL) * PX_PER_INTERVAL;
+
+    return { top, height, startMinutes: snappedStart, endMinutes: snappedEnd };
+  };
+
   // Helper function to get organizer name
   const getOrganizerName = () => {
     const names = ["Cameron Williamson", "Esther Howard", "Wade Warren", "Jenny Wilson", "Robert Fox", "Arlene McCoy"];
@@ -1052,9 +1237,12 @@ function generateDayView(date) {
         <div class="multi-day-events">
     `;
 
-    // Add hour lines for this column
-    for (let hour = 7; hour <= 23; hour++) {
-      const topPosition = (hour - 7) * 100; // 40px for main hour + 60px for intervals (20px * 3)
+    // Add hour lines for this column (commented out since time-hour-group borders now extend)
+    // Lines are positioned to match the time-hour-group structure:
+    // Spacer: 90px at top
+    // Then each hour: 100px (40px header + 60px intervals)
+    for (let hour = DAY_START_HOUR; hour <= DAY_END_HOUR; hour++) {
+      const topPosition = DAY_SPACER_PX + (hour - DAY_START_HOUR) * PX_PER_HOUR;
       html += `<div class="day-hour-line" style="top: ${topPosition}px;"></div>`;
     }
 
@@ -1064,8 +1252,12 @@ function generateDayView(date) {
     if (isToday) {
       const currentHour = today.getHours();
       const currentMinute = today.getMinutes();
-      if (currentHour >= 7 && currentHour <= 23) {
-        const currentTimePosition = (currentHour - 7) * 100 + currentMinute * 1.67;
+      if (currentHour >= DAY_START_HOUR && currentHour <= DAY_END_HOUR) {
+        // Account for spacer at top
+        const currentTimePosition =
+          DAY_SPACER_PX +
+          (currentHour - DAY_START_HOUR) * PX_PER_HOUR +
+          (currentMinute / 60) * PX_PER_HOUR;
         html += `<div class="day-current-time-line" style="top: ${currentTimePosition}px;"></div>`;
       }
     }
@@ -1073,10 +1265,13 @@ function generateDayView(date) {
     // Add events
     events.forEach((event, index) => {
       const startMinutes = timeToMinutes(event.startTime);
-      const endMinutes = timeToMinutes(event.endTime);
       const startHour = Math.floor(startMinutes / 60);
 
-      if (startHour < 7 || startHour > 23) return;
+      if (startHour < DAY_START_HOUR || startHour > DAY_END_HOUR) return;
+
+      const rect = getDayViewEventRect(event.startTime, event.endTime);
+      const topPosition = rect.top;
+      const eventHeight = rect.height;
 
       const profileImage = event.images && event.images.length > 0 ? event.images[0] : "./images/calender/default-avatar.png";
       const notificationCount = Math.floor(Math.random() * 50) + 1;
@@ -1099,7 +1294,7 @@ function generateDayView(date) {
       const notificationHtml = isFullHeight ? `<div class="multi-day-event-notification">${notificationCount}</div>` : Math.random() > 0.5 ? `<div class="multi-day-event-notification">${notificationCount}</div>` : `<div class="multi-day-event-icon">⚡</div>`;
 
       html += `
-        <div class="multi-day-event-wrapper ${heightClass}" data-event-hour="${startHour}">
+        <div class="multi-day-event-wrapper ${heightClass}" data-event-hour="${startHour}" style="top: ${topPosition}px; height: ${eventHeight}px;">
           <div class="multi-day-event-block event-type-${event.type}" data-event-id="${index}">
             <div class="multi-day-event-header">
               <div class="multi-day-event-time">${event.time}</div>

@@ -1,7 +1,8 @@
 // Event Detail Panel Component - Integrates with existing system
 // Follows existing patterns from modal and panel components
 
-const EVENT_HIDDEN = "event-hidden";
+// Use unique constant name to avoid conflicts with tasks.panel.js
+const EVENT_DETAIL_HIDDEN = "event-hidden";
 
 class EventDetailPanelComponent {
   constructor() {
@@ -18,7 +19,7 @@ class EventDetailPanelComponent {
   createEventDetailPanel() {
     // Create modal overlay and panel - follows existing modal pattern
     const modalHtml = `
-      <div class="event_detail_modal ${EVENT_HIDDEN}" id="eventDetailModal">
+      <div class="event_detail_modal ${EVENT_DETAIL_HIDDEN}" id="eventDetailModal">
         <div class="event_detail_panel_container" id="eventDetailPanelContainer">
           <!-- Dynamic content will be inserted here -->
         </div>
@@ -230,7 +231,7 @@ class EventDetailPanelComponent {
 
     // ESC key to close
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && !this.eventModal.classList.contains(EVENT_HIDDEN)) {
+      if (e.key === "Escape" && !this.eventModal.classList.contains(EVENT_DETAIL_HIDDEN)) {
         this.hideEventDetail();
       }
     });
@@ -264,11 +265,11 @@ class EventDetailPanelComponent {
     this.panelContainer.innerHTML = this.renderEventDetail(event);
     
     // Show modal
-    this.eventModal.classList.remove(EVENT_HIDDEN);
+    this.eventModal.classList.remove(EVENT_DETAIL_HIDDEN);
   }
 
   hideEventDetail() {
-    this.eventModal.classList.add(EVENT_HIDDEN);
+    this.eventModal.classList.add(EVENT_DETAIL_HIDDEN);
     this.currentEvent = null;
   }
 }

@@ -17,6 +17,59 @@ let path = "";
 
 /**
  * ============================================
+ * SLIDE FUNCTIONS - Declare before use
+ * ============================================
+ */
+const slideItems = document.querySelectorAll(".event_intro_container>div");
+let currentSlide = 0; // Track the current slide
+
+const goToSlide = function (slide) {
+  console.log(`goToSlide(${slide}) called, currentSlide was:`, currentSlide);
+  currentSlide = slide;
+  slideItems.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`));
+  
+  // Show/hide done-items button based on slide position
+  const doneItemsBtn = document.querySelector(".next-item.done-items");
+  const nextTaskBtn = document.querySelector(".next-task");
+  
+  console.log("Elements found:", { doneItemsBtn: !!doneItemsBtn, nextTaskBtn: !!nextTaskBtn });
+  
+  if (doneItemsBtn) {
+    // Show done button only on last slide (slide 3 = Birthday)
+    if (slide === 3) {
+      doneItemsBtn.style.display = "flex";
+      console.log("Done button set to flex (slide 3)");
+    } else {
+      doneItemsBtn.style.display = "none";
+      console.log("Done button set to none");
+    }
+  }
+  
+  if (nextTaskBtn) {
+    // Show next-task button on all slides except the last one
+    if (slide < 3) {
+      nextTaskBtn.style.display = "flex";
+      console.log("Next button set to flex (slide < 3)");
+      console.log("Next button computed display:", window.getComputedStyle(nextTaskBtn).display);
+      console.log("Next button visible?", nextTaskBtn.offsetWidth > 0 && nextTaskBtn.offsetHeight > 0);
+    } else {
+      nextTaskBtn.style.display = "none";
+      console.log("Next button set to none (last slide)");
+    }
+  }
+};
+
+// Allow other modules to reset the intro slides using the existing function.
+// (Matches the project pattern of attaching small helpers to window when needed.)
+if (typeof window !== "undefined") {
+  window.goToSlide = goToSlide;
+}
+
+// NOTE: Don't initialize slides on page load - the parent modal is hidden (.cal-hidden)
+// so inline display styles won't work. Instead, goToSlide(0) is called when the modal opens.
+
+/**
+ * ============================================
  * ISSUE #1: CLICK OUTSIDE TO CLOSE MODALS
  * ============================================
  */
@@ -28,14 +81,34 @@ function setupClickOutsideToClose(modalId) {
     // Check if the click is on the modal background (not on the content)
     if (event.target === modal) {
       modal.classList.add("cal-hidden");
+      
+      // Reset slides if it's the eventModal
+      if (modalId === "eventModal") {
+        goToSlide(0);
+      }
     }
   });
 
   // Find the modal content and prevent clicks from bubbling up
-  const modalContent = modal.querySelector(".cal-modal-content, .modal-mobile-container");
+  // EXCEPT for clicks on buttons, which need to reach their handlers
+  const modalContent = modal.querySelector(".cal-modal-content, .modal-mobile-container, .event_intro_container");
   if (modalContent) {
     modalContent.addEventListener("click", function(event) {
-      event.stopPropagation();
+      console.log("Modal content clicked:", modalId);
+      console.log("Target:", event.target);
+      console.log("Target classes:", event.target.className);
+      console.log("Target ID:", event.target.id);
+      
+      // Allow clicks on buttons, inputs, and interactive elements to bubble
+      const isInteractive = event.target.closest('button, .next-item, .done-items, .next-task, input, select, textarea, a, [role="button"], #nextTaskModal, .footers button');
+      console.log("Is interactive?", !!isInteractive);
+      
+      if (!isInteractive) {
+        console.log("Stopping propagation for non-interactive element");
+        event.stopPropagation();
+      } else {
+        console.log("Allowing click to bubble for interactive element");
+      }
     });
   }
 
@@ -44,11 +117,18 @@ function setupClickOutsideToClose(modalId) {
   if (closeButton) {
     closeButton.addEventListener("click", function() {
       modal.classList.add("cal-hidden");
+      
+      // Reset slides if it's the eventModal
+      if (modalId === "eventModal") {
+        goToSlide(0);
+      }
     });
   }
 }
 
 // Apply to all add modals
+setupClickOutsideToClose("addNewModal");
+setupClickOutsideToClose("eventModal"); // Intro slides modal
 setupClickOutsideToClose("addEventModal");
 setupClickOutsideToClose("addTaskModal");
 setupClickOutsideToClose("addHolidayModal");
@@ -66,12 +146,29 @@ function setupModalButtons(modalId, submitBtnId) {
   const modal = document.getElementById(modalId);
   if (!modal) return;
 
-  // Cancel button
+  // Cancel button - use jQuery to match existing pattern and avoid duplicate vanilla listeners
   const cancelBtn = modal.querySelector(".to-cancel");
   if (cancelBtn) {
-    cancelBtn.addEventListener("click", function(e) {
+    // Remove any existing handlers first to prevent duplicates
+    $(cancelBtn).off("click");
+    
+    $(cancelBtn).on("click", function(e) {
       e.preventDefault();
-      modal.classList.add("cal-hidden");
+      $(modal).addClass("cal-hidden");
+
+      // Special-case: if canceling the final task step, reset the intro slides too
+      // so the Add New flow is never stuck half-way.
+      if (modalId === "upload-interest") {
+        goToSlide(0);
+      }
+      
+      // Also reset buttons to "Add"/"Next" mode when canceling
+      if (modalId === "addEventModal") {
+        $("#addEventModal #eventSubmitBtn").text("Add").removeAttr("data-mode");
+      } else if (modalId === "addTaskModal") {
+        $("#nextTaskModal").text("Next").removeAttr("data-mode");
+      }
+
       // Clear form if exists
       const form = modal.querySelector("form");
       if (form) form.reset();
@@ -87,6 +184,7 @@ setupModalButtons("addEventModal", "eventSubmitBtn");
 setupModalButtons("addTaskModal", "nextTaskModal");
 setupModalButtons("addHolidayModal", "holidaySubmitBtn");
 setupModalButtons("addBirthdayModal", null);
+setupModalButtons("upload-interest", "createTaskBtn");
 
 /**
  * ============================================
@@ -127,26 +225,38 @@ function setupPrivatePublicToggle() {
 setupPrivatePublicToggle();
 
 addEventBtn.addEventListener("click", () => {
+  console.log("=== Event button clicked ===");
   addNewModal.classList.add(HIDDEN);
 
   if (firstTimeAddNew) {
     eventModal.classList.remove(HIDDEN);
     firstTimeAddNew = false;
     path = "event";
+    // Reset slides when opening modal for first time
+    console.log("Opening event modal, calling goToSlide(0)");
+    setTimeout(() => goToSlide(0), 50); // Small delay to ensure modal is visible
   } else {
     $("#addEventModal").removeClass("cal-hidden");
+    // Reset button to "Add" mode
+    $("#addEventModal #eventSubmitBtn").text("Add").removeAttr("data-mode");
   }
 });
 
 addTaskBtn.addEventListener("click", () => {
+  console.log("=== Task button clicked ===");
   addNewModal.classList.add(HIDDEN);
 
   if (firstTimeAddNew) {
     eventModal.classList.remove(HIDDEN);
     firstTimeAddNew = false;
     path = "task";
+    // Reset slides when opening modal for first time
+    console.log("Opening task modal, calling goToSlide(0)");
+    setTimeout(() => goToSlide(0), 50); // Small delay to ensure modal is visible
   } else {
     $("#addTaskOption").removeClass("cal-hidden");
+    // Reset button to "Next" mode when opening for new task
+    $("#nextTaskModal").text("Next").removeAttr("data-mode");
   }
 });
 
@@ -157,6 +267,8 @@ addHolidayBtn.addEventListener("click", () => {
     eventModal.classList.remove(HIDDEN);
     firstTimeAddNew = false;
     path = "holiday";
+    // Reset slides when opening modal for first time
+    goToSlide(0);
   } else {
     // $("#addNewModal").addClass("cal-hidden");
     $("#addHolidayModal").removeClass("cal-hidden");
@@ -170,50 +282,62 @@ addBirthdayBtn.addEventListener("click", () => {
     eventModal.classList.remove(HIDDEN);
     firstTimeAddNew = false;
     path = "birthday";
+    // Reset slides when opening modal for first time
+    goToSlide(0);
   } else {
     $("#addBirthdayModal").removeClass("cal-hidden");
   }
 });
 
-const slideItems = document.querySelectorAll(".event_intro_container>div");
-const goToSlide = function (slide) {
-  slideItems.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`));
-};
-
-goToSlide(0);
-
 /**
- *
- *
- *
- *
+ * ============================================
+ * ISSUE #2: FIX NAVIGATION ARROW
+ * Navigate through all slides (0 -> 1 -> 2 -> 3)
+ * Use jQuery event delegation to ensure handlers work even if DOM changes
+ * ============================================
  */
 
-document.querySelector(".next-task").addEventListener("click", function () {
-  goToSlide(1);
-});
+// Wrap in document ready to ensure DOM and jQuery are fully loaded
+$(document).ready(function() {
+  console.log("=== Setting up arrow handlers ===");
+  console.log("#eventModal exists:", $("#eventModal").length > 0);
+  console.log(".next-task exists:", $(".next-task").length);
+  console.log(".done-items exists:", $(".done-items").length);
+  
+  // IMPORTANT: We CANNOT use delegated handlers because setupClickOutsideToClose()
+  // adds event.stopPropagation() to .event_intro_container, which prevents
+  // clicks from bubbling up to #eventModal. So we must use direct binding.
+  
+  // Direct handler for arrow button
+  $(".next-task").on("click", function (e) {
+    console.log("🎯 Arrow clicked!");
+    console.log("currentSlide:", currentSlide);
+    // Move to the next slide
+    if (currentSlide < 3) {
+      goToSlide(currentSlide + 1);
+    }
+  });
 
-document.querySelector(".next-holiday").addEventListener("click", function () {
-  goToSlide(2);
-});
+  // Direct handler for done button
+  $(".next-item.done-items").on("click", function () {
+    console.log("Done button clicked!");
+    $("#eventModal").addClass("cal-hidden");
+    
+    // Reset to first slide for next time
+    goToSlide(0);
 
-document.querySelector(".next-birthday").addEventListener("click", function () {
-  goToSlide(3);
-});
-
-document.querySelector(".next-item.done-items").addEventListener("click", function () {
-  // addEventModal.classList.remove(HIDDEN);
-  $("#eventModal").addClass("cal-hidden");
-
-  if (path === "event") {
-    $("#addEventModal").removeClass("cal-hidden");
-  } else if (path === "task") {
-    $("#addTaskOption").removeClass("cal-hidden");
-  } else if (path === "holiday") {
-    $("#addHolidayModal").removeClass("cal-hidden");
-  } else if (path === "birthday") {
-    $("#addBirthdayModal").removeClass("cal-hidden");
-  }
+    if (path === "event") {
+      $("#addEventModal").removeClass("cal-hidden");
+    } else if (path === "task") {
+      $("#addTaskOption").removeClass("cal-hidden");
+    } else if (path === "holiday") {
+      $("#addHolidayModal").removeClass("cal-hidden");
+    } else if (path === "birthday") {
+      $("#addBirthdayModal").removeClass("cal-hidden");
+    }
+  });
+  
+  console.log("=== Arrow handlers setup complete ===");
 });
 
 /**

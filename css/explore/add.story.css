@@ -152,7 +152,8 @@ h2.settings-title {
 .main-layout {
   display: flex;
   flex: 1;
-  overflow: hidden;
+  /* Don't clip inner scroll areas (e.g., right-side gallery thumbnails) */
+  overflow: visible;
   height: 100%;
 }
 
@@ -390,11 +391,24 @@ h2.settings-title {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 20px;
+  /* Enable scrolling to see all pictures */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+  box-sizing: border-box;
   /* background: #f0f0f0; */
   /* position: relative; */
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.center-canvas::-webkit-scrollbar {
+  display: none;
 }
 
 .canvas-controls {
@@ -493,7 +507,26 @@ h2.settings-title {
   border-left: 1px solid #e5e5e5;
   padding: 10px;
   overflow-y: auto;
-  scrollbar-width: none;
+  /* Allow scrolling so all uploaded photos are reachable */
+  scrollbar-width: auto;
+}
+
+/* Make the right-side gallery clearly scrollable (keep subtle styling) */
+.right-gallery::-webkit-scrollbar {
+  width: 10px;
+}
+
+.right-gallery::-webkit-scrollbar-thumb {
+  background: #d5d7dc;
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+.right-gallery::-webkit-scrollbar-thumb:hover {
+  background: #bfc3ca;
+  border: 3px solid transparent;
+  background-clip: content-box;
 }
 
 .right-gallery h3 {
@@ -506,7 +539,9 @@ h2.settings-title {
 .gallery-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  /* Space between gallery thumbnails */
+  gap: 18px;
+  padding: 10px;
 }
 .gallery-item {
   position: relative;
@@ -569,9 +604,24 @@ h2.settings-title {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  background: #f0f0f0;
+  background: #ffffff;
   transition: all 0.2s;
   height: 200px;
+
+  /* More visible separation between images */
+  border: 1px solid #e6e7ea;
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04);
+}
+
+.gallery-img-wrapper {
+  /* give the image a small inner frame so gaps are obvious */
+  padding: 6px;
+  height: 100%;
+  background: #ffffff;
+}
+
+.gallery-item img {
+  border-radius: 6px;
 }
 
 .gallery-item:hover {
@@ -1212,6 +1262,196 @@ h2.settings-title {
   text-overflow: ellipsis;
 }
 
+/* ========================================================================
+   Add Story (Photo) — spacing overrides
+   NOTE: This file contains multiple generic .gallery-grid/.gallery-item blocks.
+   These scoped rules are placed at the end so the thumbnails + preview never
+   look “glued together”.
+   ====================================================================== */
+
+/* Right thumbnails grid: force visible gaps regardless of earlier overrides */
+#editing-interface .right-gallery .gallery-grid {
+  gap: 18px !important;
+  padding: 12px !important;
+  grid-auto-rows: minmax(200px, auto);
+  align-content: flex-start;
+}
+
+/*
+  Story editor grid (right sidebar) uses an extra class to avoid collisions
+  with the platform-wide `.gallery-grid` styles used by other pages/components.
+  
+  CRITICAL: These rules use maximum specificity and !important to ensure
+  they override ALL earlier generic .gallery-grid rules in this file.
+*/
+#editing-interface .right-gallery .story-gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 20px !important;
+  padding: 16px !important;
+  grid-auto-rows: minmax(200px, auto) !important;
+  align-content: flex-start !important;
+  box-sizing: border-box !important;
+}
+
+/* Each thumbnail tile: force outer frame and spacing */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item {
+  background: #ffffff !important;
+  border: 1px solid #e6e7ea !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 1px 0 rgba(16, 24, 40, 0.04) !important;
+  /* Force proper sizing so items don't overlap - FIXED WIDTH AND HEIGHT */
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
+  box-sizing: border-box !important;
+  /* Need relative positioning for hover overlay */
+  position: relative !important;
+  margin: 0 !important;
+  /* CRITICAL: Remove any transforms that might cause overlap */
+  transform: none !important;
+  left: auto !important;
+  top: auto !important;
+  /* CRITICAL: Prevent flex expansion */
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  /* Allow hover effects */
+  transition: all 0.2s ease !important;
+}
+
+/* Hover effect on gallery items */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* The "Add Photo" button should have same dimensions */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item.add-photo {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #f5f5f7 !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+}
+
+#editing-interface .right-gallery .story-gallery-grid .gallery-item.add-photo:hover {
+  background: #e8e8ea !important;
+  transform: scale(1.02) !important;
+}
+
+/* Inner wrapper: force padding so images don't touch edges */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .gallery-img-wrapper {
+  padding: 8px !important;
+  background: #ffffff !important;
+  height: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  overflow: hidden !important;
+  /* Ensure wrapper doesn't exceed parent */
+  max-height: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Images within story gallery items - STRICT CONTAINMENT */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item img,
+#editing-interface .right-gallery .story-gallery-grid .gallery-item video {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  border-radius: 8px !important;
+  object-fit: cover !important;
+  display: block !important;
+  /* Prevent any overflow */
+  overflow: hidden !important;
+}
+
+/* Gallery Actions: Show change/delete icons on hover */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .gallery-actions {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  display: flex !important;
+  gap: 16px !important;
+  opacity: 0 !important;
+  transition: opacity 0.2s ease !important;
+  z-index: 10 !important;
+  pointer-events: none !important;
+}
+
+/* Show actions on hover */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item:hover .gallery-actions {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Overlay background on hover */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item:hover::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.5) !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+  border-radius: 12px !important;
+}
+
+/* Style edit and delete buttons */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .edit-btn,
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .delete-btn {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: none !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  color: #333 !important;
+}
+
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .edit-btn:hover,
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .delete-btn:hover {
+  background: #ffffff !important;
+  transform: scale(1.1) !important;
+}
+
+/* Delete button specific color */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .delete-btn {
+  color: #ff0606 !important;
+}
+
+/* Hide the old dots button and dropdown if they exist */
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .dots-btn,
+#editing-interface .right-gallery .story-gallery-grid .gallery-item .gallery-dropdown {
+  display: none !important;
+}
+
+/* Main preview: create a visible separation between preview and the edge */
+#editing-interface .center-canvas {
+  padding: 16px;
+}
+
+#editing-interface #canvasWrap {
+  border-radius: 16px;
+}
+
+#editing-interface .canvas_editor_container {
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
 .track-name mark {
   color: #ffffff;
   background: var(--primary-color);
@@ -1422,6 +1662,7 @@ h2.settings-title {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 1;
   -webkit-line-clamp: 1;
 }
 
@@ -1948,6 +2189,7 @@ h2.settings-title {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  line-clamp: 1;
   -webkit-line-clamp: 1;
 }
 
@@ -1989,7 +2231,7 @@ h2.settings-title {
 }
 
 .start_in_timer label button {
-  /* margin-left: auto; */
+  margin-left: auto;
 }
 
 /* Enhanced Font Action Content Panels with animations */
@@ -2028,8 +2270,7 @@ h2.settings-title {
 }
 
 .font-btn.active {
-  /* transform: translateY(-2px); */
-  /* box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3); */
+  transform: translateY(-2px);
 }
 
 /* Enhanced Font Family Styles */
@@ -2575,29 +2816,39 @@ button.tx-box.active {
 .canvas_editor_container {
   width: 100%;
   height: 100%;
-  background: black;
+  background: transparent;
   position: relative;
 
-  width: 505px;
-  height: 550px;
+  max-width: 505px;
+  max-height: 550px;
+  /* Add margin between multiple canvases */
+  margin-bottom: 20px;
+  /* Center the container */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Remove margin from the last canvas */
+.canvas_editor_container:last-child {
+  margin-bottom: 0;
 }
 
 .canvas_editor_image_media,
 .canvas_editor_video_media {
-  position: absolute;
-  inset: 0;
+  position: relative;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 550px;
 }
 
 #canvasWrap .canvas_editor_container > img.canvas_editor_image_media,
 #canvasWrap .canvas_editor_container > video.canvas_editor_video_media {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 #canvasWrap[data-canvas-fit="true"] .canvas_editor_container > img.canvas_editor_image_media,
 #canvasWrap[data-canvas-fit="true"] .canvas_editor_container > video.canvas_editor_video_media {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 /* Poll / Quiz container sizing & wrapping */

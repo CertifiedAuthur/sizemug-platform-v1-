@@ -370,6 +370,9 @@ class PhotoStoryInterface {
     ];
 
     this.currentSettingsEditing = "settings"; // settings | visibility | duration | interaction | audio
+    
+    // Track item being edited for edit functionality
+    this.currentEditingItem = null;
 
     this.initializeEventListeners();
   }
@@ -911,9 +914,17 @@ class PhotoStoryInterface {
 
   initializeGalleryInteractions() {
     const addPhotoBtn = document.querySelector(".add-photo");
-    addPhotoBtn?.addEventListener("click", () => {
-      this.photoUpload.click();
-    });
+    
+    // Remove any existing event listeners by cloning and replacing the button
+    if (addPhotoBtn) {
+      const newAddPhotoBtn = addPhotoBtn.cloneNode(true);
+      addPhotoBtn.parentNode.replaceChild(newAddPhotoBtn, addPhotoBtn);
+      
+      // Add the click listener only once
+      newAddPhotoBtn.addEventListener("click", () => {
+        this.photoUpload.click();
+      });
+    }
 
     const galleryItems = document.querySelectorAll(".gallery-item:not(.add-photo)");
     galleryItems.forEach((item) => {
@@ -923,6 +934,43 @@ class PhotoStoryInterface {
       newItem.addEventListener("click", () => {
         this.selectGalleryItem(newItem);
       });
+      
+      // Re-add edit and delete button listeners after cloning
+      const editBtn = newItem.querySelector('.edit-btn');
+      const deleteBtn = newItem.querySelector('.delete-btn');
+      
+      if (editBtn) {
+        editBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.currentEditingItem = newItem;
+          this.photoUpload.click();
+        });
+      }
+      
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          
+          const confirmed = confirm('Are you sure you want to delete this photo?');
+          
+          if (confirmed) {
+            const img = newItem.querySelector('img');
+            const imageSrc = img?.src;
+            
+            newItem.remove();
+            
+            if (imageSrc) {
+              const canvasContainers = document.querySelectorAll('.canvas_editor_container');
+              canvasContainers.forEach(container => {
+                const canvasImg = container.querySelector('img, video');
+                if (canvasImg && canvasImg.src === imageSrc) {
+                  container.remove();
+                }
+              });
+            }
+          }
+        });
+      }
     });
   }
 
@@ -964,15 +1012,48 @@ class PhotoStoryInterface {
     reader.onload = (e) => {
       const path = e.target.result;
 
-      const newMedia = {
-        id: new Date().getTime(),
-        type: cat,
-        media: path,
-      };
+      // Check if we're editing an existing item
+      if (this.currentEditingItem) {
+        // Replace the image in the gallery item
+        const img = this.currentEditingItem.querySelector('img');
+        if (img) {
+          const oldSrc = img.src;
+          img.src = path;
+          
+          // Update the canvas container with the same image
+          const canvasContainers = document.querySelectorAll('.canvas_editor_container');
+          canvasContainers.forEach(container => {
+            const canvasImg = container.querySelector('img, video');
+            if (canvasImg && canvasImg.src === oldSrc) {
+              if (cat === 'image') {
+                canvasImg.src = path;
+              } else {
+                // Replace img with video
+                const video = document.createElement('video');
+                video.src = path;
+                video.classList.add('canvas_editor_video_media');
+                video.setAttribute('data-media-id', canvasImg.getAttribute('data-media-id'));
+                video.setAttribute('data-media-type', 'video');
+                container.replaceChild(video, canvasImg);
+              }
+            }
+          });
+        }
+        
+        // Clear the editing state
+        this.currentEditingItem = null;
+      } else {
+        // Normal upload - add new item
+        const newMedia = {
+          id: new Date().getTime(),
+          type: cat,
+          media: path,
+        };
 
-      this.storyEditingItems.push(newMedia);
-      this.displayUploadedImage(newMedia);
-      this.switchToEditingInterface();
+        this.storyEditingItems.push(newMedia);
+        this.displayUploadedImage(newMedia);
+        this.switchToEditingInterface();
+      }
     };
 
     reader.onerror = () => {
@@ -981,6 +1062,9 @@ class PhotoStoryInterface {
     };
 
     reader.readAsDataURL(file);
+    
+    // Reset the file input so the same file can be selected again
+    event.target.value = '';
   }
 
   // showLoadingState() {
@@ -1028,7 +1112,7 @@ class PhotoStoryInterface {
   }
 
   addImageToGallery(imageSrc) {
-    const galleryGrid = document.querySelector(".gallery-grid");
+    const galleryGrid = document.querySelector("#editing-interface .right-gallery .story-gallery-grid");
     const addPhotoBtn = document.querySelector(".add-photo");
 
     if (galleryGrid && addPhotoBtn) {
@@ -1038,17 +1122,68 @@ class PhotoStoryInterface {
         <div class="gallery-img-wrapper">
           <img src="${imageSrc}" alt="Gallery image">
           <div class="gallery-actions">
-            <button class="dots-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path fill="#fff" d="M3 9.5a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3a1.5 1.5 0 0 1 0 3"/></svg></button>
-            <ul class="gallery-dropdown ${HIDDEN}">
-              <li class="move-up"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 20 20"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 6l4-4l4 4m-4-4v20"/></svg>Move Up</li>
-              <li class="move-down"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="20" stroke-dashoffset="20" d="M12 3l0 17.5"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="20;0"/></path><path stroke-dasharray="12" stroke-dashoffset="12" d="M12 21l7 -7M12 21l-7 -7"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="12;0"/></path></g></svg> Move Down</li>
-              <li class="duplicate"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-linejoin="round" stroke-width="2" d="M6 16H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1M9 20h10a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1z"/></svg>Duplicate</li>
-              <li class="delete"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"><path fill="#ff0606" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/></svg>Delete</li>
-            </ul>
+            <button class="edit-btn" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75l1.83-1.83z"/>
+              </svg>
+            </button>
+            <button class="delete-btn" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zM17 6H7v13h10zM9 17h2V8H9zm4 0h2V8h-2zM7 6v13z"/>
+              </svg>
+            </button>
           </div>
         </div>
       `;
       galleryGrid.insertBefore(newGalleryItem, addPhotoBtn);
+      
+      // Add event listeners for edit and delete buttons
+      const editBtn = newGalleryItem.querySelector('.edit-btn');
+      const deleteBtn = newGalleryItem.querySelector('.delete-btn');
+      
+      // Edit button: Open file picker to replace the image
+      if (editBtn) {
+        editBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          
+          // Store reference to the item being edited
+          this.currentEditingItem = newGalleryItem;
+          
+          // Open file picker
+          this.photoUpload.click();
+        });
+      }
+      
+      // Delete button: Show confirmation and delete
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          
+          // Show confirmation dialog
+          const confirmed = confirm('Are you sure you want to delete this photo?');
+          
+          if (confirmed) {
+            // Find the corresponding canvas container
+            const img = newGalleryItem.querySelector('img');
+            const imageSrc = img?.src;
+            
+            // Remove from gallery
+            newGalleryItem.remove();
+            
+            // Remove from canvas
+            if (imageSrc) {
+              const canvasContainers = document.querySelectorAll('.canvas_editor_container');
+              canvasContainers.forEach(container => {
+                const canvasImg = container.querySelector('img, video');
+                if (canvasImg && canvasImg.src === imageSrc) {
+                  container.remove();
+                }
+              });
+            }
+          }
+        });
+      }
+      
       this.initializeGalleryInteractions();
     }
 

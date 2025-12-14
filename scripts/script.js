@@ -70,7 +70,10 @@ const popup_status = () => {
   });
 };
 
-const login = 1;
+// Development Mode: Set to true to bypass authentication
+const DEV_MODE = true;
+
+const login = DEV_MODE ? 1 : 0; // Auto-login when in dev mode
 
 if (!login) {
   document.getElementById("login").classList.remove("hide");

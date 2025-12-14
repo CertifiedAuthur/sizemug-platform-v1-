@@ -16,6 +16,9 @@ if (window.innerWidth < 667) {
 ///////////////////////////////////
 ///////////////////////////////////
 ///////////////////////////////////
+// Development Mode: Set to true to bypass authentication
+const DEV_MODE = true;
+
 const onboardingPage = document.querySelector(".onboarding_page");
 const landingPageHeader = document.querySelector("body .header");
 const landingPageContentArea = document.querySelector("body .content_area");
@@ -23,6 +26,12 @@ const dashboardIntroModal = document.querySelector(".landing_welcome");
 const mainDashboardSubHeader = document.getElementById("mainDashboardSubHeader");
 
 function redirect() {
+  // Development mode bypass
+  if (DEV_MODE) {
+    console.log("DEV_MODE enabled - bypassing authentication");
+    return openDashboardHasOldUser();
+  }
+  
   const userStatus = localStorage.getItem("sizemug_status");
 
   if (userStatus) {

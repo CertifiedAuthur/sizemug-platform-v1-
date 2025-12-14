@@ -1309,8 +1309,9 @@ async function generateAdditionalProfilesHtml() {
     .join("");
 }
 
-// Open a new modal when Invite, Delete, or Edit buttons are clicked
-$(document).on("click", ".invite-btn, .delete-btn, .edit-btn", function () {
+// Open a new modal when Invite or Delete buttons are clicked
+// NOTE: Edit button is handled by calender.update.js ModalHandler class
+$(document).on("click", ".invite-btn, .delete-btn", function () {
   let modalContent = "";
   let isMobile = window.innerWidth <= 700; // Adjust breakpoint as needed
 
@@ -2149,14 +2150,18 @@ $(document).ready(function (event) {
   let task = [];
   let selectedDate = new Date(); // Global variable for the currently selected date
 
-  // Initialize Datepicker
-  $(".datePicker").datepicker({
-    dateFormat: "yy-mm-dd",
-    onSelect: function (dateText) {
-      selectedDate = new Date(dateText);
-      updateCalendars(events);
-    },
-  });
+  // Initialize Datepicker (wrapped in try-catch in case library not loaded)
+  try {
+    $(".datePicker").datepicker({
+      dateFormat: "yy-mm-dd",
+      onSelect: function (dateText) {
+        selectedDate = new Date(dateText);
+        updateCalendars(events);
+      },
+    });
+  } catch (e) {
+    console.warn("Datepicker not available:", e);
+  }
 
   // Open "Add New" Modal
 
@@ -2177,10 +2182,6 @@ $(document).ready(function (event) {
   $(".import-task").on("click", function () {
     $("#importModal").removeClass("cal-hidden");
   });
-  $("#nextTaskModal").on("click", function () {
-    $("#upload-interest").removeClass("cal-hidden");
-    $("#addTaskModal").addClass("cal-hidden");
-  });
 
   // let isFirstClick = true;
   // $("#add-new-cal-mobile").on("click", function () {
@@ -2193,6 +2194,8 @@ $(document).ready(function (event) {
   //   }
   // });
 
+  // NOTE: Primary cancel handlers moved to calender.add.new.js setupModalButtons()
+  // This remains as a catch-all for backwards compatibility
   $(".to-cancel").on("click", function () {
     $("#addItemModal").addClass("cal-hidden");
     $("#addEventModal").addClass("cal-hidden");
@@ -2203,6 +2206,10 @@ $(document).ready(function (event) {
     $("#upload-interest").addClass("cal-hidden");
     $(".invite-input").empty();
     $("#addNewModal").addClass("cal-hidden");
+    
+    // Reset buttons to "Add" mode when canceling
+    $("#addEventModal #eventSubmitBtn").text("Add").removeAttr("data-mode");
+    $("#nextTaskModal").text("Next").removeAttr("data-mode");
   });
 
   // Close modal when clicking outside of .cal-modal-content
@@ -2303,6 +2310,21 @@ $(document).ready(function (event) {
   }
 
   function updateWeekView(currentEvents, isPublicView = false) {
+    // In this codebase, edits append new items to state.
+    // To prevent older revisions from rendering alongside the latest one,
+    // we collapse the incoming list to the most recent item per stable key.
+    const collapseToLatestByKey = (items) => {
+      const latest = new Map();
+      items.forEach((item) => {
+        if (!item) return;
+        const key = `${item.type || ""}|${item.name || ""}|${item.date || ""}`;
+        latest.set(key, item);
+      });
+      return Array.from(latest.values());
+    };
+
+    currentEvents = collapseToLatestByKey(currentEvents);
+
     const weekStart = new Date(selectedDate);
     weekStart.setDate(selectedDate.getDate() - selectedDate.getDay());
     console.log("hhhhh");
@@ -2450,6 +2472,19 @@ $(document).ready(function (event) {
   }
 
   function updateMonthView(events) {
+    // See note in updateWeekView(): edits append new items, so render only latest per key.
+    const collapseToLatestByKey = (items) => {
+      const latest = new Map();
+      items.forEach((item) => {
+        if (!item) return;
+        const key = `${item.type || ""}|${item.name || ""}|${item.date || ""}`;
+        latest.set(key, item);
+      });
+      return Array.from(latest.values());
+    };
+
+    events = collapseToLatestByKey(events);
+
     $("#month-view td").each(function () {
       const cell = $(this);
       const day = parseInt(cell.text(), 10);
@@ -2506,6 +2541,19 @@ $(document).ready(function (event) {
   }
 
   function updateYearView(currentEvents) {
+    // See note in updateWeekView(): edits append new items, so render only latest per key.
+    const collapseToLatestByKey = (items) => {
+      const latest = new Map();
+      items.forEach((item) => {
+        if (!item) return;
+        const key = `${item.type || ""}|${item.name || ""}|${item.date || ""}`;
+        latest.set(key, item);
+      });
+      return Array.from(latest.values());
+    };
+
+    currentEvents = collapseToLatestByKey(currentEvents);
+
     $("#year-view .month-days span").each(function () {
       const cell = $(this);
       const day = parseInt(cell.text(), 10);
@@ -2538,62 +2586,170 @@ $(document).ready(function (event) {
   $("#eventSubmitBtn").on("click", function (e) {
     e.preventDefault();
 
-    // Gather event data (same as before)
+    console.log("=== Event Submit Button Clicked ===");
+
+    // Check if we're in edit mode or add mode
+    const isEditMode = $(this).attr("data-mode") === "edit";
+    console.log("Edit mode:", isEditMode);
+    
+    // Gather event data
     const type = "event";
     const name = $("#addEventModal .name").val();
     const description = $("#addEventModal .description").val();
-    const useFromDate = $("#addEventModal .checkbox").is(":checked");
-    const date = useFromDate ? $("#addEventModal .datePicker").val() : $(".from-date").val();
-    const fromHour = $("#addEventModal .from-hour").val();
-    const fromPeriod = $("#addEventModal .from-period").val();
-    const toHour = $("#addEventModal .to-hour").val();
-    const toPeriod = $("#addEventModal .to-period").val();
+    
+    // Get date from the correct input field (#addEventStart)
+    const dateFrom = $("#addEventStart").val();
+    const dateTo = $("#addEventEnd").val();
+    
+    console.log("Date From:", dateFrom);
+    console.log("Date To:", dateTo);
+    console.log("Name:", name);
+    console.log("Description:", description);
 
-    const customTimeFrom = `${fromHour} ${fromPeriod}`;
-    const customTimeTo = `${toHour} ${toPeriod}`;
-
-    if (name && description) {
+    if (name && description && dateFrom) {
+      // Extract time from datetime string or use defaults
+      const fromDate = new Date(dateFrom);
+      const toDate = dateTo ? new Date(dateTo) : fromDate;
+      
+      // Format time as "HH AM/PM" for compatibility with existing calendar view
+      const formatTime = (date) => {
+        let hours = date.getHours();
+        const period = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+        return `${hours} ${period}`;
+      };
+      
       const newEvent = {
         name,
         type,
         description,
-        date,
-        customTimeFrom,
-        customTimeTo,
-        fromHour,
-        fromPeriod,
-        toHour,
-        toPeriod,
+        date: dateFrom.split('T')[0] || dateFrom.split(' ')[0], // Extract date part only
+        dateTo: dateTo,
+        customTimeFrom: formatTime(fromDate),
+        customTimeTo: formatTime(toDate),
         isPublic: $("#addEventModal .pub-priv .public").hasClass("clicked"),
       };
 
-      if (!isNaN(new Date(date).getTime())) {
-        const currentEvents = [newEvent]; // Only the current event
+      console.log("New event:", newEvent);
 
-        // Update the calendar with only the current event
-        updateCalendars(currentEvents);
-
-        // Optionally save to the global events array
+      if (!isNaN(new Date(dateFrom).getTime())) {
+        // Save to the global events array first
         events.push(newEvent);
+        
+        console.log("Total events now:", events.length);
+        console.log("All events:", events);
+
+        // Update the calendar with ALL events
+        updateCalendars(events);
 
         // Reset form and hide modal
         $("#addEventModal").addClass("cal-hidden");
-        $(".name, .description").val("");
+        $("#addEventModal .name").val("");
+        $("#addEventModal .description").val("");
+        $("#addEventStart").val("");
+        $("#addEventEnd").val("");
+        
+        // Reset button to "Add" mode after saving
+        $("#eventSubmitBtn").text("Add").removeAttr("data-mode");
+        
+        // Show success message
+        if (isEditMode) {
+          console.log("Event updated successfully");
+          alert("Event updated successfully!");
+        } else {
+          console.log("Event added successfully");
+          alert("Event added successfully!");
+        }
       } else {
-        console.error("Invalid date:", date);
+        console.error("Invalid date:", dateFrom);
+        alert("Please select a valid date");
       }
     } else {
       console.error("Missing required fields");
+      alert("Please fill in all required fields (Title and Note)");
     }
   });
+  
+  console.log("=== Setting up #nextTaskModal handler ===");
+  console.log("#nextTaskModal exists?", $("#nextTaskModal").length);
+  
   $("#nextTaskModal").on("click", function (e) {
     e.preventDefault();
+    
+    console.log("=== nextTaskModal clicked ===");
+    
+    // Check if we're in edit mode
+    const isEditMode = $(this).attr("data-mode") === "edit";
+    console.log("Edit mode:", isEditMode);
+    console.log("Button text:", $(this).text());
+    console.log("data-mode attribute:", $(this).attr("data-mode"));
+    
+    // If in edit mode, save the task directly
+    if (isEditMode) {
+      type = "task";
+      // Gather task data
+      const name = $("#addTaskModal .name").val();
+      const description = $("#addTaskModal .description").val();
+      const date = $("#addTaskModal input[type='text'][id='addTaskStart']").val();
+      const invites = gatherInvites();
+
+      console.log("Save task data:", { name, description, date });
+
+      if (name && description && date) {
+        const newTask = {
+          type,
+          name,
+          description,
+          date,
+          invites,
+          status: $("#addTaskModal #status").val(),
+          isPublic: $("#addTaskModal .pub-priv .public").hasClass("clicked"),
+        };
+        console.log("Task updated:", newTask);
+
+        // Update the calendar with the edited task
+        updateCalendars([newTask]);
+        tasks.push(newTask);
+        
+        console.log("Task updated successfully");
+        alert("Task updated successfully!");
+
+        resetTaskForm();
+        $("#addTaskModal").addClass("cal-hidden");
+        
+        // Reset button to "Next" mode after saving
+        $(this).text("Next").removeAttr("data-mode");
+      } else {
+        console.error("Missing required fields for edit");
+        alert("Please fill in all required fields (Title, Description, and Date)");
+      }
+    } else {
+      // Normal add mode - proceed to next step (upload-interest modal)
+      const name = $("#addTaskModal .name").val();
+      const description = $("#addTaskModal .description").val();
+      const date = $("#addTaskModal input[type='text'][id='addTaskStart']").val();
+      
+      console.log("Next step - task data:", { name, description, date });
+      
+      if (name && description && date) {
+        $("#addTaskModal").addClass("cal-hidden");
+        $("#upload-interest").removeClass("cal-hidden");
+      } else {
+        alert("Please fill in all required fields (Title, Description, and Date)");
+      }
+    }
+  });
+
+  // Handler for the Create button in the upload-interest modal (final step of task creation)
+  $("#createTaskBtn").on("click", function (e) {
+    e.preventDefault();
+    
     type = "task";
-    // Gather task data
+    // Gather task data from the first modal (addTaskModal)
     const name = $("#addTaskModal .name").val();
     const description = $("#addTaskModal .description").val();
-    const date = $("#addTaskModal .the-date input[type='date']").val();
-    const invites = gatherInvites(); // Gather selected invites
+    const date = $("#addTaskModal input[type='text'][id='addTaskStart']").val();
+    const invites = gatherInvites();
 
     if (name && description && date) {
       const newTask = {
@@ -2605,24 +2761,24 @@ $(document).ready(function (event) {
         status: $("#addTaskModal #status").val(),
         isPublic: $("#addTaskModal .pub-priv .public").hasClass("clicked"),
       };
-      console.log("taskkk", newTask);
+      console.log("New task created:", newTask);
 
-      // Validate date
-      if (!isNaN(new Date(date).getTime())) {
-        const currentTasks = [newTask]; // Only the current event
+      // Update the calendar with the new task
+      updateCalendars([newTask]);
+      tasks.push(newTask);
+      
+      console.log("Task created successfully");
+      alert("Task created successfully!");
 
-        // Update the calendar with only the current event
-        updateCalendars(currentTasks);
-        tasks.push(newTask); // Add to the existing tasks array
-        console.log("New task added:", newTask);
-
-        resetTaskForm();
-        $("#addTaskModal").fadeOut();
-      } else {
-        console.error("Invalid date:", date);
+      resetTaskForm();
+      $("#upload-interest").addClass("cal-hidden");
+      // Reset intro slides so the next Add New starts from the beginning.
+      if (typeof window !== "undefined" && typeof window.goToSlide === "function") {
+        window.goToSlide(0);
       }
     } else {
-      console.error("Missing required fields");
+      console.error("Missing required fields for task creation");
+      alert("Please fill in all required fields (Title, Description, and Date)");
     }
   });
 
@@ -2661,43 +2817,44 @@ $(document).ready(function (event) {
         type,
         description,
         date,
-        isPublic: $("#holidaySubmitBtn .pub-priv .public").hasClass("clicked"),
+        isPublic: $("#addHolidayModal .pub-priv .public").hasClass("clicked"),
       };
 
-      // console.log("New event:", newEvent);
-
       if (!isNaN(new Date(date).getTime())) {
-        // holiday.push(newEvent);
         // Add to the global holiday array
         holiday.push(newHoliday);
 
         // Update the calendar with only the new holiday
         updateMonthView([newHoliday]);
         updateCalendarsHoliday(holiday);
+        
+        // Close modal and reset form
         $("#addHolidayModal").addClass("cal-hidden");
-        $(".name, .description, .from-date").val("");
+        $("#addHolidayModal .name").val("");
+        $("#addHolidayModal .description").val("");
+        
+        console.log("Holiday added successfully");
+        alert("Holiday added successfully!");
       } else {
         console.error("Invalid date:", date);
+        alert("Please select a valid date");
       }
     } else {
       if (!name) console.error("Name is missing");
       if (!description) console.error("Description is missing");
       if (!date) console.error("Date is missing");
+      alert("Please fill in all required fields (Title and Note)");
     }
   });
   $("#birthdaySubmitBtn").on("click", function (e) {
     e.preventDefault();
 
     const type = "birthday";
-
     const name = $("#addBirthdayModal .selected-item span").first().text();
-
     const description = $("#addBirthdayModal .selected-item span").first().text();
-
     const date = $("#addBirthdayModal .holiday-date").val();
 
     console.log("Name:", name);
-
     console.log("Date:", date);
 
     if (name && date) {
@@ -2705,30 +2862,74 @@ $(document).ready(function (event) {
         name,
         type,
         description,
-
         date,
-        isPublic: $("#birthdaySubmitBtn .pub-priv .public").hasClass("clicked"),
+        isPublic: $("#addBirthdayModal .pub-priv .public").hasClass("clicked"),
       };
 
-      // console.log("New event:", newEvent);
-
       if (!isNaN(new Date(date).getTime())) {
-        // holiday.push(newEvent);
-        // Add to the global holiday array
+        // Add to the global birthday array
         birthday.push(newBirthday);
 
-        // Update the calendar with only the new holiday
+        // Update the calendar with only the new birthday
         updateMonthView([newBirthday]);
         updateCalendarsHoliday(birthday);
+        
+        // Close modal and reset form
         $("#addBirthdayModal").addClass("cal-hidden");
-        $(".name, .description").val("");
+        $("#addBirthdayModal .name").val("");
+        $("#addBirthdayModal .description").val("");
+        
+        console.log("Birthday added successfully");
+        alert("Birthday added successfully!");
       } else {
         console.error("Invalid date:", date);
+        alert("Please select a valid date");
       }
     } else {
       if (!name) console.error("Name is missing");
-      if (!description) console.error("Description is missing");
       if (!date) console.error("Date is missing");
+      alert("Please fill in all required fields (Name and Date)");
+    }
+  });
+
+  // Handler for Import button in the import task modal
+  $("#importBtn").on("click", function (e) {
+    e.preventDefault();
+    
+    // Get all selected tasks
+    const selectedTasks = [];
+    $(".accounts .select-round.selected").each(function() {
+      const accountDiv = $(this).closest(".accounts");
+      const taskName = accountDiv.find(".task-name").text();
+      const taskStatus = accountDiv.find(".task-status").text().toLowerCase();
+      
+      selectedTasks.push({
+        type: "task",
+        name: taskName,
+        status: taskStatus,
+        description: taskName,
+        date: new Date().toISOString().split("T")[0], // Default to today
+        isPublic: false // Imported tasks default to private
+      });
+    });
+    
+    if (selectedTasks.length > 0) {
+      // Add imported tasks to calendar
+      selectedTasks.forEach(task => {
+        tasks.push(task);
+      });
+      
+      // Update calendar
+      updateCalendars(selectedTasks);
+      
+      console.log(`Imported ${selectedTasks.length} task(s) successfully`);
+      alert(`Successfully imported ${selectedTasks.length} task(s)!`);
+      
+      // Close modal and clear selections
+      $("#importModal").addClass("cal-hidden");
+      $(".accounts .select-round").removeClass("selected");
+    } else {
+      alert("Please select at least one task to import");
     }
   });
 
@@ -2897,7 +3098,9 @@ $(document).ready(function () {
     $("#inviteModal").removeClass("cal-hidden");
   });
 
-  $(".to-cancel").on("click", function () {
+  // NOTE: This cancel handler is specific to inviteModal only
+  // Other modals use calender.add.new.js setupModalButtons()
+  $("#inviteModal .to-cancel").on("click", function () {
     $("#inviteModal").addClass("cal-hidden");
   });
 

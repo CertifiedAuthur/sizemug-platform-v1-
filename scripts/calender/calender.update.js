@@ -1034,22 +1034,87 @@ class ModalHandler {
   }
 
   handleModalActionClick(event) {
-    let modalContent = "";
-    let isMobile = window.innerWidth <= 700;
-
     const buttonClass = $(event.currentTarget).attr("class");
-
+    const $modal = $(event.currentTarget).closest(".week-view-modal, .week_view_modal_wrapper");
+    
     if (buttonClass.includes("invite-btn")) {
-      modalContent = "Invite functionality would be implemented here";
+      console.log("Invite functionality would be implemented here");
+      // Here you would implement the actual invite modal functionality
     } else if (buttonClass.includes("delete-btn")) {
-      modalContent = "Delete functionality would be implemented here";
+      console.log("Delete functionality would be implemented here");
+      // Here you would implement the actual delete functionality
     } else if (buttonClass.includes("edit-btn")) {
-      modalContent = "Edit functionality would be implemented here";
+      // Get the event/task data from the modal
+      const title = $modal.find(".title-dot h2").text().trim();
+      const dateText = $modal.find("p:has(img[src*='det-Calendar'])").text().replace(/\s+/g, ' ').trim();
+      const timeText = $modal.find("p:has(img[src*='det-Time'])").text().replace(/\s+/g, ' ').trim();
+      const description = $modal.find(".det-description p, .description-text").first().text().trim();
+      
+      // Determine if it's a task or event based on the modal content
+      const hasTimeElement = $modal.find("p:has(img[src*='det-Time'])").length > 0;
+      const categoryDot = $modal.find(".title-dot div[class*='-dot']").attr("class");
+      
+      // Check if it's a task (purple dot) or event (blue/other dots)
+      const isTask = categoryDot && categoryDot.includes("purple-dot");
+      
+      // Close the detail modal
+      $modal.remove();
+      $(".week_view_modal_wrapper").remove();
+      $("#month-view .month-event-item").removeClass("highlighted-event");
+      
+      // Open the appropriate edit modal
+      if (isTask) {
+        // Open task edit modal
+        $("#addTaskModal").removeClass("cal-hidden");
+        // Pre-fill the form with existing data
+        $("#addTaskModal .name").val(title);
+        $("#addTaskModal .description").val(description);
+        
+        // Parse and set date if available
+        if (dateText) {
+          // Extract date from text like "Date: December 10, 2024"
+          const dateMatch = dateText.match(/(\w+\s+\d+,\s+\d+)/);
+          if (dateMatch) {
+            $("#addTaskStart").val(dateMatch[1]);
+          }
+        }
+        
+        // Change button text to "Save" for edit mode (use the correct button ID)
+        $("#nextTaskModal").text("Save").attr("data-mode", "edit");
+      } else {
+        // Open event edit modal
+        $("#addEventModal").removeClass("cal-hidden");
+        // Pre-fill the form with existing data
+        $("#addEventModal .name").val(title);
+        $("#addEventModal .description").val(description);
+        
+        // Parse and set date/time if available
+        if (dateText) {
+          // Extract date from text
+          const dateMatch = dateText.match(/(\w+\s+\d+,\s+\d+)/);
+          if (dateMatch) {
+            $("#addEventModal .datePicker").val(dateMatch[1]);
+          }
+        }
+        
+        // Change button text to "Save" for edit mode
+        $("#addEventModal #eventSubmitBtn").text("Save").attr("data-mode", "edit");
+      }
+      
+      console.log("Edit clicked:", { title, dateText, timeText, description, isTask });
     }
-
-    console.log(`${buttonClass} clicked:`, modalContent);
-    // Here you would implement the actual modal functionality
   }
+}
+
+// ModalHandler utility to reset modal to "Add" mode
+function resetModalToAddMode(modalId) {
+  const submitButton = $(`${modalId} .to-add`);
+  submitButton.text("Add").removeAttr("data-mode");
+}
+
+// Export function to be used when opening modals in Add mode
+if (typeof window !== 'undefined') {
+  window.resetModalToAddMode = resetModalToAddMode;
 }
 
 // SidebarHandler - Handles sidebar functionality

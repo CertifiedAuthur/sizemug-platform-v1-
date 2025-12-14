@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Calendar Debug Test</title>
+    <style>
+        .debug-info { padding: 20px; background: #f0f0f0; margin: 10px; }
+        .next-item { display: flex; padding: 10px; background: blue; color: white; margin: 5px; cursor: pointer; }
+        #eventModal { border: 2px solid black; padding: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Debug Test - Check Console</h1>
+    
+    <div id="eventModal">
+        <div class="next-item next-task">Arrow Button (should start visible)</div>
+        <div class="next-item done-items">Done Button (should start hidden)</div>
+    </div>
+    
+    <div class="debug-info" id="debug-output"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        console.log('=== DEBUGGING CALENDAR ARROWS ===');
+        
+        // Test 1: Check if elements exist
+        const nextTask = document.querySelector('.next-task');
+        const nextItemNextTask = document.querySelector('.next-item.next-task');
+        const doneItems = document.querySelector('.done-items');
+        
+        console.log('nextTask (.next-task):', nextTask);
+        console.log('nextItemNextTask (.next-item.next-task):', nextItemNextTask);
+        console.log('doneItems (.done-items):', doneItems);
+        console.log('Are they the same element?', nextTask === nextItemNextTask);
+        
+        // Test 2: Check computed styles
+        if (nextTask) {
+            const styles = window.getComputedStyle(nextTask);
+            console.log('Arrow display:', styles.display);
+            console.log('Arrow visibility:', styles.visibility);
+        }
+        
+        // Test 3: Mimic goToSlide(0)
+        console.log('\n=== Testing goToSlide(0) logic ===');
+        const doneItemsBtn = document.querySelector(".next-item.done-items");
+        const nextTaskBtn = document.querySelector(".next-task");
+        
+        if (doneItemsBtn) {
+            doneItemsBtn.style.display = "none";
+            console.log('Set doneItems to none');
+        }
+        
+        if (nextTaskBtn) {
+            nextTaskBtn.style.display = "flex";
+            console.log('Set nextTask to flex');
+            console.log('nextTaskBtn after setting:', window.getComputedStyle(nextTaskBtn).display);
+        }
+        
+        // Test 4: Check for CSS overrides
+        setTimeout(() => {
+            console.log('\n=== After 100ms ===');
+            if (nextTask) {
+                console.log('Arrow display now:', window.getComputedStyle(nextTask).display);
+                console.log('Arrow inline style:', nextTask.style.display);
+            }
+            
+            // Output to page
+            document.getElementById('debug-output').innerHTML = 
+                'Arrow Element: ' + (nextTask ? 'FOUND' : 'NOT FOUND') + '<br>' +
+                'Arrow Display: ' + (nextTask ? window.getComputedStyle(nextTask).display : 'N/A') + '<br>' +
+                'Arrow Inline: ' + (nextTask ? nextTask.style.display : 'N/A');
+        }, 100);
+    </script>
+</body>
+</html>
