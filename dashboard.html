@@ -14,12 +14,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
 
     <!-- Roboto Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+
+    <!-- CDN connection warmups (dashboard uses these heavily) -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+    <link rel="preconnect" href="https://code.jquery.com" crossorigin />
+    <link rel="preconnect" href="https://vjs.zencdn.net" crossorigin />
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -33,7 +37,7 @@
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css" />
 
-    <script src="./scripts/alphine/jquery.min.js" defer type="module"></script>
+    <!-- NOTE: jQuery is loaded once at the bottom (deferred). -->
 
     <!-- stylesheets -->
     <link rel="stylesheet" href="./css/popup.css" />
@@ -137,7 +141,7 @@
 
     <!-- Duet Date Picker -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js"></script>
-    <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
+    <script nomodule defer src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/themes/default.css" />
 
     <!-- Videojs -->
@@ -2047,7 +2051,7 @@
                           </div>
 
                           <div class="attached_videos--wrapper homepage-hidden" id="attached_video--wrapper">
-                            <video id="suggestionVideoPlay" src="./assets/videos/3.mp4"></video>
+                            <video id="suggestionVideoPlay" src="./assets/videos/3.mp4" preload="none" playsinline></video>
 
                             <div id="suggestionVideoControls" class="controls">
                               <button id="suggestionModalPlayPause" data-mode="play">
@@ -7366,129 +7370,128 @@
     <!-- external scripts -->
     <!-- external scripts -->
     <!-- external scripts -->
-    <script src="/scripts/get.hidden.classnames.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="/scripts/get.hidden.classnames.js"></script>
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--  GSAP library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <!-- Tagify Script -->
-    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.min.js"></script>
     <!-- Interactjs library -->
-    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
     <!-- POPPER: Handling Dropdown position -->
-    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer src="https://unpkg.com/@popperjs/core@2"></script>
     <!-- VIDEOJS -->
-    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script defer src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <!-- Swiperjs Javascript Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.js"></script>
     <!-- Masonry Library (for managing grid view layout) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js"></script>
     <!-- Driver.JS -->
-    <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
 
-    <script src="./scripts/global.countries.data.js"></script>
-    <script src="./scripts/global.confetti.js"></script>
-    <script src="./scripts/global.sg.custom.dropdown.js"></script>
+    <script defer src="./scripts/global.countries.data.js"></script>
+    <script defer src="./scripts/global.confetti.js"></script>
+    <script defer src="./scripts/global.sg.custom.dropdown.js"></script>
 
     <!-- API for data -->
-    <script src="./scripts/freeImages.list.js"></script>
-    <script src="./scripts/grid_layout_data_fetch.js"></script>
-    <script src="./scripts/global.repost.modal.js"></script>
+    <script defer src="./scripts/freeImages.list.js"></script>
+    <script defer src="./scripts/grid_layout_data_fetch.js"></script>
+    <script defer src="./scripts/global.repost.modal.js"></script>
 
-    <script src="./scripts/gridInstanceVariables.js"></script>
-    <script src="./scripts/global.variables.js"></script>
-    <script src="./scripts/overlay.js"></script>
-    <script src="./scripts/interests.js"></script>
-    <script src="./scripts/dashboard/landing.intro.js"></script>
-    <script src="./scripts/dashboard/popular.live.js"></script>
-    <script src="/scripts/bottom.navbar.js"></script>
-    <script src="/scripts/dashboard/mobile_select.tasks-for_you.js"></script>
-    <script src="./scripts/generate.matching.data.js"></script>
-    <script src="./scripts/global.not.interested.modal.js"></script>
+    <script defer src="./scripts/gridInstanceVariables.js"></script>
+    <script defer src="./scripts/global.variables.js"></script>
+    <script defer src="./scripts/overlay.js"></script>
+    <script defer src="./scripts/interests.js"></script>
+    <script defer src="./scripts/dashboard/landing.intro.js"></script>
+    <script defer src="./scripts/dashboard/popular.live.js"></script>
+    <script defer src="/scripts/bottom.navbar.js"></script>
+    <script defer src="/scripts/dashboard/mobile_select.tasks-for_you.js"></script>
+    <script defer src="./scripts/generate.matching.data.js"></script>
+    <script defer src="./scripts/global.not.interested.modal.js"></script>
 
     <!-- Grid Skeleton Instance: This file must called before index.js where renderGridContainerSkeleton() is executed -->
-    <script src="./scripts/dashboardGridLoading.js"></script>
-    <script src="/scripts/populate.grid.container.js"></script>
+    <script defer src="./scripts/dashboardGridLoading.js"></script>
+    <script defer src="/scripts/populate.grid.container.js"></script>
 
-    <script src="./scripts/global.task.app.js"></script>
-    <script src="./scripts/index.js"></script>
-    <script src="./scripts/dashboard/dashboard.greeting.js"></script>
-    <script src="./scripts/dashboard/taskList.js"></script>
-    <script src="./scripts/dashboard/taskList.tablet.js"></script>
-    <script src="./scripts/upper-lower.case.js"></script>
-    <script src="./scripts/fontsize.select.js"></script>
-    <script src="./scripts/onboarding/onboarding.js"></script>
-    <script src="./scripts/script.js"></script>
-    <script src="./scripts/alphine/alpinejs.js"></script>
-    <script src="./scripts/alphine/slider.js"></script>
-    <script src="./scripts/notifications/notification.js"></script>
-    <script src="./scripts/global.create.task.editor.js"></script>
-    <script src="./scripts/global.create.task.js"></script>
-    <script src="./scripts/dashboard/taskList.event.js"></script>
-    <script src="./scripts/toast.js"></script>
-    <script src="./scripts/editor.formatDoc.js"></script>
-    <script src="./scripts/dashboard/discard.js"></script>
-    <script src="./scripts/global.task.add.calender.js"></script>
-    <script src="./scripts/dashboard/task.description.calender.js"></script>
-    <script src="./scripts/dashboard/grid.data.js"></script>
-    <script src="./scripts/gallery.js"></script>
-    <script src="./scripts/global.task.timer.js"></script>
-    <script src="./scripts/logout.js"></script>
-    <script src="./scripts/tether.js"></script>
-    <script src="./scripts/dashboard/matching.modal.js"></script>
-    <script src="./scripts/aside.suggestions.js"></script>
-    <script src="./scripts/dashboard/description-suggestion.dashboard.btn.js"></script>
-    <script src="/scripts/dashboard/open.task.description.js"></script>
-    <script src="/scripts/dashboard/taskDescription.event.js"></script>
-    <script src="/scripts/select_language.js"></script>
-    <script src="./scripts/dashboard/task_suggestions.events.js"></script>
-    <script src="./scripts/experience.js"></script>
-    <script src="./scripts/getModalComment.js"></script>
-    <script src="./scripts/dashboard/privacy.policy.js"></script>
+    <script defer src="./scripts/global.task.app.js"></script>
+    <script defer src="./scripts/index.js"></script>
+    <script defer src="./scripts/dashboard/dashboard.greeting.js"></script>
+    <script defer src="./scripts/dashboard/taskList.js"></script>
+    <script defer src="./scripts/dashboard/taskList.tablet.js"></script>
+    <script defer src="./scripts/upper-lower.case.js"></script>
+    <script defer src="./scripts/fontsize.select.js"></script>
+    <script defer src="./scripts/onboarding/onboarding.js"></script>
+    <script defer src="./scripts/script.js"></script>
+    <script defer src="./scripts/alphine/alpinejs.js"></script>
+    <script defer src="./scripts/alphine/slider.js"></script>
+    <script defer src="./scripts/notifications/notification.js"></script>
+    <script defer src="./scripts/global.create.task.editor.js"></script>
+    <script defer src="./scripts/global.create.task.js"></script>
+    <script defer src="./scripts/dashboard/taskList.event.js"></script>
+    <script defer src="./scripts/toast.js"></script>
+    <script defer src="./scripts/editor.formatDoc.js"></script>
+    <script defer src="./scripts/dashboard/discard.js"></script>
+    <script defer src="./scripts/global.task.add.calender.js"></script>
+    <script defer src="./scripts/dashboard/task.description.calender.js"></script>
+    <script defer src="./scripts/dashboard/grid.data.js"></script>
+    <script defer src="./scripts/gallery.js"></script>
+    <script defer src="./scripts/global.task.timer.js"></script>
+    <script defer src="./scripts/logout.js"></script>
+    <script defer src="./scripts/tether.js"></script>
+    <script defer src="./scripts/dashboard/matching.modal.js"></script>
+    <script defer src="./scripts/aside.suggestions.js"></script>
+    <script defer src="./scripts/dashboard/description-suggestion.dashboard.btn.js"></script>
+    <script defer src="/scripts/dashboard/open.task.description.js"></script>
+    <script defer src="/scripts/dashboard/taskDescription.event.js"></script>
+    <script defer src="/scripts/select_language.js"></script>
+    <script defer src="./scripts/dashboard/task_suggestions.events.js"></script>
+    <script defer src="./scripts/experience.js"></script>
+    <script defer src="./scripts/getModalComment.js"></script>
+    <script defer src="./scripts/dashboard/privacy.policy.js"></script>
 
     <!-- Top Messages -->
-    <script src="./scripts/navbar.messages_list.js"></script>
+    <script defer src="./scripts/navbar.messages_list.js"></script>
 
     <!-- Top Notifications -->
-    <script src="./scripts/notification.requests.js"></script>
-    <script src="./scripts/dashboard/recommended.collaboration.lists.js"></script>
-    <script src="./scripts/dashboard/popular.live.lists.js"></script>
+    <script defer src="./scripts/notification.requests.js"></script>
+    <script defer src="./scripts/dashboard/recommended.collaboration.lists.js"></script>
+    <script defer src="./scripts/dashboard/popular.live.lists.js"></script>
 
     <!-- Global Scripts -->
-    <script src="./scripts/global.share.modal.js"></script>
-    <script src="/scripts/following_followers.js"></script>
-    <script src="/scripts/global.report.modal.js"></script>
-    <script src="/scripts/global.discard.modal.js"></script>
-    <script src="/scripts/global.comment.tag.modal.js"></script>
-    <script src="/scripts/global.loves.like.modal.js"></script>
-    <script src="/scripts/global.mobile.navbar.js"></script>
-    <script src="./scripts/global.suggestion.modal.js"></script>
-    <script src="./scripts/global.block.modal.js"></script>
-    <script src="./scripts/global.task.collaboration.modal.js"></script>
-    <script src="./scripts/global.minimize.video.modal.js"></script>
+    <script defer src="./scripts/global.share.modal.js"></script>
+    <script defer src="/scripts/following_followers.js"></script>
+    <script defer src="/scripts/global.report.modal.js"></script>
+    <script defer src="/scripts/global.discard.modal.js"></script>
+    <script defer src="/scripts/global.comment.tag.modal.js"></script>
+    <script defer src="/scripts/global.loves.like.modal.js"></script>
+    <script defer src="/scripts/global.mobile.navbar.js"></script>
+    <script defer src="./scripts/global.suggestion.modal.js"></script>
+    <script defer src="./scripts/global.block.modal.js"></script>
+    <script defer src="./scripts/global.task.collaboration.modal.js"></script>
+    <script defer src="./scripts/global.minimize.video.modal.js"></script>
 
     <!-- Landing Task Item Comment -->
-    <script src="./scripts/search_dialog.js"></script>
-    <script src="./scripts/global.ai.button.js"></script>
-    <script src="/scripts/colloquial-toggle.js"></script>
+    <script defer src="./scripts/search_dialog.js"></script>
+    <script defer src="./scripts/global.ai.button.js"></script>
+    <script defer src="/scripts/colloquial-toggle.js"></script>
 
     <!-- GASP -->
-    <script src="/scripts/dashboard/gsap.js"></script>
+    <script defer src="/scripts/dashboard/gsap.js"></script>
 
     <!-- Comment Modal -->
-    <script src="./scripts/getModalComment.js"></script>
-    <script src="/scripts/comment.modal.slider.js"></script>
-    <script src="./scripts/watch-with-friends.js"></script>
-    <script src="./scripts/comment.modal.gifts.js"></script>
-    <script src="./scripts/comment.modal.boost.js?v=20251215"></script>
+    <script defer src="/scripts/comment.modal.slider.js"></script>
+    <script defer src="./scripts/watch-with-friends.js"></script>
+    <script defer src="./scripts/comment.modal.gifts.js"></script>
+    <script defer src="./scripts/comment.modal.boost.js?v=20251215"></script>
     <!-- Suggestion comment -->
-    <script src="./scripts/dashboard/suggestion.comment/suggestions.js"></script>
+    <script defer src="./scripts/dashboard/suggestion.comment/suggestions.js"></script>
 
     <!-- New Story -->
-    <script src="/scripts/new_story.js"></script>
+    <script defer src="/scripts/new_story.js"></script>
 
     <!-- Folder Management Script -->
-    <script src="./scripts/folder-manager.js"></script>
-    <script src="/scripts/inviteUserCode.js"></script>
-    <script src="/scripts/flashMessage.js"></script>
+    <script defer src="./scripts/folder-manager.js"></script>
+    <script defer src="/scripts/inviteUserCode.js"></script>
+    <script defer src="/scripts/flashMessage.js"></script>
   </body>
 </html>

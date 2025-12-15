@@ -442,7 +442,7 @@ class EventHandler {
   initializeModal() {
     // Create a single modal container in the body
     this.modalElement = $(`
-      <div id="calendar-modal-wrapper" class="week_view_modal_wrapper" style="display: none; position: fixed; z-index: 9998;">
+      <div id="calendar-modal-wrapper" class="week_view_modal_wrapper" style="display: none; position: fixed; z-index: 999;">
         <div style="position: relative; height: 100%">
           <div class="week-view-modal">
             <!-- Modal content will be dynamically updated -->
