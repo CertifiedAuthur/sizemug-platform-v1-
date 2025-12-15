@@ -92,6 +92,24 @@
   bottom: 24px;
 }
 
+/*
+  When the boost popover is anchored to the post-menu close icon (X),
+  align the arrow to the icon center (24px icon => 12px).
+*/
+.boost_popover.boost_anchor_x[data-popper-placement="right-start"] .boost_popover_arrow,
+.boost_popover.boost_anchor_x[data-popper-placement="left-start"] .boost_popover_arrow {
+  top: 12px;
+}
+
+/*
+  When anchored to the menu close icon (X), remove the arrow/tail entirely.
+  The popover is still positioned by Popper, but we don't want the tail to point
+  at the original click location.
+*/
+.boost_popover.boost_anchor_x .boost_popover_arrow {
+  display: none;
+}
+
 .boost_main_popover_container {
   padding: 10px;
   position: relative;

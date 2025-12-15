@@ -1343,7 +1343,7 @@ toolButtonsContainer.addEventListener("click", function (e) {
 
       // Add Sound
       if (target.closest(".sound") && !smallImageEditing) {
-        soundOverlay.classList.remove(HIDDEN);
+        openStoryMusicModalFromPost();
       }
 
       // Start Recording
@@ -1464,6 +1464,51 @@ const addSoundData = [
     musicPath: "/music/running_chinese.mp3",
   },
 ];
+
+function openStoryMusicModalFromPost() {
+  // Prefer the Explore Story Music modal (shared) if present.
+  if (window.StoryMusicModal && typeof window.StoryMusicModal.open === "function") {
+    try {
+      // Ensure legacy overlay isn't visible behind it.
+      if (soundOverlay) soundOverlay.classList.add(HIDDEN);
+    } catch (e) {
+      // no-op
+    }
+    window.StoryMusicModal.open();
+    return;
+  }
+
+  // Fallback to legacy modal if the shared modal isn't available.
+  if (soundOverlay) soundOverlay.classList.remove(HIDDEN);
+}
+
+window.addEventListener("storymusic:select", (e) => {
+  const track = e?.detail;
+  if (!track || !track.audioSrc) return;
+
+  // If there is no active cover selected, do not inject recording box.
+  if (!activeIndex) return;
+
+  let musicIndex = addSoundData.findIndex((s) => s.musicPath === track.audioSrc);
+  if (musicIndex < 0) {
+    musicIndex = addSoundData.length;
+    addSoundData.push({
+      id: musicIndex,
+      name: track.title || "Recording",
+      author: track.artistName || "Sizemug Sounds",
+      musicPath: track.audioSrc,
+    });
+  }
+
+  handleAddSoundOrRecordingToPost(musicIndex, {
+    title: track.title,
+    author: track.artistName,
+  });
+
+  if (window.StoryMusicModal && typeof window.StoryMusicModal.close === "function") {
+    window.StoryMusicModal.close();
+  }
+});
 
 // Sound Popular
 function renderAvailablePopularSounds() {
@@ -1683,6 +1728,10 @@ function handleAddSoundOrRecordingToPost(musicIndex) {
   overlayAudio = "";
   const activeImageContainer = coverEditingContainer.querySelector(`[data-itemcover="${activeIndex}"]`);
 
+  const chosen = addSoundData.slice(+musicIndex, +musicIndex + 1)[0];
+  const title = (chosen && chosen.name) || "Recording";
+  const author = (chosen && chosen.author) || "Wade Warren";
+
   // Post Page
   const recordingBox = `
       <div class="recording_box" data-music-index="${musicIndex}">
@@ -1694,8 +1743,8 @@ function handleAddSoundOrRecordingToPost(musicIndex) {
           </button>
 
           <div class="content">
-            <h3>Recording</h3>
-            <span>Wade Warren</span>
+            <h3>${title}</h3>
+            <span>${author}</span>
           </div>
         </div>
 
@@ -1775,7 +1824,7 @@ mobileTools.addEventListener("click", function (e) {
   }
 
   if (addSoundBtn) {
-    soundOverlay.classList.remove(HIDDEN);
+    openStoryMusicModalFromPost();
   }
 
   if (voiceRecordingBtn) {

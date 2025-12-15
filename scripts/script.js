@@ -71,16 +71,20 @@ const popup_status = () => {
 };
 
 // Development Mode: Set to true to bypass authentication
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 const login = DEV_MODE ? 1 : 0; // Auto-login when in dev mode
 
 if (!login) {
-  document.getElementById("login").classList.remove("hide");
-  document.getElementById("logged").classList.add("hide");
+  const loginEl = document.getElementById("login");
+  const loggedEl = document.getElementById("logged");
+  loginEl?.classList.remove("hide");
+  loggedEl?.classList.add("hide");
 } else {
-  // document.getElementById("login").classList.add("hide");
-  // document.getElementById("logged").classList.remove("hide");
+  const loginEl = document.getElementById("login");
+  const loggedEl = document.getElementById("logged");
+  loginEl?.classList.add("hide");
+  loggedEl?.classList.remove("hide");
 }
 
 $(".tab-link > div").on("click", function (e) {

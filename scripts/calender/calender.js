@@ -2410,6 +2410,17 @@ $(document).ready(function (event) {
     $("#eventDetailModal").fadeOut();
   });
   function updateWeekViewHoliday(currentEvents, isPublicView = false) {
+    const stripLeadingEmoji = (value) => {
+      const text = String(value ?? "");
+      // Remove leading emojis/pictographs (plus optional variation selectors / ZWJ), then trim.
+      return text
+        .replace(
+          /^[\s\uFE0F\u200D]*(?:[\u2600-\u27BF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDC00-\uDFFF])+/g,
+          ""
+        )
+        .trim();
+    };
+
     const weekStart = new Date(selectedDate);
     weekStart.setDate(selectedDate.getDate() - selectedDate.getDay()); // Start of the week (Sunday)
 
@@ -2427,10 +2438,6 @@ $(document).ready(function (event) {
       const $header = $(header);
       const $headerDiv = $header.find(".the-day-date .header-content");
 
-      // Debugging logs
-      console.log(`Header Element:`, $header.html());
-      console.log(`Header Div Exists:`, $headerDiv.length > 0);
-
       if (!$headerDiv.length) {
         console.warn(`Header content div not found for column index ${colIndex}`);
         return;
@@ -2443,19 +2450,8 @@ $(document).ready(function (event) {
         // Normalize eventDate to "YYYY-MM-DD" format
         const normalizedEventDate = eventDate.toISOString().split("T")[0];
 
-        // Debug each event comparison
-        console.log(`Comparing:`, {
-          headerDate: normalizedHeaderDate,
-          eventDate: normalizedEventDate,
-          isPublicMatch: event.isPublic === isPublicView,
-        });
-
         return normalizedEventDate === normalizedHeaderDate && event.isPublic === isPublicView;
       });
-
-      // Debugging logs
-      console.log(`Header Date: ${normalizedHeaderDate}`);
-      console.log(`Filtered Events:`, filteredEvents);
 
       // Clear existing content in the header for fresh render
       $headerDiv.find(".event-title").remove();
@@ -2463,10 +2459,9 @@ $(document).ready(function (event) {
       // Append filtered events to the header
       filteredEvents.forEach((event) => {
         const eventClass = event.type === "holiday" ? "static-holiday" : "static-birthday";
-        const eventIcon = event.type === "birthday" ? "🎂 " : "";
-        $headerDiv.addClass(eventClass).append(`
-          ${eventIcon}${event.name}
-        `);
+        const displayName = stripLeadingEmoji(event.name);
+        if (!displayName) return;
+        $headerDiv.append($("<span />", { class: `event-title ${eventClass}`, text: displayName }));
       });
     });
   }

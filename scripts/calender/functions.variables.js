@@ -522,6 +522,17 @@ async function populateStaticContentWithImages() {
 }
 
 function generateWeekView(date) {
+  const stripLeadingEmoji = (value) => {
+    const text = String(value ?? "");
+    // Remove leading emojis/pictographs (plus optional variation selectors / ZWJ), then trim.
+    return text
+      .replace(
+        /^[\s\uFE0F\u200D]*(?:[\u2600-\u27BF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDC00-\uDFFF])+/g,
+        ""
+      )
+      .trim();
+  };
+
   let html = "<tr>";
 
   const weekStart = new Date(date);
@@ -545,6 +556,7 @@ function generateWeekView(date) {
     const headerText = headerContent.text || "";
     const headerCategory = headerContent.category || "";
     const headerClass = headerCategory ? `static-${headerCategory}` : "";
+    const displayHeaderText = headerCategory === "birthday" || headerCategory === "holiday" ? stripLeadingEmoji(headerText) : headerText;
     const weekendClass = i === 0 || i === 6 ? "weekend-column" : "";
     const thuDay = i === 4 ? "thuDay" : "";
 
@@ -553,11 +565,11 @@ function generateWeekView(date) {
               <div class="the-day-date">
                   <div class="day-name"><span>${dayName}</span> - <span class="large-font">${day.getDate()}</span></div>
                   ${
-                    headerText
+                    displayHeaderText
                       ? `
                   <div data-current-count="1" data-total-count="1" class="header-content-container ${headerClass}">
                     <div class="header-content active" data-index="1" data-day="${dayName}" data-category="${headerCategory}" data-date="${fullDate}">
-                      <p>${headerText}</p>
+                      <p>${displayHeaderText}</p>
                     </div>
                   </div>`
                       : ""
@@ -796,6 +808,25 @@ function generateMonthView(date) {
         const circleColor = getCircleColor(index);
         const profileImage = event.images && event.images.length > 0 ? event.images[0] : "./icons/Avatar.svg";
 
+        const isBirthday = event.type === "birthday";
+        const isHoliday = event.type === "holiday";
+
+        if (isBirthday || isHoliday) {
+          const pillClass = isBirthday ? "month-pill-birthday" : "month-pill-holiday";
+          const displayTitle = (event.title || "")
+            // Remove leading emoji/icon characters (covers common surrogate-pair emojis)
+            .replace(/^\s*(?:[\uD83C-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27BF])+/g, "")
+            .trim();
+
+          items += `
+            <div class="month-event-item month-pill ${pillClass}" data-event-index="${index}" data-day="${day}">
+              <span class="month-pill-text">${displayTitle || event.title}</span>
+              <span class="month-pill-more" aria-hidden="true"></span>
+            </div>
+          `;
+          return;
+        }
+
         items += `
           <div class="month-event-item" style="display: flex; align-items: center; margin: 2px 0; font-size: 10px; line-height: 1.2;" data-event-index="${index}" data-day="${day}">
             <div class="event-number" style="background-color: ${circleColor}; color: white; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: bold; margin-right: 4px; flex-shrink: 0;">
@@ -1002,6 +1033,24 @@ function generateMonthView(date) {
 }
 
 function generateDayView(date) {
+  // Format a 24-hour time string ("H:MM" or "HH:MM") to 12-hour ("h:MM AM/PM")
+  const formatTime12From24 = (timeStr) => {
+    if (!timeStr || typeof timeStr !== "string") return timeStr;
+    const match = timeStr.trim().match(/^(\d{1,2})(?::(\d{2}))?$/);
+    if (!match) return timeStr;
+
+    let hour24 = parseInt(match[1], 10);
+    const minute = (match[2] ?? "00").padStart(2, "0");
+
+    if (Number.isNaN(hour24)) return timeStr;
+
+    const period = hour24 >= 12 ? "PM" : "AM";
+    let hour12 = hour24 % 12;
+    if (hour12 === 0) hour12 = 12;
+
+    return `${hour12}:${minute} ${period}`;
+  };
+
   // Generate 4 days: Thursday to Sunday
   const generateFourDays = () => {
     const days = [];
@@ -1039,6 +1088,10 @@ function generateDayView(date) {
   const getDayEvents = (dayShort) => {
     const events = [];
 
+    // Default duration used when no end time/duration exists in the data.
+    // Keep this modest so an "8:00" card doesn't visually fill the whole hour.
+    const DEFAULT_EVENT_DURATION_MINUTES = 30;
+
     // Helper function to convert "7 AM" or "12 PM" format to "7:00" or "12:00" 24-hour format
     const convertTo24Hour = (timeStr) => {
       const match = timeStr.match(/(\d+)\s*(AM|PM)/i);
@@ -1065,16 +1118,17 @@ function generateDayView(date) {
       Object.keys(dayContent).forEach((time) => {
         if (time !== "header") {
           const content = dayContent[time];
-          const time24 = convertTo24Hour(time); // Convert "7 AM" to "7:00"
+          const time24 = convertTo24Hour(time); // Convert "7 AM" to "7:00" for positioning
+          const time12 = formatTime12From24(time24);
           
           if (Array.isArray(content)) {
             content.forEach((item) => {
               events.push({
                 type: item.category || "task",
                 title: item.text_2 || item.text || "Task", // Use text_2 for title, not text_1 which is the time
-                time: time24, // Use converted 24-hour format for display
-                startTime: time24, // Use converted format for positioning
-                endTime: calculateEndTime(time24, 60),
+                time: time12, // Always display 12-hour time
+                startTime: time24, // Keep 24-hour for positioning
+                endTime: calculateEndTime(time24, DEFAULT_EVENT_DURATION_MINUTES),
                 isHeader: false,
                 images: item.images || [],
                 organizer: getOrganizerName(),
@@ -1084,9 +1138,9 @@ function generateDayView(date) {
             events.push({
               type: content.category || "task",
               title: content.text_2 || content.text || "Task", // Use text_2 for title, not text_1
-              time: time24, // Use converted 24-hour format for display
-              startTime: time24, // Use converted format for positioning
-              endTime: calculateEndTime(time24, 60),
+              time: time12, // Always display 12-hour time
+              startTime: time24, // Keep 24-hour for positioning
+              endTime: calculateEndTime(time24, DEFAULT_EVENT_DURATION_MINUTES),
               isHeader: false,
               images: content.images || [],
               organizer: getOrganizerName(),
@@ -1125,9 +1179,9 @@ function generateDayView(date) {
       randomEvents.push({
         type: randomType,
         title: randomTitle,
-        time: randomTime,
+        time: formatTime12From24(randomTime),
         startTime: randomTime,
-        endTime: calculateEndTime(randomTime, 60),
+        endTime: calculateEndTime(randomTime, 30),
         isHeader: false,
         images: isFullHeight ? [profileImages[Math.floor(Math.random() * profileImages.length)]] : [],
         organizer: isFullHeight ? getOrganizerName() : null,
@@ -1157,15 +1211,19 @@ function generateDayView(date) {
   const DAY_END_HOUR = 23;
   const DAY_SPACER_PX = 90;
   // Increase spacing: bigger hour blocks -> more vertical room between times
-  const PX_PER_HOUR = 140;
+  const PX_PER_HOUR = 224;
+  const HOUR_HEADER_PX = 40;
   const MINUTES_PER_INTERVAL = 15;
-  const PX_PER_INTERVAL = PX_PER_HOUR / (60 / MINUTES_PER_INTERVAL); // 35px per 15 mins
+  const PX_PER_INTERVAL = PX_PER_HOUR / (60 / MINUTES_PER_INTERVAL); // 56px per 15 mins
 
   const roundDownToInterval = (minutes, interval = MINUTES_PER_INTERVAL) =>
     Math.floor(minutes / interval) * interval;
 
   const roundUpToInterval = (minutes, interval = MINUTES_PER_INTERVAL) =>
     Math.ceil(minutes / interval) * interval;
+
+  const roundToInterval = (minutes, interval = MINUTES_PER_INTERVAL) =>
+    Math.round(minutes / interval) * interval;
 
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -1176,17 +1234,66 @@ function generateDayView(date) {
     const dayStartMin = DAY_START_HOUR * 60;
     const dayEndMin = (DAY_END_HOUR + 1) * 60; // allow events up to 24:00
 
-    // Snap to 15-min grid
+    // We keep the top aligned to the 15-minute grid, BUT we do NOT stretch event height
+    // to the grid (otherwise cards grow into the next slot when you increase spacing).
+    // This makes an 8:00 event stay within the 8:00 block and not enter 8:15.
     const snappedStart = clamp(roundDownToInterval(startMinutes), dayStartMin, dayEndMin);
-    const snappedEnd = clamp(roundUpToInterval(endMinutes), dayStartMin, dayEndMin);
 
-    const duration = Math.max(MINUTES_PER_INTERVAL, snappedEnd - snappedStart);
+    // Exact duration in minutes (clamped to at least 1 minute so we can render something)
+    const exactDurationMins = Math.max(1, endMinutes - startMinutes);
+
+    // Convert minutes -> pixels using the true scale
+    const pxPerMinute = PX_PER_HOUR / 60;
+
     const offsetMinutes = snappedStart - dayStartMin;
-
     const top = DAY_SPACER_PX + (offsetMinutes / MINUTES_PER_INTERVAL) * PX_PER_INTERVAL;
-    const height = (duration / MINUTES_PER_INTERVAL) * PX_PER_INTERVAL;
 
-    return { top, height, startMinutes: snappedStart, endMinutes: snappedEnd };
+  // Minimum visible height (so tiny events are still clickable)
+  // Keep this small so events don't appear to run into the next 15-minute tick.
+  const MIN_EVENT_PX = Math.max(10, Math.round(pxPerMinute * 2)); // ~2 minutes or 10px
+    const height = Math.max(MIN_EVENT_PX, exactDurationMins * pxPerMinute);
+
+    return {
+      top,
+      height,
+      startMinutes: snappedStart,
+      endMinutes: clamp(endMinutes, dayStartMin, dayEndMin),
+    };
+  };
+
+  // Compute dynamic top based on collapsed hour blocks.
+  // Collapsed hours shrink to header height, and everything below shifts up.
+  const getCollapsedHoursSet = () => {
+    const set = new Set();
+    document
+      .querySelectorAll(".multi-day-time-column .time-hour-group.is-collapsed[data-hour]")
+      .forEach((el) => {
+        const hour = parseInt(el.getAttribute("data-hour"), 10);
+        if (!Number.isNaN(hour)) set.add(hour);
+      });
+    return set;
+  };
+
+  const getHourBlockHeight = (hour, collapsedHours) =>
+    collapsedHours && collapsedHours.has(hour) ? HOUR_HEADER_PX : PX_PER_HOUR;
+
+  const getTopForTimeWithCollapse = (timeStr, collapsedHours) => {
+    const [hours, minutes] = timeStr.split(":").map(Number);
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) return DAY_SPACER_PX;
+
+    const targetHour = hours;
+    const minuteInHour = minutes;
+    let top = DAY_SPACER_PX;
+
+    for (let h = DAY_START_HOUR; h < targetHour; h++) {
+      top += getHourBlockHeight(h, collapsedHours);
+    }
+
+    // Within an expanded hour, position is proportional to PX_PER_HOUR.
+    // For collapsed hours, we hide events anyway.
+    top += (minuteInHour / 60) * PX_PER_HOUR;
+
+    return top;
   };
 
   // Helper function to get organizer name
@@ -1216,9 +1323,9 @@ function generateDayView(date) {
             </button>
           </div>
           <div class="time-intervals" id="${hourId}">
-            <div class="time-interval">${hour}:15</div>
-            <div class="time-interval">${hour}:30</div>
-            <div class="time-interval">${hour}:45</div>
+            <div class="time-interval">${formatTime12From24(`${hour}:15`)}</div>
+            <div class="time-interval">${formatTime12From24(`${hour}:30`)}</div>
+            <div class="time-interval">${formatTime12From24(`${hour}:45`)}</div>
           </div>
         </div>
       `;
@@ -1243,7 +1350,7 @@ function generateDayView(date) {
     // Then each hour: 100px (40px header + 60px intervals)
     for (let hour = DAY_START_HOUR; hour <= DAY_END_HOUR; hour++) {
       const topPosition = DAY_SPACER_PX + (hour - DAY_START_HOUR) * PX_PER_HOUR;
-      html += `<div class="day-hour-line" style="top: ${topPosition}px;"></div>`;
+      html += `<div class="day-hour-line" data-hour="${hour}" style="top: ${topPosition}px;"></div>`;
     }
 
     // Add current time line if this is today
@@ -1258,7 +1365,7 @@ function generateDayView(date) {
           DAY_SPACER_PX +
           (currentHour - DAY_START_HOUR) * PX_PER_HOUR +
           (currentMinute / 60) * PX_PER_HOUR;
-        html += `<div class="day-current-time-line" style="top: ${currentTimePosition}px;"></div>`;
+        html += `<div class="day-current-time-line" data-minute="${currentHour * 60 + currentMinute}" style="top: ${currentTimePosition}px;"></div>`;
       }
     }
 
@@ -1294,7 +1401,7 @@ function generateDayView(date) {
       const notificationHtml = isFullHeight ? `<div class="multi-day-event-notification">${notificationCount}</div>` : Math.random() > 0.5 ? `<div class="multi-day-event-notification">${notificationCount}</div>` : `<div class="multi-day-event-icon">⚡</div>`;
 
       html += `
-        <div class="multi-day-event-wrapper ${heightClass}" data-event-hour="${startHour}" style="top: ${topPosition}px; height: ${eventHeight}px;">
+        <div class="multi-day-event-wrapper ${heightClass}" data-event-hour="${startHour}" data-start-time="${event.startTime}" data-end-time="${event.endTime}" style="top: ${topPosition}px; height: ${eventHeight}px;">
           <div class="multi-day-event-block event-type-${event.type}" data-event-id="${index}">
             <div class="multi-day-event-header">
               <div class="multi-day-event-time">${event.time}</div>
@@ -1357,6 +1464,96 @@ function generateDayView(date) {
 
   $("#day-view").html(dayViewHtml);
 
+  // Expose a small reflow helper so collapse/expand can keep alignment perfect.
+  // (We avoid relying on the fixed 17×PX_PER_HOUR math when hours can shrink.)
+  window.reflowDayViewLayout = () => {
+    const collapsedHours = getCollapsedHoursSet();
+
+    // Toggle a class to disable fixed-gradient grids when the hour heights are non-uniform.
+    const container = document.querySelector(".multi-day-view-container");
+    if (container) {
+      if (collapsedHours.size > 0) container.classList.add("has-collapsed-hours");
+      else container.classList.remove("has-collapsed-hours");
+    }
+
+    // Update overall min-heights so there isn't dead space at the bottom.
+    let totalHeight = DAY_SPACER_PX;
+    for (let h = DAY_START_HOUR; h <= DAY_END_HOUR; h++) {
+      totalHeight += getHourBlockHeight(h, collapsedHours);
+    }
+
+    const viewContainer = document.querySelector(".multi-day-view-container");
+    if (viewContainer) viewContainer.style.minHeight = `${totalHeight}px`;
+    document.querySelectorAll(".multi-day-events").forEach((el) => {
+      el.style.minHeight = `${totalHeight}px`;
+    });
+
+    // Reposition current-time indicators (time column label + day line)
+    const now = new Date();
+    const ch = now.getHours();
+    const cm = now.getMinutes();
+    const currentHourCollapsed = collapsedHours.has(ch);
+    const currentTimeTop = getTopForTimeWithCollapse(`${ch}:${cm.toString().padStart(2, "0")}`, collapsedHours);
+
+    const timeIndicator = document.querySelector(".multi-day-time-column .current-time-indicator");
+    if (timeIndicator) {
+      if (ch < DAY_START_HOUR || ch > DAY_END_HOUR || currentHourCollapsed) {
+        timeIndicator.style.display = "none";
+      } else {
+        timeIndicator.style.display = "block";
+        timeIndicator.style.top = `${currentTimeTop}px`;
+      }
+    }
+
+    document.querySelectorAll(".day-current-time-line").forEach((line) => {
+      // Keep the line only if it was rendered (today column) and current hour is visible
+      if (ch < DAY_START_HOUR || ch > DAY_END_HOUR || currentHourCollapsed) {
+        line.style.display = "none";
+      } else {
+        line.style.display = "block";
+        line.style.top = `${currentTimeTop}px`;
+      }
+    });
+
+    // Reposition hour markers (if enabled in the future)
+    document.querySelectorAll(".day-hour-line[data-hour]").forEach((line) => {
+      const hour = parseInt(line.getAttribute("data-hour"), 10);
+      if (Number.isNaN(hour)) return;
+      let top = DAY_SPACER_PX;
+      for (let h = DAY_START_HOUR; h < hour; h++) {
+        top += getHourBlockHeight(h, collapsedHours);
+      }
+      line.style.top = `${top}px`;
+    });
+
+    // Reposition events based on dynamic collapsed heights
+    document.querySelectorAll(".multi-day-event-wrapper[data-start-time][data-end-time]").forEach((wrapper) => {
+      const startTime = wrapper.getAttribute("data-start-time");
+      const endTime = wrapper.getAttribute("data-end-time");
+      if (!startTime || !endTime) return;
+
+      const startHour = parseInt(wrapper.getAttribute("data-event-hour"), 10);
+      if (!Number.isNaN(startHour) && collapsedHours.has(startHour)) {
+        wrapper.style.display = "none";
+        return;
+      }
+
+      // Respect any prior explicit hide/show (but keep visible hours visible)
+      wrapper.style.display = "block";
+
+      const startMinutes = timeToMinutes(startTime);
+      const endMinutes = timeToMinutes(endTime);
+      const durationMins = Math.max(1, endMinutes - startMinutes);
+      const pxPerMinute = PX_PER_HOUR / 60;
+
+      const top = getTopForTimeWithCollapse(startTime, collapsedHours);
+      const height = Math.max(10, durationMins * pxPerMinute);
+
+      wrapper.style.top = `${top}px`;
+      wrapper.style.height = `${height}px`;
+    });
+  };
+
   // Add click handlers for events
   $("#day-view .multi-day-event-block").on("click", function () {
     const eventId = $(this).data("event-id");
@@ -1377,12 +1574,19 @@ function generateDayView(date) {
 
   // Add current time indicator
   addCurrentTimeIndicator();
+
+  // Ensure layout is consistent on first render
+  if (typeof window.reflowDayViewLayout === "function") window.reflowDayViewLayout();
 }
 
 // Function to toggle time hour collapse/expand
 function toggleTimeHour(hourId) {
   const intervals = document.getElementById(hourId);
   const button = document.getElementById(`btn-${hourId}`);
+
+  if (!intervals || !button) return;
+
+  const hourGroup = intervals.closest(".time-hour-group");
 
   // Extract hour number from hourId (e.g., "hour-7" -> 7)
   const hour = parseInt(hourId.split("-")[1]);
@@ -1392,8 +1596,11 @@ function toggleTimeHour(hourId) {
 
   if (intervals.style.display === "none") {
     // Expand: Show intervals and events
-    intervals.style.display = "block";
+    // Clear inline style so CSS restores the correct layout (flex)
+    intervals.style.display = "";
     button.style.transform = "rotate(0deg)";
+
+    if (hourGroup) hourGroup.classList.remove("is-collapsed");
 
     // Show all events for this hour
     eventWrappers.forEach((wrapper) => {
@@ -1401,14 +1608,20 @@ function toggleTimeHour(hourId) {
     });
   } else {
     // Collapse: Hide intervals and events
+    // Keep an explicit inline hide for immediate feedback; CSS also enforces it.
     intervals.style.display = "none";
     button.style.transform = "rotate(-90deg)";
+
+    if (hourGroup) hourGroup.classList.add("is-collapsed");
 
     // Hide all events for this hour
     eventWrappers.forEach((wrapper) => {
       wrapper.style.display = "none";
     });
   }
+
+  // Recompute positions so everything below shifts and stays aligned.
+  if (typeof window.reflowDayViewLayout === "function") window.reflowDayViewLayout();
 }
 
 // Function to add current time indicator
@@ -1418,11 +1631,14 @@ function addCurrentTimeIndicator() {
   const currentMinute = now.getMinutes();
 
   if (currentHour >= 7 && currentHour <= 23) {
-    // Add current time indicator to time column
-    const timePosition = (currentHour - 7) * 60 + currentMinute;
+    // Add current time indicator to time column (top aligns with the same scale as events)
+    const timePositionPx = 90 + (currentHour - 7) * 224 + (currentMinute / 60) * 224;
+    const hour12 = ((currentHour % 12) || 12);
+    const period = currentHour >= 12 ? "PM" : "AM";
+    const displayTime = `${hour12}:${currentMinute.toString().padStart(2, "0")} ${period}`;
     const currentTimeHtml = `
-      <div class="current-time-indicator" style="top: ${timePosition + 60}px;">
-        ${currentHour}:${currentMinute.toString().padStart(2, "0")}
+      <div class="current-time-indicator" style="top: ${timePositionPx}px;">
+        ${displayTime}
       </div>
     `;
     $(".multi-day-time-column").append(currentTimeHtml);

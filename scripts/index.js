@@ -17,7 +17,7 @@ if (window.innerWidth < 667) {
 ///////////////////////////////////
 ///////////////////////////////////
 // Development Mode: Set to true to bypass authentication
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 const onboardingPage = document.querySelector(".onboarding_page");
 const landingPageHeader = document.querySelector("body .header");

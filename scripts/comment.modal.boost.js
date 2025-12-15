@@ -23,6 +23,7 @@ class BoostModal {
     this.currentState = "selection"; // selection, confirmation, success
     this.currentTriggerBtn = null;
     this.popperInstance = null;
+    this.isAnchoredToMenuCloseIcon = false;
 
     this.boostOptions = [
       {
@@ -80,7 +81,28 @@ class BoostModal {
       const boostBtn = e.target.closest(".boost");
       if (boostBtn) {
         e.stopPropagation();
-        this.currentTriggerBtn = boostBtn;
+        // When "Boost" is clicked from the ellipsis/options menu, anchor the popover
+        // to the visible toggle icon (X when open, ellipsis when closed) so the arrow
+        // points to that control and the popover can flow downward.
+        const menuButton = boostBtn.closest("button.commentGlobalSliderPostMenu");
+        if (menuButton) {
+          const isVisible = (el) => {
+            if (!el) return false;
+            const style = window.getComputedStyle(el);
+            if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
+            return el.getClientRects().length > 0;
+          };
+
+          const timesIcon = menuButton.querySelector('#postMenuTimes');
+          const ellipsisIcon = menuButton.querySelector('#postMenuEllipsis');
+          const useTimes = isVisible(timesIcon);
+          const useEllipsis = !useTimes && isVisible(ellipsisIcon);
+          this.currentTriggerBtn = (useTimes && timesIcon) || (useEllipsis && ellipsisIcon) || menuButton;
+          this.isAnchoredToMenuCloseIcon = !!useTimes;
+        } else {
+          this.currentTriggerBtn = boostBtn;
+          this.isAnchoredToMenuCloseIcon = false;
+        }
         this.togglePopover();
         return;
       }
@@ -154,9 +176,15 @@ class BoostModal {
 
   openPopover() {
     if (this.boostPopover) {
-      this.positionPopover();
       this.boostPopover.classList.add("active");
       this.showSelectionState();
+
+      // Popper needs the popover to be visible to correctly measure and position
+      // the arrow/tail against the trigger (e.g., the menu close X).
+      this.positionPopover();
+      requestAnimationFrame(() => {
+        this.popperInstance?.update();
+      });
 
       // Focus search input
       setTimeout(() => {
@@ -183,6 +211,15 @@ class BoostModal {
   positionPopover() {
     if (!this.currentTriggerBtn || !this.boostPopover) return;
 
+    this.boostPopover.classList.toggle("boost_anchor_x", !!this.isAnchoredToMenuCloseIcon);
+
+    const currentPage = (window.location?.pathname || "").split("/").pop();
+    const openOnRightPages = new Set(["dashboard.html", "explore.html", "not-found.html"]);
+    const preferredPlacement = openOnRightPages.has(currentPage) ? "right-start" : "left-end";
+    const fallbackPlacements = openOnRightPages.has(currentPage)
+      ? ["right-end", "left-start", "left-end"]
+      : ["left-start", "right-end", "right-start"];
+
     // Destroy existing popper instance if it exists
     if (this.popperInstance) {
       this.popperInstance.destroy();
@@ -191,7 +228,7 @@ class BoostModal {
 
     // Create new Popper instance
     this.popperInstance = Popper.createPopper(this.currentTriggerBtn, this.boostPopover, {
-      placement: "left-end",
+      placement: preferredPlacement,
       modifiers: [
         {
           name: "offset",
@@ -209,7 +246,7 @@ class BoostModal {
         {
           name: "flip",
           options: {
-            fallbackPlacements: ["left-start", "right-end", "right-start"],
+            fallbackPlacements,
           },
         },
         {

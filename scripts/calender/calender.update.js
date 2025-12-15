@@ -1123,14 +1123,49 @@ class SidebarHandler {
     this.calendar = calendar;
   }
 
+  syncExpandTriggerVisibility() {
+    const $sidebar = $("#sidebar");
+    const isOpen = $sidebar.attr("aria-expanded") === "true";
+    const showWhenOpen = $sidebar.attr("data-show-handle") === "true";
+
+    if (isOpen) {
+      if (showWhenOpen) {
+        $(".expand-trigger").removeClass("cal-hidden");
+      } else {
+        $(".expand-trigger").addClass("cal-hidden");
+      }
+    } else {
+      $(".expand-trigger").removeClass("cal-hidden");
+    }
+  }
+
+  openSidebar() {
+    $("#sidebar").attr("aria-expanded", "true");
+    this.syncExpandTriggerVisibility();
+  }
+
+  collapseSidebar() {
+    $("#sidebar").attr("aria-expanded", "false");
+    this.syncExpandTriggerVisibility();
+  }
+
   bindSidebarEvents() {
     // Sidebar toggle functionality
-    $(document).on("click", "#add-new-arrow", (event) => {
+    $(document).off("click.sidebarToggle", "#add-new-arrow");
+    $(document).on("click.sidebarToggle", "#add-new-arrow", (event) => {
       this.toggleSidebar(event);
     });
 
-    $(".expand-trigger").on("click", () => {
-      this.closeSidebar();
+    $(document).off("click.sidebarExpand", ".expand-trigger");
+    $(document).on("click.sidebarExpand", ".expand-trigger", () => {
+      const $sidebar = $("#sidebar");
+      const isOpen = $sidebar.attr("aria-expanded") === "true";
+
+      // If the user is using the handle, keep it visible while open (as a toggle).
+      $sidebar.attr("data-show-handle", "true");
+
+      if (isOpen) this.collapseSidebar();
+      else this.openSidebar();
     });
 
     // Mobile month label click
@@ -1144,31 +1179,42 @@ class SidebarHandler {
 
     // Handle responsive sidebar behavior
     this.handleResponsiveSidebar();
+
+    // Ensure correct state on initial load (prevents trigger flashing)
+    this.syncExpandTriggerVisibility();
+
+    // Keep behavior correct on resize
+    $(window).off("resize.sidebarResponsive");
+    $(window).on("resize.sidebarResponsive", () => {
+      this.handleResponsiveSidebar();
+      this.syncExpandTriggerVisibility();
+    });
   }
 
   toggleSidebar(event) {
     const $sidebar = $("#sidebar");
     const isOpen = $sidebar.attr("aria-expanded") === "true";
-    $sidebar.attr("aria-expanded", !isOpen);
-    $(".expand-trigger").removeClass("cal-hidden");
+    const nextOpen = !isOpen;
+
+    // If opened from inside the sidebar (arrow), keep the external handle hidden when open.
+    if (nextOpen) {
+      $sidebar.removeAttr("data-show-handle");
+    }
+
+    $sidebar.attr("aria-expanded", nextOpen);
+    this.syncExpandTriggerVisibility();
     console.log("Sidebar toggled");
   }
 
   closeSidebar() {
-    $(".expand-trigger").addClass("cal-hidden");
+    // Backward-compatible alias: close means collapse
+    this.collapseSidebar();
   }
 
   handleResponsiveSidebar() {
     if (window.innerWidth <= 1024) {
       // Tablet view
-      $(".expand-trigger").removeClass("cal-hidden");
-      $("#sidebar").attr("aria-expanded", "false");
-      $(".expand-trigger").on("click", () => {
-        $(".expand-trigger").addClass("cal-hidden");
-        const $sidebar = $("#sidebar");
-        const isOpen = $sidebar.attr("aria-expanded") === "true";
-        $sidebar.attr("aria-expanded", isOpen);
-      });
+      this.collapseSidebar();
     }
   }
 }

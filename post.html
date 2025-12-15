@@ -127,6 +127,7 @@
     <link rel="stylesheet" href="./css/post/post.cover.css" />
     <link rel="stylesheet" href="./css/post/post.preview.css" />
     <link rel="stylesheet" href="./css/post/post.root.css" />
+    <link rel="stylesheet" href="./css/story.music.modal.css" />
     <link rel="stylesheet" href="./css/folder-modal.css" />
     <!-- START: All Choicejs Package  -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
@@ -148,6 +149,7 @@
     <script defer src="./scripts/alphine/slider.js"></script>
     <script defer src="./scripts/script.js"></script>
     <script defer src="./scripts/post/post.js"></script>
+    <script defer src="./scripts/shared/storyMusicModal.js"></script>
     <script defer src="./scripts/post/post.cover.js"></script>
     <script defer src="./scripts/post/post.voice.js"></script>
     <script defer src="./scripts/notifications/notification.js"></script>
@@ -1447,6 +1449,105 @@
           <div class="btns">
             <button class="cancel">Cancel</button>
             <button class="add_sound" id="add_chosen--sound">Add Sound</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Story Music Modal (copied from explore.html) -->
+    <div class="explore-hidden" id="storyMusicModal" aria-hidden="true">
+      <div class="story-music-modal__backdrop" data-close-story-music-modal="true"></div>
+
+      <div class="story-music-modal" role="dialog" aria-modal="true" aria-label="Music & Sound">
+        <div class="story-music-modal__header">
+          <div class="story-music-modal__tabs" role="tablist" aria-label="Music tabs">
+            <button type="button" class="story-music-tab is-active" data-story-music-tab="for-you" role="tab" aria-selected="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3z"/></svg>
+              <span>For you</span>
+            </button>
+            <button type="button" class="story-music-tab" data-story-music-tab="categories" role="tab" aria-selected="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                <path fill="currentColor" d="M4 7h16v2H4V7zm0 8h16v2H4v-2z"/>
+                <path fill="currentColor" d="M4 11h11v2H4v-2z"/>
+              </svg>
+              <span>Categories</span>
+            </button>
+            <button type="button" class="story-music-tab" data-story-music-tab="artists" role="tab" aria-selected="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12q-1.65 0-2.825-1.175T8 8t1.175-2.825T12 4t2.825 1.175T16 8t-1.175 2.825T12 12m-8 8v-1.4q0-.85.438-1.562T5.6 15.95q1.3-.65 2.712-1T11 14.6h2q1.675 0 3.088.35t2.712 1q.725.375 1.162 1.088T20.4 18.6V20z"/></svg>
+              <span>Artists</span>
+            </button>
+            <button type="button" class="story-music-tab" data-story-music-tab="favorites" role="tab" aria-selected="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>
+              <span>Favorites</span>
+            </button>
+          </div>
+
+          <div class="story-music-modal__actions">
+            <button type="button" class="story-music-modal__icon-btn" id="storyMusicSearchToggle" aria-label="Search">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314" /></svg>
+            </button>
+            <button type="button" class="story-music-modal__icon-btn" id="storyMusicViewToggle" aria-label="Toggle grid view" data-view="list">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h8v8H4V4zm0 10h8v8H4v-8zm10-10h8v8h-8V4zm0 10h8v8h-8v-8z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="story-music-modal__body">
+          <div class="story-music-panel is-active" data-story-music-panel="for-you" role="tabpanel">
+            <div class="story-music-modal__search explore-hidden" data-story-music-search-row="for-you">
+              <div class="story-music-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg>
+                <input type="text" class="story-music-modal-search" placeholder="Search" autocomplete="off" />
+              </div>
+            </div>
+            <div class="story-music-list" id="storyMusicForYouList"></div>
+          </div>
+
+          <div class="story-music-panel" data-story-music-panel="categories" role="tabpanel" aria-hidden="true">
+            <div class="story-music-modal__search explore-hidden" data-story-music-search-row="categories">
+              <div class="story-music-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg>
+                <input type="text" class="story-music-modal-search" placeholder="Search" autocomplete="off" />
+              </div>
+            </div>
+            <div class="story-music-categories" id="storyMusicCategoriesGrid"></div>
+          </div>
+
+          <div class="story-music-panel" data-story-music-panel="artists" role="tabpanel" aria-hidden="true">
+            <div class="story-music-modal__search explore-hidden" data-story-music-search-row="artists">
+              <div class="story-music-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg>
+                <input type="text" class="story-music-modal-search" placeholder="Search" autocomplete="off" />
+              </div>
+            </div>
+            <div class="story-music-artists" id="storyMusicArtistsList"></div>
+          </div>
+
+          <div class="story-music-panel" data-story-music-panel="favorites" role="tabpanel" aria-hidden="true">
+            <div class="story-music-modal__search explore-hidden" data-story-music-search-row="favorites">
+              <div class="story-music-search">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg>
+                <input type="text" class="story-music-modal-search" placeholder="Search" autocomplete="off" />
+              </div>
+            </div>
+            <div class="story-music-fav-controls" id="storyMusicFavControls">
+              <span class="story-music-fav-controls__label">Sort by:</span>
+              <div class="story-music-fav-toggle" role="tablist" aria-label="Favorites sort">
+                <button type="button" class="story-music-fav-toggle__btn is-active" data-fav-sort="music" role="tab" aria-selected="true">Music</button>
+                <button type="button" class="story-music-fav-toggle__btn" data-fav-sort="artists" role="tab" aria-selected="false">Artists</button>
+              </div>
+            </div>
+
+            <div class="story-music-empty" id="storyMusicFavoritesEmpty">
+              <div class="story-music-empty__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 24 24"><path fill="#f06b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>
+              </div>
+              <h3>You haven’t added any favourites yet!</h3>
+              <p>Tap the ♡ on songs you love to see them here.</p>
+              <button type="button" class="story-music-empty__cta" data-story-music-go="for-you">Go to For you</button>
+            </div>
+
+            <div class="story-music-list" id="storyMusicFavoritesList"></div>
           </div>
         </div>
       </div>

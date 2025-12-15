@@ -3,6 +3,14 @@
  */
 
 const gridContainer = document.getElementById("gridContainer");
+// This file was relying on another script to declare `gridContainerWrapper`.
+// If that script loads after this one (or not at all on some pages), it throws
+// a ReferenceError that can stop unrelated features (like the Story Music modal).
+const gridContainerWrapper = document.getElementById("gridContainerWrapper") || gridContainer?.parentElement;
+
+// Some pages don't define the global `mainTaskLists`. Provide a safe fallback so
+// this file doesn't throw and break other features.
+const mainTaskLists = window.mainTaskLists || document.querySelectorAll?.(".tasks_list, .main_task_list, .task_lists") || [];
 const commentsModal = document.getElementById("comments_modal");
 
 // Grid Container Events
@@ -345,11 +353,15 @@ function playGridHoverVideo(videoEl, button) {
 ["load"].forEach((event) => {
   window.addEventListener(event, function (e) {
     if (innerWidth < 667) {
-      gridContainerWrapper.classList.add(HIDDEN);
+      if (gridContainerWrapper) gridContainerWrapper.classList.add(HIDDEN);
 
-      mainTaskLists.forEach((list) => {
-        list.classList.remove(HIDDEN);
-      });
+      try {
+        mainTaskLists.forEach((list) => {
+          list?.classList?.remove?.(HIDDEN);
+        });
+      } catch {
+        // ignore
+      }
     }
   });
 });
