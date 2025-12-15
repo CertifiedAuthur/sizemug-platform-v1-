@@ -75,7 +75,7 @@
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 12px;
-  z-index: 1;
+  z-index: 9998;
   color: #000;
   top: -50px;
   right: -250px;
@@ -1827,26 +1827,15 @@ table {
 
 #day-view {
   width: 100%;
-  height: calc(100vh - 200px); /* Fixed height to enable scrolling */
-  max-height: calc(100vh - 200px);
-  overflow-y: scroll; /* Enable vertical scrolling */
-  overflow-x: hidden;
+  height: auto;
+  max-height: none;
+  overflow: visible;
   background: #f8f9fa;
-  /* Hide scrollbar for all browsers */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-#day-view::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
 }
 
 .day-view-container {
   display: flex;
-  min-height: 100%;
+  align-items: flex-start;
   background: white;
   border-radius: 8px;
   margin: 10px;
@@ -1863,7 +1852,6 @@ table {
 .day-events-column {
   flex: 1;
   position: relative;
-  min-height: 100%;
 }
 
 /* Collapsible Time Slots */
@@ -1891,7 +1879,7 @@ table {
 .time-hour-group::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 100%;
   right: -9999px; /* Extend far to the right to cut through events area */
   height: 2px;
@@ -1913,7 +1901,7 @@ table {
 .time-hour-group.spacer::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 100%;
   right: -9999px; /* Extend far to the right to cut through events area */
   height: 2px;
@@ -1961,7 +1949,7 @@ table {
 .time-hour-group.is-collapsed .time-hour-header::after {
   content: '';
   position: absolute;
-  bottom: -2px;
+  bottom: 0;
   left: 100%;
   right: -9999px;
   height: 2px;

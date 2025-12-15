@@ -434,13 +434,15 @@ class EventHandler {
   constructor(calendar) {
     this.calendar = calendar;
     this.modalElement = null;
+    this.currentTriggerElement = null;
+    this._rafRepositionId = null;
     this.initializeModal();
   }
 
   initializeModal() {
     // Create a single modal container in the body
     this.modalElement = $(`
-      <div id="calendar-modal-wrapper" class="week_view_modal_wrapper" style="display: none; position: fixed; z-index: 9999;">
+      <div id="calendar-modal-wrapper" class="week_view_modal_wrapper" style="display: none; position: fixed; z-index: 9998;">
         <div style="position: relative; height: 100%">
           <div class="week-view-modal">
             <!-- Modal content will be dynamically updated -->
@@ -462,58 +464,69 @@ class EventHandler {
 
       this.hideModal();
     });
+
+    // Keep the modal anchored to the trigger while the page scrolls/resizes.
+    // (The modal is `position: fixed`, so we must recompute viewport coordinates.)
+    const scheduleReposition = () => {
+      if (this._rafRepositionId) return;
+      this._rafRepositionId = window.requestAnimationFrame(() => {
+        this._rafRepositionId = null;
+        this.updateModalPosition();
+      });
+    };
+
+    // Capture scroll events from any scrollable container (not just window).
+    document.addEventListener("scroll", scheduleReposition, { passive: true, capture: true });
+    window.addEventListener("resize", scheduleReposition);
+  }
+
+  updateModalPosition() {
+    if (!this.modalElement || !this.modalElement.is(":visible")) return;
+    if (!this.currentTriggerElement) return;
+
+    // If the trigger element is gone from the DOM, close the modal.
+    if (!document.body.contains(this.currentTriggerElement)) {
+      this.hideModal();
+      return;
+    }
+
+    const windowWidth = $(window).width();
+    const windowHeight = $(window).height();
+
+    // Use viewport-relative coordinates so this works for scrolling inside containers.
+    const rect = this.currentTriggerElement.getBoundingClientRect();
+    if (!rect) return;
+
+    let left = rect.left;
+    let top = rect.bottom + 10; // keep downward
+
+    const modalWidth = this.modalElement.get(0)?.getBoundingClientRect()?.width || 400;
+    if (left + modalWidth > windowWidth) left = windowWidth - modalWidth - 20;
+    if (left < 10) left = 10;
+
+    // Keep the modal's max height within the viewport.
+    const heightAnchorTop = Math.max(10, top);
+    const availableHeight = Math.max(120, windowHeight - heightAnchorTop - 10);
+    this.modalElement.css({ left: left + "px", top: top + "px", maxHeight: availableHeight + "px" });
+    this.modalElement.find(".week-view-modal").css({ maxHeight: availableHeight + "px", overflowY: "auto" });
   }
 
   showModal(content, triggerElement) {
     // Update modal content
     this.modalElement.find(".week-view-modal").html(content);
 
-    // Position modal near the trigger element
-    const triggerOffset = $(triggerElement).offset();
-    const triggerHeight = $(triggerElement).outerHeight();
-    const triggerWidth = $(triggerElement).outerWidth();
-    const windowWidth = $(window).width();
-    const windowHeight = $(window).height();
-    const scrollLeft = $(window).scrollLeft();
-    const scrollTop = $(window).scrollTop();
+    // Store trigger so we can keep the modal anchored on scroll
+    this.currentTriggerElement = triggerElement;
 
-    // Calculate position
-    // `position: fixed` uses viewport coordinates, so normalize `.offset()` by scroll.
-    let left = triggerOffset.left - scrollLeft;
-    let top = triggerOffset.top - scrollTop + triggerHeight + 10; // always downward
-
-    // Adjust if modal would go off screen
-    if (left + 400 > windowWidth) {
-      // Assuming modal width ~400px
-      left = windowWidth - 420;
-    }
-    if (left < 10) {
-      left = 10;
-    }
-    if (top < 10) {
-      top = 10;
-    }
-
-    // Keep it opening downward; if there's not enough vertical space, make it scroll.
-    const availableHeight = Math.max(120, windowHeight - top - 10);
-    this.modalElement.css({ maxHeight: availableHeight + "px" });
-    this.modalElement
-      .find(".week-view-modal")
-      .css({ maxHeight: availableHeight + "px", overflowY: "auto" });
-
-    // Show modal with positioning - make sure display is set to block
-    this.modalElement.css({
-      left: left + "px",
-      top: top + "px",
-      display: "block",
-    });
-
-    // Also ensure the modal is visible using jQuery show() as backup
+    // Show first, then position (so measurements like max-height apply correctly)
+    this.modalElement.css({ display: "block" });
     this.modalElement.show();
+    this.updateModalPosition();
   }
 
   hideModal() {
     this.modalElement.hide();
+    this.currentTriggerElement = null;
     // Remove selected state from calendar cells
     document.querySelectorAll("#week-view td").forEach((el) => el.classList.remove("selected-task"));
   }

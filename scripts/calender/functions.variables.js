@@ -1390,22 +1390,7 @@ function generateDayView(date) {
       html += `<div class="day-hour-line" data-hour="${hour}" style="top: ${topPosition}px;"></div>`;
     }
 
-    // Add current time line if this is today
-    const today = new Date();
-    const isToday = dayInfo.date.toDateString() === today.toDateString();
-    if (isToday) {
-      const currentHour = today.getHours();
-      const currentMinute = today.getMinutes();
-      const currentHourInRange = normalizeHourForRange(currentHour);
-      if (currentHourInRange >= DAY_START_HOUR && currentHourInRange <= DAY_END_HOUR) {
-        // Account for spacer at top
-        const currentTimePosition =
-          DAY_SPACER_PX +
-          (currentHourInRange - DAY_START_HOUR) * PX_PER_HOUR +
-          (currentMinute / 60) * PX_PER_HOUR;
-        html += `<div class="day-current-time-line" data-minute="${currentHourInRange * 60 + currentMinute}" style="top: ${currentTimePosition}px;"></div>`;
-      }
-    }
+    // Current time indicator intentionally disabled for Day view
 
     // Add events
     events.forEach((event, index) => {
@@ -1504,6 +1489,10 @@ function generateDayView(date) {
 
   $("#day-view").html(dayViewHtml);
 
+  // Ensure no current-time indicators remain (disabled for Day view)
+  $("#day-view .current-time-indicator").remove();
+  $("#day-view .day-current-time-line").remove();
+
   // Expose a small reflow helper so collapse/expand can keep alignment perfect.
   // (We avoid relying on the fixed 17×PX_PER_HOUR math when hours can shrink.)
   window.reflowDayViewLayout = () => {
@@ -1528,33 +1517,7 @@ function generateDayView(date) {
       el.style.minHeight = `${totalHeight}px`;
     });
 
-    // Reposition current-time indicators (time column label + day line)
-    const now = new Date();
-    const chRaw = now.getHours();
-    const ch = normalizeHourForRange(chRaw);
-    const cm = now.getMinutes();
-    const currentHourCollapsed = collapsedHours.has(ch);
-    const currentTimeTop = getTopForTimeWithCollapse(`${chRaw}:${cm.toString().padStart(2, "0")}`, collapsedHours);
-
-    const timeIndicator = document.querySelector(".multi-day-time-column .current-time-indicator");
-    if (timeIndicator) {
-      if (ch < DAY_START_HOUR || ch > DAY_END_HOUR || currentHourCollapsed) {
-        timeIndicator.style.display = "none";
-      } else {
-        timeIndicator.style.display = "block";
-        timeIndicator.style.top = `${currentTimeTop}px`;
-      }
-    }
-
-    document.querySelectorAll(".day-current-time-line").forEach((line) => {
-      // Keep the line only if it was rendered (today column) and current hour is visible
-      if (ch < DAY_START_HOUR || ch > DAY_END_HOUR || currentHourCollapsed) {
-        line.style.display = "none";
-      } else {
-        line.style.display = "block";
-        line.style.top = `${currentTimeTop}px`;
-      }
-    });
+    // Current time indicator intentionally disabled for Day view
 
     // Reposition hour markers (if enabled in the future)
     document.querySelectorAll(".day-hour-line[data-hour]").forEach((line) => {
@@ -1655,8 +1618,7 @@ function generateDayView(date) {
     toggleTimeHour(hourId);
   });
 
-  // Add current time indicator
-  addCurrentTimeIndicator();
+  // Current time indicator intentionally disabled for Day view
 
   // Ensure layout is consistent on first render
   if (typeof window.reflowDayViewLayout === "function") window.reflowDayViewLayout();
