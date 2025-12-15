@@ -270,41 +270,42 @@ registerBtn.addEventListener("click", async function (e) {
     registerLoading.classList.remove("auth--hidden");
     this.setAttribute("disabled", true);
 
-    // https://sizemug-server.onrender.com/api/signup
-    // http://localhost:3000/api/signup
-    const response = await fetch("https://sizemug-backend-server.vercel.app/api/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstName: registerFirstInput,
-        lastName: registerLastInput,
-        username: registerUsernameInput,
-        email: registerEmailInput,
-        password: registerPasswordInput,
-        referralCode: registerInviteCodeInput || "",
-      }),
-    });
+    const users = readLocalAuthUsers();
+    const emailKey = normalizeKey(registerEmailInput);
+    const usernameKey = normalizeKey(registerUsernameInput);
 
-    registerLoading.classList.add("auth--hidden");
-    this.removeAttribute("disabled");
-
-    const data = await response.json();
-
-    if (response.ok) {
-      // Store non-sensitive data in localStorage
-      localStorage.setItem("sizemugUserInfo", JSON.stringify(data.user));
-      localStorage.setItem("sizemugUserToken", JSON.stringify(data.token));
-
-      handleAuth("mid-start");
-    } else {
-      registerFlashAuth.querySelector("p").textContent = data.message;
+    const exists = users.some((u) => normalizeKey(u.email) === emailKey || normalizeKey(u.username) === usernameKey);
+    if (exists) {
+      registerFlashAuth.querySelector("p").textContent = "Email or username already exists";
       registerFlashAuth.classList.remove("auth--hidden");
+      return;
     }
+
+    const user = {
+      id: safeId(),
+      firstName: registerFirstInput,
+      lastName: registerLastInput,
+      username: registerUsernameInput,
+      email: registerEmailInput,
+      referralCode: registerInviteCodeInput || "",
+      createdAt: new Date().toISOString(),
+    };
+
+    users.push({ ...user, password: String(registerPasswordInput) });
+    writeLocalAuthUsers(users);
+
+    // Store non-sensitive data in localStorage
+    localStorage.setItem("sizemugUserInfo", JSON.stringify(user));
+    localStorage.setItem("sizemugUserToken", JSON.stringify(makeToken()));
+
+    handleAuth("mid-start");
   } catch (error) {
     console.log(error.message);
+    registerFlashAuth.querySelector("p").textContent = "Unable to sign up right now.";
+    registerFlashAuth.classList.remove("auth--hidden");
+  } finally {
     registerLoading.classList.add("auth--hidden");
+    this.removeAttribute("disabled");
   }
 });
 
@@ -347,39 +348,76 @@ loginBtn.addEventListener("click", async function (e) {
     loginLoading.style.display = "inline";
     this.setAttribute("disabled", true);
 
-    // https://sizemug-server.onrender.com/api/login
-    // http://localhost:3000/api/login
-    const response = await fetch("https://sizemug-backend-server.vercel.app/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: loginUsernameInput,
-        password: loginPasswordInput,
-      }),
-    });
+    const users = readLocalAuthUsers();
+    const loginKey = normalizeKey(loginUsernameInput);
 
-    loginLoading.style.display = "none";
-    this.removeAttribute("disabled");
+    const account = users.find(
+      (u) => normalizeKey(u.username) === loginKey || normalizeKey(u.email) === loginKey
+    );
 
-    const data = await response.json();
-
-    if (response.ok) {
-      // Store non-sensitive data in localStorage
-      localStorage.setItem("sizemugUserInfo", JSON.stringify(data.user));
-      localStorage.setItem("sizemugUserToken", JSON.stringify(data.token));
-
-      handleAuth("old");
-    } else {
-      loginFlashAuth.querySelector("p").textContent = data.message;
+    if (!account) {
+      loginFlashAuth.querySelector("p").textContent = "Account not found";
       loginFlashAuth.style.display = "flex";
+      return;
     }
+
+    if (String(account.password) !== String(loginPasswordInput)) {
+      loginFlashAuth.querySelector("p").textContent = "Invalid password";
+      loginFlashAuth.style.display = "flex";
+      return;
+    }
+
+    const { password, ...user } = account;
+    localStorage.setItem("sizemugUserInfo", JSON.stringify(user));
+    localStorage.setItem("sizemugUserToken", JSON.stringify(makeToken()));
+
+    handleAuth("old");
   } catch (error) {
     console.log(error.message);
+    loginFlashAuth.querySelector("p").textContent = "Unable to login right now.";
+    loginFlashAuth.style.display = "flex";
+  } finally {
     loginLoading.style.display = "none";
+    this.removeAttribute("disabled");
   }
 });
+
+const LOCAL_AUTH_STORAGE_KEY = "sizemug_local_auth_users_v1";
+
+function normalizeKey(v) {
+  return String(v || "").trim().toLowerCase();
+}
+
+function safeId() {
+  try {
+    if (window.crypto && typeof window.crypto.randomUUID === "function") return window.crypto.randomUUID();
+  } catch {
+    // ignore
+  }
+  return `u_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
+function makeToken() {
+  return `t_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+}
+
+function readLocalAuthUsers() {
+  try {
+    const raw = localStorage.getItem(LOCAL_AUTH_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function writeLocalAuthUsers(users) {
+  try {
+    localStorage.setItem(LOCAL_AUTH_STORAGE_KEY, JSON.stringify(users || []));
+  } catch {
+    // ignore quota / privacy mode issues
+  }
+}
 
 // Self clicked
 document.addEventListener("click", (e) => {
