@@ -580,12 +580,13 @@ function generateWeekView(date) {
 
   html += `</tr>`;
 
-  // Generate time rows - changed to 1-hour intervals as requested
-  for (let hour = 7; hour <= 23; hour++) {
+  // Generate time rows - 1-hour intervals (6am -> 5am next day)
+  for (let hour = 6; hour <= 29; hour++) {
+    const hourOfDay = hour % 24;
     // Keep `time` in the same format as `staticContent` keys (e.g. "7 AM")
-    const time = hour <= 11 ? `${hour} AM` : hour === 12 ? `12 PM` : `${hour - 12} PM`;
+    const time = hourOfDay === 0 ? "12 AM" : hourOfDay < 12 ? `${hourOfDay} AM` : hourOfDay === 12 ? "12 PM" : `${hourOfDay - 12} PM`;
     // Only control what the user sees in the UI (e.g. "7am")
-    const timeLabel = hour === 0 ? "12am" : hour < 12 ? `${hour}am` : hour === 12 ? "12pm" : `${hour - 12}pm`;
+    const timeLabel = hourOfDay === 0 ? "12am" : hourOfDay < 12 ? `${hourOfDay}am` : hourOfDay === 12 ? "12pm" : `${hourOfDay - 12}pm`;
 
     html += `<tr>`;
 
@@ -990,9 +991,11 @@ function generateMonthView(date) {
       const itemOffset = $item.offset();
       const windowWidth = $(window).width();
       const windowHeight = $(window).height();
+      const scrollLeft = $(window).scrollLeft();
+      const scrollTop = $(window).scrollTop();
       
-      let left = itemOffset.left;
-      let top = itemOffset.top + $item.outerHeight() + 10;
+      let left = itemOffset.left - scrollLeft;
+      let top = itemOffset.top - scrollTop + $item.outerHeight() + 10; // always downward
       
       // Adjust if modal would go off screen
       if (left + 400 > windowWidth) {
@@ -1001,12 +1004,13 @@ function generateMonthView(date) {
       if (left < 10) {
         left = 10;
       }
-      if (top + 300 > windowHeight) {
-        top = itemOffset.top - 310;
-      }
       if (top < 10) {
         top = 10;
       }
+
+      const availableHeight = Math.max(120, windowHeight - top - 10);
+      modalWrapper.css({ maxHeight: availableHeight + "px" });
+      modalWrapper.find(".week-view-modal").css({ maxHeight: availableHeight + "px", overflowY: "auto" });
       
       modalWrapper.css({
         left: left + "px",
@@ -1044,8 +1048,10 @@ function generateDayView(date) {
 
     if (Number.isNaN(hour24)) return timeStr;
 
-    const period = hour24 >= 12 ? "PM" : "AM";
-    let hour12 = hour24 % 12;
+    // Support extended day ranges (e.g. 24:15 -> 12:15 AM, 29:45 -> 5:45 AM)
+    const hourOfDay = ((hour24 % 24) + 24) % 24;
+    const period = hourOfDay >= 12 ? "PM" : "AM";
+    let hour12 = hourOfDay % 12;
     if (hour12 === 0) hour12 = 12;
 
     return `${hour12}:${minute} ${period}`;
@@ -1207,14 +1213,23 @@ function generateDayView(date) {
   };
 
   // --- Day view positioning helpers (single-source-of-truth constants) ---
-  const DAY_START_HOUR = 7;
-  const DAY_END_HOUR = 23;
+  const DAY_START_HOUR = 6;
+  const DAY_END_HOUR = 29; // extend through 5am next day
   const DAY_SPACER_PX = 90;
   // Increase spacing: bigger hour blocks -> more vertical room between times
   const PX_PER_HOUR = 224;
   const HOUR_HEADER_PX = 40;
   const MINUTES_PER_INTERVAL = 15;
   const PX_PER_INTERVAL = PX_PER_HOUR / (60 / MINUTES_PER_INTERVAL); // 56px per 15 mins
+
+  // Keep CSS in sync with the dynamic hour range so the view ends cleanly
+  // (no extra white space after the last interval).
+  try {
+    const hourCount = DAY_END_HOUR - DAY_START_HOUR + 1;
+    document.documentElement.style.setProperty("--cal-day-hours-count", String(hourCount));
+  } catch (_) {
+    // ignore (non-browser or restricted env)
+  }
 
   const roundDownToInterval = (minutes, interval = MINUTES_PER_INTERVAL) =>
     Math.floor(minutes / interval) * interval;
@@ -1227,12 +1242,28 @@ function generateDayView(date) {
 
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
+  const isExtendedDayRange = DAY_END_HOUR >= 24;
+  const normalizeHourForRange = (hour) => (isExtendedDayRange && hour < DAY_START_HOUR ? hour + 24 : hour);
+  const timeToMinutesInRange = (timeStr) => {
+    const [hoursRaw, minutes] = timeStr.split(":").map(Number);
+    if (Number.isNaN(hoursRaw) || Number.isNaN(minutes)) return NaN;
+    const hours = normalizeHourForRange(hoursRaw);
+    return hours * 60 + minutes;
+  };
+  const getEventMinuteRange = (startTime, endTime) => {
+    let startMinutes = timeToMinutesInRange(startTime);
+    let endMinutes = timeToMinutesInRange(endTime);
+    if (Number.isNaN(startMinutes) || Number.isNaN(endMinutes)) return { startMinutes, endMinutes };
+    // Handle events that cross midnight (e.g. 23:45 -> 00:15)
+    if (endMinutes < startMinutes) endMinutes += 24 * 60;
+    return { startMinutes, endMinutes };
+  };
+
   const getDayViewEventRect = (startTime, endTime) => {
-    const startMinutes = timeToMinutes(startTime);
-    const endMinutes = timeToMinutes(endTime);
+    const { startMinutes, endMinutes } = getEventMinuteRange(startTime, endTime);
 
     const dayStartMin = DAY_START_HOUR * 60;
-    const dayEndMin = (DAY_END_HOUR + 1) * 60; // allow events up to 24:00
+    const dayEndMin = (DAY_END_HOUR + 1) * 60; // allow events up to 30:00 (5am next day)
 
     // We keep the top aligned to the 15-minute grid, BUT we do NOT stretch event height
     // to the grid (otherwise cards grow into the next slot when you increase spacing).
@@ -1274,14 +1305,17 @@ function generateDayView(date) {
     return set;
   };
 
+  const LAST_HOUR_BLOCK_PX = HOUR_HEADER_PX + 3 * PX_PER_INTERVAL; // end at :45
+
   const getHourBlockHeight = (hour, collapsedHours) =>
-    collapsedHours && collapsedHours.has(hour) ? HOUR_HEADER_PX : PX_PER_HOUR;
+    collapsedHours && collapsedHours.has(hour) ? HOUR_HEADER_PX : hour === DAY_END_HOUR ? LAST_HOUR_BLOCK_PX : PX_PER_HOUR;
 
   const getTopForTimeWithCollapse = (timeStr, collapsedHours) => {
     const [hours, minutes] = timeStr.split(":").map(Number);
     if (Number.isNaN(hours) || Number.isNaN(minutes)) return DAY_SPACER_PX;
 
-    const targetHour = hours;
+    let targetHour = hours;
+    if (isExtendedDayRange && targetHour < DAY_START_HOUR) targetHour += 24;
     const minuteInHour = minutes;
     let top = DAY_SPACER_PX;
 
@@ -1309,13 +1343,15 @@ function generateDayView(date) {
     // Add spacer at the beginning to align with day headers
     html += `<div class="time-hour-group spacer"></div>`;
 
-    for (let hour = 7; hour <= 23; hour++) {
-      const timeStr = hour === 12 ? "12 PM" : hour > 12 ? `${hour - 12} PM` : hour === 0 ? "12 AM" : `${hour} AM`;
+    for (let hour = DAY_START_HOUR; hour <= DAY_END_HOUR; hour++) {
+      const hourOfDay = hour % 24;
+      const timeStr = hourOfDay === 0 ? "12 AM" : hourOfDay < 12 ? `${hourOfDay} AM` : hourOfDay === 12 ? "12 PM" : `${hourOfDay - 12} PM`;
       const hourId = `hour-${hour}`;
+      const isEndHourClass = hour === DAY_END_HOUR ? " is-day-end" : "";
 
       // Main hour header with collapse button
       html += `
-        <div class="time-hour-group" data-hour="${hour}">
+        <div class="time-hour-group${isEndHourClass}" data-hour="${hour}">
           <div class="time-hour-header" data-hour-id="${hourId}">
             <span class="time-hour-label">${timeStr}</span>
             <button class="time-collapse-btn" id="btn-${hourId}" data-hour-id="${hourId}">
@@ -1335,8 +1371,9 @@ function generateDayView(date) {
 
   // Generate events for a single day column
   const generateDayColumn = (dayInfo, events) => {
+    const fullDate = dayInfo.date.toISOString().split("T")[0]; // YYYY-MM-DD (matches week view)
     let html = `
-      <div class="multi-day-column">
+      <div class="multi-day-column" data-date="${fullDate}" data-day="${dayInfo.dayShort}">
         <div class="multi-day-header">
           <div class="day-name">${dayInfo.dayName}</div>
           <div class="day-date">${dayInfo.dayNumber}${getDaySuffix(dayInfo.dayNumber)} ${dayInfo.monthName}</div>
@@ -1359,19 +1396,20 @@ function generateDayView(date) {
     if (isToday) {
       const currentHour = today.getHours();
       const currentMinute = today.getMinutes();
-      if (currentHour >= DAY_START_HOUR && currentHour <= DAY_END_HOUR) {
+      const currentHourInRange = normalizeHourForRange(currentHour);
+      if (currentHourInRange >= DAY_START_HOUR && currentHourInRange <= DAY_END_HOUR) {
         // Account for spacer at top
         const currentTimePosition =
           DAY_SPACER_PX +
-          (currentHour - DAY_START_HOUR) * PX_PER_HOUR +
+          (currentHourInRange - DAY_START_HOUR) * PX_PER_HOUR +
           (currentMinute / 60) * PX_PER_HOUR;
-        html += `<div class="day-current-time-line" data-minute="${currentHour * 60 + currentMinute}" style="top: ${currentTimePosition}px;"></div>`;
+        html += `<div class="day-current-time-line" data-minute="${currentHourInRange * 60 + currentMinute}" style="top: ${currentTimePosition}px;"></div>`;
       }
     }
 
     // Add events
     events.forEach((event, index) => {
-      const startMinutes = timeToMinutes(event.startTime);
+      const startMinutes = timeToMinutesInRange(event.startTime);
       const startHour = Math.floor(startMinutes / 60);
 
       if (startHour < DAY_START_HOUR || startHour > DAY_END_HOUR) return;
@@ -1400,9 +1438,11 @@ function generateDayView(date) {
       // For half-height events, sometimes show an icon instead of notification count
       const notificationHtml = isFullHeight ? `<div class="multi-day-event-notification">${notificationCount}</div>` : Math.random() > 0.5 ? `<div class="multi-day-event-notification">${notificationCount}</div>` : `<div class="multi-day-event-icon">⚡</div>`;
 
+      const imagesAttr = (event.images || []).join(",");
+
       html += `
         <div class="multi-day-event-wrapper ${heightClass}" data-event-hour="${startHour}" data-start-time="${event.startTime}" data-end-time="${event.endTime}" style="top: ${topPosition}px; height: ${eventHeight}px;">
-          <div class="multi-day-event-block event-type-${event.type}" data-event-id="${index}">
+          <div class="multi-day-event-block event-type-${event.type}" data-event-id="${index}" data-images="${imagesAttr}">
             <div class="multi-day-event-header">
               <div class="multi-day-event-time">${event.time}</div>
               ${notificationHtml}
@@ -1490,10 +1530,11 @@ function generateDayView(date) {
 
     // Reposition current-time indicators (time column label + day line)
     const now = new Date();
-    const ch = now.getHours();
+    const chRaw = now.getHours();
+    const ch = normalizeHourForRange(chRaw);
     const cm = now.getMinutes();
     const currentHourCollapsed = collapsedHours.has(ch);
-    const currentTimeTop = getTopForTimeWithCollapse(`${ch}:${cm.toString().padStart(2, "0")}`, collapsedHours);
+    const currentTimeTop = getTopForTimeWithCollapse(`${chRaw}:${cm.toString().padStart(2, "0")}`, collapsedHours);
 
     const timeIndicator = document.querySelector(".multi-day-time-column .current-time-indicator");
     if (timeIndicator) {
@@ -1541,9 +1582,8 @@ function generateDayView(date) {
       // Respect any prior explicit hide/show (but keep visible hours visible)
       wrapper.style.display = "block";
 
-      const startMinutes = timeToMinutes(startTime);
-      const endMinutes = timeToMinutes(endTime);
-      const durationMins = Math.max(1, endMinutes - startMinutes);
+      const range = getEventMinuteRange(startTime, endTime);
+      const durationMins = Math.max(1, range.endMinutes - range.startMinutes);
       const pxPerMinute = PX_PER_HOUR / 60;
 
       const top = getTopForTimeWithCollapse(startTime, collapsedHours);
@@ -1554,10 +1594,53 @@ function generateDayView(date) {
     });
   };
 
-  // Add click handlers for events
-  $("#day-view .multi-day-event-block").on("click", function () {
-    const eventId = $(this).data("event-id");
-    console.log("Multi-day event clicked:", eventId);
+  // Add click handlers for events (open the same modal used by Week view)
+  $("#day-view").on("click", ".multi-day-event-block", async function () {
+    const $block = $(this);
+
+    const calendar = window.modernCalendar || window.calendar;
+    const eventHandler = calendar && calendar.eventHandler;
+
+    const title = ($block.find(".multi-day-event-title").text() || "").trim();
+    const time = ($block.find(".multi-day-event-time").text() || "").trim();
+    const fullDate = $block.closest(".multi-day-column").data("date") || "";
+
+    // Infer category from the event-type-* class.
+    const typeMatch = ($block.attr("class") || "").match(/\bevent-type-([^\s]+)\b/);
+    const category = typeMatch ? typeMatch[1] : "task";
+
+    // Pull images from data-images (comma-separated) if present.
+    const imagesRaw = ($block.data("images") || "").toString();
+    const images = imagesRaw ? imagesRaw.split(",").map((s) => s.trim()).filter(Boolean) : [];
+
+    // Shape content to match what the Week modal expects.
+    const content = {
+      category,
+      text_2: title,
+      description: "",
+      images,
+    };
+
+    // If the modern calendar modal system exists, use it.
+    if (eventHandler && typeof eventHandler.showModal === "function" && typeof eventHandler.generateCellModalContent === "function") {
+      let profileImagesHtml = "";
+      try {
+        if (typeof generateProfileImagesHtml === "function") {
+          profileImagesHtml = await generateProfileImagesHtml(images);
+        }
+      } catch (error) {
+        console.error("Failed to generate profile images:", error);
+      }
+
+      const descriptionData = typeof eventHandler.getTruncatedDescription === "function" ? eventHandler.getTruncatedDescription(content.description || "") : { truncated: "", full: null };
+      const modalContent = eventHandler.generateCellModalContent(content, fullDate, time, profileImagesHtml, descriptionData);
+      eventHandler.showModal(modalContent, this);
+      return;
+    }
+
+    // Fallback: do nothing besides logging if the modal system isn't present.
+    const eventId = $block.data("event-id");
+    console.log("Multi-day event clicked (no modal handler available):", eventId);
   });
 
   // Add click handlers for time collapse buttons
@@ -1630,9 +1713,16 @@ function addCurrentTimeIndicator() {
   const currentHour = now.getHours();
   const currentMinute = now.getMinutes();
 
-  if (currentHour >= 7 && currentHour <= 23) {
+  // Keep these in sync with Day view layout.
+  const DAY_START_HOUR = 6;
+  const DAY_END_HOUR = 29; // 5am next day
+  const DAY_SPACER_PX = 90;
+  const PX_PER_HOUR = 224;
+  const hourInRange = currentHour < DAY_START_HOUR ? currentHour + 24 : currentHour;
+
+  if (hourInRange >= DAY_START_HOUR && hourInRange <= DAY_END_HOUR) {
     // Add current time indicator to time column (top aligns with the same scale as events)
-    const timePositionPx = 90 + (currentHour - 7) * 224 + (currentMinute / 60) * 224;
+    const timePositionPx = DAY_SPACER_PX + (hourInRange - DAY_START_HOUR) * PX_PER_HOUR + (currentMinute / 60) * PX_PER_HOUR;
     const hour12 = ((currentHour % 12) || 12);
     const period = currentHour >= 12 ? "PM" : "AM";
     const displayTime = `${hour12}:${currentMinute.toString().padStart(2, "0")} ${period}`;

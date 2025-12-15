@@ -453,9 +453,14 @@ class EventHandler {
 
     // Add click outside to close modal
     $(document).on("click", (e) => {
-      if (!e.target?.closest("td.static-event") && !e.target?.closest("td.static-task") && !e.target.closest(".static-birthday") && !e.target.closest(".static-holiday")) {
-        this.hideModal();
-      }
+      // Don't treat clicks inside the modal as "outside"
+      if (e.target?.closest(".week_view_modal_wrapper")) return;
+
+      // Don't auto-close on the same click that opens a modal from a valid calendar item
+      if (e.target?.closest("td.static-event") || e.target?.closest("td.static-task") || e.target?.closest(".static-birthday") || e.target?.closest(".static-holiday")) return;
+      if (e.target?.closest(".multi-day-event-block") || e.target?.closest(".month-event-item")) return;
+
+      this.hideModal();
     });
   }
 
@@ -469,10 +474,13 @@ class EventHandler {
     const triggerWidth = $(triggerElement).outerWidth();
     const windowWidth = $(window).width();
     const windowHeight = $(window).height();
+    const scrollLeft = $(window).scrollLeft();
+    const scrollTop = $(window).scrollTop();
 
     // Calculate position
-    let left = triggerOffset.left;
-    let top = triggerOffset.top + triggerHeight + 10;
+    // `position: fixed` uses viewport coordinates, so normalize `.offset()` by scroll.
+    let left = triggerOffset.left - scrollLeft;
+    let top = triggerOffset.top - scrollTop + triggerHeight + 10; // always downward
 
     // Adjust if modal would go off screen
     if (left + 400 > windowWidth) {
@@ -482,14 +490,16 @@ class EventHandler {
     if (left < 10) {
       left = 10;
     }
-
-    if (top + 300 > windowHeight) {
-      // Assuming modal height ~300px
-      top = triggerOffset.top - 310;
-    }
     if (top < 10) {
       top = 10;
     }
+
+    // Keep it opening downward; if there's not enough vertical space, make it scroll.
+    const availableHeight = Math.max(120, windowHeight - top - 10);
+    this.modalElement.css({ maxHeight: availableHeight + "px" });
+    this.modalElement
+      .find(".week-view-modal")
+      .css({ maxHeight: availableHeight + "px", overflowY: "auto" });
 
     // Show modal with positioning - make sure display is set to block
     this.modalElement.css({
@@ -1223,6 +1233,11 @@ class SidebarHandler {
 $(document).ready(() => {
   // Create global instance for backward compatibility
   window.modernCalendar = new ModernCalendar();
+
+  // Backward-compatible alias: some legacy code expects `window.calendar`.
+  if (!window.calendar) {
+    window.calendar = window.modernCalendar;
+  }
 
   // Make it accessible globally for debugging and external access
   window.ModernCalendar = ModernCalendar;

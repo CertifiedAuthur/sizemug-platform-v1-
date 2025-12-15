@@ -1819,6 +1819,10 @@ table {
   /* Increased spacing so events have more breathing room */
   --cal-px-per-hour: 224px; /* PX_PER_HOUR (1.4× of 160) */
   --cal-px-per-interval: 56px; /* PX_PER_INTERVAL (15m) */
+  /* Number of hour blocks in Day view (fallback preserves old behavior). */
+  --cal-day-hours-count: 17;
+  /* Day view ends at :45 for the last hour block. */
+  --cal-last-hour-height: calc(40px + (3 * var(--cal-px-per-interval)));
 }
 
 #day-view {
@@ -1870,6 +1874,17 @@ table {
   position: relative;
   /* Must match JS math (PX_PER_HOUR = 224): 40px header + 184px intervals */
   height: var(--cal-px-per-hour);
+}
+
+/* End the final hour exactly at :45 so there is no extra space below 5:45am */
+.time-hour-group.is-day-end {
+  height: var(--cal-last-hour-height);
+}
+
+.time-hour-group.is-day-end .time-intervals {
+  min-height: calc(3 * var(--cal-px-per-interval));
+  max-height: calc(3 * var(--cal-px-per-interval));
+  justify-content: flex-start;
 }
 
 /* Extend the border horizontally across the entire calendar */
@@ -4191,8 +4206,12 @@ label {
 /* Multi-Day View Styles */
 .multi-day-view-container {
   display: flex;
-  /* Must match JS/CSS scale: spacer + (17 hours × PX_PER_HOUR) */
-  min-height: calc(var(--cal-day-spacer) + (17 * var(--cal-px-per-hour)));
+  /* spacer + ((hours-1)×PX_PER_HOUR) + lastHourHeight */
+  min-height: calc(
+    var(--cal-day-spacer) +
+    ((var(--cal-day-hours-count) - 1) * var(--cal-px-per-hour)) +
+    var(--cal-last-hour-height)
+  );
   background: white;
   position: relative;
 }
@@ -4294,7 +4313,11 @@ label {
 
 .multi-day-events {
   position: relative;
-  min-height: calc(var(--cal-day-spacer) + (17 * var(--cal-px-per-hour))); /* matches JS */
+  min-height: calc(
+    var(--cal-day-spacer) +
+    ((var(--cal-day-hours-count) - 1) * var(--cal-px-per-hour)) +
+    var(--cal-last-hour-height)
+  );
   padding-top: 0;
 }
 

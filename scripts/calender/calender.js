@@ -1496,9 +1496,10 @@ function generateMobileView(date) {
   html += `<div class="body-container">`;
 
   // Create rows for each hour of the day
-  for (let hour = 7; hour <= 30; hour++) {
-    const adjustedHour = hour > 24 ? hour - 24 : hour;
-    const time = adjustedHour <= 11 ? `${adjustedHour} AM` : adjustedHour === 12 ? `12 PM` : `${adjustedHour - 12} PM`;
+  // 6am -> 5am next day
+  for (let hour = 6; hour <= 29; hour++) {
+    const hourOfDay = hour % 24;
+    const time = hourOfDay === 0 ? "12 AM" : hourOfDay < 12 ? `${hourOfDay} AM` : hourOfDay === 12 ? "12 PM" : `${hourOfDay - 12} PM`;
 
     html += `<div class="mobile-row"  data-time="${time}" data-day="${currentDay}" data-date="${date.toISOString().split("T")[0]}">
           <div class="time-row">

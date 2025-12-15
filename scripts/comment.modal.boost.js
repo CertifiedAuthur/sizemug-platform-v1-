@@ -62,6 +62,7 @@ class BoostModal {
 
     // Mock user coins (in real app, this would come from API)
     this.userCoins = 1500;
+    this.backdropEl = null;
 
     this.init();
   }
@@ -71,9 +72,57 @@ class BoostModal {
     this.renderBoostOptions();
   }
 
+  ensureBackdrop() {
+    if (this.backdropEl && document.body.contains(this.backdropEl)) return;
+
+    const el = document.createElement("div");
+    el.className = "boost_popover_backdrop";
+
+    // Clicking anywhere on the backdrop closes the popover.
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.closePopover();
+    });
+
+    document.body.appendChild(el);
+    this.backdropEl = el;
+  }
+
+  showBackdrop() {
+    this.ensureBackdrop();
+    this.backdropEl?.classList.add("active");
+  }
+
+  hideBackdrop() {
+    this.backdropEl?.classList.remove("active");
+  }
   bindEvents() {
     this.boostPopover.addEventListener("click", (e) => {
       e.stopPropagation();
+    });
+
+    // Close when clicking anywhere outside the popover.
+    // (Backdrop covers the page, but this is a safe fallback if stacking changes.)
+    document.addEventListener("click", (e) => {
+      if (!this.boostPopover) return;
+      if (!this.boostPopover.classList.contains("active")) return;
+
+      // Ignore clicks on the popover itself
+      if (e.target && this.boostPopover.contains(e.target)) return;
+
+      // Ignore clicks on Boost triggers (they open/reposition instead)
+      if (e.target && e.target.closest && e.target.closest(".boost")) return;
+
+      this.closePopover();
+    });
+
+    // Explicit close button inside the popover
+    this.boostPopover?.querySelectorAll(".close_boost_modal").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.closePopover();
+      });
     });
 
     // Use event delegation for dynamically created boost buttons
@@ -81,37 +130,18 @@ class BoostModal {
       const boostBtn = e.target.closest(".boost");
       if (boostBtn) {
         e.stopPropagation();
-        // When "Boost" is clicked from the ellipsis/options menu, anchor the popover
-        // to the visible toggle icon (X when open, ellipsis when closed) so the arrow
-        // points to that control and the popover can flow downward.
-        const menuButton = boostBtn.closest("button.commentGlobalSliderPostMenu");
-        if (menuButton) {
-          const isVisible = (el) => {
-            if (!el) return false;
-            const style = window.getComputedStyle(el);
-            if (style.display === "none" || style.visibility === "hidden" || style.opacity === "0") return false;
-            return el.getClientRects().length > 0;
-          };
-
-          const timesIcon = menuButton.querySelector('#postMenuTimes');
-          const ellipsisIcon = menuButton.querySelector('#postMenuEllipsis');
-          const useTimes = isVisible(timesIcon);
-          const useEllipsis = !useTimes && isVisible(ellipsisIcon);
-          this.currentTriggerBtn = (useTimes && timesIcon) || (useEllipsis && ellipsisIcon) || menuButton;
-          this.isAnchoredToMenuCloseIcon = !!useTimes;
-        } else {
-          this.currentTriggerBtn = boostBtn;
-          this.isAnchoredToMenuCloseIcon = false;
-        }
-        this.togglePopover();
+        // Anchor the popover beside the exact Boost element that was clicked.
+        // Use a Popper "virtual element" so positioning remains stable even if the
+        // clicked element disappears (e.g., an options menu closes).
+        const anchorRect = boostBtn.getBoundingClientRect();
+        this.currentTriggerBtn = {
+          getBoundingClientRect: () => anchorRect,
+          contextElement: boostBtn,
+        };
+        this.isAnchoredToMenuCloseIcon = false;
+        // Never close the popover by re-clicking Boost; just open/reposition it.
+        this.openPopover();
         return;
-      }
-      
-      // Close popover when clicking outside
-      if (this.boostPopover && this.boostPopover.classList.contains("active")) {
-        if (!this.boostPopover.contains(e.target) && !this.currentTriggerBtn?.contains(e.target)) {
-          this.closePopover();
-        }
       }
     });
 
@@ -158,24 +188,18 @@ class BoostModal {
       });
     }
 
-    // ESC key to close
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && this.boostPopover?.classList.contains("active")) {
-        this.closePopover();
-      }
-    });
+    // Note: do not close on Escape; only explicit close button should close.
   }
 
   togglePopover() {
-    if (this.boostPopover.classList.contains("active")) {
-      this.closePopover();
-    } else {
-      this.openPopover();
-    }
+    // Kept for backwards compatibility; do not use for closing.
+    this.openPopover();
   }
 
   openPopover() {
     if (this.boostPopover) {
+      // Show the full-screen backdrop (covers navbar). Backdrop does not close the popover.
+      this.showBackdrop();
       this.boostPopover.classList.add("active");
       this.showSelectionState();
 
@@ -201,6 +225,9 @@ class BoostModal {
       this.resetPopover();
     }
 
+    // Hide backdrop only when popover is closed.
+    this.hideBackdrop();
+
     // Destroy Popper instance
     if (this.popperInstance) {
       this.popperInstance.destroy();
@@ -213,11 +240,13 @@ class BoostModal {
 
     this.boostPopover.classList.toggle("boost_anchor_x", !!this.isAnchoredToMenuCloseIcon);
 
+    // Keep the popover beside the clicked Boost, but bias it to display upward
+    // by using "*-end" placements (so the popover's bottom aligns to the trigger).
     const currentPage = (window.location?.pathname || "").split("/").pop();
-    const openOnRightPages = new Set(["dashboard.html", "explore.html", "not-found.html"]);
-    const preferredPlacement = openOnRightPages.has(currentPage) ? "right-start" : "left-end";
+    const openOnRightPages = new Set(["dashboard.html", "explore.html", "not-found.html", "challenges.html"]);
+    const preferredPlacement = openOnRightPages.has(currentPage) ? "right-end" : "left-end";
     const fallbackPlacements = openOnRightPages.has(currentPage)
-      ? ["right-end", "left-start", "left-end"]
+      ? ["right-start", "left-end", "left-start"]
       : ["left-start", "right-end", "right-start"];
 
     // Destroy existing popper instance if it exists
@@ -228,8 +257,16 @@ class BoostModal {
 
     // Create new Popper instance
     this.popperInstance = Popper.createPopper(this.currentTriggerBtn, this.boostPopover, {
+      strategy: "fixed",
       placement: preferredPlacement,
       modifiers: [
+        {
+          name: "eventListeners",
+          options: {
+            scroll: false,
+            resize: false,
+          },
+        },
         {
           name: "offset",
           options: {

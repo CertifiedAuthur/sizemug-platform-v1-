@@ -1205,7 +1205,10 @@ function initStoryMusicModalUi() {
 
   function renderFavoritesEmptyState() {
     if (!elFavoritesEmpty) return;
-    const hasFav = state.favorites.size > 0;
+    const hasFav =
+      state.favoritesSort === "artists"
+        ? state.favorites.size > 0 || state.favoriteArtists.size > 0
+        : state.favorites.size > 0;
     elFavoritesEmpty.classList.toggle("explore-hidden", hasFav);
 
     // hide the list host when empty
@@ -1220,81 +1223,69 @@ function initStoryMusicModalUi() {
   }
 
   function renderFavoritesArtists() {
-    // Render favorites grouping inside the Favorites panel.
+    // Render artist-only list inside the Favorites panel.
     if (!elFavoritesList) return;
 
-    const favoriteTracks = musicLibrary.tracks.filter((t) => state.favorites.has(t.id)).filter((t) => trackMatchesQuery(t, state.query));
+    const favoriteTracks = musicLibrary.tracks.filter((t) => state.favorites.has(t.id));
     const byArtist = new Map();
-
     favoriteTracks.forEach((t) => {
       const arr = byArtist.get(t.artistId) || [];
       arr.push(t);
       byArtist.set(t.artistId, arr);
     });
 
-    // stable order by artist name
-    const artistIds = [...byArtist.keys()].sort((aId, bId) => {
-      const a = artistById(aId)?.name || "";
-      const b = artistById(bId)?.name || "";
-      return a.localeCompare(b);
-    });
+    const union = new Set();
+    [...byArtist.keys()].forEach((id) => union.add(String(id)));
+    [...state.favoriteArtists].forEach((id) => union.add(String(id)));
 
-    const sections = artistIds
+    const q = String(state.query || "").toLowerCase().trim();
+    const artistIds = [...union]
+      .filter((id) => !!artistById(id))
+      .filter((id) => {
+        if (!q) return true;
+        const a = artistById(id);
+        const name = String(a?.name || "").toLowerCase();
+        if (name.includes(q)) return true;
+        const tracks = byArtist.get(id) || [];
+        return tracks.some((t) => trackMatchesQuery(t, q));
+      })
+      .sort((aId, bId) => {
+        const a = artistById(aId)?.name || "";
+        const b = artistById(bId)?.name || "";
+        return a.localeCompare(b);
+      });
+
+    const items = artistIds
       .map((artistId) => {
         const a = artistById(artistId);
-        const tracks = byArtist.get(artistId) || [];
-        const items = tracks
-          .map((t) => {
-            const isFav = state.favorites.has(t.id);
-            const isActive = state.playingTrackId === t.id;
-            const isPlaying = isActive && state.isPlaying;
-            const playIcon = isPlaying
-              ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>'
-              : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
-            const heartIcon = isFav
-              ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#f06b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>'
-              : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1l-.1-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5c0 2.89-3.14 5.74-7.9 10.05z"/></svg>';
-
-            return `
-              <div class="story-music-item ${isActive ? "is-active" : ""} ${isPlaying ? "is-playing" : ""}" data-track-id="${escapeAttr(t.id)}">
-                <div class="story-music-item__cover">
-                  <img src="${escapeAttr(t.coverSrc)}" alt="" loading="lazy" onerror="imgOnErrorHide(this)" />
-                </div>
-                <div class="story-music-item__meta">
-                  <div class="story-music-item__title">${escapeHtml(t.title)}</div>
-                  <div class="story-music-item__sub">
-                    <span>${escapeHtml(t.duration)}</span>
-                  </div>
-                </div>
-                <div class="story-music-item__actions">
-                  <button type="button" class="story-music-action-btn is-primary" data-action="play" data-track-id="${escapeAttr(t.id)}">${playIcon}</button>
-                  <button type="button" class="story-music-action-btn" data-action="favorite" data-track-id="${escapeAttr(t.id)}">${heartIcon}</button>
-                </div>
-              </div>
-            `;
-          })
-          .join("");
-
+        const savedCount = (byArtist.get(artistId) || []).length;
+        const isFav = state.favoriteArtists.has(artistId);
+        const heartIcon = isFav
+          ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#f06b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>'
+          : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1l-.1-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5c0 2.89-3.14 5.74-7.9 10.05z"/></svg>';
+        const savedCountHtml = savedCount > 0 ? `<span class="story-music-artist__count">(${escapeHtml(String(savedCount))})</span>` : "";
         return `
-          <div class="story-music-fav-artist">
-            <div class="story-music-fav-artist__header">
-              <div class="story-music-fav-artist__left">
-                <div class="story-music-fav-artist__avatar">
-                  <img src="${escapeAttr(a?.avatar || "")}" alt="" loading="lazy" onerror="imgOnErrorHide(this)" />
-                </div>
-                <div class="story-music-fav-artist__meta">
-                  <div class="story-music-fav-artist__name">${escapeHtml(a?.name || "Artist")}</div>
-                  <div class="story-music-fav-artist__count">${escapeHtml(String(tracks.length))} saved</div>
-                </div>
+          <div class="story-music-artist" data-artist-id="${escapeAttr(artistId)}">
+            <div class="story-music-artist__left">
+              <div class="story-music-artist__avatar">
+                <img src="${escapeAttr(a?.avatar || "")}" alt="" loading="lazy" onerror="imgOnErrorHide(this)" />
+              </div>
+              <div>
+                <span class="story-music-artist__name">${escapeHtml(a?.name || "Artist")}</span>
+                ${savedCountHtml}
               </div>
             </div>
-            <div class="story-music-list">${items}</div>
+            <div class="story-music-artist__actions">
+              <button type="button" class="story-music-action-btn" data-action="favorite-artist" data-artist-id="${escapeAttr(
+                artistId
+              )}" aria-label="${isFav ? "Remove from favorites" : "Add to favorites"}">${heartIcon}</button>
+            </div>
           </div>
         `;
       })
       .join("");
 
-    elFavoritesList.innerHTML = `<div class="story-music-fav-artists">${sections || ""}</div>`;
+    elFavoritesList.innerHTML = `<div class="story-music-fav-artists">${items || ""}</div>`;
   }
 
   const openModal = () => {
@@ -1693,11 +1684,11 @@ function initStoryMusicModalUi() {
 
     // If favorites tab has items, show list using the For you list host
     if (state.activeTab === "favorites") {
-      const tracks = getVisibleTracks();
-      if (tracks.length) {
-        if (state.favoritesSort === "artists") {
-          renderFavoritesArtists();
-        } else {
+      if (state.favoritesSort === "artists") {
+        renderFavoritesArtists();
+      } else {
+        const tracks = getVisibleTracks();
+        if (tracks.length) {
           // Music list (default)
           if (elFavoritesList) {
             elFavoritesList.innerHTML = `<div class="story-music-list">${tracks
