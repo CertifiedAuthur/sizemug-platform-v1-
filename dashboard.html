@@ -149,6 +149,55 @@
 
     <!-- Swiperjs CSS Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.4.5/swiper-bundle.min.css" />
+    
+    <!-- JAVASCRIPT CARET OVERRIDE: Force caret control via JS (same pattern as calender.html) -->
+    <script>
+      (function() {
+        function forceCaretControl() {
+          const allowedSelectors = [
+            '.navbar-search-input',
+            '.search_input_dialog',
+            '#onboarding_main_wrapper input',
+            '#onboarding_main_wrapper textarea',
+            '.onboarding_main input',
+            '.onboarding_main textarea',
+            '.identity_form input',
+            '.identity_form textarea'
+          ];
+          
+          const allEditables = document.querySelectorAll('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), textarea, [contenteditable="true"]');
+          
+          allEditables.forEach(el => {
+            const isAllowed = allowedSelectors.some(selector => {
+              try {
+                return el.matches(selector) || el.closest(selector.split(' ')[0]);
+              } catch(e) {
+                return false;
+              }
+            });
+            
+            if (!isAllowed) {
+              el.style.setProperty('caret-color', 'transparent', 'important');
+            } else {
+              el.style.setProperty('caret-color', 'auto', 'important');
+            }
+          });
+        }
+        
+        forceCaretControl();
+        
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', forceCaretControl);
+        }
+        
+        window.addEventListener('load', forceCaretControl);
+        
+        setInterval(forceCaretControl, 500);
+        
+        document.addEventListener('click', forceCaretControl, true);
+        document.addEventListener('focusin', forceCaretControl, true);
+      })();
+    </script>
   </head>
 
   <body x-data="{image_viewers:false, notification_tab:'notifications', push__top:''}">

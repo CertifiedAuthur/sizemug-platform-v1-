@@ -183,11 +183,51 @@ if (typeof window.__sizemugPreventAutofocusCaret === "undefined") {
   // setInterval). Blurring after the fact can still show a visible caret flash.
   // To stop that entirely, block programmatic focus on editable elements until
   // the user interacts.
+  
+  // Helper: check if element is in allowlist (navbar search, onboarding inputs, modal inputs)
+  const isCaretAllowlisted = (el) => {
+    if (!el || !el.matches) {
+      console.log('⚠️ isCaretAllowlisted: Invalid element', el);
+      return false;
+    }
+    
+    // Direct class/id matches
+    if (el.matches(
+      '.navbar-search-input, .search_input_dialog, ' +
+      '.comment-message-box, #comment_message, ' +
+      '#onboarding_main_wrapper input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), ' +
+      '#onboarding_main_wrapper textarea, ' +
+      '.onboarding_main input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), ' +
+      '.onboarding_main textarea, ' +
+      '.identity_form input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), ' +
+      '.identity_form textarea'
+    )) {
+      console.log('✅ isCaretAllowlisted: Direct match', el.tagName, el.className || el.id);
+      return true;
+    }
+    
+    // Check if inside allowed containers
+    if ((el.matches('input, textarea')) && el.closest('.friends_search_input, .watching_search_input, .suggestion_modal, .animation-modal, .post-comment-container, [id*="comments_modal"]')) {
+      // Make sure it's not a button type
+      if (el.matches('input') && el.matches('[type="hidden"], [type="checkbox"], [type="radio"], [type="button"], [type="submit"], [type="reset"], [type="file"]')) {
+        console.log('❌ isCaretAllowlisted: Inside container but wrong input type');
+        return false;
+      }
+      const container = el.closest('.friends_search_input, .watching_search_input, .suggestion_modal, .animation-modal, .post-comment-container, [id*="comments_modal"]');
+      console.log('✅ isCaretAllowlisted: Inside allowed container', container.className || container.id);
+      return true;
+    }
+    
+    console.log('❌ isCaretAllowlisted: Not allowlisted', el.tagName, el.className || el.id);
+    return false;
+  };
+  
   if (typeof window.__sizemugOriginalHTMLElementFocus !== "function") {
     window.__sizemugOriginalHTMLElementFocus = HTMLElement.prototype.focus;
 
     HTMLElement.prototype.focus = function (...args) {
-      if (!hadUserGesture && isEditableElement(this)) {
+      // Allow focus on allowlisted inputs even before user gesture
+      if (!hadUserGesture && isEditableElement(this) && !isCaretAllowlisted(this)) {
         return;
       }
       return window.__sizemugOriginalHTMLElementFocus.apply(this, args);
@@ -198,7 +238,14 @@ if (typeof window.__sizemugPreventAutofocusCaret === "undefined") {
     if (hadUserGesture) return;
     const active = document.activeElement;
     if (!isEditableElement(active)) return;
+    
+    // Don't blur allowlisted inputs
+    if (isCaretAllowlisted(active)) {
+      console.log('🟢 SCRIPT.JS: Skipping blur - element is allowlisted:', active.tagName, active.className || active.id);
+      return;
+    }
 
+    console.log('🔴 SCRIPT.JS: Blurring element (not allowlisted):', active.tagName, active.className || active.id);
     try {
       active.blur();
     } catch (e) {
@@ -220,13 +267,30 @@ if (typeof window.__sizemugPreventAutofocusCaret === "undefined") {
   // modal init, timers, etc.). Catch those too, until the user actually
   // interacts.
   const onFocusIn = (event) => {
-    if (hadUserGesture) return;
+    if (hadUserGesture) {
+      console.log('🟢 SCRIPT.JS onFocusIn: User gesture detected, allowing focus');
+      return;
+    }
     const target = event.target;
     if (!isEditableElement(target)) return;
+    
+    // Don't blur allowlisted inputs
+    if (isCaretAllowlisted(target)) {
+      console.log('🟢 SCRIPT.JS onFocusIn: Element is allowlisted, allowing focus:', target.tagName, target.className || target.id);
+      return;
+    }
 
+    console.log('🔴 SCRIPT.JS onFocusIn: Will blur element (not allowlisted):', target.tagName, target.className || target.id);
     // Let the focus event complete, then remove it.
     setTimeout(() => {
       if (hadUserGesture) return;
+      // Double-check allowlist again in case element changed
+      if (isCaretAllowlisted(target)) {
+        console.log('🟢 SCRIPT.JS onFocusIn setTimeout: Now allowlisted, skipping blur');
+        return;
+      }
+      
+      console.log('🔴 SCRIPT.JS onFocusIn setTimeout: Blurring now');
       try {
         target.blur();
       } catch (e) {

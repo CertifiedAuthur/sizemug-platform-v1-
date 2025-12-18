@@ -1076,16 +1076,53 @@ html:not(.sizemug-user-gesture) [contenteditable]:not([contenteditable="false"])
   caret-color: transparent !important;
 }
 
-/* After interaction, keep caret hidden everywhere EXCEPT the main navbar search. */
+/* After interaction, keep caret hidden everywhere EXCEPT allowlisted inputs. */
 html.sizemug-user-gesture input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
 html.sizemug-user-gesture textarea,
-html.sizemug-user-gesture [contenteditable]:not([contenteditable="false"]) {
+html.sizemug-user-gesture [contenteditable]:not([contenteditable="false"]),
+html input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html textarea,
+html [contenteditable]:not([contenteditable="false"]) {
   caret-color: transparent !important;
 }
 
-/* Allow caret only for the navbar search bar + its dialog input. */
-html.sizemug-user-gesture #navbar_search_form .navbar-search-input,
-html.sizemug-user-gesture #search_dialog .search_input_dialog {
+/* --------------------------------------------------------------------------
+   CARET ALLOWLIST: These inputs SHOULD show the blinking caret.
+   These rules must come AFTER the hide rules above for proper override.
+   Use high specificity to ensure they win.
+   -------------------------------------------------------------------------- */
+
+/* Allow caret for the navbar search bar + its dialog input */
+html body #navbar_search_form .navbar-search-input,
+html body .navbar-search-form .navbar-search-input,
+html body #search_dialog .search_input_dialog,
+html body .search_input_dialog {
+  caret-color: auto !important;
+}
+
+/* Allow caret for onboarding inputs (account setup flow in dashboard.html) */
+html body #onboarding_main_wrapper input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html body #onboarding_main_wrapper textarea,
+html body #onboarding_main_wrapper [contenteditable]:not([contenteditable="false"]),
+html body .onboarding_main input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html body .onboarding_main textarea,
+html body .identity_form input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html body .identity_form textarea {
+  caret-color: auto !important;
+}
+
+/* Allow caret for modal inputs (comments, search fields in modals) */
+html body .comment-message-box,
+html body #comment_message,
+html body .friends_search_input input,
+html body .watching_search_input input,
+html body .suggestion_modal input,
+html body .animation-modal input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html body .animation-modal textarea,
+html body .post-comment-container input,
+html body .post-comment-container textarea,
+html body [id*="comments_modal"] input,
+html body [id*="comments_modal"] textarea {
   caret-color: auto !important;
 }
 

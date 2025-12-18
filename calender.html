@@ -121,9 +121,16 @@
         
         // This runs immediately and repeatedly to ensure caret is hidden
         function forceHideCarets() {
-          const searchInputs = [
+          // Allowlist: selectors for inputs that SHOULD show caret
+          const allowedInputSelectors = [
             '.navbar-search-input',
-            '.search_input_dialog'
+            '.search_input_dialog',
+            '#onboarding_main_wrapper input',
+            '#onboarding_main_wrapper textarea',
+            '.onboarding_main input',
+            '.onboarding_main textarea',
+            '.identity_form input',
+            '.identity_form textarea'
           ];
           
           // Get all inputs, textareas, and contenteditable elements
@@ -133,27 +140,27 @@
           let allowedCount = 0;
           
           allEditables.forEach(el => {
-            // Check if it's a search input
-            const isSearchInput = searchInputs.some(selector => {
+            // Check if this element matches any allowed selector
+            const isAllowed = allowedInputSelectors.some(selector => {
               try {
-                return el.matches(selector) || el.closest(selector);
+                return el.matches(selector) || el.closest(selector.split(' ')[0]);
               } catch(e) {
                 return false;
               }
             });
             
-            if (!isSearchInput) {
+            if (!isAllowed) {
               el.style.setProperty('caret-color', 'transparent', 'important');
               hiddenCount++;
             } else {
               el.style.setProperty('caret-color', 'auto', 'important');
               allowedCount++;
+              // DEBUG: Log which elements are allowed
+              console.log('✅ ALLOWED:', el.tagName, el.className || el.id, 'in', el.closest('[id], [class]')?.className || el.closest('[id], [class]')?.id);
             }
           });
           
-          if (hiddenCount > 0 || allowedCount > 0) {
-            console.log(`✅ CARET BLOCKER: Hidden ${hiddenCount} carets, Allowed ${allowedCount} search inputs`);
-          }
+          console.log(`📊 CARET BLOCKER: Hidden ${hiddenCount} carets, Allowed ${allowedCount} inputs`);
         }
         
         // Run immediately

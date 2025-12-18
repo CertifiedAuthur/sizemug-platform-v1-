@@ -123,6 +123,81 @@
     <link rel="stylesheet" href="./css/explore/add.text.story.css" />
     <!-- New Story Modal -->
     <link rel="stylesheet" href="./css/new_story.css" />
+    
+    <!-- JAVASCRIPT CARET OVERRIDE: Force caret hiding via JS (bypasses all CSS cache issues) -->
+    <script>
+      (function() {
+        console.log('🎉 EXPLORE CARET BLOCKER: Script loaded and running');
+        
+        function forceHideCarets() {
+          const allowedInputSelectors = [
+            '.navbar-search-input',
+            '.search_input_dialog',
+            '#onboarding_main_wrapper input',
+            '#onboarding_main_wrapper textarea',
+            '.onboarding_main input',
+            '.onboarding_main textarea',
+            '.identity_form input',
+            '.identity_form textarea',
+            '.comment-message-box',
+            '#comment_message',
+            '.friends_search_input input',
+            '.watching_search_input input',
+            '.post-comment-container input',
+            '.post-comment-container textarea',
+            '#comments_modal input',
+            '#comments_modal textarea',
+            '.animation-modal input',
+            '.animation-modal textarea',
+            '#musicSearch',
+            '.story-music-modal-search'
+          ];
+          
+          const allEditables = document.querySelectorAll('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), textarea, [contenteditable="true"]');
+          
+          let hiddenCount = 0;
+          let allowedCount = 0;
+          
+          allEditables.forEach(el => {
+            const isAllowed = allowedInputSelectors.some(selector => {
+              try {
+                return el.matches(selector) || el.closest(selector.split(' ')[0]);
+              } catch(e) {
+                return false;
+              }
+            });
+            
+            if (!isAllowed) {
+              el.style.setProperty('caret-color', 'transparent', 'important');
+              hiddenCount++;
+            } else {
+              el.style.setProperty('caret-color', 'auto', 'important');
+              allowedCount++;
+            }
+          });
+          
+          // Only log summary, not every element
+          if (allowedCount > 0) {
+            console.log(`📊 EXPLORE CARET: Hidden ${hiddenCount}, Allowed ${allowedCount}`);
+          }
+        }
+        
+        forceHideCarets();
+        
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', forceHideCarets);
+        }
+        
+        window.addEventListener('load', forceHideCarets);
+        
+        setInterval(forceHideCarets, 500);
+        
+        document.addEventListener('click', forceHideCarets, true);
+        document.addEventListener('focusin', forceHideCarets, true);
+        
+        console.log('🎉 EXPLORE CARET: All listeners attached');
+      })();
+    </script>
   </head>
 
   <body x-data="{ image_viewers: false, notification_tab: 'notifications', push__top: ''}">

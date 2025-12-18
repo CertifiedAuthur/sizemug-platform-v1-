@@ -101,6 +101,109 @@
     <!-- <link rel="stylesheet" href="./css/explore/story.css" /> -->
     <link rel="stylesheet" href="./css/hashtag/hashtag.css" />
     <link rel="stylesheet" href="./css/musics/musics.css" />
+    
+    <!-- JAVASCRIPT CARET OVERRIDE: Force caret hiding via JS (bypasses all CSS cache issues) -->
+    <script>
+      alert('🎵 MUSICS SCRIPT IS LOADING - v20251218_TEST1');
+      (function() {
+        console.log('🔧 MUSICS CARET BLOCKER: Script loaded and running');
+        console.log('🔧 MUSICS CARET BLOCKER: Script loaded and running');
+        console.log('🔧 MUSICS CARET BLOCKER: Script loaded and running');
+        
+        // This runs immediately and repeatedly to ensure caret is hidden
+        function forceHideCarets() {
+          // Allowlist: selectors for inputs that SHOULD show caret
+          const allowedInputSelectors = [
+            '.navbar-search-input',
+            '.search_input_dialog',
+            '#onboarding_main_wrapper input',
+            '#onboarding_main_wrapper textarea',
+            '.onboarding_main input',
+            '.onboarding_main textarea',
+            '.identity_form input',
+            '.identity_form textarea',
+            '.comment-message-box',
+            '#comment_message',
+            '.friends_search_input input',
+            '.watching_search_input input',
+            '.post-comment-container input',
+            '.post-comment-container textarea',
+            '#comments_modal input',
+            '#comments_modal textarea',
+            '.animation-modal input',
+            '.animation-modal textarea'
+          ];
+          
+          // Get all inputs, textareas, and contenteditable elements
+          const allEditables = document.querySelectorAll('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), textarea, [contenteditable="true"]');
+          
+          let hiddenCount = 0;
+          let allowedCount = 0;
+          
+          allEditables.forEach(el => {
+            // Check if this element matches any allowed selector
+            const isAllowed = allowedInputSelectors.some(selector => {
+              try {
+                return el.matches(selector) || el.closest(selector.split(' ')[0]);
+              } catch(e) {
+                return false;
+              }
+            });
+            
+            if (!isAllowed) {
+              el.style.setProperty('caret-color', 'transparent', 'important');
+              hiddenCount++;
+            } else {
+              el.style.setProperty('caret-color', 'auto', 'important');
+              allowedCount++;
+              // DEBUG: Log which elements are allowed
+              console.log('✅ MUSICS ALLOWED:', el.tagName, el.className || el.id, 'in', el.closest('[id], [class]')?.className || el.closest('[id], [class]')?.id);
+            }
+          });
+          
+          console.log(`📊 MUSICS CARET: Hidden ${hiddenCount} carets, Allowed ${allowedCount} inputs`);
+        }
+        
+        // Run immediately
+        forceHideCarets();
+        
+        // Run after DOM loads
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔧 MUSICS CARET: DOM loaded, applying...');
+            forceHideCarets();
+          });
+        } else {
+          console.log('🔧 MUSICS CARET: DOM already loaded, applying...');
+          forceHideCarets();
+        }
+        
+        // Run after everything loads
+        window.addEventListener('load', () => {
+          console.log('🔧 MUSICS CARET: Window loaded, applying...');
+          forceHideCarets();
+        });
+        
+        // Run periodically for dynamically added elements (every 500ms)
+        let intervalCount = 0;
+        const intervalId = setInterval(() => {
+          forceHideCarets();
+          intervalCount++;
+          if (intervalCount === 1) {
+            console.log('🔧 MUSICS CARET: Interval running every 500ms');
+          }
+        }, 500);
+        
+        // Run on any click/focus event
+        document.addEventListener('click', forceHideCarets, true);
+        document.addEventListener('focusin', (e) => {
+          console.log('🔧 MUSICS CARET: Focus event on', e.target.tagName, e.target.className || e.target.id);
+          forceHideCarets();
+        }, true);
+        
+        console.log('🔧 MUSICS CARET: All event listeners attached');
+      })();
+    </script>
   </head>
 
   <body x-data="{ image_viewers: false, notification_tab: 'notifications', push__top: ''}">
