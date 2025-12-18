@@ -204,6 +204,61 @@ h2.modal-label {
   gap: 0.5rem;
   margin: 0;
 }
+
+/* Ensure consistent alignment for all rows in the modal body */
+.active-week-view-modal .modal-body p,
+.week_view_modal_wrapper .modal-body p,
+.active-week-view-modal .modal-body .det-description,
+.week_view_modal_wrapper .modal-body .det-description,
+.active-week-view-modal .modal-body .invite-box,
+.week_view_modal_wrapper .modal-body .invite-box,
+.active-week-view-modal .modal-body .see-all-profile,
+.week_view_modal_wrapper .modal-body .see-all-profile {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.active-week-view-modal .modal-body p > strong,
+.week_view_modal_wrapper .modal-body p > strong,
+.active-week-view-modal .modal-body .det-description > strong,
+.week_view_modal_wrapper .modal-body .det-description > strong {
+  flex: 0 0 1rem;
+  width: 1rem;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.active-week-view-modal .modal-body p > strong img,
+.week_view_modal_wrapper .modal-body p > strong img,
+.active-week-view-modal .modal-body .det-description > strong img,
+.week_view_modal_wrapper .modal-body .det-description > strong img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.active-week-view-modal .modal-body .invite-box > img,
+.week_view_modal_wrapper .modal-body .invite-box > img {
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* "See all" has no icon in markup; add a spacer so the text aligns with other rows */
+.active-week-view-modal .modal-body .see-all-profile::before,
+.week_view_modal_wrapper .modal-body .see-all-profile::before {
+  content: "";
+  flex: 0 0 1rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Align actions with the text column (icon width + gap) */
+.active-week-view-modal .modal-body .modal-actions,
+.week_view_modal_wrapper .modal-body .modal-actions {
+  margin-left: calc(1rem + 0.5rem);
+}
 .det-description {
   display: flex;
   gap: 0.5rem;
@@ -233,9 +288,33 @@ h2.modal-label {
 .det-description p {
   width: 272px;
 }
-.see-all-profile {
-  margin-left: 1.5rem;
+.active-week-view-modal .see-all-profile,
+.week_view_modal_wrapper .see-all-profile {
+  margin-left: 0;
   color: #8837e9;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.active-week-view-modal .see-all-profile::before,
+.week_view_modal_wrapper .see-all-profile::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+}
+
+/* Align "See all" text start with the text column used by the rows above (icon + gap). */
+.active-week-view-modal .modal-body .see-all-profile,
+.week_view_modal_wrapper .modal-body .see-all-profile {
+  padding-left: 0;
+}
+
+.active-week-view-modal .modal-body .see-all-profile::before,
+.week_view_modal_wrapper .modal-body .see-all-profile::before {
+  width: 1rem;
+  flex-basis: 1rem;
 }
 .active-week-view-modal .modal-body .invite-box,
 .week_view_modal_wrapper .modal-body .invite-box {
@@ -286,8 +365,6 @@ h2.modal-label {
 }
 .active-week-view-modal .modal-body p,
 .week_view_modal_wrapper .modal-body p {
-  display: flex;
-  gap: 0.5rem;
   font-size: 0.75rem;
 }
 .active-week-view-modal .modal-body .profile-images,
@@ -1816,10 +1893,10 @@ table {
 :root {
   /* Single source of truth for calendar vertical scale.
      MUST match `scripts/calender/functions.variables.js` */
-  --cal-day-spacer: 90px; /* DAY_SPACER_PX */
-  /* Increased spacing so events have more breathing room */
-  --cal-px-per-hour: 224px; /* PX_PER_HOUR (1.4× of 160) */
-  --cal-px-per-interval: 56px; /* PX_PER_INTERVAL (15m) */
+  --cal-day-spacer: 60px; /* DAY_SPACER_PX */
+  /* Day view vertical scale */
+  --cal-px-per-hour: 160px; /* PX_PER_HOUR */
+  --cal-px-per-interval: 40px; /* PX_PER_INTERVAL (15m) */
   /* Number of hour blocks in Day view (fallback preserves old behavior). */
   --cal-day-hours-count: 17;
   /* Day view ends at :45 for the last hour block. */
@@ -1831,7 +1908,7 @@ table {
   height: auto;
   max-height: none;
   overflow: visible;
-  background: #f8f9fa;
+  background: #ffffff;
 }
 
 .day-view-container {
@@ -1857,11 +1934,11 @@ table {
 
 /* Collapsible Time Slots */
 .time-hour-group {
-  border-bottom: 2px solid #e5e7eb; /* More visible border */
+  border-bottom: 1px solid #e5e7eb; /* Single clean line */
   display: flex;
   flex-direction: column;
   position: relative;
-  /* Must match JS math (PX_PER_HOUR = 224): 40px header + 184px intervals */
+  /* Must match JS/CSS math: 40px header + (3 × 15-min intervals) */
   height: var(--cal-px-per-hour);
 }
 
@@ -1883,8 +1960,8 @@ table {
   bottom: 0;
   left: 100%;
   right: -9999px; /* Extend far to the right to cut through events area */
-  height: 2px;
-  background: #e5e7eb;
+  height: 1px;
+  background: rgba(229, 231, 235, 0.85);
   z-index: 1;
   pointer-events: none;
 }
@@ -1894,7 +1971,7 @@ table {
 .time-hour-group.spacer {
   height: var(--cal-day-spacer);
   background: white;
-  border-bottom: 2px solid #e5e7eb; /* More visible border */
+  border-bottom: 1px solid #e5e7eb; /* Single clean line */
   position: relative;
 }
 
@@ -1905,8 +1982,8 @@ table {
   bottom: 0;
   left: 100%;
   right: -9999px; /* Extend far to the right to cut through events area */
-  height: 2px;
-  background: #e5e7eb;
+  height: 1px;
+  background: rgba(229, 231, 235, 0.85);
   z-index: 1;
   pointer-events: none;
 }
@@ -1940,11 +2017,12 @@ table {
 /* When hours have non-uniform heights, the fixed repeating-gradient grid will drift.
    Disable it in that state and rely on hour borders extending from the time column. */
 .multi-day-view-container.has-collapsed-hours .multi-day-events {
-  background: #fff;
+  background-color: var(--day-col-bg);
+  background-image: none;
 }
 
 .time-hour-group.is-collapsed .time-hour-header {
-  border-bottom: 2px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .time-hour-group.is-collapsed .time-hour-header::after {
@@ -1953,8 +2031,8 @@ table {
   bottom: 0;
   left: 100%;
   right: -9999px;
-  height: 2px;
-  background: #e5e7eb;
+  height: 1px;
+  background: rgba(229, 231, 235, 0.85);
   z-index: 1;
   pointer-events: none;
 }
@@ -3772,9 +3850,9 @@ label {
 .static-birthday {
   background-color: #f43f5e !important;
   color: #fff !important;
-  padding: 5px;
+  padding: 8px 10px;
   border-radius: 6px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: none !important;
@@ -3789,8 +3867,10 @@ label {
 .static-holiday {
   background-color: #f59e0b !important;
   color: #fff !important;
-  padding: 5px;
+  padding: 8px 10px;
   border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
   width: 100%;
   cursor: pointer;
   box-shadow: none !important;
@@ -3803,10 +3883,10 @@ label {
 
 @media (min-width: 760px) and (max-width: 835px) {
   .static-birthday {
-    font-size: 8px;
+    font-size: 11px;
   }
   .static-holiday {
-    font-size: 8px;
+    font-size: 11px;
   }
 }
 
@@ -3815,20 +3895,29 @@ label {
   font-weight: 700;
   font-size: 10px;
   height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.day-date-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
 
 .day-name {
-  display: flex;
-  gap: 3px;
-
   font-size: 12px;
   font-weight: 600;
   color: #71717a;
-  padding-bottom: 5px;
 }
 
-.day-name span:last-child {
-  color: black;
+.day-date {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
 }
 
 .item-profile-images {
@@ -4229,11 +4318,12 @@ label {
 .multi-day-events {
   /* keep original layout */
   position: relative;
+  background-color: var(--day-col-bg);
 
-  /* Visual grid for multi-day columns (JS/CSS scale: spacer + PX_PER_HOUR, PX_PER_INTERVAL) */
-  background:
-    /* Spacer area (matches DAY_SPACER_PX) */
-    linear-gradient(to bottom, #fff 0, #fff var(--cal-day-spacer)),
+  /* Visual grid for multi-day columns (JS/CSS scale: PX_PER_HOUR, PX_PER_INTERVAL)
+     NOTE: `.multi-day-header` already occupies `--cal-day-spacer`, so grid starts at 0 here.
+     Use background-image so we don't accidentally reset background-color (tint). */
+  background-image:
     /* 15-minute separators */
     repeating-linear-gradient(
       to bottom,
@@ -4247,11 +4337,11 @@ label {
       to bottom,
       transparent 0,
       transparent calc(var(--cal-px-per-hour) - 1px),
-      rgba(209, 213, 219, 0.55) calc(var(--cal-px-per-hour) - 1px),
-      rgba(209, 213, 219, 0.55) var(--cal-px-per-hour)
+      rgba(209, 213, 219, 0.28) calc(var(--cal-px-per-hour) - 1px),
+      rgba(209, 213, 219, 0.28) var(--cal-px-per-hour)
     );
-  background-position: 0 0, 0 var(--cal-day-spacer), 0 var(--cal-day-spacer);
-  background-size: 100% var(--cal-day-spacer), 100% var(--cal-px-per-interval), 100% var(--cal-px-per-hour);
+  background-position: 0 0, 0 0;
+  background-size: 100% var(--cal-px-per-interval), 100% var(--cal-px-per-hour);
 }
 
 .large-day-number {
@@ -4269,41 +4359,73 @@ label {
   flex: 1;
   border-right: 1px solid #e5e7eb;
   position: relative;
+  --day-col-bg: #ffffff;
 }
+
+/* Day view: alternate column tint (matches screenshot) */
+#day-view .multi-day-column:nth-child(odd) {
+  --day-col-bg: #f7f5ff;
+}
+
+/* Day view: first column is extra-light purple */
+#day-view .multi-day-column:first-child {
+  --day-col-bg: #f5efff;
+}
+
 
 .multi-day-column:last-child {
   border-right: none;
 }
 
 .multi-day-header {
-  padding: 12px 8px;
+  padding: 0 12px;
   border-bottom: 1px solid #e5e7eb;
   background: white;
-  text-align: center;
-  min-height: 5.62rem;
-  max-height: 5.62rem;
+  text-align: left;
+  height: var(--cal-day-spacer);
+  min-height: var(--cal-day-spacer);
+  max-height: var(--cal-day-spacer);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
 }
 
-.day-name {
-  font-size: 16px;
+.day-name-date {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+/* Day view time column should not show collapse controls (matches screenshot) */
+.multi-day-time-column .time-collapse-btn {
+  display: none;
+}
+
+.multi-day-time-column .time-hour-header {
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.multi-day-time-column .time-hour-label {
+  font-size: 12px;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 2px;
 }
 
-.day-date {
-  font-size: 13px;
-  color: #9ca3af;
-  font-weight: 400;
+.multi-day-time-column .time-intervals {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.multi-day-time-column .time-interval {
+  padding-left: 10px;
+  font-size: 11px;
+  color: #6b7280;
 }
 
 .multi-day-events {
   position: relative;
   min-height: calc(
-    var(--cal-day-spacer) +
     ((var(--cal-day-hours-count) - 1) * var(--cal-px-per-hour)) +
     var(--cal-last-hour-height)
   );
@@ -4324,8 +4446,8 @@ label {
 }
 
 .multi-day-event-notification {
-  background: #E7E1F9;
-  color: #6B46C1;
+  background: #ef4444;
+  color: #ffffff;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -4335,6 +4457,12 @@ label {
   font-size: 10px;
   font-weight: bold;
   flex-shrink: 0;
+}
+
+/* Day view: notification badge is orange (matches screenshot) */
+#day-view .multi-day-event-notification {
+  background: #fda629 !important;
+  color: #ffffff !important;
 }
 
 .multi-day-event-title {
@@ -4377,45 +4505,79 @@ label {
   z-index: 2;
 }
 
-.multi-day-event-wrapper.full-height .multi-day-event-block {
-  height: 100%;
-  min-height: 0;
-}
-
-.multi-day-event-wrapper.half-height .multi-day-event-block {
-  height: 100%;
-  min-height: 0;
-}
-
 .multi-day-event-block {
-  background: #8b5cf6;
+  background: #E7E1F9;
   border-radius: 8px;
   padding: 12px;
-  color: white;
+  color: #111827;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border-left: 4px solid rgba(255, 255, 255, 0.3);
+  border-left: 3px solid #8b5cf6;
 
   display: flex;
   flex-direction: column;
 }
 
-.multi-day-event-block.event-type-task {
-  background: #E7E1F9 !important;
+/* Day view: add the purple right-edge accent strip (matches screenshot) */
+#day-view .multi-day-event-block {
+  position: relative;
+  overflow: hidden;
 }
 
-.multi-day-event-block.event-type-event {
-  background: #E7E1F9 !important;
+#day-view .multi-day-event-block::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: #8b5cf6;
+  pointer-events: none;
 }
 
-.multi-day-event-block.event-type-meeting {
-  background: #E7E1F9 !important;
+/* Day view: keep card content within the time-sized wrapper so it aligns to the grid */
+#day-view .multi-day-event-wrapper {
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  padding: 0;
 }
 
-.multi-day-event-block.event-type-holiday {
-  background: #E7E1F9 !important;
+#day-view .multi-day-event-block {
+  height: 100%;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
+#day-view .multi-day-event-header {
+  margin-bottom: 4px;
+}
+
+#day-view .multi-day-event-title {
+  font-size: 13px;
+  line-height: 1.15;
+  margin-bottom: 4px;
+}
+
+#day-view .multi-day-event-footer {
+  gap: 6px;
+}
+
+#day-view .multi-day-event-avatar {
+  width: 18px;
+  height: 18px;
+}
+
+#day-view .multi-day-event-time {
+  font-size: 11px;
+}
+
+#day-view .multi-day-event-organizer {
+  font-size: 11px;
+}
+
+.multi-day-event-block.event-type-meeting,
+.multi-day-event-block.event-type-holiday,
 .multi-day-event-block.event-type-birthday {
   background: #E7E1F9 !important;
 }
@@ -4457,18 +4619,18 @@ label {
 }
 
 .multi-day-event-avatar {
-  width: 24px;
-  height: 24px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: none;
 }
 
 .multi-day-event-organizer {
   font-size: 12px;
   opacity: 0.9;
   font-weight: 500;
-  color: #6B46C1 !important;
+  color: #667085 !important;
 }
 /* Height variants for event wrappers */
 .multi-day-event-wrapper.full-height {
@@ -4556,4 +4718,129 @@ label {
 .multi-day-event-block.event-type-birthday {
   background: #E7E1F9 !important;
   background-color: #E7E1F9 !important;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Calendar modal alignment (hard override - covers both modal wrapper paths)  */
+/* -------------------------------------------------------------------------- */
+
+/* Ensure all rows in the task details modal share the same left start (icon column + gap). */
+.week_view_modal_wrapper .modal-body p,
+.week_view_modal_wrapper .modal-body .det-description,
+.week_view_modal_wrapper .modal-body .invite-box,
+.week_view_modal_wrapper .modal-body .see-all-profile {
+  display: flex !important;
+  gap: 0.5rem !important;
+  align-items: flex-start !important;
+  margin: 0 !important;
+}
+
+.week_view_modal_wrapper .modal-body p > strong,
+.week_view_modal_wrapper .modal-body .det-description > strong {
+  flex: 0 0 1rem !important;
+  width: 1rem !important;
+  display: inline-flex !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+}
+
+.week_view_modal_wrapper .modal-body p > strong img,
+.week_view_modal_wrapper .modal-body .det-description > strong img {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.week_view_modal_wrapper .modal-body .invite-box > img:first-child {
+  flex: 0 0 1rem !important;
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+/* "See all" has no icon in markup; add spacer to align with the text column. */
+.week_view_modal_wrapper .modal-body .see-all-profile {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.week_view_modal_wrapper .modal-body .see-all-profile::before {
+  content: "" !important;
+  flex: 0 0 1rem !important;
+  width: 1rem !important;
+  height: 1rem !important;
+  display: block !important;
+}
+
+/* Align action buttons with the text column. */
+.week_view_modal_wrapper .modal-body .modal-actions {
+  margin-left: calc(1rem + 0.5rem) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* =================================================================
+   CARET VISIBILITY CONTROL - CALENDAR PAGE
+   Hide text cursor everywhere except the navbar search bar
+   ================================================================= */
+
+/* Hide caret on ALL editable elements with maximum specificity */
+body input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]):not(.navbar-search-input):not(.search_input_dialog),
+body textarea:not(.navbar-search-input):not(.search_input_dialog),
+body [contenteditable]:not([contenteditable="false"]):not(.navbar-search-input):not(.search_input_dialog),
+body .invite-input,
+body .hashtag-input,
+body #inviteInput,
+body #hashtag-input,
+body .name,
+body #datePicker,
+body #addEventStart,
+body #addEventEnd,
+body #addTaskStart,
+body #addHolidayStart,
+body #addBirthdayStart {
+  caret-color: transparent !important;
+}
+
+/* Only allow caret in the main navbar search bar */
+body .navbar-search-form .navbar-search-input,
+body #navbar_search_form .navbar-search-input,
+body #search_dialog .search_input_dialog {
+  caret-color: auto !important;
+}
+
+/* =================================================================
+   CALENDAR GRID: DISABLE TEXT CARET/SELECTION
+   Prevent browser text-caret/selection inside non-editable cells.
+   ================================================================= */
+
+#week-view,
+#month-view,
+#mobile-view,
+#day-view,
+#week-view td,
+#month-view td,
+#mobile-view td,
+#day-view *,
+#week-view td *,
+#month-view td *,
+#mobile-view td * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#week-view td:focus,
+#month-view td:focus,
+#mobile-view td:focus,
+#week-view td:focus-visible,
+#month-view td:focus-visible,
+#mobile-view td:focus-visible {
+  outline: none !important;
+}
+
+#day-view :focus,
+#day-view :focus-visible {
+  outline: none !important;
 }

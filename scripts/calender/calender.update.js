@@ -522,6 +522,16 @@ class EventHandler {
     this.modalElement.css({ display: "block" });
     this.modalElement.show();
     this.updateModalPosition();
+
+    // Prevent any focus/caret-browsing artifacts inside the modal.
+    try {
+      const active = document.activeElement;
+      if (active && typeof active.blur === "function") active.blur();
+    } catch (e) {
+      // ignore
+    }
+    
+    // Alignment will be handled by CSS
   }
 
   hideModal() {

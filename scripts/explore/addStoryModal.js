@@ -1118,6 +1118,29 @@ function initStoryMusicModalUi() {
 
     listHost.innerHTML = `<div class="story-music-host ${hostModeClass}">${headerHtml}<div class="${wrapperClass}">${itemsHtml}</div></div>`;
 
+    // Some global stylesheets can still wipe borders in drill-down contexts.
+    // Force the bordered-card look inline (with !important) for Category/Artist drill-down track rows.
+    if (state.route.mode === "category" || state.route.mode === "artist") {
+      // Ensure the list wrapper has padding for spacing from modal walls
+      const listWrapper = listHost.querySelector(".story-music-list, .story-music-grid");
+      if (listWrapper) {
+        listWrapper.style.setProperty("padding", "14px", "important");
+      }
+      
+      const trackElements = listHost.querySelectorAll(".story-music-item[data-track-id], .story-music-grid-card[data-track-id]");
+      console.log(`[StoryMusic] Enforcing borders on ${trackElements.length} drill-down track rows in ${state.route.mode} mode`);
+      trackElements.forEach((el) => {
+        el.style.setProperty("border-width", "1px", "important");
+        el.style.setProperty("border-style", "solid", "important");
+        el.style.setProperty("border-color", "#eef0f3", "important");
+        el.style.setProperty("border-radius", "14px", "important");
+        el.style.setProperty("background-color", "#fff", "important");
+        el.style.setProperty("box-shadow", "0 0 0 1px #eef0f3 inset", "important");
+        el.style.setProperty("outline", "1px solid #eef0f3", "important");
+        el.style.setProperty("outline-offset", "-1px");
+      });
+    }
+
   // Apply the current search term without re-rendering (Boost-style).
   applySearchFilterToHost(listHost);
 
@@ -1727,29 +1750,28 @@ function initStoryMusicModalUi() {
               .join("")}</div>`;
           }
         }
-        elFavoritesEmpty?.classList.add("explore-hidden");
       }
     }
-  }
 
-  // Restore focus to search input if it had focus before rendering
-  // (prevents losing typing position in drill-down search)
-  if (hadFocus) {
-    const newActiveInput =
-      state.route.mode === "category"
-        ? elCategoriesGrid?.querySelector(".story-music-modal__search--injected .story-music-modal-search")
-        : state.route.mode === "artist"
-          ? elArtistsList?.querySelector(".story-music-modal__search--injected .story-music-modal-search")
-          : getActiveSearchInput();
-    if (newActiveInput && document.activeElement !== newActiveInput) {
-      // Use microtask to ensure DOM is fully updated before focusing
-      Promise.resolve().then(() => {
-        newActiveInput.focus();
-        // Restore cursor to end of input
-        if (newActiveInput.value) {
-          newActiveInput.setSelectionRange(newActiveInput.value.length, newActiveInput.value.length);
-        }
-      });
+    // Restore focus to search input if it had focus before rendering
+    // (prevents losing typing position in drill-down search)
+    if (hadFocus) {
+      const newActiveInput =
+        state.route.mode === "category"
+          ? elCategoriesGrid?.querySelector(".story-music-modal__search--injected .story-music-modal-search")
+          : state.route.mode === "artist"
+            ? elArtistsList?.querySelector(".story-music-modal__search--injected .story-music-modal-search")
+            : getActiveSearchInput();
+      if (newActiveInput && document.activeElement !== newActiveInput) {
+        // Use microtask to ensure DOM is fully updated before focusing
+        Promise.resolve().then(() => {
+          newActiveInput.focus();
+          // Restore cursor to end of input
+          if (newActiveInput.value) {
+            newActiveInput.setSelectionRange(newActiveInput.value.length, newActiveInput.value.length);
+          }
+        });
+      }
     }
   }
 

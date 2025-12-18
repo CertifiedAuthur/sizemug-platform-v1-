@@ -1064,3 +1064,153 @@ button.my_rainbow_button {
   background-position: center;
   background-repeat: no-repeat;
 }
+
+/* --------------------------------------------------------------------------
+   Caret guard: prevent the blinking text caret from showing on page load.
+   The caret should only appear after a real user interaction.
+   JS toggles the `sizemug-user-gesture` class on <html>.
+   -------------------------------------------------------------------------- */
+html:not(.sizemug-user-gesture) input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html:not(.sizemug-user-gesture) textarea,
+html:not(.sizemug-user-gesture) [contenteditable]:not([contenteditable="false"]) {
+  caret-color: transparent !important;
+}
+
+/* After interaction, keep caret hidden everywhere EXCEPT the main navbar search. */
+html.sizemug-user-gesture input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]),
+html.sizemug-user-gesture textarea,
+html.sizemug-user-gesture [contenteditable]:not([contenteditable="false"]) {
+  caret-color: transparent !important;
+}
+
+/* Allow caret only for the navbar search bar + its dialog input. */
+html.sizemug-user-gesture #navbar_search_form .navbar-search-input,
+html.sizemug-user-gesture #search_dialog .search_input_dialog {
+  caret-color: auto !important;
+}
+
+/* --------------------------------------------------------------------------
+   Modal anti-blink: prevent caret-browsing / selection caret in modal text.
+   Keep real form controls editable/selectable.
+   -------------------------------------------------------------------------- */
+
+dialog,
+[role="dialog"],
+[aria-modal="true"],
+[data-modal],
+.modal,
+.modal-overlay,
+.popup-overlay,
+.over_lay,
+.modal-wrapper,
+.header_modal,
+.auth_modal,
+.banner_modal,
+.cal-modal,
+.animation-modal,
+.detail-modal,
+.week_view_modal_wrapper,
+.active-week-view-modal {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+dialog :focus,
+dialog :focus-visible,
+[role="dialog"] :focus,
+[role="dialog"] :focus-visible,
+[aria-modal="true"] :focus,
+[aria-modal="true"] :focus-visible,
+[data-modal] :focus,
+[data-modal] :focus-visible,
+.modal :focus,
+.modal :focus-visible,
+.cal-modal :focus,
+.cal-modal :focus-visible,
+.animation-modal :focus,
+.animation-modal :focus-visible,
+.detail-modal :focus,
+.detail-modal :focus-visible,
+.week_view_modal_wrapper :focus,
+.week_view_modal_wrapper :focus-visible,
+.active-week-view-modal :focus,
+.active-week-view-modal :focus-visible {
+  outline: none !important;
+}
+
+/* Allow normal selection/typing inside real controls within modals. */
+dialog input,
+dialog textarea,
+dialog select,
+dialog option,
+dialog [contenteditable]:not([contenteditable="false"]),
+[role="dialog"] input,
+[role="dialog"] textarea,
+[role="dialog"] select,
+[role="dialog"] option,
+[role="dialog"] [contenteditable]:not([contenteditable="false"]),
+[aria-modal="true"] input,
+[aria-modal="true"] textarea,
+[aria-modal="true"] select,
+[aria-modal="true"] option,
+[aria-modal="true"] [contenteditable]:not([contenteditable="false"]),
+[data-modal] input,
+[data-modal] textarea,
+[data-modal] select,
+[data-modal] option,
+[data-modal] [contenteditable]:not([contenteditable="false"]),
+.modal input,
+.modal textarea,
+.modal select,
+.modal option,
+.modal [contenteditable]:not([contenteditable="false"]),
+.cal-modal input,
+.cal-modal textarea,
+.cal-modal select,
+.cal-modal option,
+.cal-modal [contenteditable]:not([contenteditable="false"]),
+.animation-modal input,
+.animation-modal textarea,
+.animation-modal select,
+.animation-modal option,
+.animation-modal [contenteditable]:not([contenteditable="false"]),
+.week_view_modal_wrapper input,
+.week_view_modal_wrapper textarea,
+.week_view_modal_wrapper select,
+.week_view_modal_wrapper option,
+.week_view_modal_wrapper [contenteditable]:not([contenteditable="false"]) {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* --------------------------------------------------------------------------
+   Calendar views: prevent caret-browsing / text-selection caret from appearing
+   when clicking non-editable calendar UI (Day/Week/Month/Mobile).
+   Scoped to calendar IDs so it won't affect normal pages.
+   -------------------------------------------------------------------------- */
+
+#day-view,
+#week-view,
+#month-view,
+#mobile-view,
+#day-view *,
+#week-view td,
+#month-view td,
+#mobile-view td,
+#week-view td *,
+#month-view td *,
+#mobile-view td * {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#day-view :focus,
+#day-view :focus-visible,
+#week-view td:focus,
+#month-view td:focus,
+#mobile-view td:focus,
+#week-view td:focus-visible,
+#month-view td:focus-visible,
+#mobile-view td:focus-visible {
+  outline: none !important;
+}

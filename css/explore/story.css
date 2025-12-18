@@ -1905,11 +1905,10 @@ label.search_dialog:focus-within {
   justify-content: flex-start;
   padding-left: 20px;
   z-index: 100;
-  transition: background-color 0.3s ease;
 }
 
 .story_modal-contents .story__view .previous_story_media:hover {
-  --tw-bg-opacity: 0.2;
+  /* Removed background opacity change - only show arrow */
 }
 
 .story_modal-contents .story__view .previous_story_media::before {
@@ -1948,11 +1947,10 @@ label.search_dialog:focus-within {
   justify-content: flex-end;
   padding-right: 20px;
   z-index: 100;
-  transition: background-color 0.3s ease;
 }
 
 .story_modal-contents .story__view .next_story_media:hover {
-  --tw-bg-opacity: 0.2;
+  /* Removed background opacity change - only show arrow */
 }
 
 .story_modal-contents .story__view .next_story_media::before {

@@ -212,9 +212,12 @@ body.story-music-modal-open {
 .story-music-panel {
   display: none;
   height: 100%;
-  overflow: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding: 14px;
   scrollbar-width: none;
+  /* Prevent layout jitter when switching between panels/drill-down (Windows scrollbars). */
+  scrollbar-gutter: stable;
 }
 
 .story-music-panel::-webkit-scrollbar {
@@ -224,6 +227,48 @@ body.story-music-modal-open {
 
 .story-music-panel.is-active {
   display: block;
+}
+
+/* Ensure track rows keep the same bordered-card look in all contexts.
+   (Some pages/styles can accidentally override borders in drill-down or non-ForYou panels.) */
+#storyMusicModal .story-music-item {
+  border: 1px solid #eef0f3;
+  border-color: #eef0f3;
+}
+
+/* Drill-down track rows sometimes get borders stripped by page-level CSS.
+   Use an inset ring so borders remain visible in Category/Artist drill-down lists. */
+#storyMusicModal .story-music-host--category .story-music-item,
+#storyMusicModal .story-music-host--artist .story-music-item {
+  border: 1px solid #eef0f3 !important;
+  border-color: #eef0f3 !important;
+  box-shadow: 0 0 0 1px #eef0f3 inset !important;
+}
+
+#storyMusicModal .story-music-host--category div[data-track-id],
+#storyMusicModal .story-music-host--artist div[data-track-id] {
+  /* Hard override: some global CSS can zero out border-width via utilities/resets.
+     Use explicit longhands + !important, and avoid targeting buttons (they are <button data-track-id>). */
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: #eef0f3 !important;
+  background: #fff;
+  box-shadow: 0 0 0 1px #eef0f3 inset !important;
+  outline: 1px solid #eef0f3 !important;
+  outline-offset: -1px;
+}
+
+#storyMusicModal .story-music-host--category .story-music-grid-card,
+#storyMusicModal .story-music-host--artist .story-music-grid-card {
+  border: 1px solid #eef0f3 !important;
+  border-color: #eef0f3 !important;
+  box-shadow: 0 0 0 1px #eef0f3 inset !important;
+}
+
+#storyMusicModal .story-music-artist,
+#storyMusicModal .story-music-fav-artist {
+  border: 1px solid #eef0f3;
+  border-color: #eef0f3;
 }
 
 .story-music-host {
@@ -535,8 +580,8 @@ body.story-music-modal-open {
 }
 
 .story-music-detail-hero--artist .story-music-artist-hero__right {
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .story-music-artist-hero__img {

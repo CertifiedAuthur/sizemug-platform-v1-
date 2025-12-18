@@ -1,5 +1,6 @@
 .active_calender_user {
-  display: none !important; /* Hide the active calendar users section */
+  display: flex;
+  align-items: center;
   width: 100%;
   height: 4rem;
   overflow: hidden;
@@ -34,6 +35,8 @@
 
 .active_calender_user .active_item > div img {
   object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
 .active_calender_user .active_item h4 {
@@ -189,6 +192,42 @@
   font-size: 13px;
 }
 
+/* -------------------------------------------------------------------------- */
+/* NUCLEAR OVERRIDE: Modal alignment (loaded LAST, overrides everything) */
+/* -------------------------------------------------------------------------- */
+
+/* Remove the ::before spacer that's blocking leftward movement */
+.week_view_modal_wrapper .modal-body .see-all-profile::before,
+.week-view-modal .modal-body .see-all-profile::before {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
+  flex: 0 0 0 !important;
+}
+
+/* Move see-all forward so S is visible */
+.week_view_modal_wrapper .modal-body .see-all-profile,
+.week-view-modal .modal-body .see-all-profile {
+  margin-left: 0px !important;
+  padding-left: 0 !important;
+}
+
+/* Move modal-actions buttons slightly forward */
+.week_view_modal_wrapper .modal-body .modal-actions,
+.week-view-modal .modal-body .modal-actions {
+  margin-left: 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+/* Move only the first div (invite/trash) slightly left */
+.week_view_modal_wrapper .modal-body .modal-actions > div:first-child,
+.week-view-modal .modal-body .modal-actions > div:first-child {
+  margin-left: -5px !important;
+}
+
+
 .active_invited_container_slide .invited_lists {
   height: auto;
   overflow-y: auto;
@@ -223,4 +262,134 @@
 
 .active_invited_container_slide .invited_lists li button:hover svg path {
   stroke: #ff3a30d3;
+}
+/* Birthday Celebrant Dropdown Styles */
+.birthday-celebrant {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.custom-dropdown {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+.selected-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: white;
+}
+
+.placeholder-birthday {
+  display: flex;
+  align-items: center;
+}
+
+.selected-item img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-options {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+  margin-top: 8px;
+  overflow-y: auto;
+  max-height: 320px;
+}
+
+.dropdown-options::-webkit-scrollbar {
+  display: none;
+}
+
+.dropdown-options {
+  scrollbar-width: none;
+}
+
+.dropdown-options li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-options li:hover {
+  background-color: #f9fafb;
+}
+
+.dropdown-options li img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.dropdown-options li.selected {
+  background-color: #f9fafb;
+}
+
+.dropdown-options li.selected::after {
+  content: "✔";
+  font-size: 14px;
+  color: #8837e9;
+  margin-left: auto;
+  font-weight: bold;
+}
+
+.user-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* =================================================================
+   CARET VISIBILITY CONTROL - CALENDAR PAGE SPECIFIC
+   Reinforcement to hide text cursor everywhere
+   ================================================================= */
+
+/* Hide caret on ALL inputs and editable elements with maximum specificity */
+body.content_area input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]):not(.navbar-search-input):not(.search_input_dialog),
+body.content_area textarea:not(.navbar-search-input):not(.search_input_dialog),
+body.content_area [contenteditable]:not([contenteditable="false"]):not(.navbar-search-input):not(.search_input_dialog),
+body .invite-input,
+body .hashtag-input,
+body #inviteInput,
+body #hashtag-input,
+body .cal-search input,
+body .invite-search input,
+body .sg-wavy-header-search input,
+body .gallery-search input,
+body .interests-search input,
+body #folderNameInput {
+  caret-color: transparent !important;
+}
+
+/* Only allow caret in navbar search */
+body .navbar-search-form .navbar-search-input,
+body #navbar_search_form .navbar-search-input,
+body #search_dialog .search_input_dialog {
+  caret-color: auto !important;
 }

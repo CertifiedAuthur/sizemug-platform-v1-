@@ -57,12 +57,145 @@
     <link rel="stylesheet" href="./css/calender/notification_page.css?v=12" />
     <link rel="stylesheet" href="./css/folder-modal.css?v=20" />
     <link rel="stylesheet" href="./css/calender/calender.collapsible.time.css?v=20" />
-  <link rel="stylesheet" href="./css/calender/calendar.css?v=49" />
-    <link rel="stylesheet" href="./css/calender/active.calender.css?v=20" />
+  <link rel="stylesheet" href="./css/calender/calendar.css?v=71" />
+    <link rel="stylesheet" href="./css/calender/active.calender.css?v=67" />
     
     <!-- Tasks and Event Detail Panels -->
     <link rel="stylesheet" href="./css/tasks/tasks.panel.css" />
     <link rel="stylesheet" href="./css/tasks/event.detail.panel.css" />
+    
+    <!-- CARET OVERRIDE: Absolute final rule to hide text cursor everywhere except navbar search -->
+    <style id="caret-override-styles">
+      /* Hide caret everywhere with maximum specificity - correct CSS syntax */
+      input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]):not(.navbar-search-input):not(.search_input_dialog) {
+        caret-color: transparent !important;
+      }
+      
+      textarea:not(.navbar-search-input):not(.search_input_dialog) {
+        caret-color: transparent !important;
+      }
+      
+      [contenteditable="true"]:not(.navbar-search-input):not(.search_input_dialog) {
+        caret-color: transparent !important;
+      }
+      
+      div[contenteditable="true"]:not(.navbar-search-input):not(.search_input_dialog) {
+        caret-color: transparent !important;
+      }
+      
+      /* Target all specific calendar inputs by class and ID */
+      .invite-input,
+      .hashtag-input,
+      #inviteInput,
+      #hashtag-input,
+      .name,
+      #datePicker,
+      #addEventStart,
+      #addEventEnd,
+      #addTaskStart,
+      #addHolidayStart,
+      #addBirthdayStart,
+      #folderNameInput,
+      #interestsSearch,
+      #gallerySearchInput,
+      .cal-search input,
+      .invite-search input,
+      .sg-wavy-header-search input,
+      .gallery-search input,
+      .interests-search input {
+        caret-color: transparent !important;
+      }
+      
+      /* Only allow caret in navbar search - with highest specificity */
+      html body .navbar-search-form .navbar-search-input,
+      html body #navbar_search_form .navbar-search-input,
+      html body #search_dialog .search_input_dialog {
+        caret-color: auto !important;
+      }
+    </style>
+    
+    <!-- JAVASCRIPT CARET OVERRIDE: Force caret hiding via JS (bypasses all CSS cache issues) -->
+    <script>
+      (function() {
+        console.log('🔧 CARET BLOCKER: Script loaded and running');
+        
+        // This runs immediately and repeatedly to ensure caret is hidden
+        function forceHideCarets() {
+          const searchInputs = [
+            '.navbar-search-input',
+            '.search_input_dialog'
+          ];
+          
+          // Get all inputs, textareas, and contenteditable elements
+          const allEditables = document.querySelectorAll('input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="file"]), textarea, [contenteditable="true"]');
+          
+          let hiddenCount = 0;
+          let allowedCount = 0;
+          
+          allEditables.forEach(el => {
+            // Check if it's a search input
+            const isSearchInput = searchInputs.some(selector => {
+              try {
+                return el.matches(selector) || el.closest(selector);
+              } catch(e) {
+                return false;
+              }
+            });
+            
+            if (!isSearchInput) {
+              el.style.setProperty('caret-color', 'transparent', 'important');
+              hiddenCount++;
+            } else {
+              el.style.setProperty('caret-color', 'auto', 'important');
+              allowedCount++;
+            }
+          });
+          
+          if (hiddenCount > 0 || allowedCount > 0) {
+            console.log(`✅ CARET BLOCKER: Hidden ${hiddenCount} carets, Allowed ${allowedCount} search inputs`);
+          }
+        }
+        
+        // Run immediately
+        forceHideCarets();
+        
+        // Run after DOM loads
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            console.log('🔧 CARET BLOCKER: DOM loaded, applying...');
+            forceHideCarets();
+          });
+        } else {
+          console.log('🔧 CARET BLOCKER: DOM already loaded, applying...');
+          forceHideCarets();
+        }
+        
+        // Run after everything loads
+        window.addEventListener('load', () => {
+          console.log('🔧 CARET BLOCKER: Window loaded, applying...');
+          forceHideCarets();
+        });
+        
+        // Run periodically for dynamically added elements (every 500ms)
+        let intervalCount = 0;
+        const intervalId = setInterval(() => {
+          forceHideCarets();
+          intervalCount++;
+          if (intervalCount === 1) {
+            console.log('🔧 CARET BLOCKER: Interval running every 500ms');
+          }
+        }, 500);
+        
+        // Run on any click/focus event
+        document.addEventListener('click', forceHideCarets, true);
+        document.addEventListener('focusin', (e) => {
+          console.log('🔧 CARET BLOCKER: Focus event on', e.target.tagName, e.target.className || e.target.id);
+          forceHideCarets();
+        }, true);
+        
+        console.log('🔧 CARET BLOCKER: All event listeners attached');
+      })();
+    </script>
   </head>
 
   <body x-data="{image_viewers:false, notification_tab:'notifications', push__top:''}">
@@ -1279,7 +1412,7 @@
               <input x-model="search_input" placeholder="Search contents" class="navbar-search-input" />
             </form>
 
-            <dialog x-cloak open x-show="search_input !=''" class="dialog-visible" id="search_dialog">
+            <dialog x-cloak x-bind:open="search_input !=''" x-show="search_input !=''" class="dialog-visible" id="search_dialog">
               <div class="search_dialog">
                 <header class="search_dialog-header">
                   <form>
@@ -1370,7 +1503,7 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6L12 18" stroke="#33363F" stroke-width="2" stroke-linecap="round"/><path d="M18 12L6 12" stroke="#33363F" stroke-width="2" stroke-linecap="round"/></svg>
 
                 <ul class="sizemug_navbar_action--plus--dropdown">
-                  <li role="button" tabindex="0" data-target="post">Create Posts</li>
+                  <li role="button" tabindex="0" onclick="window.location.href='post.html'">Create Posts</li>
                   <li role="button" tabindex="0" data-target="post">Create Tasks</li>
                   <li role="button" tabindex="0" data-target="post">Create Collaboration</li>
                   <li role="button" tabindex="0" data-target="post">Create Campaign</li>
@@ -3580,13 +3713,14 @@
     <script src="./scripts/calender/comments.js"></script>
     <script src="./scripts/folder-manager.js"></script>
 
-  <script src="./scripts/calender/functions.variables.js?v=48"></script>
+  <script src="./scripts/calender/functions.variables.js?v=71"></script>
   <script src="./scripts/calender/calender.js?v=34"></script>
-  <script src="./scripts/calender/calender.update.js?v=39"></script>
+  <script src="./scripts/calender/calender.update.js?v=51"></script>
     <!-- <script src="scripts/calender/calendar-refactored.js"></script> -->
-  <script src="./scripts/calender/active.calender.js?v=34"></script>
+  <script src="./scripts/calender/active.calender.js?v=36"></script>
   <script src="./scripts/calender/calender.add.new.js?v=34"></script>
   <script src="./scripts/calender/calender.collapsible.time.js?v=34"></script>
+  <script src="./scripts/calender/birthday.dropdown.js?v=2"></script>
     
     <!-- Tasks and Event Detail Panels -->
     <script src="./scripts/tasks/tasks.panel.js"></script>

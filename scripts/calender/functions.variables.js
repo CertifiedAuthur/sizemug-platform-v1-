@@ -314,6 +314,25 @@ const generateRandomImages = (images) => {
   return randomImages;
 };
 
+// Stable (deterministic) string hash for UI seeding (32-bit unsigned)
+const hashString = (str = "") => {
+  // FNV-1a
+  let hash = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    hash ^= str.charCodeAt(i);
+    hash = (hash + (hash << 1) + (hash << 4) + (hash << 7) + (hash << 8) + (hash << 24)) >>> 0;
+  }
+  return hash >>> 0;
+};
+
+const padTime24 = (timeStr) => {
+  const [hRaw, mRaw = "00"] = (timeStr || "").split(":");
+  const h = Number.parseInt(hRaw, 10);
+  const m = Number.parseInt(mRaw, 10);
+  if (Number.isNaN(h) || Number.isNaN(m)) return timeStr;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+};
+
 async function generateProfileImagesHtml(images = []) {
   const randomNames = ["Wade Warren", "Wade Warren", "Wade Warren", "Wade Warren", "Emily"];
   const defaultImage = "./images/calender/icons/Avatar.svg";
@@ -563,7 +582,10 @@ function generateWeekView(date) {
     html += `
           <th class="day-column ${thuDay} ${weekendClass}">
               <div class="the-day-date">
-                  <div class="day-name"><span>${dayName}</span> - <span class="large-font">${day.getDate()}</span></div>
+                  <div class="day-date-wrapper">
+                      <div class="day-name">${dayName}</div>
+                      <div class="day-date">${day.getDate()}</div>
+                  </div>
                   ${
                     displayHeaderText
                       ? `
@@ -727,6 +749,7 @@ function generateMonthView(date) {
           time: "All day",
           isHeader: true,
           images: dayContent.header.images || [],
+          data: dayContent.header,
         });
       }
 
@@ -738,16 +761,18 @@ function generateMonthView(date) {
             content.forEach((item) => {
               events.push({
                 type: item.category || "task",
-                title: item.text_1 || item.text || "Task",
+                title: item.text_2 || item.text_1 || item.text || "Task",
                 time: time,
                 isHeader: false,
                 images: item.images || [],
+                description: item.description || "",
+                data: item,
               });
             });
           } else if (content && typeof content === "object") {
             events.push({
               type: content.category || "task",
-              title: content.text_2 || content.text || "Task",
+              title: content.text_2 || content.text_1 || content.text || "Task",
               time: time,
               isHeader: false,
               images: content.images || [],
@@ -901,19 +926,24 @@ function generateMonthView(date) {
     // Get the event data
     const events = getEventsForDay(day);
     const eventData = events[eventIndex];
-    
-    if (!eventData || !eventData.data) return;
-    
-    const content = eventData.data;
+
+    if (!eventData) return;
+
+    // Public month items can come from different shapes (header/object/array-item).
+    // Prefer the stored raw content, but gracefully fall back to the normalized event.
+    const content = eventData.data && typeof eventData.data === "object" ? eventData.data : eventData;
+
+    const contentCategory = content.category || eventData.type || "task";
+    const modalTitle = content.text_2 || content.text_1 || content.text || eventData.title || "No Title";
     const dayDate = new Date(year, month, day);
     const fullDate = dayDate.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric" });
     const time = eventData.time !== "All day" ? eventData.time : "";
     
     // Generate profile images HTML
-    const profileImagesHtml = await generateProfileImagesHtml(content.images || []);
+    const profileImagesHtml = await generateProfileImagesHtml((content.images || eventData.images || []) ?? []);
     
     // Get truncated description
-    const descriptionData = getTruncatedDescription(content.description || "");
+    const descriptionData = getTruncatedDescription((content.description || eventData.description || "") ?? "");
     
     // Determine category dot class
     const categoryDotClass = {
@@ -921,7 +951,7 @@ function generateMonthView(date) {
       event: "blue-dot",
       holiday: "green-dot",
       birthday: "yellow-dot",
-    }[content.category] || "";
+    }[contentCategory] || "";
     
     const descriptionHtml = `
       <div class="det-description">
@@ -939,7 +969,7 @@ function generateMonthView(date) {
       <div class="modal-header">
         <div class="title-dot">
           <div class="${categoryDotClass}"></div>
-          <h2>${content.text_2 || content.text || "No Title"}</h2>
+          <h2>${modalTitle}</h2>
         </div>
         <button class="close-modal">&times;</button>
       </div>
@@ -986,6 +1016,8 @@ function generateMonthView(date) {
       `);
       
       $("body").append(modalWrapper);
+      
+      // Alignment will be handled by CSS
       
       // Position modal
       const itemOffset = $item.offset();
@@ -1124,77 +1156,123 @@ function generateDayView(date) {
       Object.keys(dayContent).forEach((time) => {
         if (time !== "header") {
           const content = dayContent[time];
-          const time24 = convertTo24Hour(time); // Convert "7 AM" to "7:00" for positioning
+          const time24 = padTime24(convertTo24Hour(time)); // Convert "7 AM" to "07:00" for positioning
           const time12 = formatTime12From24(time24);
           
           if (Array.isArray(content)) {
             content.forEach((item) => {
+              const title = item.text_2 || item.text || "Task";
+              const organizerSeed = `${dayShort}-${time24}-${title}`;
               events.push({
                 type: item.category || "task",
-                title: item.text_2 || item.text || "Task", // Use text_2 for title, not text_1 which is the time
+                title, // Use text_2 for title, not text_1 which is the time
                 time: time12, // Always display 12-hour time
                 startTime: time24, // Keep 24-hour for positioning
                 endTime: calculateEndTime(time24, DEFAULT_EVENT_DURATION_MINUTES),
                 isHeader: false,
                 images: item.images || [],
-                organizer: getOrganizerName(),
+                organizer: getOrganizerName(organizerSeed),
               });
             });
           } else if (content && typeof content === "object") {
+            const title = content.text_2 || content.text || "Task";
+            const organizerSeed = `${dayShort}-${time24}-${title}`;
             events.push({
               type: content.category || "task",
-              title: content.text_2 || content.text || "Task", // Use text_2 for title, not text_1
+              title, // Use text_2 for title, not text_1
               time: time12, // Always display 12-hour time
               startTime: time24, // Keep 24-hour for positioning
               endTime: calculateEndTime(time24, DEFAULT_EVENT_DURATION_MINUTES),
               isHeader: false,
               images: content.images || [],
-              organizer: getOrganizerName(),
+              organizer: getOrganizerName(organizerSeed),
             });
           }
         }
       });
     }
 
-    // Add additional random events to create a mix of full and half height
+    // Add additional demo events (deterministic) without overlaps
     const additionalEvents = generateRandomEvents(dayShort);
-    events.push(...additionalEvents);
+
+    const toMinutesSimple = (timeStr) => {
+      const [h, m] = (timeStr || "").split(":").map(Number);
+      if (Number.isNaN(h) || Number.isNaN(m)) return NaN;
+      return h * 60 + m;
+    };
+
+    const rangesOverlap = (a, b) => {
+      const aStart = toMinutesSimple(a.startTime);
+      const aEnd = toMinutesSimple(a.endTime);
+      const bStart = toMinutesSimple(b.startTime);
+      const bEnd = toMinutesSimple(b.endTime);
+      if ([aStart, aEnd, bStart, bEnd].some(Number.isNaN)) return false;
+      return aStart < bEnd && bStart < aEnd;
+    };
+
+    additionalEvents.forEach((candidate) => {
+      const collides = events.some((existing) => rangesOverlap(existing, candidate));
+      if (!collides) events.push(candidate);
+    });
 
     return events.sort((a, b) => a.startTime.localeCompare(b.startTime));
   };
 
-  // Generate random events for demonstration
+  // Generate deterministic demo events for Day view
   const generateRandomEvents = (dayShort) => {
-    const eventTitles = ["Team Standup", "Client Meeting", "Code Review", "Design Workshop", "User Research", "Sprint Planning", "Product Demo", "Training Session", "Onboarding Presentation", "Strategy Meeting", "Performance Review", "Brainstorming Session", "Technical Discussion", "Project Kickoff"];
+    const profileImages = [
+      "./images/calender/icons/Avatar.svg",
+      "./images/calender/icons/Avatar.svg",
+      "./images/calender/icons/Avatar.svg",
+      "./images/calender/icons/Avatar.svg",
+    ];
 
-    const eventTypes = ["task", "event", "meeting", "holiday", "birthday"];
-    const timeSlots = ["8:00", "9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
-    const profileImages = ["./icons/Avatar.svg", "./icons/Avatar.svg", "./icons/Avatar.svg", "./icons/Avatar.svg"];
+    // Base schedule (15-min aligned) so cards are stable between refreshes.
+    // We'll render only a small subset per day to keep the Day view intentionally sparse.
+    const schedule = [
+      { start: "06:00", duration: 60, type: "meeting", title: "Daily Standup" },
+      { start: "07:30", duration: 30, type: "task", title: "Inbox Review" },
+      { start: "08:15", duration: 45, type: "event", title: "Design Sync" },
+      { start: "09:30", duration: 60, type: "meeting", title: "Client Meeting" },
+      { start: "11:00", duration: 45, type: "task", title: "Code Review" },
+      { start: "13:00", duration: 60, type: "meeting", title: "Sprint Planning" },
+      { start: "15:00", duration: 45, type: "event", title: "Project Update" },
+      { start: "16:30", duration: 30, type: "task", title: "Wrap-up" },
+    ];
 
-    const randomEvents = [];
-    const numEvents = Math.floor(Math.random() * 4) + 2; // 2-5 random events per day
+    const daySeed = `${dayShort || "day"}`;
 
-    for (let i = 0; i < numEvents; i++) {
-      const randomTime = timeSlots[Math.floor(Math.random() * timeSlots.length)];
-      const randomTitle = eventTitles[Math.floor(Math.random() * eventTitles.length)];
-      const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+    // Day view shows Thu–Sun; pick different, small subsets per day so
+    // you don't get a full row of cards across all columns at the same time.
+    const sparseIndexMap = {
+      Thu: [0, 4],
+      Fri: [1, 6],
+      Sat: [2],
+      Sun: [3, 7],
+    };
 
-      // Randomly decide if this should be full height (with organizer) or half height
-      const isFullHeight = Math.random() > 0.4; // 60% chance of full height
+    const pickedIndices = sparseIndexMap[dayShort] || [hashString(daySeed) % schedule.length];
+    const picked = pickedIndices
+      .map((i) => schedule[i])
+      .filter(Boolean);
 
-      randomEvents.push({
-        type: randomType,
-        title: randomTitle,
-        time: formatTime12From24(randomTime),
-        startTime: randomTime,
-        endTime: calculateEndTime(randomTime, 30),
+    return picked.map((s) => {
+      const startTime = padTime24(s.start);
+      const endTime = calculateEndTime(startTime, s.duration);
+      const seed = `${daySeed}-${startTime}-${s.title}`;
+      const imageIndex = hashString(`${seed}-img`) % profileImages.length;
+
+      return {
+        type: s.type,
+        title: s.title,
+        time: formatTime12From24(startTime),
+        startTime,
+        endTime,
         isHeader: false,
-        images: isFullHeight ? [profileImages[Math.floor(Math.random() * profileImages.length)]] : [],
-        organizer: isFullHeight ? getOrganizerName() : null,
-      });
-    }
-
-    return randomEvents;
+        images: [profileImages[imageIndex]],
+        organizer: getOrganizerName(seed),
+      };
+    });
   };
 
   // Helper function to calculate end time
@@ -1215,12 +1293,18 @@ function generateDayView(date) {
   // --- Day view positioning helpers (single-source-of-truth constants) ---
   const DAY_START_HOUR = 6;
   const DAY_END_HOUR = 29; // extend through 5am next day
-  const DAY_SPACER_PX = 90;
-  // Increase spacing: bigger hour blocks -> more vertical room between times
-  const PX_PER_HOUR = 224;
+  const DAY_SPACER_PX = 60;
+  // IMPORTANT:
+  // `.multi-day-events` sits *below* `.multi-day-header` in each day column.
+  // That header already accounts for the top offset, so event `top` values must
+  // be relative to the top of `.multi-day-events` (0px), otherwise we double-apply
+  // the spacer and events drift downward from their time labels.
+  const EVENTS_TOP_OFFSET_PX = 0;
+  // Vertical scale for Day view (must match CSS vars)
+  const PX_PER_HOUR = 160;
   const HOUR_HEADER_PX = 40;
   const MINUTES_PER_INTERVAL = 15;
-  const PX_PER_INTERVAL = PX_PER_HOUR / (60 / MINUTES_PER_INTERVAL); // 56px per 15 mins
+  const PX_PER_INTERVAL = PX_PER_HOUR / (60 / MINUTES_PER_INTERVAL); // 40px per 15 mins
 
   // Keep CSS in sync with the dynamic hour range so the view ends cleanly
   // (no extra white space after the last interval).
@@ -1277,12 +1361,21 @@ function generateDayView(date) {
     const pxPerMinute = PX_PER_HOUR / 60;
 
     const offsetMinutes = snappedStart - dayStartMin;
-    const top = DAY_SPACER_PX + (offsetMinutes / MINUTES_PER_INTERVAL) * PX_PER_INTERVAL;
+    const top = EVENTS_TOP_OFFSET_PX + (offsetMinutes / MINUTES_PER_INTERVAL) * PX_PER_INTERVAL;
 
-  // Minimum visible height (so tiny events are still clickable)
-  // Keep this small so events don't appear to run into the next 15-minute tick.
-  const MIN_EVENT_PX = Math.max(10, Math.round(pxPerMinute * 2)); // ~2 minutes or 10px
-    const height = Math.max(MIN_EVENT_PX, exactDurationMins * pxPerMinute);
+    // Minimum visible height (so tiny events are still clickable)
+    // Keep this small so events don't appear to run into the next 15-minute tick.
+    const MIN_EVENT_PX = Math.max(10, Math.round(pxPerMinute * 2)); // ~2 minutes or 10px
+
+    // Do NOT allow a card to visually cross into the next hour block.
+    // Example: 9:30 should not extend past the 10:00 border.
+    const minuteIntoHour = ((startMinutes % 60) + 60) % 60;
+    const maxVisibleMinutesInHour = Math.max(1, 60 - minuteIntoHour);
+
+    // Visual separation between stacked events (doesn't change start alignment)
+    const EVENT_GAP_PX = 8;
+    const rawHeight = Math.min(exactDurationMins, maxVisibleMinutesInHour) * pxPerMinute;
+    const height = Math.max(MIN_EVENT_PX, Math.max(0, rawHeight - EVENT_GAP_PX));
 
     return {
       top,
@@ -1312,12 +1405,12 @@ function generateDayView(date) {
 
   const getTopForTimeWithCollapse = (timeStr, collapsedHours) => {
     const [hours, minutes] = timeStr.split(":").map(Number);
-    if (Number.isNaN(hours) || Number.isNaN(minutes)) return DAY_SPACER_PX;
+    if (Number.isNaN(hours) || Number.isNaN(minutes)) return EVENTS_TOP_OFFSET_PX;
 
     let targetHour = hours;
     if (isExtendedDayRange && targetHour < DAY_START_HOUR) targetHour += 24;
     const minuteInHour = minutes;
-    let top = DAY_SPACER_PX;
+    let top = EVENTS_TOP_OFFSET_PX;
 
     for (let h = DAY_START_HOUR; h < targetHour; h++) {
       top += getHourBlockHeight(h, collapsedHours);
@@ -1330,10 +1423,11 @@ function generateDayView(date) {
     return top;
   };
 
-  // Helper function to get organizer name
-  const getOrganizerName = () => {
+  // Helper function to get organizer name (deterministic)
+  const getOrganizerName = (seed = "") => {
     const names = ["Cameron Williamson", "Esther Howard", "Wade Warren", "Jenny Wilson", "Robert Fox", "Arlene McCoy"];
-    return names[Math.floor(Math.random() * names.length)];
+    const safeSeed = seed && String(seed).length ? String(seed) : "default";
+    return names[hashString(safeSeed) % names.length];
   };
 
   // Generate collapsible time slots with 15-minute intervals
@@ -1372,11 +1466,11 @@ function generateDayView(date) {
   // Generate events for a single day column
   const generateDayColumn = (dayInfo, events) => {
     const fullDate = dayInfo.date.toISOString().split("T")[0]; // YYYY-MM-DD (matches week view)
+    const daySuffix = getDaySuffix(dayInfo.dayNumber);
     let html = `
       <div class="multi-day-column" data-date="${fullDate}" data-day="${dayInfo.dayShort}">
         <div class="multi-day-header">
-          <div class="day-name">${dayInfo.dayName}</div>
-          <div class="day-date">${dayInfo.dayNumber}${getDaySuffix(dayInfo.dayNumber)} ${dayInfo.monthName}</div>
+          <div class="day-name-date">${dayInfo.dayName} - ${dayInfo.dayNumber}${daySuffix} ${dayInfo.monthName}</div>
         </div>
         <div class="multi-day-events">
     `;
@@ -1386,11 +1480,11 @@ function generateDayView(date) {
     // Spacer: 90px at top
     // Then each hour: 100px (40px header + 60px intervals)
     for (let hour = DAY_START_HOUR; hour <= DAY_END_HOUR; hour++) {
-      const topPosition = DAY_SPACER_PX + (hour - DAY_START_HOUR) * PX_PER_HOUR;
+      const topPosition = (hour - DAY_START_HOUR) * PX_PER_HOUR;
       html += `<div class="day-hour-line" data-hour="${hour}" style="top: ${topPosition}px;"></div>`;
     }
 
-    // Current time indicator intentionally disabled for Day view
+    // (Current time indicator is drawn at the multi-day container level)
 
     // Add events
     events.forEach((event, index) => {
@@ -1403,33 +1497,29 @@ function generateDayView(date) {
       const topPosition = rect.top;
       const eventHeight = rect.height;
 
-      const profileImage = event.images && event.images.length > 0 ? event.images[0] : "./images/calender/default-avatar.png";
-      const notificationCount = Math.floor(Math.random() * 50) + 1;
+      const profileImage = event.images && event.images.length > 0 ? event.images[0] : "./images/calender/icons/Avatar.svg";
+      const notificationSeed = `${dayInfo.dayShort}-${event.startTime}-${event.title}`;
+      const notificationCount = (hashString(notificationSeed) % 50) + 1;
 
-      // Determine if this is a full or half height event based on content
-      const isFullHeight = event.organizer && event.images && event.images.length > 0;
-      const heightClass = isFullHeight ? "full-height" : "half-height";
-
-      // Generate footer only for full height events
-      const footerHtml = isFullHeight
-        ? `
+      const organizerName = event.organizer || getOrganizerName(notificationSeed);
+      const footerHtml = `
         <div class="multi-day-event-footer">
           <img src="${profileImage}" alt="Profile" class="multi-day-event-avatar">
-          <div class="multi-day-event-organizer">${event.organizer}</div>
+          <div class="multi-day-event-organizer">${organizerName}</div>
         </div>
-      `
-        : "";
+      `;
 
-      // For half-height events, sometimes show an icon instead of notification count
-      const notificationHtml = isFullHeight ? `<div class="multi-day-event-notification">${notificationCount}</div>` : Math.random() > 0.5 ? `<div class="multi-day-event-notification">${notificationCount}</div>` : `<div class="multi-day-event-icon">⚡</div>`;
+      const notificationHtml = `<div class="multi-day-event-notification">${notificationCount}</div>`;
 
       const imagesAttr = (event.images || []).join(",");
 
+      const displayedTime = event.startTime ? formatTime12From24(event.startTime) : (event.time || "");
+
       html += `
-        <div class="multi-day-event-wrapper ${heightClass}" data-event-hour="${startHour}" data-start-time="${event.startTime}" data-end-time="${event.endTime}" style="top: ${topPosition}px; height: ${eventHeight}px;">
+        <div class="multi-day-event-wrapper" data-event-hour="${startHour}" data-start-time="${event.startTime}" data-end-time="${event.endTime}" style="top: ${topPosition}px; height: ${eventHeight}px;">
           <div class="multi-day-event-block event-type-${event.type}" data-event-id="${index}" data-images="${imagesAttr}">
             <div class="multi-day-event-header">
-              <div class="multi-day-event-time">${event.time}</div>
+              <div class="multi-day-event-time">${displayedTime}</div>
               ${notificationHtml}
             </div>
             <div class="multi-day-event-title">${event.title}</div>
@@ -1472,16 +1562,12 @@ function generateDayView(date) {
     dayColumnsHtml += generateDayColumn(dayInfo, events);
   });
 
-  // Get the current day number for the large display
-  const currentDayNumber = new Date().getDate();
-
   const dayViewHtml = `
     <div class="multi-day-view-container">
       <div class="multi-day-time-column">
         ${timeColumnHtml}
       </div>
       <div class="multi-day-content">
-        <div class="large-day-number">${currentDayNumber}</div>
         ${dayColumnsHtml}
       </div>
     </div>
@@ -1489,7 +1575,7 @@ function generateDayView(date) {
 
   $("#day-view").html(dayViewHtml);
 
-  // Ensure no current-time indicators remain (disabled for Day view)
+  // Ensure current-time indicators don't duplicate on rerender
   $("#day-view .current-time-indicator").remove();
   $("#day-view .day-current-time-line").remove();
 
@@ -1511,19 +1597,21 @@ function generateDayView(date) {
       totalHeight += getHourBlockHeight(h, collapsedHours);
     }
 
+    const eventsHeight = Math.max(0, totalHeight - DAY_SPACER_PX);
+
     const viewContainer = document.querySelector(".multi-day-view-container");
     if (viewContainer) viewContainer.style.minHeight = `${totalHeight}px`;
     document.querySelectorAll(".multi-day-events").forEach((el) => {
-      el.style.minHeight = `${totalHeight}px`;
+      el.style.minHeight = `${eventsHeight}px`;
     });
 
-    // Current time indicator intentionally disabled for Day view
+    // Current time indicator is intentionally disabled for Day view
 
     // Reposition hour markers (if enabled in the future)
     document.querySelectorAll(".day-hour-line[data-hour]").forEach((line) => {
       const hour = parseInt(line.getAttribute("data-hour"), 10);
       if (Number.isNaN(hour)) return;
-      let top = DAY_SPACER_PX;
+      let top = 0;
       for (let h = DAY_START_HOUR; h < hour; h++) {
         top += getHourBlockHeight(h, collapsedHours);
       }
@@ -1550,7 +1638,12 @@ function generateDayView(date) {
       const pxPerMinute = PX_PER_HOUR / 60;
 
       const top = getTopForTimeWithCollapse(startTime, collapsedHours);
-      const height = Math.max(10, durationMins * pxPerMinute);
+      const minuteIntoHour = ((range.startMinutes % 60) + 60) % 60;
+      const maxVisibleMinutesInHour = Math.max(1, 60 - minuteIntoHour);
+
+      const EVENT_GAP_PX = 8;
+      const rawHeight = Math.min(durationMins, maxVisibleMinutesInHour) * pxPerMinute;
+      const height = Math.max(10, Math.max(0, rawHeight - EVENT_GAP_PX));
 
       wrapper.style.top = `${top}px`;
       wrapper.style.height = `${height}px`;
@@ -1618,7 +1711,7 @@ function generateDayView(date) {
     toggleTimeHour(hourId);
   });
 
-  // Current time indicator intentionally disabled for Day view
+  // Current time indicator is intentionally disabled for Day view
 
   // Ensure layout is consistent on first render
   if (typeof window.reflowDayViewLayout === "function") window.reflowDayViewLayout();
@@ -1678,8 +1771,8 @@ function addCurrentTimeIndicator() {
   // Keep these in sync with Day view layout.
   const DAY_START_HOUR = 6;
   const DAY_END_HOUR = 29; // 5am next day
-  const DAY_SPACER_PX = 90;
-  const PX_PER_HOUR = 224;
+  const DAY_SPACER_PX = 60;
+  const PX_PER_HOUR = 160;
   const hourInRange = currentHour < DAY_START_HOUR ? currentHour + 24 : currentHour;
 
   if (hourInRange >= DAY_START_HOUR && hourInRange <= DAY_END_HOUR) {

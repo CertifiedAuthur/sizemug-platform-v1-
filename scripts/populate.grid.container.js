@@ -6,7 +6,11 @@ const gridContainer = document.getElementById("gridContainer");
 // This file was relying on another script to declare `gridContainerWrapper`.
 // If that script loads after this one (or not at all on some pages), it throws
 // a ReferenceError that can stop unrelated features (like the Story Music modal).
-const gridContainerWrapper = document.getElementById("gridContainerWrapper") || gridContainer?.parentElement;
+// Use window object to avoid duplicate declaration errors
+if (typeof window.gridContainerWrapper === 'undefined') {
+  window.gridContainerWrapper = document.getElementById("gridContainerWrapper") || gridContainer?.parentElement;
+}
+const gridContainerWrapper = window.gridContainerWrapper;
 
 // Some pages don't define the global `mainTaskLists`. Provide a safe fallback so
 // this file doesn't throw and break other features.

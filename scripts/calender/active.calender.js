@@ -25,32 +25,47 @@ function renderSkeletonActiveUserOnCalender() {
 async function renderActiveUserOnCalender() {
   renderSkeletonActiveUserOnCalender();
 
-  const users = (await getAsideSuggestions(15)) ?? [];
-  activeCalenderUsersData = users;
+  try {
+    const users = (await getAsideSuggestions(15)) ?? [];
+    activeCalenderUsersData = users;
 
-  activeCalenderUserEl.innerHTML = "";
-  users.forEach((user, i) => {
-    const { name, avatar } = user;
+    activeCalenderUserEl.innerHTML = "";
+    users.forEach((user, i) => {
+      const { name, avatar } = user;
 
-    const markup = `
-        <div class="active_item" data-user-index="${i}" role="button" tabindex="0">
-           <div>
-              <img src="${avatar}" alt="${name}" />
-           </div>
+      const markup = `
+          <div class="active_item" data-user-index="${i}" role="button" tabindex="0">
+             <div>
+                <img src="${avatar}" alt="${name}" />
+             </div>
 
-           <h4>${name}</h4>
+             <h4>${name}</h4>
 
-           <img src="./images/calender/verify-badge.svg" />
-        </div>
-    `;
+             <img src="./images/calender/verify-badge.svg" />
+          </div>
+      `;
 
-    activeCalenderUserEl.insertAdjacentHTML("beforeend", markup);
-  });
+      activeCalenderUserEl.insertAdjacentHTML("beforeend", markup);
+    });
+  } catch (err) {
+    console.error("Failed to render active calendar users", err);
+    activeCalenderUsersData = [];
+    activeCalenderUserEl.innerHTML = "";
+  }
 }
 
 renderActiveUserOnCalender();
 
 const activeUserInfoModal = document.getElementById("activeUserInfoModal");
+
+// Close overlay when clicking the dimmed background
+if (activeUserInfoModal) {
+  activeUserInfoModal.addEventListener("click", (e) => {
+    if (e.target === activeUserInfoModal) {
+      activeUserInfoModal.classList.add(HIDDEN);
+    }
+  });
+}
 
 activeCalenderUserEl.addEventListener("click", (e) => {
   const activeItem = e.target.closest(".active_item");
@@ -58,16 +73,24 @@ activeCalenderUserEl.addEventListener("click", (e) => {
   if (activeItem) {
     const { userIndex } = activeItem.dataset;
 
-    const userItem = activeCalenderUsersData[+userIndex];
+    const userItem = activeCalenderUsersData?.[+userIndex];
+    if (!userItem || !activeUserInfoModal) return;
 
     // Fetch Active Invited :)
     renderModalInterest();
-    // Show Modal
+
+    // Show the full-screen overlay modal
     activeUserInfoModal.classList.remove(HIDDEN);
-    // Update profile photo
-    document.getElementById("activeUserPhoto").src = userItem.avatar;
-    // Update profile name
-    document.getElementById("activeUserName").textContent = userItem.name;
+
+    // Update profile photo & name
+    const photoEl = document.getElementById("activeUserPhoto");
+    const nameEl = document.getElementById("activeUserName");
+    if (photoEl) photoEl.src = userItem.avatar;
+    if (nameEl) nameEl.textContent = userItem.name;
+
+    // Update category label/dot
+    const dotEl = document.getElementById("activeModalDot");
+    const categoryEl = document.getElementById("activeModalCategoryType");
 
     let content;
     let dotColor;
@@ -87,14 +110,8 @@ activeCalenderUserEl.addEventListener("click", (e) => {
       dotColor = "holiday";
     }
 
-    document.getElementById("activeModalDot").className = `${dotColor}-dot`;
-    document.getElementById("activeModalCategoryType").textContent = content;
-  }
-});
-
-activeUserInfoModal.addEventListener("click", (e) => {
-  if (e.target.id === "activeUserInfoModal") {
-    return activeUserInfoModal.classList.add(HIDDEN);
+    if (dotEl) dotEl.className = `${dotColor}-dot`;
+    if (categoryEl) categoryEl.textContent = content;
   }
 });
 
