@@ -580,6 +580,12 @@ const ellipsisSVG = commentGlobalSliderPostMenu.querySelector("#postMenuEllipsis
 const timesSVG = commentGlobalSliderPostMenu.querySelector("#postMenuTimes");
 
 commentGlobalSliderPostMenu.addEventListener("click", (e) => {
+  // Keep the post menu visible when triggering Boost from within the comment modal.
+  // The Boost UI is a separate popover and shouldn't collapse this dropdown.
+  if (e.target.closest(".boost")) {
+    return;
+  }
+
   if (menuDropdown.classList.contains(HIDDEN)) {
     menuDropdown.classList.remove(HIDDEN);
 

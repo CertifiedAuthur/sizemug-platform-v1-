@@ -303,7 +303,12 @@
 
     const state = {
       activeTab: "for-you",
-      view: (document.getElementById("storyMusicViewToggle")?.getAttribute("data-view") || "list").toLowerCase(),
+      viewByTab: {
+        "for-you": (document.getElementById("storyMusicViewToggle")?.getAttribute("data-view") || "list").toLowerCase(),
+        "categories": "list",
+        "artists": "list",
+        "favorites": "list"
+      },
       query: "",
       favorites: new Set(),
       favoriteArtists: new Set(),
@@ -382,13 +387,14 @@
       const toGridIcon =
         '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"/></svg>';
 
+      const currentView = state.viewByTab[state.activeTab];
       if (!hideTopToggle) {
-        btn.innerHTML = state.view === "grid" ? toListIcon : toGridIcon;
-        btn.setAttribute("aria-label", state.view === "grid" ? "Switch to list" : "Switch to grid");
+        btn.innerHTML = currentView === "grid" ? toListIcon : toGridIcon;
+        btn.setAttribute("aria-label", currentView === "grid" ? "Switch to list" : "Switch to grid");
       }
 
       modalRoot.querySelectorAll(".story-music-view-toggle-btn").forEach((drillBtn) => {
-        drillBtn.setAttribute("data-view", state.view);
+        drillBtn.setAttribute("data-view", currentView);
       });
     }
 
@@ -591,7 +597,7 @@
           <div class="story-music-search">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg>
             <input type="text" class="story-music-modal-search" placeholder="${searchPlaceholderAttr}" value="${searchValueAttr}" autocomplete="off" />
-            <button type="button" class="story-music-modal__icon-btn story-music-view-toggle-btn" data-view="${escapeAttr(state.view)}" aria-label="Toggle view" title="Toggle list/grid view">
+            <button type="button" class="story-music-modal__icon-btn story-music-view-toggle-btn" data-view="${escapeAttr(state.viewByTab[state.activeTab])}" aria-label="Toggle view" title="Toggle list/grid view">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="view-icon-list" aria-hidden="true"><path fill="currentColor" d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z"/></svg>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="view-icon-grid" aria-hidden="true"><path fill="currentColor" d="M4 4h6v6H4zm0 10h6v6H4zm10-10h6v6h-6zm0 10h6v6h-6z"/></svg>
             </button>
@@ -628,7 +634,7 @@
           <div class="story-music-search">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m21 21l-4.343-4.343m0 0A8 8 0 1 0 5.343 5.343a8 8 0 0 0 11.314 11.314"/></svg>
             <input type="text" class="story-music-modal-search" placeholder="${searchPlaceholderAttr}" value="${searchValueAttr}" autocomplete="off" />
-            <button type="button" class="story-music-modal__icon-btn story-music-view-toggle-btn" data-view="${escapeAttr(state.view)}" aria-label="Toggle view" title="Toggle list/grid view">
+            <button type="button" class="story-music-modal__icon-btn story-music-view-toggle-btn" data-view="${escapeAttr(state.viewByTab[state.activeTab])}" aria-label="Toggle view" title="Toggle list/grid view">
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="view-icon-list" aria-hidden="true"><path fill="currentColor" d="M3 4h18v2H3zm0 7h18v2H3zm0 7h18v2H3z"/></svg>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="view-icon-grid" aria-hidden="true"><path fill="currentColor" d="M4 4h6v6H4zm0 10h6v6H4zm10-10h6v6h-6zm0 10h6v6h-6z"/></svg>
             </button>
@@ -638,7 +644,7 @@
       }
 
       const useGrid =
-        state.view === "grid" &&
+        state.viewByTab[state.activeTab] === "grid" &&
         ((state.route.mode === "root" && state.activeTab === "for-you") ||
           state.route.mode === "category" ||
           state.route.mode === "artist");
@@ -1078,7 +1084,7 @@
       viewToggle.addEventListener("click", () => {
         const next = (viewToggle.getAttribute("data-view") || "list") === "list" ? "grid" : "list";
         viewToggle.setAttribute("data-view", next);
-        state.view = next;
+        state.viewByTab[state.activeTab] = next;
         render();
       });
     }
@@ -1088,7 +1094,7 @@
       if (viewToggleBtn) {
         const current = viewToggleBtn.getAttribute("data-view") || "list";
         const next = current === "list" ? "grid" : "list";
-        state.view = next;
+        state.viewByTab[state.activeTab] = next;
         render();
         return;
       }

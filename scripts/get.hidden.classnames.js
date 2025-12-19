@@ -1,74 +1,119 @@
 let HIDDEN = "";
 
 function getHiddenClassName() {
-  const pathname = location.pathname;
+  const rawPathname = String(location.pathname || "");
+  const normalized = rawPathname.replace(/\\/g, "/");
+  const filename = normalized.split("/").filter(Boolean).pop() || "";
 
-  if (pathname === "/dashboard.html") {
-    HIDDEN = "homepage-hidden";
-  } else if (pathname === "/post.html") {
-    HIDDEN = "post-hidden";
-  } else if (pathname === "/collaboration-page.html") {
-    HIDDEN = "hidden-page";
-  } else if (pathname === "/collaborations.html") {
-    HIDDEN = "collaboration-hidden";
-  } else if (pathname === "/marketing.html") {
-    HIDDEN = "marketing-hidden";
-  } else if (pathname === "/notification.html") {
-    HIDDEN = "notification-hidden";
-  } else if (pathname === "/board.html" || pathname === "/board-page.html") {
-    HIDDEN = "board--hidden";
-  } else if (pathname === "/new-paper.html") {
-    HIDDEN = "new-paper-hidden";
-  } else if (pathname === "/paper-editing.html") {
-    HIDDEN = "paper-editing-hidden";
-  } else if (pathname === "/get-verified.html") {
-    HIDDEN = "get-verified-hidden";
-  } else if (pathname === "/christmas.html") {
-    HIDDEN = "christ-hidden";
-  } else if (pathname === "/campaign.html") {
-    HIDDEN = "campaign-hidden";
-  } else if (pathname === "/work.html") {
-    HIDDEN = "work-hidden";
-  } else if (pathname === "/advanced-editor.html") {
-    HIDDEN = "editor-hidden";
-  } else if (pathname === "/live.html") {
-    HIDDEN = "live--hidden";
-  } else if (pathname === "/streamer.html" || pathname === "/live-room.html" || pathname === "/audio-room.html" || pathname === "/audio-room-host.html") {
-    HIDDEN = "streamer-hidden";
-  } else if (pathname === "/dropped.html") {
-    HIDDEN = "dropped-hidden";
-  } else if (pathname === "/not-found.html") {
-    HIDDEN = "not-found-hidden";
-  } else if (pathname === "/explore.html") {
-    HIDDEN = "explore-hidden";
-  } else if (pathname === "/profile.html") {
-    HIDDEN = "profile-hidden";
-  } else if (pathname === "/account-profile.html") {
-    HIDDEN = "profile-hidden";
-  } else if (pathname === "/analytics.html") {
-    HIDDEN = "analytics-hidden";
-  } else if (pathname === "/chat.html") {
-    HIDDEN = "chat-hidden";
-  } else if (pathname === "/calender.html") {
-    HIDDEN = "cal-hidden";
-  } else if (pathname === "/crypto-dashboard.html") {
-    HIDDEN = "crypto-hidden";
-  } else if (pathname === "/pricing.html") {
-    HIDDEN = "pricing-hidden";
-  } else if (pathname === "/hashtag.html") {
-    HIDDEN = "hashtag--hidden";
-  } else if (pathname === "/musics.html") {
-    HIDDEN = "musics-hidden";
-  } else if (pathname === "/search.html") {
-    HIDDEN = "search-hidden";
-  } else if (pathname === "/location.html") {
-    HIDDEN = "location-hidden";
-  } else if (pathname === "/live-chat.html") {
-    HIDDEN = "live-chat-hidden";
-  } else if (pathname === "/settings.html") {
-    HIDDEN = "settings--hidden";
-  } else if (pathname === "/challenges.html") {
-    HIDDEN = "challenge-hidden";
+  // Match by filename so this works for:
+  // - root paths: /dashboard.html
+  // - nested paths: /Sizemug-Platform/dashboard.html
+  // - file urls on Windows: /C:/Users/.../dashboard.html
+  switch (filename) {
+    case "dashboard.html":
+      HIDDEN = "homepage-hidden";
+      break;
+    case "post.html":
+      HIDDEN = "post-hidden";
+      break;
+    case "collaboration-page.html":
+      HIDDEN = "hidden-page";
+      break;
+    case "collaborations.html":
+      HIDDEN = "collaboration-hidden";
+      break;
+    case "marketing.html":
+      HIDDEN = "marketing-hidden";
+      break;
+    case "notification.html":
+      HIDDEN = "notification-hidden";
+      break;
+    case "board.html":
+    case "board-page.html":
+      HIDDEN = "board--hidden";
+      break;
+    case "new-paper.html":
+      HIDDEN = "new-paper-hidden";
+      break;
+    case "paper-editing.html":
+      HIDDEN = "paper-editing-hidden";
+      break;
+    case "get-verified.html":
+      HIDDEN = "get-verified-hidden";
+      break;
+    case "christmas.html":
+      HIDDEN = "christ-hidden";
+      break;
+    case "campaign.html":
+      HIDDEN = "campaign-hidden";
+      break;
+    case "work.html":
+      HIDDEN = "work-hidden";
+      break;
+    case "advanced-editor.html":
+      HIDDEN = "editor-hidden";
+      break;
+    case "live.html":
+      HIDDEN = "live--hidden";
+      break;
+    case "streamer.html":
+    case "live-room.html":
+    case "audio-room.html":
+    case "audio-room-host.html":
+      HIDDEN = "streamer-hidden";
+      break;
+    case "dropped.html":
+      HIDDEN = "dropped-hidden";
+      break;
+    case "not-found.html":
+      HIDDEN = "not-found-hidden";
+      break;
+    case "explore.html":
+      HIDDEN = "explore-hidden";
+      break;
+    case "profile.html":
+    case "account-profile.html":
+      HIDDEN = "profile-hidden";
+      break;
+    case "analytics.html":
+      HIDDEN = "analytics-hidden";
+      break;
+    case "chat.html":
+      HIDDEN = "chat-hidden";
+      break;
+    case "calender.html":
+      HIDDEN = "cal-hidden";
+      break;
+    case "crypto-dashboard.html":
+      HIDDEN = "crypto-hidden";
+      break;
+    case "pricing.html":
+      HIDDEN = "pricing-hidden";
+      break;
+    case "hashtag.html":
+      HIDDEN = "hashtag--hidden";
+      break;
+    case "musics.html":
+      HIDDEN = "musics-hidden";
+      break;
+    case "search.html":
+      HIDDEN = "search-hidden";
+      break;
+    case "location.html":
+      HIDDEN = "location-hidden";
+      break;
+    case "live-chat.html":
+      HIDDEN = "live-chat-hidden";
+      break;
+    case "settings.html":
+      HIDDEN = "settings--hidden";
+      break;
+    case "challenges.html":
+      HIDDEN = "challenge-hidden";
+      break;
+    default:
+      // Keep previous value or empty string
+      break;
   }
 }
 

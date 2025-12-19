@@ -102,6 +102,13 @@
         hideAsideContainerMenu.setAttribute("aria-expanded", true);
       });
     }
+
+    const commentSendBtn = document.querySelector(".message-send-btn");
+    if (commentSendBtn) {
+      commentSendBtn.addEventListener("click", () => {
+        // Send button click handler
+      });
+    }
   }
 
   function handleAsideContainer() {

@@ -102,7 +102,7 @@ async function generateUsersWithTasks(length = 100, query = "coding") {
   try {
     const [response1, response2] = await Promise.all([
       fetch(`https://randomuser.me/api/?results=${length}`),
-      fetch(`https://api.pexels.com/videos/search?query=coding&&per_page=80`, {
+      fetch(`https://api.pexels.com/videos/search?query=${encodeURIComponent(query)}&&per_page=80`, {
         headers: {
           Authorization: apiKey,
           "Content-Type": "application/json",
@@ -112,7 +112,6 @@ async function generateUsersWithTasks(length = 100, query = "coding") {
 
     const data1 = await response1.json();
     const data2 = await response2.json();
-
     const videos = data2.videos;
 
     const usersWithTasks = data1.results.map((user, i) => {

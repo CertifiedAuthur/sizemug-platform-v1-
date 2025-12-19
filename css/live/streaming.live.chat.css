@@ -199,6 +199,19 @@
 
 .live_chat_input_wrapper input {
   width: 100%;
+  caret-color: #ffffff !important;
+  color: #ffffff !important;
+  font-size: 14px;
+  background: transparent !important;
+}
+
+.live_chat_input_wrapper input::placeholder {
+  color: #ffffff80 !important;
+}
+
+.live_chat_input_wrapper input:focus {
+  outline: none !important;
+  caret-color: #ffffff !important;
 }
 
 #liveChatsListAreaWrapper {

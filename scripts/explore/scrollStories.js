@@ -1,4 +1,6 @@
-const scrollStoriesData = [
+// Check if scrollStoriesData is already defined (to avoid duplicate declaration error)
+if (typeof scrollStoriesData === 'undefined') {
+  var scrollStoriesData = [
   {
     id: 672,
     fullName: "Amelia Harrison",
@@ -228,6 +230,7 @@ const scrollStoriesData = [
     ],
   },
 ];
+}
 
 scrollStoriesData[10].pinIcon = "./images/stories/Story_pin_Icon1.svg";
 scrollStoriesData[8].pinIcon = "./images/stories/Story_pin_Icon2.svg";

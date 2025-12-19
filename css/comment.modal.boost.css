@@ -7,6 +7,14 @@
   display: none;
 }
 
+/*
+  Comment-modal Boost instance needs to be above comment option menus
+  (some menus in popup.css use extremely large z-index values).
+*/
+.boost_popover_backdrop.boost_popover_backdrop--comment {
+  z-index: 1000000000000001;
+}
+
 .boost_popover_backdrop.active {
   display: block;
 }
@@ -22,6 +30,10 @@
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.boost_popover.boost_popover--comment {
+  z-index: 1000000000000002;
 }
 
 .boost_popover.active {

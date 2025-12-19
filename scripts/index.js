@@ -17,7 +17,7 @@ if (window.innerWidth < 667) {
 ///////////////////////////////////
 ///////////////////////////////////
 // Development Mode: Set to true to bypass authentication
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 const onboardingPage = document.querySelector(".onboarding_page");
 const landingPageHeader = document.querySelector("body .header");
@@ -51,6 +51,13 @@ function redirect() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Ensure HIDDEN class is set (in case get.hidden.classnames.js hasn't run yet)
+  if (typeof HIDDEN === "undefined" || !HIDDEN) {
+    if (typeof getHiddenClassName === "function") {
+      getHiddenClassName();
+    }
+  }
+
   const loadingType = localStorage.getItem("sizemug_loading_type");
   const onboardLoadingContainer = document.getElementById("onboard_loading_container");
 
@@ -74,13 +81,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // I have to must the call here so that masonry layout will be well organized
     ///////// IIFE for landing task display
     (async () => {
-      renderGridContainerSkeleton();
-      const data = await generateUsersWithTasks();
-      if (data) {
-        gridContainerSkeleton.remove();
-        const gridContainerEl = document.querySelector(".gridContainer");
-        populateGridLayout(data, gridContainerEl, dashboardMainMasonryInstance);
-        gridDataItem = data;
+      try {
+        renderGridContainerSkeleton();
+        
+        const data = await generateUsersWithTasks();
+        
+        if (Array.isArray(data) && data.length) {
+          const skeleton = document.getElementById("gridContainerSkeleton");
+          if (skeleton) {
+            skeleton.remove();
+          }
+          
+          const gridContainerEl = document.querySelector(".gridContainer");
+          
+          if (gridContainerEl) {
+            populateGridLayout(data, gridContainerEl, dashboardMainMasonryInstance);
+            gridDataItem = data;
+          }
+        }
+      } catch (error) {
+        console.error("For You loading failed:", error);
       }
     })();
   }
@@ -97,13 +117,24 @@ function openDashboardHasNewUser() {
   dashboardIntroModal.classList.remove(HIDDEN);
 
   setTimeout(async () => {
-    renderGridContainerSkeleton();
-    const data = await generateUsersWithTasks();
-    if (data) {
-      gridContainerSkeleton.remove();
-      const gridContainerEl = document.querySelector(".gridContainer");
-      populateGridLayout(data, gridContainerEl, dashboardMainMasonryInstance);
-      gridDataItem = data;
+    try {
+      // Wait for required functions to be available
+      while (typeof renderGridContainerSkeleton !== "function" || 
+             typeof generateUsersWithTasks !== "function" || 
+             typeof populateGridLayout !== "function") {
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+
+      renderGridContainerSkeleton();
+      const data = await generateUsersWithTasks();
+      if (data) {
+        gridContainerSkeleton.remove();
+        const gridContainerEl = document.querySelector(".gridContainer");
+        populateGridLayout(data, gridContainerEl, dashboardMainMasonryInstance);
+        gridDataItem = data;
+      }
+    } catch (error) {
+      console.error("For You loading failed (new user):", error);
     }
   }, 2000);
 }

@@ -2,22 +2,69 @@
  * Boost Modal Handler
  */
 class BoostModal {
-  constructor() {
-    this.boostPopover = document.getElementById("boostPopover");
-    this.boostOptionsGrid = document.getElementById("boostOptionsGrid");
-    this.boostSearchInput = document.querySelector(".boost_search_input input");
-    this.goBackBtn = document.getElementById("goBackBtn");
-    this.boostConfirmBtn = document.getElementById("boostConfirmBtn");
-    this.successGoBackBtn = document.getElementById("successGoBackBtn");
-    this.boostAgainBtn = document.getElementById("boostAgainBtn");
+  constructor(options = {}) {
+    const {
+      popoverId = "boostPopover",
+      optionsGridId = "boostOptionsGrid",
+      goBackBtnId = "goBackBtn",
+      boostConfirmBtnId = "boostConfirmBtn",
+      successGoBackBtnId = "successGoBackBtn",
+      boostAgainBtnId = "boostAgainBtn",
+      triggerSelector = ".boost",
+      shouldHandleTrigger = () => true,
+      popoverClassName = "",
+      backdropClassName = "",
+      useBackdrop = true,
+      popoverZIndex,
+      backdropZIndex,
+      confettiZIndex,
+      preferredPlacement,
+      fallbackPlacements,
+      anchorToMenuDropdown = false,
+      anchorToTriggerTop = false,
+      triggerTopNudge = 0,
+      arrowPadding = 0,
+    } = options;
 
-    // State elements
-    this.boostSelectionState = document.querySelector(".boost_selection_state");
-    this.boostConfirmationState = document.querySelector(".boost_confirmation_state");
-    this.boostSuccessState = document.querySelector(".boost_success_state");
+    this.popoverId = popoverId;
+    this.optionsGridId = optionsGridId;
+    this.triggerSelector = triggerSelector;
+    this.shouldHandleTrigger = shouldHandleTrigger;
+    this.popoverClassName = popoverClassName;
+    this.backdropClassName = backdropClassName;
+    this.useBackdrop = useBackdrop;
+    this.popoverZIndex = popoverZIndex;
+    this.backdropZIndex = backdropZIndex;
+    this.confettiZIndex = confettiZIndex;
+    this.preferredPlacement = preferredPlacement;
+    this.fallbackPlacements = fallbackPlacements;
+    this.anchorToMenuDropdown = anchorToMenuDropdown;
+    this.anchorToTriggerTop = anchorToTriggerTop;
+    this.triggerTopNudge = triggerTopNudge;
+    this.arrowPadding = arrowPadding;
 
-    // Boost trigger buttons
-    this.boostTriggerBtns = document.querySelectorAll(".boost");
+    this.boostPopover = document.getElementById(popoverId);
+    if (!this.boostPopover) {
+      console.warn(`[BoostModal] Popover element not found: #${popoverId}`);
+      return;
+    }
+
+    if (this.popoverClassName) {
+      this.boostPopover.classList.add(this.popoverClassName);
+    }
+
+    // Instance-scoped elements
+    this.boostOptionsGrid = this.boostPopover.querySelector(`#${optionsGridId}`);
+    this.boostSearchInput = this.boostPopover.querySelector(".boost_search_input input");
+    this.goBackBtn = this.boostPopover.querySelector(`#${goBackBtnId}`);
+    this.boostConfirmBtn = this.boostPopover.querySelector(`#${boostConfirmBtnId}`);
+    this.successGoBackBtn = this.boostPopover.querySelector(`#${successGoBackBtnId}`);
+    this.boostAgainBtn = this.boostPopover.querySelector(`#${boostAgainBtnId}`);
+
+    // State elements (scoped)
+    this.boostSelectionState = this.boostPopover.querySelector(".boost_selection_state");
+    this.boostConfirmationState = this.boostPopover.querySelector(".boost_confirmation_state");
+    this.boostSuccessState = this.boostPopover.querySelector(".boost_success_state");
 
     this.selectedBoost = null;
     this.currentState = "selection"; // selection, confirmation, success
@@ -77,6 +124,12 @@ class BoostModal {
 
     const el = document.createElement("div");
     el.className = "boost_popover_backdrop";
+    if (this.backdropClassName) {
+      el.classList.add(this.backdropClassName);
+    }
+    if (typeof this.backdropZIndex === "number") {
+      el.style.zIndex = String(this.backdropZIndex);
+    }
 
     // Clicking anywhere on the backdrop closes the popover.
     el.addEventListener("click", (e) => {
@@ -98,7 +151,7 @@ class BoostModal {
     this.backdropEl?.classList.remove("active");
   }
   bindEvents() {
-    this.boostPopover.addEventListener("click", (e) => {
+    this.boostPopover?.addEventListener("click", (e) => {
       e.stopPropagation();
     });
 
@@ -127,22 +180,60 @@ class BoostModal {
 
     // Use event delegation for dynamically created boost buttons
     document.addEventListener("click", (e) => {
-      const boostBtn = e.target.closest(".boost");
-      if (boostBtn) {
-        e.stopPropagation();
-        // Anchor the popover beside the exact Boost element that was clicked.
-        // Use a Popper "virtual element" so positioning remains stable even if the
-        // clicked element disappears (e.g., an options menu closes).
-        const anchorRect = boostBtn.getBoundingClientRect();
-        this.currentTriggerBtn = {
-          getBoundingClientRect: () => anchorRect,
-          contextElement: boostBtn,
-        };
-        this.isAnchoredToMenuCloseIcon = false;
-        // Never close the popover by re-clicking Boost; just open/reposition it.
-        this.openPopover();
-        return;
+      const boostBtn = e.target?.closest ? e.target.closest(this.triggerSelector) : null;
+      if (!boostBtn) return;
+      if (!this.shouldHandleTrigger || !this.shouldHandleTrigger(boostBtn)) return;
+
+      e.stopPropagation();
+
+      // Anchor the popover beside the exact Boost element that was clicked.
+      // NOTE: In comment modals, the dropdown menu often closes immediately after clicking
+      // a menu item, which can make the clicked element's rect become (0,0). In that case,
+      // anchor to the stable post-menu button wrapper instead.
+      let anchorElement = boostBtn;
+
+      const isInsidePostMenuDropdown = !!boostBtn.closest?.("#post-menu ul");
+      if (isInsidePostMenuDropdown) {
+        // In the comment modal, we may want to anchor to the dropdown itself so the
+        // popover positions beside the menu (instead of covering it).
+        if (this.anchorToMenuDropdown) {
+          anchorElement = boostBtn.closest("#post-menu ul") || boostBtn;
+        } else {
+          // Prefer anchoring to the exact Boost item (so the popover is level with it)
+          // and the arrow points to it. If that element isn't measurable, fall back.
+          anchorElement = boostBtn;
+          const rect = anchorElement.getBoundingClientRect?.();
+          const isBadRect = !rect || (rect.width === 0 && rect.height === 0);
+          if (isBadRect) {
+            anchorElement = boostBtn.closest("button") || boostBtn.closest("#post-menu") || boostBtn;
+          }
+        }
       }
+
+      const anchorRect = anchorElement.getBoundingClientRect();
+      const topNudge = this.anchorToTriggerTop ? Number(this.triggerTopNudge || 0) : 0;
+      const nudgedTop = anchorRect.top + topNudge;
+      const referenceRect = this.anchorToTriggerTop
+        ? {
+            x: anchorRect.x,
+            y: nudgedTop,
+            width: anchorRect.width,
+            height: 0,
+            top: nudgedTop,
+            right: anchorRect.right,
+            bottom: nudgedTop,
+            left: anchorRect.left,
+          }
+        : anchorRect;
+      this.currentTriggerBtn = {
+        getBoundingClientRect: () => referenceRect,
+        contextElement: anchorElement,
+      };
+
+      // Only hide the tail/arrow when we had to anchor to a wrapper element.
+      // When anchored to the actual Boost item, keep the arrow pointing to it.
+      this.isAnchoredToMenuCloseIcon = isInsidePostMenuDropdown && anchorElement !== boostBtn;
+      this.openPopover();
     });
 
     // Go back button
@@ -199,7 +290,14 @@ class BoostModal {
   openPopover() {
     if (this.boostPopover) {
       // Show the full-screen backdrop (covers navbar). Backdrop does not close the popover.
-      this.showBackdrop();
+      if (this.useBackdrop) {
+        this.showBackdrop();
+      }
+
+      if (typeof this.popoverZIndex === "number") {
+        this.boostPopover.style.zIndex = String(this.popoverZIndex);
+      }
+
       this.boostPopover.classList.add("active");
       this.showSelectionState();
 
@@ -226,7 +324,9 @@ class BoostModal {
     }
 
     // Hide backdrop only when popover is closed.
-    this.hideBackdrop();
+    if (this.useBackdrop) {
+      this.hideBackdrop();
+    }
 
     // Destroy Popper instance
     if (this.popperInstance) {
@@ -244,10 +344,15 @@ class BoostModal {
     // by using "*-end" placements (so the popover's bottom aligns to the trigger).
     const currentPage = (window.location?.pathname || "").split("/").pop();
     const openOnRightPages = new Set(["dashboard.html", "explore.html", "not-found.html", "challenges.html"]);
-    const preferredPlacement = openOnRightPages.has(currentPage) ? "right-end" : "left-end";
-    const fallbackPlacements = openOnRightPages.has(currentPage)
-      ? ["right-start", "left-end", "left-start"]
-      : ["left-start", "right-end", "right-start"];
+
+    const preferredPlacement =
+      this.preferredPlacement || (openOnRightPages.has(currentPage) ? "right-end" : "left-end");
+
+    const fallbackPlacements =
+      this.fallbackPlacements ||
+      (openOnRightPages.has(currentPage)
+        ? ["right-start", "left-end", "left-start"]
+        : ["left-start", "right-end", "right-start"]);
 
     // Destroy existing popper instance if it exists
     if (this.popperInstance) {
@@ -290,6 +395,7 @@ class BoostModal {
           name: "arrow",
           options: {
             element: ".boost_popover_arrow",
+            padding: this.arrowPadding,
           },
         },
       ],
@@ -310,51 +416,51 @@ class BoostModal {
 
   showSelectionState() {
     this.currentState = "selection";
-    this.boostSelectionState.style.display = "block";
-    this.boostConfirmationState.style.display = "none";
-    this.boostSuccessState.style.display = "none";
+    if (this.boostSelectionState) this.boostSelectionState.style.display = "block";
+    if (this.boostConfirmationState) this.boostConfirmationState.style.display = "none";
+    if (this.boostSuccessState) this.boostSuccessState.style.display = "none";
   }
 
   showConfirmationState() {
     this.currentState = "confirmation";
-    this.boostSelectionState.style.display = "none";
-    this.boostConfirmationState.style.display = "block";
-    this.boostSuccessState.style.display = "none";
+    if (this.boostSelectionState) this.boostSelectionState.style.display = "none";
+    if (this.boostConfirmationState) this.boostConfirmationState.style.display = "block";
+    if (this.boostSuccessState) this.boostSuccessState.style.display = "none";
 
     // Update confirmation content
     if (this.selectedBoost) {
-      const nameElement = document.querySelector(".selected_boost_name");
-      const descriptionElement = document.querySelector(".selected_boost_description");
-      const priceElement = document.querySelector(".boost_confirm_btn .boost_price");
-      const previewCard = document.querySelector(".boost_confirmation_state .boost_preview_card");
+      const nameElement = this.boostPopover?.querySelector(".selected_boost_name");
+      const descriptionElement = this.boostPopover?.querySelector(".selected_boost_description");
+      const priceElement = this.boostPopover?.querySelector(".boost_confirm_btn .boost_price");
+      const previewCard = this.boostPopover?.querySelector(".boost_confirmation_state .boost_preview_card");
 
       if (nameElement) nameElement.textContent = this.selectedBoost.name;
       if (descriptionElement) descriptionElement.textContent = this.selectedBoost.description;
       if (priceElement) priceElement.textContent = this.selectedBoost.price;
       if (previewCard) {
-        previewCard.style.background = this.selectedBoost.gradient;
+        previewCard.style.background = this.selectedBoost.gradient || "";
       }
     }
   }
 
   showSuccessState() {
     this.currentState = "success";
-    this.boostSelectionState.style.display = "none";
-    this.boostConfirmationState.style.display = "none";
-    this.boostSuccessState.style.display = "block";
+    if (this.boostSelectionState) this.boostSelectionState.style.display = "none";
+    if (this.boostConfirmationState) this.boostConfirmationState.style.display = "none";
+    if (this.boostSuccessState) this.boostSuccessState.style.display = "block";
 
     // Update success content
     if (this.selectedBoost) {
-      const nameElement = document.querySelector(".boosted_item_name");
-      const descriptionElement = document.querySelector(".boosted_item_description");
-      const priceElement = document.querySelector(".boost_again_btn .boost_price");
-      const previewCard = document.querySelector(".boost_success_preview .boost_preview_card");
+      const nameElement = this.boostPopover?.querySelector(".boosted_item_name");
+      const descriptionElement = this.boostPopover?.querySelector(".boosted_item_description");
+      const priceElement = this.boostPopover?.querySelector(".boost_again_btn .boost_price");
+      const previewCard = this.boostPopover?.querySelector(".boost_success_preview .boost_preview_card");
 
       if (nameElement) nameElement.textContent = this.selectedBoost.name;
       if (descriptionElement) descriptionElement.textContent = this.selectedBoost.description;
       if (priceElement) priceElement.textContent = this.selectedBoost.price;
       if (previewCard) {
-        previewCard.style.background = this.selectedBoost.gradient;
+        previewCard.style.background = this.selectedBoost.gradient || "";
       }
     }
 
@@ -473,7 +579,13 @@ class BoostModal {
     canvas.style.width = "100vw";
     canvas.style.height = "100vh";
     canvas.style.pointerEvents = "none";
-    canvas.style.zIndex = "99999";
+    if (typeof this.confettiZIndex === "number") {
+      canvas.style.zIndex = String(this.confettiZIndex);
+    } else if (typeof this.popoverZIndex === "number") {
+      canvas.style.zIndex = String(this.popoverZIndex + 1);
+    } else {
+      canvas.style.zIndex = "99999";
+    }
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -545,7 +657,77 @@ document.head.appendChild(boostModalStyle);
 
 // Initialize boost modal when DOM is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  window.boostModal = new BoostModal();
+  // Create a second Boost popover instance for comment modal usage.
+  // This avoids state/ID clashes and allows different z-index stacking.
+  const basePopover = document.getElementById("boostPopover");
+  if (basePopover && !document.getElementById("boostPopoverComment")) {
+    const clone = basePopover.cloneNode(true);
+
+    // Remap IDs inside the cloned popover so the second instance can bind safely.
+    const idMap = {
+      boostPopover: "boostPopoverComment",
+      boostOptionsGrid: "boostOptionsGridComment",
+      goBackBtn: "goBackBtnComment",
+      boostConfirmBtn: "boostConfirmBtnComment",
+      successGoBackBtn: "successGoBackBtnComment",
+      boostAgainBtn: "boostAgainBtnComment",
+    };
+
+    clone.id = idMap.boostPopover;
+    Object.entries(idMap).forEach(([from, to]) => {
+      if (from === "boostPopover") return;
+      clone.querySelectorAll(`#${from}`).forEach((el) => {
+        el.id = to;
+      });
+    });
+
+    document.body.appendChild(clone);
+  }
+
+  // Default Boost: triggers outside the comment modal
+  window.boostModal = new BoostModal({
+    popoverId: "boostPopover",
+    optionsGridId: "boostOptionsGrid",
+    goBackBtnId: "goBackBtn",
+    boostConfirmBtnId: "boostConfirmBtn",
+    successGoBackBtnId: "successGoBackBtn",
+    boostAgainBtnId: "boostAgainBtn",
+    shouldHandleTrigger: (btn) => !btn.closest("#comments_modal"),
+  });
+
+  // Comment Boost: triggers inside the comment modal
+  window.commentBoostModal = new BoostModal({
+    popoverId: "boostPopoverComment",
+    optionsGridId: "boostOptionsGridComment",
+    goBackBtnId: "goBackBtnComment",
+    boostConfirmBtnId: "boostConfirmBtnComment",
+    successGoBackBtnId: "successGoBackBtnComment",
+    boostAgainBtnId: "boostAgainBtnComment",
+    shouldHandleTrigger: (btn) => !!btn.closest("#comments_modal"),
+    popoverClassName: "boost_popover--comment",
+    backdropClassName: "boost_popover_backdrop--comment",
+    // Comment boost should not dim/overlay the comment modal.
+    useBackdrop: false,
+    // Ensure it sits above comment option menus which use extremely high z-index.
+    backdropZIndex: 1000000000000001,
+    popoverZIndex: 1000000000000002,
+    confettiZIndex: 1000000000000003,
+    // Always prefer showing at the side for comment modal.
+    // Place it to the LEFT of the clicked Boost item, aligned at the same level,
+    // with the arrow pointing to the Boost.
+    // Use left-start so the popover's TOP aligns with the Boost item,
+    // and the arrow can sit near the top.
+    preferredPlacement: "left-start",
+    fallbackPlacements: ["left-end", "right-start", "right-end", "right"],
+    // Anchor to the clicked Boost item (not the whole menu) so the popover aligns.
+    anchorToMenuDropdown: false,
+    // Treat the Boost click as a top-point reference so the arrow aligns to the top.
+    anchorToTriggerTop: true,
+    // Keep the popover starting at the Boost level.
+    triggerTopNudge: 0,
+    // Keep the arrow a bit away from the very top so it doesn't visually overflow.
+    arrowPadding: 12,
+  });
 });
 
 // Export for use in other scripts

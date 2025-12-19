@@ -714,10 +714,20 @@
 
             <div class="chat_aside_scrollable_wrapper">
               <!-- Chat Stories -->
-              <div>
-                <ul class="chat_story_items story-list" id="chatStoryItems">
+              <div class="story">
+                <ul class="story-list x-thin-scroll" id="chatStoryItems">
                   <!-- Chat Story Items -->
                 </ul>
+
+                <button class="story_button_scroll--btn story_button_scroll_btn--left" id="scrollStoryLeftChat">
+                  <!-- prettier-ignore -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#33363F" d="m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6z"/></svg>
+                </button>
+
+                <button class="story_button_scroll--btn story_button_scroll_btn--right" id="scrollStoryRightChat">
+                  <!-- prettier-ignore -->
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#33363F" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6z"/></svg>
+                </button>
               </div>
 
               <!-- Filter Message: All/Unread/New/Followers/Following/Favourites -->
@@ -8817,7 +8827,557 @@
     <!-- Story Modal - Chat Page Popup (No Sidebar) -->
     <div class="story_modal_container animation-modal chat-hidden" id="storyModalContainer">
       <div class="story_modal-contents">
-        <!-- Only Story Display Area (No Sidebar) -->
+        <div class="control_story">
+          <aside>
+            <div class="story-view" id="storyView">
+              <div class="close-setting">
+                <div class="close-story-display" id="closeStoryDisplay">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#f30909" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z" /></svg>
+                </div>
+                <div id="settingsBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024"><path fill="#fff" d="M600.704 64a32 32 0 0 1 30.464 22.208l35.2 109.376c14.784 7.232 28.928 15.36 42.432 24.512l112.384-24.192a32 32 0 0 1 34.432 15.36L944.32 364.8a32 32 0 0 1-4.032 37.504l-77.12 85.12a357 357 0 0 1 0 49.024l77.12 85.248a32 32 0 0 1 4.032 37.504l-88.704 153.6a32 32 0 0 1-34.432 15.296L708.8 803.904c-13.44 9.088-27.648 17.28-42.368 24.512l-35.264 109.376A32 32 0 0 1 600.704 960H423.296a32 32 0 0 1-30.464-22.208L357.696 828.48a352 352 0 0 1-42.56-24.64l-112.32 24.256a32 32 0 0 1-34.432-15.36L79.68 659.2a32 32 0 0 1 4.032-37.504l77.12-85.248a357 357 0 0 1 0-48.896l-77.12-85.248A32 32 0 0 1 79.68 364.8l88.704-153.6a32 32 0 0 1 34.432-15.296l112.32 24.256c13.568-9.152 27.776-17.408 42.56-24.64l35.2-109.312A32 32 0 0 1 423.232 64H600.64zm-23.424 64H446.72l-36.352 113.088l-24.512 11.968a294 294 0 0 0-34.816 20.096l-22.656 15.36l-116.224-25.088l-65.28 113.152l79.68 88.192l-1.92 27.136a293 293 0 0 0 0 40.192l1.92 27.136l-79.808 88.192l65.344 113.152l116.224-25.024l22.656 15.296a294 294 0 0 0 34.816 20.096l24.512 11.968L446.72 896h130.688l36.48-113.152l24.448-11.904a288 288 0 0 0 34.752-20.096l22.592-15.296l116.288 25.024l65.28-113.152l-79.744-88.192l1.92-27.136a293 293 0 0 0 0-40.256l-1.92-27.136l79.808-88.128l-65.344-113.152l-116.288 24.96l-22.592-15.232a288 288 0 0 0-34.752-20.096l-24.448-11.904L577.344 128zM512 320a192 192 0 1 1 0 384a192 192 0 0 1 0-384m0 64a128 128 0 1 0 0 256a128 128 0 0 0 0-256" /></svg>
+                </div>
+              </div>
+              <h1>View Story</h1>
+              <header>
+                <div class="group-tab" id="storyGroupTab">
+                  <span class="active_tab" id="groupActiveTab"></span>
+                  <button type="button" class="all_story">All</button>
+                  <button type="button" class="my_story">My Story</button>
+                </div>
+              </header>
+
+              <!-- All Stories and My Stories -->
+              <div style="height: 100%">
+                <!-- All Stories -->
+                <article class="animate__animated animate__fadeIn" id="storyAllContainer">
+                  <label class="search_dialog all">
+                    <svg data-icon="search" class="">
+                      <use href="../icons/sprite.svg#search" />
+                    </svg>
+                    <input type="text" placeholder="Search All" spellcheck="false" id="searchDialogAll" name="search_dialog_all" />
+                  </label>
+
+                  <!-- Story All Body -->
+                  <ul class="chat view_story-list y-thin-scroll explore_story_list" id="viewStoryList">
+                    <!-- Stories -->
+                  </ul>
+                </article>
+
+                <!-- My Stories -->
+                <article id="storyMyContainer" class="animate__animated animate__fadeIn chat-hidden">
+                  <label class="search_dialog my-story">
+                    <svg data-icon="search" class="">
+                      <use href="../icons/sprite.svg#search" />
+                    </svg>
+                    <input placeholder="Search My Story" />
+                  </label>
+
+                  <!-- My Story Body -->
+                  <div class="my_story_tabs">
+                    <div class="tab_header">
+                      <div class="group-tab" id="myStoryTabItems">
+                        <span class="active_tab" id="myStoryGroupTabs" style="width: 33.33%"></span>
+                        <button class="tab_coin" data-my-story-tab="icon" data-target-index="0" type="button">(200)</button>
+                        <button class="tab_gift" data-my-story-tab="gift" data-target-index="1" type="button">(6)</button>
+                        <button class="tab_reaction" data-my-story-tab="reaction" data-target-index="2" type="button">(12,234)</button>
+                      </div>
+                    </div>
+
+                    <!-- Icon Panel Container -->
+                    <div class="tab_coin-panel myStoryTabContainers" id="myStoryTabContainer--icon">
+                      <!-- <header data-state="open">
+                      <span>Coins (200)</span>
+                    </header> -->
+
+                      <article>
+                        <ul>
+                          <li>
+                            <img src="./images/exploreImages/1.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <b>10</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                            <b>1</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <b>100</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                            <b>10</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/5.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <b>23</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <b>200</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <b>7</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <b>60</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                            <b>1</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <b>100</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                            <b>10</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/5.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <b>23</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <b>200</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <b>7</b>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <b>60</b>
+                          </li>
+                        </ul>
+                      </article>
+                    </div>
+
+                    <!-- Gift Panel Container -->
+                    <div class="tab_gift-panel myStoryTabContainers chat-hidden" id="myStoryTabContainer--gift">
+                      <header data-state="open">
+                        <span>Gifts (6)</span>
+                      </header>
+
+                      <article>
+                        <ul>
+                          <li>
+                            <img src="./images/exploreImages/1.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <img src="./images/exploreImages/emoji/1.png" alt="avatar" />
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                            <img src="./images/exploreImages/emoji/2.png" alt="avatar" />
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <img src="./images/exploreImages/emoji/3.png" alt="avatar" />
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                            <img src="./images/exploreImages/emoji/4.png" alt="avatar" />
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/5.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                            <img src="./images/exploreImages/emoji/5.png" alt="avatar" />
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                            <img src="./images/exploreImages/emoji/6.png" alt="avatar" />
+                          </li>
+                        </ul>
+                      </article>
+                    </div>
+
+                    <!-- Reaction Panel Container -->
+                    <div class="tab_reaction-panel myStoryTabContainers chat-hidden" id="myStoryTabContainer--reaction">
+                      <header data-state="open">
+                        <span>Love (12,234)</span>
+                      </header>
+
+                      <article>
+                        <ul>
+                          <li>
+                            <img src="./images/exploreImages/1.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/5.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Theresa Webb</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/5.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/2.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/3.png" alt="avatar" />
+                            <span>Darrell Steward</span>
+                          </li>
+                          <li>
+                            <img src="./images/exploreImages/4.png" alt="avatar" />
+                            <span>Arlene McCoy</span>
+                          </li>
+                        </ul>
+                      </article>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <!-- Settings View -->
+            <div class="settings-view chat-hidden" id="settingsView">
+              <!-- Settings Header -->
+              <div class="settings-header">
+                <button id="backToStories">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 48">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M31 36L19 24l12-12" />
+                  </svg>
+                </button>
+                <h2 class="settings-title">Settings</h2>
+              </div>
+
+              <!-- Settings List -->
+              <div class="settings-list" id="settingsList">
+                <div class="setting-option" data-setting="privacy" data-title="Visibility & Privacy" data-description="Control who can see your stories">
+                  <div class="setting-option-content">
+                    <div class="setting-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M4.19 4.47C3.47 4.79 3 5.51 3 6.3V11c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V6.3c0-.79-.47-1.51-1.19-1.83l-7-3.11c-.52-.23-1.11-.23-1.62 0zM12 7c.55 0 1 .45 1 1s-.45 1-1 1s-1-.45-1-1s.45-1 1-1m0 4c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1s-1-.45-1-1v-4c0-.55.45-1 1-1" />
+                      </svg>
+                    </div>
+                    <div class="setting-text">
+                      <h4>Visibility & Privacy</h4>
+                      <p>Control who can see your stories</p>
+                    </div>
+                  </div>
+                  <div class="setting-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M16.06 10.94a1.5 1.5 0 0 1 0 2.12l-5.656 5.658a1.5 1.5 0 1 1-2.121-2.122L12.879 12L8.283 7.404a1.5 1.5 0 0 1 2.12-2.122l5.658 5.657Z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="setting-option" data-setting="duration" data-title="Duration" data-description="Set story expiration time">
+                  <div class="setting-option-content">
+                    <div class="setting-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12m10-4a1 1 0 1 0-2 0v5a1 1 0 0 0 1 1h5a1 1 0 1 0 0-2h-4z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <div class="setting-text">
+                      <h4>Duration</h4>
+                      <p>Set story expiration time</p>
+                    </div>
+                  </div>
+                  <div class="setting-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M16.06 10.94a1.5 1.5 0 0 1 0 2.12l-5.656 5.658a1.5 1.5 0 1 1-2.121-2.122L12.879 12L8.283 7.404a1.5 1.5 0 0 1 2.12-2.122l5.658 5.657Z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="setting-option" data-setting="interactions" data-title="Interaction Controls" data-description="Manage reactions and responses">
+                  <div class="setting-option-content">
+                    <div class="setting-icon">
+                      <svg width="24" height="24" viewBox="0 0 48 48">
+                        <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 8C8.925 8 4 12.925 4 19c0 11 13 21 20 23.326C31 40 44 30 44 19c0-6.075-4.925-11-11-11c-3.72 0-7.01 1.847-9 4.674A10.99 10.99 0 0 0 15 8" />
+                      </svg>
+                    </div>
+                    <div class="setting-text">
+                      <h4>Interaction Controls</h4>
+                      <p>Manage reactions and responses</p>
+                    </div>
+                  </div>
+                  <div class="setting-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M16.06 10.94a1.5 1.5 0 0 1 0 2.12l-5.656 5.658a1.5 1.5 0 1 1-2.121-2.122L12.879 12L8.283 7.404a1.5 1.5 0 0 1 2.12-2.122l5.658 5.657Z" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="setting-option" data-setting="playback" data-title="Audio & Playback" data-description="Configure media settings">
+                  <div class="setting-option-content">
+                    <div class="setting-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M9.608 1.517c.77-.175 1.57-.267 2.392-.267c5.937 0 10.75 4.813 10.75 10.75S17.937 22.75 12 22.75c-.822 0-1.622-.092-2.392-.267a.75.75 0 1 1 .332-1.463a9.25 9.25 0 1 0 0-18.04a.75.75 0 1 1-.332-1.463M7.314 3.132a.75.75 0 0 1-.235 1.034A9.3 9.3 0 0 0 4.166 7.08a.75.75 0 0 1-1.27-.8A10.8 10.8 0 0 1 6.28 2.897a.75.75 0 0 1 1.035.235M2.98 9.94a.75.75 0 1 0-1.463-.332c-.175.77-.267 1.57-.267 2.392s.092 1.622.267 2.393a.75.75 0 0 0 1.463-.333A9.3 9.3 0 0 1 2.75 12c0-.709.08-1.398.23-2.06m.152 6.746a.75.75 0 0 1 1.034.235a9.3 9.3 0 0 0 2.913 2.913a.75.75 0 0 1-.8 1.27a10.8 10.8 0 0 1-3.382-3.383a.75.75 0 0 1 .235-1.035" />
+                        <path fill="currentColor" d="M15.414 10.941c.781.462.781 1.656 0 2.118l-4.72 2.787C9.934 16.294 9 15.71 9 14.786V9.214c0-.924.934-1.507 1.694-1.059z" />
+                      </svg>
+                    </div>
+                    <div class="setting-text">
+                      <h4>Audio & Playback</h4>
+                      <p>Configure media settings</p>
+                    </div>
+                  </div>
+                  <div class="setting-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M16.06 10.94a1.5 1.5 0 0 1 0 2.12l-5.656 5.658a1.5 1.5 0 1 1-2.121-2.122L12.879 12L8.283 7.404a1.5 1.5 0 0 1 2.12-2.122l5.658 5.657Z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Setting Detail Views -->
+            <div class="setting-detail-view chat-hidden" id="settingDetailView">
+              <div class="settings-header">
+                <button id="backToSettings">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 48 48">
+                    <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M31 36L19 24l12-12" />
+                  </svg>
+                </button>
+                <h2 class="settings-title" id="settingDetailTitle">Setting</h2>
+              </div>
+
+              <div class="setting-detail-content" id="settingDetailContent">
+                <!-- Privacy Settings -->
+                <div class="setting-content-panel" data-setting-panel="privacy">
+                  <div class="setting-group">
+                    <label class="setting-label">Who can see this story?</label>
+                    <p class="setting-description">Choose who can view your story</p>
+                    <div class="custom-select-wrapper">
+                      <div class="custom-select-trigger">
+                        <span class="selected-value">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14 12.25a3.75 3.75 0 1 1 3.75-3.75A3.75 3.75 0 0 1 14 12.25m0-6a2.25 2.25 0 1 0 2.25 2.25A2.25 2.25 0 0 0 14 6.25m7 13a.76.76 0 0 1-.75-.75c0-1.95-1.06-3.25-6.25-3.25s-6.25 1.3-6.25 3.25a.75.75 0 0 1-1.5 0c0-4.75 5.43-4.75 7.75-4.75s7.75 0 7.75 4.75a.76.76 0 0 1-.75.75M8.32 13.06H8a3 3 0 1 1 .58-6a.75.75 0 1 1-.15 1.49a1.46 1.46 0 0 0-1.09.34a1.47 1.47 0 0 0-.54 1a1.49 1.49 0 0 0 1.35 1.64a1.53 1.53 0 0 0 .93-.22a.75.75 0 0 1 .79 1.28a3 3 0 0 1-1.55.47M3 18.5a.76.76 0 0 1-.75-.75c0-2.7.72-4.5 4.25-4.5a.75.75 0 0 1 0 1.5c-2.35 0-2.75.75-2.75 3a.76.76 0 0 1-.75.75" />
+                          </svg>
+                          Private
+                        </span>
+                        <span class="arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <g fill="#11131a" fill-rule="evenodd">
+                              <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                              <path
+                                fill="#fff"
+                                d="M12.707 15.707a1 1 0 0
+                              1-1.414 0L5.636 10.05A1 1 0 1 1 7.05 8.636l4.95
+                              4.95l4.95-4.95a1 1 0 0 1 1.414 1.414z"
+                              />
+                            </g>
+                          </svg>
+                        </span>
+                      </div>
+                      <ul class="custom-options hidden">
+                        <li data-value="public">🌍 Public</li>
+                        <li data-value="friends">👥 Friends</li>
+                        <li data-value="private">
+                          <span class="option-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+                              <path fill="currentColor" d="M14 12.25a3.75 3.75 0 1 1 3.75-3.75A3.75 3.75 0 0 1 14 12.25m0-6a2.25 2.25 0 1 0 2.25 2.25A2.25 2.25 0 0 0 14 6.25m7 13a.76.76 0 0 1-.75-.75c0-1.95-1.06-3.25-6.25-3.25s-6.25 1.3-6.25 3.25a.75.75 0 0 1-1.5 0c0-4.75 5.43-4.75 7.75-4.75s7.75 0 7.75 4.75a.76.76 0 0 1-.75.75M8.32 13.06H8a3 3 0 1 1 .58-6a.75.75 0 1 1-.15 1.49a1.46 1.46 0 0 0-1.09.34a1.47 1.47 0 0 0-.54 1a1.49 1.49 0 0 0 1.35 1.64a1.53 1.53 0 0 0 .93-.22a.75.75 0 0 1 .79 1.28a3 3 0 0 1-1.55.47M3 18.5a.76.76 0 0 1-.75-.75c0-2.7.72-4.5 4.25-4.5a.75.75 0 0 1 0 1.5c-2.35 0-2.75.75-2.75 3a.76.76 0 0 1-.75.75" />
+                            </svg>
+                          </span>
+                          Private
+                        </li>
+                        <li data-value="custom">⚙️ Custom</li>
+                      </ul>
+                      <input type="hidden" name="setting" value="private" />
+                    </div>
+                  </div>
+
+                  <div class="setting-separator"></div>
+
+                  <div class="setting-group">
+                    <label class="setting-label">Hide Story From...</label>
+                    <p class="setting-description">Block selected users from seeing this specific story</p>
+                    <div class="custom-select-wrapper" id="hide-from-wrapper">
+                      <div class="custom-select-trigger">
+                        <span class="selected-value">👥 Select</span>
+                        <span class="arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <g fill="#11131a" fill-rule="evenodd">
+                              <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                              <path
+                                fill="#fff"
+                                d="M12.707 15.707a1 1 0 0
+                              1-1.414 0L5.636 10.05A1 1 0 1 1 7.05 8.636l4.95
+                              4.95l4.95-4.95a1 1 0 0 1 1.414 1.414z"
+                              />
+                            </g>
+                          </svg>
+                        </span>
+                      </div>
+                      <ul class="custom-options hidden">
+                        <li data-value="none">👥 Select</li>
+                        <li data-value="blocked">🚫 Blocked Users</li>
+                        <li data-value="custom">⚙️ Custom List</li>
+                      </ul>
+                      <input type="hidden" name="hide-from" value="none" />
+                    </div>
+                  </div>
+
+                  <div class="setting-separator"></div>
+
+                  <div class="setting-group setting-with-toggle">
+                    <div class="setting-text">
+                      <label class="setting-label">Allow Replies?</label>
+                      <p class="setting-description">Control who can respond to your story through messages</p>
+                    </div>
+                    <div class="toggle-switch active" data-setting-key="privacy.allowReplies" data-default="true"></div>
+                  </div>
+                </div>
+
+                <!-- Duration Settings -->
+                <div class="setting-content-panel" data-setting-panel="duration">
+                  <div class="setting-group">
+                    <label class="setting-label">Story Duration</label>
+                    <p class="setting-description">How long should your story be visible?</p>
+                    <div class="custom-select-wrapper" id="duration-wrapper">
+                      <div class="custom-select-trigger">
+                        <span class="selected-value">24 Hours</span>
+                        <span class="arrow">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <g fill="#11131a" fill-rule="evenodd">
+                              <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
+                              <path
+                                fill="#fff"
+                                d="M12.707 15.707a1 1 0 0
+                              1-1.414 0L5.636 10.05A1 1 0 1 1 7.05 8.636l4.95
+                              4.95l4.95-4.95a1 1 0 0 1 1.414 1.414z"
+                              />
+                            </g>
+                          </svg>
+                        </span>
+                      </div>
+                      <ul class="custom-options hidden">
+                        <li data-value="24">24 Hours</li>
+                        <li data-value="48">48 Hours</li>
+                        <li data-value="72">72 Hours</li>
+                      </ul>
+                      <input type="hidden" name="duration" value="24" />
+                    </div>
+                  </div>
+                  <!-- <div class="setting-group setting-group-flex">
+                    <div>
+                      <label class="setting-label">Auto-Delete</label>
+                      <p class="setting-description">Automatically delete after duration expires</p>
+                    </div>
+                    <div class="toggle-container">
+                      <input type="checkbox" id="auto-delete" class="toggle-input" checked />
+                      <label for="auto-delete" class="toggle-label"></label>
+                    </div>
+                  </div> -->
+                </div>
+
+                <!-- Interaction Settings -->
+                <div class="setting-content-panel" data-setting-panel="interactions">
+                  <div class="setting-group setting-with-toggle">
+                    <div class="setting-text">
+                      <label class="setting-label">Enable Reactions</label>
+                      <p class="setting-description">Turn on quick emoji responses to your story.</p>
+                    </div>
+                    <div class="toggle-switch active" data-setting-key="interactions.enableReactions" data-default="true"></div>
+                  </div>
+
+                  <div class="setting-separator"></div>
+
+                  <div class="setting-group setting-with-toggle">
+                    <div class="setting-text">
+                      <label class="setting-label">Enable Poll/Quiz Results View</label>
+                      <p class="setting-description">Decide when viewers can see the results of polls or quizzes.</p>
+                    </div>
+                    <div class="toggle-switch active" data-setting-key="interactions.enablePollResults" data-default="true"></div>
+                  </div>
+                </div>
+
+                <!-- Playback Settings -->
+                <div class="setting-content-panel" data-setting-panel="playback">
+                  <div class="setting-group setting-with-toggle">
+                    <div class="setting-text">
+                      <label class="setting-label">Mute by Default</label>
+                      <p class="setting-description">Choose whether your story starts with sound or stays silent.</p>
+                    </div>
+                    <div class="toggle-switch" data-setting-key="playback.muteByDefault" data-default="false"></div>
+                  </div>
+
+                  <div class="setting-separator"></div>
+
+                  <div class="setting-group setting-with-toggle">
+                    <div class="setting-text">
+                      <label class="setting-label">Loop Story Video</label>
+                      <p class="setting-description">Automatically replay your video stories on a loop.</p>
+                    </div>
+                    <div class="toggle-switch active" data-setting-key="playback.loopVideo" data-default="true"></div>
+                  </div>
+
+                  <div class="setting-separator"></div>
+
+                  <div class="setting-group setting-with-toggle">
+                    <div class="setting-text">
+                      <label class="setting-label">Auto-play Next Story</label>
+                      <p class="setting-description">Continue to the next story without user input.</p>
+                    </div>
+                    <div class="toggle-switch active" data-setting-key="playback.autoPlayNext" data-default="true"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+
         <div class="story__view" id="storyViewContainer">
           <div class="no_story" id="storyDisplayPlaceholderContainer">
             <p>Click on a contact to view their history</p>

@@ -1,6 +1,7 @@
 const gridContainerSkeleton = document.getElementById("gridContainerSkeleton");
 
 function renderGridContainerSkeleton() {
+  if (!gridContainerSkeleton) return;
   const dummyHeights = Array.from({ length: 50 }, (_, i) => {
     return getRandomNumber(250, 400);
   });
@@ -10,12 +11,14 @@ function renderGridContainerSkeleton() {
     gridContainerSkeleton.insertAdjacentHTML("beforeend", html);
   });
 
-  dashboardGridSkeletonInstance = new Masonry(gridContainerSkeleton, {
-    itemSelector: ".gridContainerSkeleton--item",
-    columnWidth: ".gridContainerSkeleton--item",
-    percentPosition: true,
-    gutter: 16,
-  });
+  if (typeof Masonry === "function") {
+    dashboardGridSkeletonInstance = new Masonry(gridContainerSkeleton, {
+      itemSelector: ".gridContainerSkeleton--item",
+      columnWidth: ".gridContainerSkeleton--item",
+      percentPosition: true,
+      gutter: 16,
+    });
 
-  dashboardGridSkeletonInstance.layout();
+    dashboardGridSkeletonInstance.layout();
+  }
 }

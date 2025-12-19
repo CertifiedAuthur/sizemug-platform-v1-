@@ -2,47 +2,17 @@
  * The `gridContainerWrapper` variable name used in this file has been declared in mobile_select.tasks-for_you.js file
  */
 
-const gridContainer = document.getElementById("gridContainer");
-// This file was relying on another script to declare `gridContainerWrapper`.
-// If that script loads after this one (or not at all on some pages), it throws
-// a ReferenceError that can stop unrelated features (like the Story Music modal).
-// Use window object to avoid duplicate declaration errors
-if (typeof window.gridContainerWrapper === 'undefined') {
-  window.gridContainerWrapper = document.getElementById("gridContainerWrapper") || gridContainer?.parentElement;
+// Ensure HIDDEN is defined on window (don't redeclare if already exists)
+if (typeof HIDDEN === "undefined" && typeof window.HIDDEN === "undefined") {
+  window.HIDDEN = "homepage-hidden";
 }
-const gridContainerWrapper = window.gridContainerWrapper;
 
-// Some pages don't define the global `mainTaskLists`. Provide a safe fallback so
-// this file doesn't throw and break other features.
-const mainTaskLists = window.mainTaskLists || document.querySelectorAll?.(".tasks_list, .main_task_list, .task_lists") || [];
-const commentsModal = document.getElementById("comments_modal");
-
-// Grid Container Events
-let audio;
-let playing = false;
-
-// Track currently playing music globally if needed
-let currentMusic = null;
-
-// Track currently playing music globally if needed
-let currentAudio = null;
-
-// Track currently playing video globally if needed
-let isVideoPlaying = false;
-let currentVideoAudio;
-
-let MODE_TIME_MILLI = 1800000;
-
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-////////////////////////////////////////////////////
-// Grid layout rendering
-// The gridData here is stored in grid.data.js file
+// Define the function IMMEDIATELY and make it globally accessible
 function populateGridLayout(gridData, gridContainerEl, masonryInstance) {
+  if (!gridData || !gridContainerEl) {
+    return;
+  }
+  
   gridData.forEach((item, i) => {
     const gridItem = `
                 <div class="grid_item" id="grid_item--${i}" style="height: ${item.height}px" data-grid-item-id="${item.id}">
@@ -335,6 +305,25 @@ function populateGridLayout(gridData, gridContainerEl, masonryInstance) {
   }
 }
 
+// Initialize variables after function definition
+const gridContainer = document.getElementById("gridContainer");
+if (typeof window.gridContainerWrapper === 'undefined') {
+  window.gridContainerWrapper = document.getElementById("gridContainerWrapper") || gridContainer?.parentElement;
+}
+// Use window references to avoid duplicate declarations
+if (typeof window.mainTaskLists === 'undefined') {
+  window.mainTaskLists = document.querySelectorAll?.(".tasks_list, .main_task_list, .task_lists") || [];
+}
+const commentsModal = document.getElementById("comments_modal");
+
+let audio;
+let playing = false;
+let currentMusic = null;
+let currentAudio = null;
+let isVideoPlaying = false;
+let currentVideoAudio;
+let MODE_TIME_MILLI = 1800000;
+
 function playGridHoverVideo(videoEl, button) {
   // Play the video
   videoEl
@@ -357,10 +346,10 @@ function playGridHoverVideo(videoEl, button) {
 ["load"].forEach((event) => {
   window.addEventListener(event, function (e) {
     if (innerWidth < 667) {
-      if (gridContainerWrapper) gridContainerWrapper.classList.add(HIDDEN);
+      if (window.gridContainerWrapper) window.gridContainerWrapper.classList.add(HIDDEN);
 
       try {
-        mainTaskLists.forEach((list) => {
+        window.mainTaskLists.forEach((list) => {
           list?.classList?.remove?.(HIDDEN);
         });
       } catch {
@@ -847,3 +836,5 @@ scrollGridButtonContainerDown.addEventListener("click", () => {
 
 // Update button states on manual scroll (e.g., with mouse or keyboard)
 scrollGridContainerElement.addEventListener("scroll", updateLandingStickyButtonStates);
+// Explicitly export to window
+window.populateGridLayout = populateGridLayout;

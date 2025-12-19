@@ -1427,33 +1427,206 @@ class ChatAsideSidebarStory {
     this.chatStoryItems.addEventListener("click", (e) => {
       const storyItem = e.target.closest("#storyItem");
       if (storyItem) {
-        const storyUserId = storyItem.dataset.storyUserId;
-        if (storyUserId) {
-          // Get the hidden class name from chat.html context
-          const HIDDEN = "chat-hidden";
-          const storyModalContainer = document.getElementById("storyModalContainer");
+        // Match explore.html behavior: opening the modal should NOT autoplay.
+        // It should show the placeholder until a story is clicked inside the modal grid/list.
+        const HIDDEN = "chat-hidden";
+        const storyModalContainer = document.getElementById("storyModalContainer");
+
+        if (storyModalContainer) {
+          storyModalContainer.classList.remove(HIDDEN);
+        }
+
+        // Hide the collapsed sidebar Add Story icon (chat.html only)
+        const collapsedAddStory = document.querySelector(".collapsed_aside_users_list_item.for_story");
+        console.log("Add Story element found:", collapsedAddStory);
+        if (collapsedAddStory) {
+          collapsedAddStory.style.setProperty('display', 'none', 'important');
+          console.log("Add Story icon hidden");
+        } else {
+          console.warn("Add Story element not found!");
+        }
+        
+        // Use MutationObserver to watch for addNewStory being added to DOM
+        const storyListContainers = [
+          document.getElementById("viewStoryList"),
+          document.getElementById("storyListContainer")
+        ].filter(el => el);
+        
+        if (storyListContainers.length > 0) {
+          const observer = new MutationObserver((mutations) => {
+            const addNewStory = document.getElementById("addNewStory");
+            const addNewStoryFromDisplay = document.getElementById("addNewStoryFromStoryDisplay");
+            
+            if (addNewStory) {
+              addNewStory.style.setProperty('display', 'none', 'important');
+              addNewStory.style.setProperty('visibility', 'hidden', 'important');
+              console.log("Add Story hidden via MutationObserver");
+            }
+            
+            if (addNewStoryFromDisplay) {
+              addNewStoryFromDisplay.style.setProperty('display', 'none', 'important');
+              addNewStoryFromDisplay.style.setProperty('visibility', 'hidden', 'important');
+              console.log("Add Story (from display) hidden via MutationObserver");
+            }
+          });
           
-          // First, remove hidden class to show modal (like explore.html does with removeClass)
-          if (storyModalContainer) {
-            storyModalContainer.classList.remove(HIDDEN);
-          }
+          storyListContainers.forEach(container => {
+            observer.observe(container, { childList: true, subtree: true });
+          });
           
-          // Then render the clicked user's stories
-          if (typeof renderClickUserStories === "function") {
-            renderClickUserStories(parseInt(storyUserId, 10));
-          }
+          // Store observer to disconnect later
+          this._storyObserver = observer;
+        }
+        
+        // Also hide with multiple delays as fallback
+        [100, 500, 1000, 2000].forEach(delay => {
+          setTimeout(() => {
+            const addNewStory = document.getElementById("addNewStory");
+            const addNewStoryFromDisplay = document.getElementById("addNewStoryFromStoryDisplay");
+            
+            if (addNewStory && addNewStory.style.display !== 'none') {
+              console.log(`Story list Add Story found (${delay}ms delay):`, addNewStory);
+              addNewStory.style.setProperty('display', 'none', 'important');
+              addNewStory.style.setProperty('visibility', 'hidden', 'important');
+              console.log("Story list Add Story hidden");
+            }
+            
+            if (addNewStoryFromDisplay && addNewStoryFromDisplay.style.display !== 'none') {
+              console.log(`Story list Add Story from display found (${delay}ms delay):`, addNewStoryFromDisplay);
+              addNewStoryFromDisplay.style.setProperty('display', 'none', 'important');
+              addNewStoryFromDisplay.style.setProperty('visibility', 'hidden', 'important');
+              console.log("Story list Add Story from display hidden");
+            }
+          }, delay);
+        });
+
+        // Reset to placeholder state on open
+        if (typeof hideStoryDisplayContainer === "function") {
+          hideStoryDisplayContainer();
+        } else {
+          // Fallback if explore modal helpers aren't loaded for some reason
+          const placeholder = document.getElementById("storyDisplayPlaceholderContainer");
+          const display = document.getElementById("storyDisplayContainer");
+          placeholder?.classList.remove(HIDDEN);
+          display?.classList.add(HIDDEN);
         }
       }
     });
 
+    // Story scroll buttons - match explore.html pattern
+    const chatStoryContainer = document.getElementById("chatStoryItems");
+    const btnLeft = document.getElementById("scrollStoryLeftChat");
+    const btnRight = document.getElementById("scrollStoryRightChat");
+    const SCROLL_STEP = 200; // px per click
+
+    if (chatStoryContainer && btnLeft && btnRight) {
+      function updateScrollButtons() {
+        const scrollLeft = chatStoryContainer.scrollLeft;
+        const maxScroll = chatStoryContainer.scrollWidth - chatStoryContainer.clientWidth;
+
+        // Hide Left if at or before start
+        btnLeft.style.display = scrollLeft > 0 ? "flex" : "none";
+
+        // Hide Right if at or past end
+        btnRight.style.display = scrollLeft < maxScroll ? "flex" : "none";
+      }
+
+      btnLeft.addEventListener("click", () => {
+        chatStoryContainer.scrollBy({ left: -SCROLL_STEP, behavior: "smooth" });
+      });
+
+      btnRight.addEventListener("click", () => {
+        chatStoryContainer.scrollBy({ left: SCROLL_STEP, behavior: "smooth" });
+      });
+
+      chatStoryContainer.addEventListener("scroll", updateScrollButtons);
+
+      // Initial state
+      updateScrollButtons();
+    }
+
     // Close story modal when clicking outside (on the overlay)
     const storyModalContainer = document.getElementById("storyModalContainer");
+    const closeStoryDisplay = document.getElementById("closeStoryDisplay");
     const HIDDEN = "chat-hidden";
 
     if (storyModalContainer) {
       storyModalContainer.addEventListener("click", function (e) {
         if (e.target.id === "storyModalContainer") {
+          if (typeof hideStoryDisplayContainer === "function") {
+            hideStoryDisplayContainer();
+          }
           this.classList.add(HIDDEN);
+          
+          // Show collapsed sidebar Add Story icon when modal closes (chat.html only)
+          const collapsedAddStory = document.querySelector(".collapsed_aside_users_list_item.for_story");
+          console.log("Showing Add Story element:", collapsedAddStory);
+          if (collapsedAddStory) {
+            collapsedAddStory.style.setProperty('display', '', 'important');
+            console.log("Add Story icon shown");
+          }
+          
+          // Disconnect observer
+          if (this._storyObserver) {
+            this._storyObserver.disconnect();
+            delete this._storyObserver;
+          }
+          
+          // Also show the story list Add Story item
+          const addNewStory = document.getElementById("addNewStory");
+          const addNewStoryFromDisplay = document.getElementById("addNewStoryFromStoryDisplay");
+          
+          if (addNewStory) {
+            addNewStory.style.setProperty('display', '', 'important');
+            addNewStory.style.setProperty('visibility', '', 'important');
+            console.log("Story list Add Story shown");
+          }
+          
+          if (addNewStoryFromDisplay) {
+            addNewStoryFromDisplay.style.setProperty('display', '', 'important');
+            addNewStoryFromDisplay.style.setProperty('visibility', '', 'important');
+            console.log("Story list Add Story from display shown");
+          }
+        }
+      });
+    }
+
+    // Close story modal when clicking the X button
+    if (closeStoryDisplay) {
+      closeStoryDisplay.addEventListener("click", function () {
+        if (typeof hideStoryDisplayContainer === "function") {
+          hideStoryDisplayContainer();
+        }
+        storyModalContainer.classList.add(HIDDEN);
+        
+        // Show collapsed sidebar Add Story icon when modal closes (chat.html only)
+        const collapsedAddStory = document.querySelector(".collapsed_aside_users_list_item.for_story");
+        console.log("Showing Add Story element (X button):", collapsedAddStory);
+        if (collapsedAddStory) {
+          collapsedAddStory.style.setProperty('display', '', 'important');
+          console.log("Add Story icon shown (X button)");
+        }
+        
+        // Disconnect observer
+        if (this._storyObserver) {
+          this._storyObserver.disconnect();
+          delete this._storyObserver;
+        }
+        
+        // Also show the story list Add Story item
+        const addNewStory = document.getElementById("addNewStory");
+        const addNewStoryFromDisplay = document.getElementById("addNewStoryFromStoryDisplay");
+        
+        if (addNewStory) {
+          addNewStory.style.setProperty('display', '', 'important');
+          addNewStory.style.setProperty('visibility', '', 'important');
+          console.log("Story list Add Story shown (X button)");
+        }
+        
+        if (addNewStoryFromDisplay) {
+          addNewStoryFromDisplay.style.setProperty('display', '', 'important');
+          addNewStoryFromDisplay.style.setProperty('visibility', '', 'important');
+          console.log("Story list Add Story from display shown (X button)");
         }
       });
     }
