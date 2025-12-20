@@ -1136,7 +1136,7 @@
     height: 100%;
 
     display: grid;
-    grid-template-columns: repeat(autofit, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   }
 
   .post-image-wrapper img {

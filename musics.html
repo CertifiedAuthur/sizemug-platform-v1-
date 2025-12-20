@@ -5329,5 +5329,62 @@
     <!-- Explore JS -->
     <script src="./scripts/musics/musics.js"></script>
     <script src="./scripts/folder-manager.js"></script>
+
+    <!-- DEBUG: Grid Display Check -->
+    <script>
+      console.log('🔍 GRID DEBUG: Checking ff-container styling...');
+      
+      // Wait for DOM to be fully loaded
+      setTimeout(() => {
+        const containers = document.querySelectorAll('.ff-container');
+        console.log(`🔍 Found ${containers.length} ff-container elements`);
+        
+        containers.forEach((container, index) => {
+          const computed = window.getComputedStyle(container);
+          console.log(`\n📦 Container ${index + 1}:`);
+          console.log(`  - display: ${computed.display}`);
+          console.log(`  - grid-template-columns: ${computed.gridTemplateColumns}`);
+          console.log(`  - gap: ${computed.gap}`);
+          console.log(`  - Parent classes: ${container.parentElement.className}`);
+          console.log(`  - Container classes: ${container.className}`);
+          
+          // Check if container is visible
+          const isVisible = container.offsetParent !== null;
+          console.log(`  - Is visible: ${isVisible}`);
+          
+          // List items count
+          const items = container.querySelectorAll('li:not(.hide)');
+          console.log(`  - Visible items: ${items.length}`);
+        });
+        
+        // Check loves-likes-body styling
+        const lovesLikesBody = document.querySelector('.loves-likes-body');
+        if (lovesLikesBody) {
+          const ffInBody = lovesLikesBody.querySelector('.ff-container');
+          if (ffInBody) {
+            const computed = window.getComputedStyle(ffInBody);
+            console.log('\n💗 Loves-Likes-Body .ff-container:');
+            console.log(`  - display: ${computed.display}`);
+            console.log(`  - grid-template-columns: ${computed.gridTemplateColumns}`);
+            console.log(`  - All matched CSS rules:`);
+            
+            // Try to show which CSS file is being applied
+            const sheets = document.styleSheets;
+            for (let sheet of sheets) {
+              try {
+                const rules = sheet.cssRules || sheet.rules;
+                for (let rule of rules) {
+                  if (rule.selectorText && rule.selectorText.includes('.ff-container')) {
+                    console.log(`    ${rule.selectorText}: ${rule.cssText.substring(0, 100)}...`);
+                  }
+                }
+              } catch (e) {
+                // CORS issues with external stylesheets
+              }
+            }
+          }
+        }
+      }, 1000);
+    </script>
   </body>
 </html>

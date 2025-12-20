@@ -97,3 +97,25 @@
 .musics-hidden {
   display: none !important;
 }
+
+/* Grid display for favorite tab */
+.ff-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding: 0.5rem;
+  overflow-y: auto;
+}
+
+.ff-container li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.ff-container li:hover {
+  background-color: #f3f4f6;
+}

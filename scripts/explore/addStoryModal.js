@@ -334,6 +334,10 @@ function initStoryMusicModalUi() {
   const modalRoot = document.getElementById("storyMusicModal");
   if (!modalRoot) return;
 
+  // Prevent double-initialization (which would double-bind events and make toggles appear to do nothing).
+  if (modalRoot.dataset.storyMusicInitialized === "true") return;
+  modalRoot.dataset.storyMusicInitialized = "true";
+
   // Ensure the modal overlay is not trapped inside a transformed/stacking-context
   // container (common in the story editor). If it is, `position: fixed` backdrops
   // won't cover the global sticky header.
@@ -722,6 +726,10 @@ function initStoryMusicModalUi() {
     // Get current view for active tab
     const currentView = state.viewByTab[state.activeTab] || "list";
 
+    // Keep the button state in sync with the active tab.
+    // The click handler reads `data-view` to decide the next state.
+    btn.setAttribute("data-view", currentView);
+
     // Hide the top-right toggle when it doesn't apply:
     // - Categories root uses a fixed grid of category cards.
     // - Category drill-down uses the injected toggle in the search bar.
@@ -729,7 +737,8 @@ function initStoryMusicModalUi() {
       state.activeTab === "categories" ||
       state.activeTab === "artists" ||
       state.route.mode === "category" ||
-      state.route.mode === "artist";
+      state.route.mode === "artist" ||
+      (state.activeTab === "favorites" && state.favoritesSort === "artists");
     btn.style.display = hideTopToggle ? "none" : "";
 
     // Requirement: when the list is in grid form, the icon should change to the horizontal line icon.
@@ -836,8 +845,14 @@ function initStoryMusicModalUi() {
 
   function getCurrentTracksHost() {
     // Matches the routing logic in renderForYouOrListContext.
+    // Only return a host that contains track elements ([data-track-id]).
     if (state.route.mode === "category") return elCategoriesGrid;
     if (state.route.mode === "artist") return elArtistsList;
+    if (state.activeTab === "favorites") {
+      // In Favorites->Artists view the list is artist rows (not tracks), so DOM filtering doesn't apply.
+      if (state.favoritesSort !== "music") return null;
+      return elFavoritesList;
+    }
     return elForYouList;
   }
 
@@ -953,7 +968,8 @@ function initStoryMusicModalUi() {
 
   function renderForYouOrListContext() {
     // Decide where the track list should render.
-    // - Root For You + Favorites use the For You list host.
+    // - Root For You uses the For You list host.
+    // - Root Favorites->Music uses the Favorites list host.
     // - Drill-down from Categories should render inside Categories panel.
     // - Drill-down from Artists should render inside Artists panel.
     const listHost =
@@ -961,7 +977,9 @@ function initStoryMusicModalUi() {
         ? elCategoriesGrid
         : state.route.mode === "artist"
           ? elArtistsList
-          : elForYouList;
+          : state.activeTab === "favorites"
+            ? elFavoritesList
+            : elForYouList;
 
     if (!listHost) return;
 
@@ -1037,10 +1055,11 @@ function initStoryMusicModalUi() {
       `;
     }
 
-    // Grid view is supported in For You root and in drill-down lists (Category/Artist).
+    // Grid view is supported in For You root, Favorites, and in drill-down lists (Category/Artist).
     const useGrid =
       state.viewByTab[state.activeTab] === "grid" &&
       ((state.route.mode === "root" && state.activeTab === "for-you") ||
+        (state.route.mode === "root" && state.activeTab === "favorites") ||
         state.route.mode === "category" ||
         state.route.mode === "artist");
     const wrapperClass = useGrid ? "story-music-grid" : "story-music-list";
@@ -1125,6 +1144,9 @@ function initStoryMusicModalUi() {
           : "story-music-host--root";
 
     listHost.innerHTML = `<div class="story-music-host ${hostModeClass}">${headerHtml}<div class="${wrapperClass}">${itemsHtml}</div></div>`;
+    // Debuggable markers (safe in production): helps verify which layout was rendered.
+    listHost.setAttribute("data-story-music-render-tab", state.activeTab);
+    listHost.setAttribute("data-story-music-render-view", useGrid ? "grid" : "list");
 
     // Some global stylesheets can still wipe borders in drill-down contexts.
     // Force the bordered-card look inline (with !important) for Category/Artist drill-down track rows.
@@ -1617,6 +1639,16 @@ function initStoryMusicModalUi() {
   });
 
   function render() {
+    // Keep Favorites sort UI in sync with state (state can be hydrated from storage).
+    if (elFavControls) {
+      elFavControls.querySelectorAll("[data-fav-sort]").forEach((b) => {
+        const sort = b.getAttribute("data-fav-sort");
+        const active = sort === state.favoritesSort;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-selected", active ? "true" : "false");
+      });
+    }
+
     setViewToggleIcon();
     // When drilling down into a Category/Artist, keep search visible so it appears
     // immediately under the banner (outside the banner, per mockups).
@@ -1701,63 +1733,21 @@ function initStoryMusicModalUi() {
     renderCategories();
     renderArtists();
 
-    // Render list hosts
-    // - For You tab renders the main list.
-    // - Favorites tab renders into the For You host (existing markup pattern).
+    // Render track list/grid hosts
+    // - For You tab renders the main track list.
+    // - Favorites tab renders tracks only for Favorites->Music.
     // - Drill-down views render into their source tab container (Categories/Artists).
-    // Render list hosts
-    if (state.activeTab === "for-you" || state.activeTab === "favorites" || isDrillDown) {
+    if (isDrillDown || state.activeTab === "for-you" || (state.activeTab === "favorites" && state.favoritesSort === "music")) {
       renderForYouOrListContext();
     }
 
     // Favorites empty/filled
     renderFavoritesEmptyState();
 
-    // If favorites tab has items, show list using the For you list host
+    // Favorites-specific rendering
     if (state.activeTab === "favorites") {
       if (state.favoritesSort === "artists") {
         renderFavoritesArtists();
-      } else {
-        const tracks = getVisibleTracks();
-        if (tracks.length) {
-          // Music list (default)
-          if (elFavoritesList) {
-            elFavoritesList.innerHTML = `<div class="story-music-list">${tracks
-              .map((t) => {
-                const a = artistById(t.artistId);
-                const isFav = state.favorites.has(t.id);
-                const isActive = state.playingTrackId === t.id;
-                const isPlaying = isActive && state.isPlaying;
-                const playIcon = isPlaying
-                  ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>'
-                  : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
-                const heartIcon = isFav
-                  ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#f06b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>'
-                  : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1l-.1-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5c0 2.89-3.14 5.74-7.9 10.05z"/></svg>';
-                return `
-                    <div class="story-music-item ${isActive ? "is-active" : ""} ${isPlaying ? "is-playing" : ""}" data-track-id="${escapeAttr(t.id)}">
-                      <div class="story-music-item__cover">
-                        <img src="${escapeAttr(t.coverSrc)}" alt="" loading="lazy" onerror="imgOnErrorHide(this)" />
-                        <div class="story-music-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                      </div>
-                      <div class="story-music-item__meta">
-                        <div class="story-music-item__title">${escapeHtml(t.title)}</div>
-                        <div class="story-music-item__sub">
-                          <span>${escapeHtml(a?.name || "")}</span>
-                          <span>•</span>
-                          <span>${escapeHtml(t.duration)}</span>
-                        </div>
-                      </div>
-                      <div class="story-music-item__actions">
-                        <button type="button" class="story-music-action-btn is-primary" data-action="play" data-track-id="${escapeAttr(t.id)}">${playIcon}</button>
-                        <button type="button" class="story-music-action-btn" data-action="favorite" data-track-id="${escapeAttr(t.id)}">${heartIcon}</button>
-                      </div>
-                    </div>
-                  `;
-              })
-              .join("")}</div>`;
-          }
-        }
       }
     }
 

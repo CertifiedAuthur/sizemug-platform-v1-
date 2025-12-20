@@ -375,11 +375,18 @@
       const btn = document.getElementById("storyMusicViewToggle");
       if (!btn) return;
 
+      const currentView = state.viewByTab[state.activeTab] || "list";
+
+      // Keep the button state in sync with the active tab.
+      // The click handler reads `data-view` to decide the next state.
+      btn.setAttribute("data-view", currentView);
+
       const hideTopToggle =
         state.activeTab === "categories" ||
         state.activeTab === "artists" ||
         state.route.mode === "category" ||
-        state.route.mode === "artist";
+        state.route.mode === "artist" ||
+        (state.activeTab === "favorites" && state.favoritesSort === "artists");
       btn.style.display = hideTopToggle ? "none" : "";
 
       const toListIcon =
@@ -387,7 +394,6 @@
       const toGridIcon =
         '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z"/></svg>';
 
-      const currentView = state.viewByTab[state.activeTab];
       if (!hideTopToggle) {
         btn.innerHTML = currentView === "grid" ? toListIcon : toGridIcon;
         btn.setAttribute("aria-label", currentView === "grid" ? "Switch to list" : "Switch to grid");
@@ -476,6 +482,10 @@
     function getCurrentTracksHost() {
       if (state.route.mode === "category") return elCategoriesGrid;
       if (state.route.mode === "artist") return elArtistsList;
+      if (state.activeTab === "favorites") {
+        if (state.favoritesSort !== "music") return null;
+        return elFavoritesList;
+      }
       return elForYouList;
     }
 
@@ -566,7 +576,13 @@
 
     function renderForYouOrListContext() {
       const listHost =
-        state.route.mode === "category" ? elCategoriesGrid : state.route.mode === "artist" ? elArtistsList : elForYouList;
+        state.route.mode === "category"
+          ? elCategoriesGrid
+          : state.route.mode === "artist"
+            ? elArtistsList
+            : state.activeTab === "favorites"
+              ? elFavoritesList
+              : elForYouList;
 
       if (!listHost) return;
 
@@ -646,6 +662,7 @@
       const useGrid =
         state.viewByTab[state.activeTab] === "grid" &&
         ((state.route.mode === "root" && state.activeTab === "for-you") ||
+          (state.route.mode === "root" && state.activeTab === "favorites") ||
           state.route.mode === "category" ||
           state.route.mode === "artist");
       const wrapperClass = useGrid ? "story-music-grid" : "story-music-list";
@@ -1164,6 +1181,16 @@
     });
 
     function render() {
+      // Keep Favorites sort UI in sync with state (state can be hydrated from storage).
+      if (elFavControls) {
+        elFavControls.querySelectorAll("[data-fav-sort]").forEach((b) => {
+          const sort = b.getAttribute("data-fav-sort");
+          const active = sort === state.favoritesSort;
+          b.classList.toggle("is-active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      }
+
       setViewToggleIcon();
       const isDrillDown = state.route.mode === "category" || state.route.mode === "artist";
 
@@ -1208,7 +1235,8 @@
           state.activeTab === "categories" ||
           state.activeTab === "artists" ||
           state.route.mode === "category" ||
-          state.route.mode === "artist"
+          state.route.mode === "artist" ||
+          (state.activeTab === "favorites" && state.favoritesSort === "artists")
         ) {
           viewToggle.classList.add("explore-hidden");
         } else {
@@ -1233,7 +1261,7 @@
       renderCategories();
       renderArtists();
 
-      if (state.activeTab === "for-you" || state.activeTab === "favorites" || isDrillDown) {
+      if (isDrillDown || state.activeTab === "for-you" || (state.activeTab === "favorites" && state.favoritesSort === "music")) {
         renderForYouOrListContext();
       }
 
@@ -1242,54 +1270,6 @@
       if (state.activeTab === "favorites") {
         if (state.favoritesSort === "artists") {
           renderFavoritesArtists();
-        } else {
-          const tracks = getVisibleTracks();
-          if (tracks.length) {
-            if (elFavoritesList) {
-              elFavoritesList.innerHTML = `<div class="story-music-list">${tracks
-                .map((t) => {
-                  const a = artistById(t.artistId);
-                  const isFav = state.favorites.has(t.id);
-                  const isActive = state.playingTrackId === t.id;
-                  const isPlaying = isActive && state.isPlaying;
-                  const playIcon = isPlaying
-                    ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h4v14H6V5zm8 0h4v14h-4V5z"/></svg>'
-                    : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>';
-                  const heartIcon = isFav
-                    ? '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#f06b6b" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54z"/></svg>'
-                    : '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1l-.1-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5C18.5 5 20 6.5 20 8.5c0 2.89-3.14 5.74-7.9 10.05z"/></svg>';
-
-                  return `
-                    <div class="story-music-item ${isActive ? "is-active" : ""} ${isPlaying ? "is-playing" : ""}" data-track-id="${escapeAttr(
-                    t.id
-                  )}">
-                      <div class="story-music-item__cover">
-                        <img src="${escapeAttr(t.coverSrc)}" alt="" loading="lazy" onerror="imgOnErrorHide(this)" />
-                        <div class="story-music-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-                      </div>
-                      <div class="story-music-item__meta">
-                        <div class="story-music-item__title">${escapeHtml(t.title)}</div>
-                        <div class="story-music-item__sub">
-                          <span>${escapeHtml(a?.name || "")}</span>
-                          <span>•</span>
-                          <span>${escapeHtml(t.duration)}</span>
-                        </div>
-                      </div>
-                      <div class="story-music-item__actions">
-                        <button type="button" class="story-music-action-btn is-primary" data-action="play" data-track-id="${escapeAttr(
-                          t.id
-                        )}">${playIcon}</button>
-                        <button type="button" class="story-music-action-btn" data-action="favorite" data-track-id="${escapeAttr(
-                          t.id
-                        )}">${heartIcon}</button>
-                      </div>
-                    </div>
-                  `;
-                })
-                .join("")}</div>`;
-            }
-            elFavoritesEmpty?.classList.add("explore-hidden");
-          }
         }
       }
 
