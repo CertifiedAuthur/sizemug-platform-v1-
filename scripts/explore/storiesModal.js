@@ -130,6 +130,19 @@ async function renderModalStories(stories) {
    `
   );
 
+  viewStoryList.insertAdjacentHTML(
+    "beforeend",
+    `
+    <li class="no-story">
+ <img src="./images/stories/no-stories-white.svg" />
+ <div>
+     <span>No more Stories to Show</span>
+     <div class="find-friends">Find Friends</div>
+     </div>
+    </li>
+  `
+  );
+
   // const addNewStoryFromStoryDisplay = document.getElementById("addNewStoryFromStoryDisplay");
   // const uploadInterface = document.getElementById("upload-interface");
 

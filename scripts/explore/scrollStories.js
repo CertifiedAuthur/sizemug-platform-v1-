@@ -304,7 +304,21 @@ async function renderStories(stories) {
    `
   );
 
+  storyListContainer.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="no-story">
+      <img src="./images/stories/no-stories.svg" />
+      <span>No more Stories to Show</span>
+      <span class="find-friends" id="findFriends">Find Friends</span>
+    </div>`
+  );
+
   const suggestionModal = document.getElementById("suggestion_modal");
+  const findFriends = document.getElementById("findFriends");
+  findFriends.addEventListener("click", () => {
+    handleShowSuggestionModal();
+  });
 
   // Add Story
   const addNewStory = document.getElementById("addNewStory");

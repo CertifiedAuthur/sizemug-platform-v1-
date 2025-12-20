@@ -140,3 +140,9 @@
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* Chat-only: hide the injected "No more Stories to Show / Find Friends" tile */
+#storyModalContainer #viewStoryList li.no-story,
+#storyModalContainer #viewStoryList .no-story {
+  display: none !important;
+}
